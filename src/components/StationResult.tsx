@@ -48,6 +48,7 @@ function StationResult({ form, onReset }: StationResultProps) {
       let currentWeight = 0;
       let currentCost = 0;
       let profit = 0;
+      let didAddItem = false;
       const currentItems = items.slice();
       const boughtItems: ParsedFetchStationItemWithEfficiency[] = [];
       const notBoughtItems: ParsedFetchStationItemWithEfficiency[] = [];
@@ -62,13 +63,9 @@ function StationResult({ form, onReset }: StationResultProps) {
           const weightRemaining = maxWeight - currentWeight;
           const volumePerUnit = item.volume / item.quantity;
           const profitPerUnit = item.netProfit / item.quantity;
-          let unitsCount = 0;
-
-          if (isOverCost) {
-            unitsCount = Math.floor(costRemaining / item.buyPrice);
-          } else {
-            unitsCount = Math.floor(weightRemaining / volumePerUnit);
-          }
+          const costUnitsCount = Math.floor(costRemaining / item.buyPrice);
+          const weightUnitsCount = Math.floor(weightRemaining / volumePerUnit);
+          const unitsCount = Math.min(costUnitsCount, weightUnitsCount);
 
           if (unitsCount > 0) {
             const unitsVolume = unitsCount * volumePerUnit;
@@ -77,6 +74,7 @@ function StationResult({ form, onReset }: StationResultProps) {
             currentWeight += unitsVolume;
             currentCost += unitsCost;
             profit += unitsProfit;
+            didAddItem = true;
 
             // TODO: recalculate remainder of item props
             boughtItems.push({
@@ -97,10 +95,13 @@ function StationResult({ form, onReset }: StationResultProps) {
           currentCost += item.netCosts;
           profit += item.netProfit;
           boughtItems.push(item);
+          didAddItem = true;
         }
 
-        currentItems.shift();
-        i--;
+        if (didAddItem) {
+          currentItems.shift();
+          i--;
+        }
 
         if (currentWeight + 0.11 >= maxWeight || currentCost + 1000 > maxCost) {
           notBoughtItems.concat(currentItems);
