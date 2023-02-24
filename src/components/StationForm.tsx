@@ -18,6 +18,8 @@ import {
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
+import { useRecoilState } from "recoil";
+import stationFormState from "../recoil/stationForm/atom";
 
 interface StationFormState {
   from: StationEnum;
@@ -51,44 +53,44 @@ function StationForm({ onSubmit }: StationFormProps) {
       tax,
     },
     setState,
-  ] = useState<StationFormState>({
-    from: StationEnum.Jita,
-    to: Object.values(StationEnum).map(() => true),
-    maxBudget: 200, // in millions
-    maxWeight: 60000,
-    maxWeight2: 5000,
-    minProfit: 0.02,
-    minRoi: 0.04, // percent
-    routeSafety: RouteSecurity.LeastSafe,
-    security: Object.values(SystemSecurity).map(() => false),
-    tax: Number(Tax.Level3), // percent
-  });
-
+  ] = useRecoilState(stationFormState);
   const validateForm = () => !Number.isNaN(maxWeight) && hasStation(to);
   const onMaxBudgetChange = (_: any, value: number | number[]) =>
-    setState((state) => ({
+    setState((state: StationFormState) => ({
       ...state,
       maxBudget: value as number,
     }));
   const onMaxWeightChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) =>
-    setState((state) => ({ ...state, maxWeight: Number(event.target.value) }));
+    setState((state: StationFormState) => ({
+      ...state,
+      maxWeight: Number(event.target.value),
+    }));
   const onMaxWeight2Change = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) =>
-    setState((state) => ({ ...state, maxWeight2: Number(event.target.value) }));
+    setState((state: StationFormState) => ({
+      ...state,
+      maxWeight2: Number(event.target.value),
+    }));
   const onMinProfitChange = (_: any, value: number | number[]) =>
-    setState((state) => ({ ...state, minProfit: value as number }));
+    setState((state: StationFormState) => ({
+      ...state,
+      minProfit: value as number,
+    }));
   const onMinRoiChange = (_: any, value: number | number[]) =>
-    setState((state) => ({ ...state, minRoi: value as number }));
+    setState((state: StationFormState) => ({
+      ...state,
+      minRoi: value as number,
+    }));
   const onSafetyChange = (event: SelectChangeEvent<RouteSecurity>) =>
-    setState((state) => ({
+    setState((state: StationFormState) => ({
       ...state,
       routeSafety: event.target.value as RouteSecurity,
     }));
   const onTaxChange = (event: SelectChangeEvent<number>) =>
-    setState((state) => ({
+    setState((state: StationFormState) => ({
       ...state,
       tax: Number(event.target.value),
     }));
@@ -98,10 +100,10 @@ function StationForm({ onSubmit }: StationFormProps) {
       (value) => value === currentValue
     );
     nextArr[index] = value;
-    setState((state) => ({ ...state, security: nextArr }));
+    setState((state: StationFormState) => ({ ...state, security: nextArr }));
   };
   const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setState((state) => ({
+    setState((state: StationFormState) => ({
       ...state,
       from: event.target.value as StationEnum,
     }));
@@ -111,7 +113,7 @@ function StationForm({ onSubmit }: StationFormProps) {
       (value) => value === currentValue
     );
     nextArr[index] = value;
-    setState((state) => ({ ...state, to: nextArr }));
+    setState((state: StationFormState) => ({ ...state, to: nextArr }));
   };
   const hasStation = (values: boolean[]) =>
     values.filter((value) => Boolean(value)).length > 0;
