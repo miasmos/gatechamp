@@ -107,7 +107,7 @@ function useFetchStation({
       return prev;
     }, "");
 
-  const fromStr = serializeStation(from);
+  const fromStr = `${getStationRegion(from)}:${from}`;
   const toStr = serializeStation(to);
   const maxBudgetStr = (maxBudget * 1000000).toString();
   const minProfitStr = (minProfit * 1000000).toString();

@@ -15,9 +15,12 @@ import {
   SystemSecurity,
   Tax,
 } from "../enum";
+import Radio from "@mui/material/Radio";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import RadioGroup from "@mui/material/RadioGroup";
 
 interface StationFormState {
-  from: boolean[];
+  from: StationEnum;
   to: boolean[];
   maxBudget: number;
   maxWeight: number;
@@ -49,7 +52,7 @@ function StationForm({ onSubmit }: StationFormProps) {
     },
     setState,
   ] = useState<StationFormState>({
-    from: Object.values(StationEnum).map(() => false),
+    from: StationEnum.Jita,
     to: Object.values(StationEnum).map(() => true),
     maxBudget: 200, // in millions
     maxWeight: 60000,
@@ -61,8 +64,7 @@ function StationForm({ onSubmit }: StationFormProps) {
     tax: Number(Tax.Level3), // percent
   });
 
-  const validateForm = () =>
-    !Number.isNaN(maxWeight) && hasStation(from) && hasStation(to);
+  const validateForm = () => !Number.isNaN(maxWeight) && hasStation(to);
   const onMaxBudgetChange = (_: any, value: number | number[]) =>
     setState((state) => ({
       ...state,
@@ -98,14 +100,11 @@ function StationForm({ onSubmit }: StationFormProps) {
     nextArr[index] = value;
     setState((state) => ({ ...state, security: nextArr }));
   };
-  const onFromChange = (currentValue: StationEnum, value: boolean) => {
-    const nextArr = from.slice();
-    const index = Object.values(StationEnum).findIndex(
-      (value) => value === currentValue
-    );
-    nextArr[index] = value;
-    setState((state) => ({ ...state, from: nextArr }));
-  };
+  const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setState((state) => ({
+      ...state,
+      from: event.target.value as StationEnum,
+    }));
   const onToChange = (currentValue: StationEnum, value: boolean) => {
     const nextArr = to.slice();
     const index = Object.values(StationEnum).findIndex(
@@ -136,7 +135,7 @@ function StationForm({ onSubmit }: StationFormProps) {
 
   return (
     <>
-      <Typography variant="h2" mb={5}>
+      <Typography variant="h4" mb={5}>
         Station to Station
       </Typography>
       <Stack direction="column" spacing={2}>
@@ -147,24 +146,23 @@ function StationForm({ onSubmit }: StationFormProps) {
               From
             </Typography>
           </Stack>
-          <Stack direction="row" spacing={4}>
-            {Object.entries(StationEnum).map(([key, value], index) => (
-              <Stack
+          <RadioGroup
+            sx={{ ml: "0 !important" }}
+            row
+            value={from}
+            onChange={onFromChange}
+          >
+            {Object.entries(StationEnum).map(([key, value]) => (
+              <FormControlLabel
                 key={value}
-                direction="row"
-                alignItems="center"
-                spacing={1}
-              >
-                <Typography sx={{ width: 50 }}>{key}</Typography>
-                <Checkbox
-                  checked={from[index]}
-                  onChange={(event) =>
-                    onFromChange(value, event.target.checked)
-                  }
-                />
-              </Stack>
+                sx={{ ml: 6.5 }}
+                labelPlacement="start"
+                value={value}
+                control={<Radio />}
+                label={key}
+              />
             ))}
-          </Stack>
+          </RadioGroup>
         </Stack>
 
         {/* To */}
@@ -176,13 +174,10 @@ function StationForm({ onSubmit }: StationFormProps) {
           </Stack>
           <Stack direction="row" spacing={4}>
             {Object.entries(StationEnum).map(([key, value], index) => (
-              <Stack
-                key={value}
-                direction="row"
-                alignItems="center"
-                spacing={1}
-              >
-                <Typography sx={{ width: 50 }}>{key}</Typography>
+              <Stack key={value} direction="row" alignItems="center">
+                <Typography sx={{ width: 50 }} textAlign="right">
+                  {key}
+                </Typography>
                 <Checkbox
                   checked={to[index]}
                   onChange={(event) => onToChange(value, event.target.checked)}
@@ -346,11 +341,12 @@ function StationForm({ onSubmit }: StationFormProps) {
       </Stack>
       <Stack mt={5}>
         <Button
+          sx={{ height: 60 }}
           variant="contained"
           disabled={!validateForm()}
           onClick={onSearchClick}
         >
-          Search
+          Route
         </Button>
       </Stack>
     </>

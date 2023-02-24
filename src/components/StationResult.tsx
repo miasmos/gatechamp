@@ -157,19 +157,6 @@ function StationResult({ form, onReset }: StationResultProps) {
         ))
     );
 
-    // parse origin station
-    const originStationId = form.from.reduce<Station>(
-      (prev, current, index) => {
-        if (current && Station.None) {
-          const station = Object.values(Station)[index];
-          prev = station;
-        }
-
-        return prev;
-      },
-      Station.None
-    );
-
     // get most efficient items/destination
     const higherMaxWeight = Math.max(form.maxWeight, form.maxWeight2);
     const lowerMaxWeight = Math.min(form.maxWeight, form.maxWeight2);
@@ -182,7 +169,7 @@ function StationResult({ form, onReset }: StationResultProps) {
         ]
       )
       .sort((a, b) => b[1].profit - a[1].profit);
-    const origin = locations[Number(originStationId)];
+    const origin = locations[Number(form.from)];
     const destination = locations[Number(mostEfficientItems[0])];
     const cargoHold1Items = mostEfficientItems[1];
     const cargoHold2Items = getEfficientItems(
