@@ -87,35 +87,6 @@
     "Total Volume (m3)": "75.00"
   },
   {
-    "Item ID": 56078,
-    "Item": "Internal-5 'Pochven' Filament",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "20",
-    "Buy Price": "87,640.00",
-    "Net Costs": "1,752,800.00",
-    "Take To": {
-      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
-      "station_id": 60004588,
-      "system_id": 30002510,
-      "rating": 0.894581865921
-    },
-    "Sell Price": "98,840.00",
-    "Net Sales": "1,976,800.00",
-    "Gross Margin": "224,000.00",
-    "Sales Taxes": "1,059.56",
-    "Net Profit": "118,043.52",
-    "Jumps": "33",
-    "Profit per Jump": "3,577.08",
-    "Profit Per Item": "5,902.18",
-    "ROI": "6.73%",
-    "Total Volume (m3)": "2.00"
-  },
-  {
     "Item ID": 47790,
     "Item": "Decayed X-Large Shield Booster Mutaplasmid",
     "From": {
@@ -232,6 +203,35 @@
     "Total Volume (m3)": "230.00"
   },
   {
+    "Item ID": 16273,
+    "Item": "Liquid Ozone",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "11,699",
+    "Buy Price": "106.70",
+    "Net Costs": "1,248,283.30",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "125.40",
+    "Net Sales": "1,467,054.60",
+    "Gross Margin": "218,771.30",
+    "Sales Taxes": "786.34",
+    "Net Profit": "140,137.17",
+    "Jumps": "14",
+    "Profit per Jump": "10,009.80",
+    "Profit Per Item": "11.98",
+    "ROI": "11.23%",
+    "Total Volume (m3)": "4,679.60"
+  },
+  {
     "Item ID": 8089,
     "Item": "Arbalest Compact Light Missile Launcher",
     "From": {
@@ -261,62 +261,33 @@
     "Total Volume (m3)": "280.00"
   },
   {
-    "Item ID": 16273,
-    "Item": "Liquid Ozone",
+    "Item ID": 16391,
+    "Item": "Compact Multispectrum Energized Membrane",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "13,142",
-    "Buy Price": "106.70",
-    "Net Costs": "1,402,251.40",
+    "Quantity": "10",
+    "Buy Price": "168,200.00",
+    "Net Costs": "1,682,000.00",
     "Take To": {
       "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
       "station_id": 60011866,
       "system_id": 30002659,
       "rating": 0.868406701643
     },
-    "Sell Price": "125.40",
-    "Net Sales": "1,648,006.80",
-    "Gross Margin": "245,755.40",
-    "Sales Taxes": "883.33",
-    "Net Profit": "157,422.24",
+    "Sell Price": "194,700.00",
+    "Net Sales": "1,947,000.00",
+    "Gross Margin": "265,000.00",
+    "Sales Taxes": "1,043.59",
+    "Net Profit": "160,640.80",
     "Jumps": "14",
-    "Profit per Jump": "11,244.45",
-    "Profit Per Item": "11.98",
-    "ROI": "11.23%",
-    "Total Volume (m3)": "5,256.80"
-  },
-  {
-    "Item ID": 16303,
-    "Item": "'Halcyon' Core Equalizer I",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "12",
-    "Buy Price": "58,410.00",
-    "Net Costs": "700,920.00",
-    "Take To": {
-      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
-      "station_id": 60004588,
-      "system_id": 30002510,
-      "rating": 0.894581865921
-    },
-    "Sell Price": "75,650.00",
-    "Net Sales": "907,800.00",
-    "Gross Margin": "206,880.00",
-    "Sales Taxes": "486.58",
-    "Net Profit": "158,221.92",
-    "Jumps": "33",
-    "Profit per Jump": "4,794.60",
-    "Profit Per Item": "13,185.16",
-    "ROI": "22.57%",
-    "Total Volume (m3)": "60.00"
+    "Profit per Jump": "11,474.34",
+    "Profit Per Item": "16,064.08",
+    "ROI": "9.55%",
+    "Total Volume (m3)": "50.00"
   },
   {
     "Item ID": 13874,
@@ -375,35 +346,6 @@
     "Profit Per Item": "172,400.00",
     "ROI": "5.49%",
     "Total Volume (m3)": "20.00"
-  },
-  {
-    "Item ID": 16391,
-    "Item": "Compact Multispectrum Energized Membrane",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "11",
-    "Buy Price": "168,500.00",
-    "Net Costs": "1,853,500.00",
-    "Take To": {
-      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
-      "station_id": 60011866,
-      "system_id": 30002659,
-      "rating": 0.868406701643
-    },
-    "Sell Price": "194,700.00",
-    "Net Sales": "2,141,700.00",
-    "Gross Margin": "288,200.00",
-    "Sales Taxes": "1,147.95",
-    "Net Profit": "173,404.88",
-    "Jumps": "14",
-    "Profit per Jump": "12,386.06",
-    "Profit Per Item": "15,764.08",
-    "ROI": "9.36%",
-    "Total Volume (m3)": "55.00"
   },
   {
     "Item ID": 25606,
@@ -510,15 +452,15 @@
       "system_id": 30002187,
       "rating": 1
     },
-    "Sell Price": "22,040.00",
-    "Net Sales": "1,630,960.00",
-    "Gross Margin": "286,380.00",
-    "Sales Taxes": "874.19",
-    "Net Profit": "198,960.54",
+    "Sell Price": "22,050.00",
+    "Net Sales": "1,631,700.00",
+    "Gross Margin": "287,120.00",
+    "Sales Taxes": "874.59",
+    "Net Profit": "199,660.88",
     "Jumps": "40",
-    "Profit per Jump": "4,974.01",
-    "Profit Per Item": "2,688.66",
-    "ROI": "14.80%",
+    "Profit per Jump": "4,991.52",
+    "Profit Per Item": "2,698.12",
+    "ROI": "14.85%",
     "Total Volume (m3)": "0.74"
   },
   {
@@ -551,6 +493,296 @@
     "Total Volume (m3)": "4,520.00"
   },
   {
+    "Item ID": 3703,
+    "Item": "Nerve Sticks",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "20",
+    "Buy Price": "39.81",
+    "Net Costs": "796.20",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "1,100.00",
+    "Net Sales": "22,000.00",
+    "Gross Margin": "21,203.80",
+    "Sales Taxes": "11.79",
+    "Net Profit": "20,024.60",
+    "Jumps": "14",
+    "Profit per Jump": "1,430.33",
+    "Profit Per Item": "1,001.23",
+    "ROI": "2,515.02%",
+    "Total Volume (m3)": "4.00"
+  },
+  {
+    "Item ID": 10246,
+    "Item": "Mining Drone I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "14",
+    "Buy Price": "10,270.00",
+    "Net Costs": "143,780.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "12,400.00",
+    "Net Sales": "173,600.00",
+    "Gross Margin": "29,820.00",
+    "Sales Taxes": "93.05",
+    "Net Profit": "20,515.04",
+    "Jumps": "33",
+    "Profit per Jump": "621.67",
+    "Profit Per Item": "1,465.36",
+    "ROI": "14.27%",
+    "Total Volume (m3)": "70.00"
+  },
+  {
+    "Item ID": 56070,
+    "Item": "Cladistic-5 'Krai Perun' Filament",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "2",
+    "Buy Price": "178,700.00",
+    "Net Costs": "357,400.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "200,000.00",
+    "Net Sales": "400,000.00",
+    "Gross Margin": "42,600.00",
+    "Sales Taxes": "214.40",
+    "Net Profit": "21,160.00",
+    "Jumps": "9",
+    "Profit per Jump": "2,351.11",
+    "Profit Per Item": "10,580.00",
+    "ROI": "5.92%",
+    "Total Volume (m3)": "0.20"
+  },
+  {
+    "Item ID": 231,
+    "Item": "Iron Charge L",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "6,800",
+    "Buy Price": "21.90",
+    "Net Costs": "148,920.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "26.53",
+    "Net Sales": "180,404.00",
+    "Gross Margin": "31,484.00",
+    "Sales Taxes": "96.70",
+    "Net Profit": "21,814.35",
+    "Jumps": "40",
+    "Profit per Jump": "545.36",
+    "Profit Per Item": "3.21",
+    "ROI": "14.65%",
+    "Total Volume (m3)": "170.00"
+  },
+  {
+    "Item ID": 11695,
+    "Item": "Plasma Pulse Generator",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "10",
+    "Buy Price": "16,710.00",
+    "Net Costs": "167,100.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "20,000.00",
+    "Net Sales": "200,000.00",
+    "Gross Margin": "32,900.00",
+    "Sales Taxes": "107.20",
+    "Net Profit": "22,180.00",
+    "Jumps": "33",
+    "Profit per Jump": "672.12",
+    "Profit Per Item": "2,218.00",
+    "ROI": "13.27%",
+    "Total Volume (m3)": "10.00"
+  },
+  {
+    "Item ID": 8867,
+    "Item": "200mm Light Gallium Machine Gun",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "11",
+    "Buy Price": "16,780.00",
+    "Net Costs": "184,580.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "20,000.00",
+    "Net Sales": "220,000.00",
+    "Gross Margin": "35,420.00",
+    "Sales Taxes": "117.92",
+    "Net Profit": "23,628.00",
+    "Jumps": "33",
+    "Profit per Jump": "716.00",
+    "Profit Per Item": "2,148.00",
+    "ROI": "12.80%",
+    "Total Volume (m3)": "55.00"
+  },
+  {
+    "Item ID": 443,
+    "Item": "Ship Scanner I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "90",
+    "Buy Price": "3,996.00",
+    "Net Costs": "359,640.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "4,500.00",
+    "Net Sales": "405,000.00",
+    "Gross Margin": "45,360.00",
+    "Sales Taxes": "217.08",
+    "Net Profit": "23,652.00",
+    "Jumps": "40",
+    "Profit per Jump": "591.30",
+    "Profit Per Item": "262.80",
+    "ROI": "6.58%",
+    "Total Volume (m3)": "450.00"
+  },
+  {
+    "Item ID": 8117,
+    "Item": "Prototype 'Arbalest' Torpedo Launcher",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "5",
+    "Buy Price": "24,000.00",
+    "Net Costs": "120,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "30,580.00",
+    "Net Sales": "152,900.00",
+    "Gross Margin": "32,900.00",
+    "Sales Taxes": "81.95",
+    "Net Profit": "24,704.56",
+    "Jumps": "40",
+    "Profit per Jump": "617.61",
+    "Profit Per Item": "4,940.91",
+    "ROI": "20.59%",
+    "Total Volume (m3)": "100.00"
+  },
+  {
+    "Item ID": 15612,
+    "Item": "Imperial Navy Captain Insignia I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "3",
+    "Buy Price": "38,900.00",
+    "Net Costs": "116,700.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "50,000.00",
+    "Net Sales": "150,000.00",
+    "Gross Margin": "33,300.00",
+    "Sales Taxes": "80.40",
+    "Net Profit": "25,260.00",
+    "Jumps": "14",
+    "Profit per Jump": "1,804.29",
+    "Profit Per Item": "8,420.00",
+    "ROI": "21.65%",
+    "Total Volume (m3)": "0.30"
+  },
+  {
+    "Item ID": 16673,
+    "Item": "Fernite Carbide",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "2,600",
+    "Buy Price": "113.20",
+    "Net Costs": "294,320.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "130.00",
+    "Net Sales": "338,000.00",
+    "Gross Margin": "43,680.00",
+    "Sales Taxes": "181.17",
+    "Net Profit": "25,563.20",
+    "Jumps": "14",
+    "Profit per Jump": "1,825.94",
+    "Profit Per Item": "9.83",
+    "ROI": "8.69%",
+    "Total Volume (m3)": "26.00"
+  },
+  {
     "Item ID": 41303,
     "Item": "Enduring Conductors",
     "From": {
@@ -580,62 +812,207 @@
     "Total Volume (m3)": "0.29"
   },
   {
-    "Item ID": 20418,
-    "Item": "Datacore - Electronic Engineering",
+    "Item ID": 8419,
+    "Item": "Large Azeotropic Restrained Shield Extender",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "22",
-    "Buy Price": "88,960.00",
-    "Net Costs": "1,957,120.00",
-    "Take To": {
-      "name": "Amarr VIII (Oris) - Emperor Family Academy",
-      "station_id": 60008494,
-      "system_id": 30002187,
-      "rating": 1
-    },
-    "Sell Price": "107,400.00",
-    "Net Sales": "2,362,800.00",
-    "Gross Margin": "405,680.00",
-    "Sales Taxes": "1,266.46",
-    "Net Profit": "279,033.92",
-    "Jumps": "40",
-    "Profit per Jump": "6,975.85",
-    "Profit Per Item": "12,683.36",
-    "ROI": "14.26%",
-    "Total Volume (m3)": "2.20"
-  },
-  {
-    "Item ID": 8225,
-    "Item": "Mark I Compact Power Diagnostic System",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "99",
-    "Buy Price": "11,820.00",
-    "Net Costs": "1,170,180.00",
+    "Quantity": "6",
+    "Buy Price": "30,020.00",
+    "Net Costs": "180,120.00",
     "Take To": {
       "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
       "station_id": 60011866,
       "system_id": 30002659,
       "rating": 0.868406701643
     },
-    "Sell Price": "15,470.00",
-    "Net Sales": "1,531,530.00",
-    "Gross Margin": "361,350.00",
-    "Sales Taxes": "820.90",
-    "Net Profit": "279,259.99",
+    "Sell Price": "36,310.00",
+    "Net Sales": "217,860.00",
+    "Gross Margin": "37,740.00",
+    "Sales Taxes": "116.77",
+    "Net Profit": "26,062.70",
     "Jumps": "14",
-    "Profit per Jump": "19,947.14",
-    "Profit Per Item": "2,820.81",
-    "ROI": "23.86%",
-    "Total Volume (m3)": "495.00"
+    "Profit per Jump": "1,861.62",
+    "Profit Per Item": "4,343.78",
+    "ROI": "14.47%",
+    "Total Volume (m3)": "120.00"
+  },
+  {
+    "Item ID": 8905,
+    "Item": "250mm Light Carbine Howitzer I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "2",
+    "Buy Price": "17,970.00",
+    "Net Costs": "35,940.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "33,000.00",
+    "Net Sales": "66,000.00",
+    "Gross Margin": "30,060.00",
+    "Sales Taxes": "35.38",
+    "Net Profit": "26,522.40",
+    "Jumps": "9",
+    "Profit per Jump": "2,946.93",
+    "Profit Per Item": "13,261.20",
+    "ROI": "73.80%",
+    "Total Volume (m3)": "10.00"
+  },
+  {
+    "Item ID": 19931,
+    "Item": "Compulsive Scoped Multispectral ECM",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "3",
+    "Buy Price": "38,300.00",
+    "Net Costs": "114,900.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "50,010.00",
+    "Net Sales": "150,030.00",
+    "Gross Margin": "35,130.00",
+    "Sales Taxes": "80.42",
+    "Net Profit": "27,088.39",
+    "Jumps": "9",
+    "Profit per Jump": "3,009.82",
+    "Profit Per Item": "9,029.46",
+    "ROI": "23.58%",
+    "Total Volume (m3)": "15.00"
+  },
+  {
+    "Item ID": 1830,
+    "Item": "Nova Auto-Targeting Cruise Missile I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "800",
+    "Buy Price": "155.00",
+    "Net Costs": "124,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "200.00",
+    "Net Sales": "160,000.00",
+    "Gross Margin": "36,000.00",
+    "Sales Taxes": "85.76",
+    "Net Profit": "27,424.00",
+    "Jumps": "40",
+    "Profit per Jump": "685.60",
+    "Profit Per Item": "34.28",
+    "ROI": "22.12%",
+    "Total Volume (m3)": "40.00"
+  },
+  {
+    "Item ID": 41034,
+    "Item": "AE-K Compact Drone Damage Amplifier",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "14",
+    "Buy Price": "44,370.00",
+    "Net Costs": "621,180.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "48,970.00",
+    "Net Sales": "685,580.00",
+    "Gross Margin": "64,400.00",
+    "Sales Taxes": "367.47",
+    "Net Profit": "27,652.91",
+    "Jumps": "9",
+    "Profit per Jump": "3,072.55",
+    "Profit Per Item": "1,975.21",
+    "ROI": "4.45%",
+    "Total Volume (m3)": "70.00"
+  },
+  {
+    "Item ID": 16273,
+    "Item": "Liquid Ozone",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "11,699",
+    "Buy Price": "106.70",
+    "Net Costs": "1,248,283.30",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "137.80",
+    "Net Sales": "1,612,122.20",
+    "Gross Margin": "363,838.90",
+    "Sales Taxes": "864.10",
+    "Net Profit": "277,429.15",
+    "Jumps": "40",
+    "Profit per Jump": "6,935.73",
+    "Profit Per Item": "23.71",
+    "ROI": "22.22%",
+    "Total Volume (m3)": "4,679.60"
+  },
+  {
+    "Item ID": 33180,
+    "Item": "Scan Rangefinding Array I",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "158,600.00",
+    "Net Costs": "158,600.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "197,400.00",
+    "Net Sales": "197,400.00",
+    "Gross Margin": "38,800.00",
+    "Sales Taxes": "105.81",
+    "Net Profit": "28,219.36",
+    "Jumps": "9",
+    "Profit per Jump": "3,135.48",
+    "Profit Per Item": "28,219.36",
+    "ROI": "17.79%",
+    "Total Volume (m3)": "5.00"
   },
   {
     "Item ID": 19946,
@@ -667,33 +1044,178 @@
     "Total Volume (m3)": "105.00"
   },
   {
-    "Item ID": 16273,
-    "Item": "Liquid Ozone",
+    "Item ID": 2270,
+    "Item": "Noble Metals",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "13,142",
-    "Buy Price": "106.70",
-    "Net Costs": "1,402,251.40",
+    "Quantity": "103,376",
+    "Buy Price": "5.09",
+    "Net Costs": "526,183.84",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "5.68",
+    "Net Sales": "587,175.68",
+    "Gross Margin": "60,991.84",
+    "Sales Taxes": "314.73",
+    "Net Profit": "29,519.22",
+    "Jumps": "9",
+    "Profit per Jump": "3,279.91",
+    "Profit Per Item": "0.29",
+    "ROI": "5.61%",
+    "Total Volume (m3)": "1,033.76"
+  },
+  {
+    "Item ID": 55647,
+    "Item": "Svipul Biosecurity Responders SKIN",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "115,000.00",
+    "Net Costs": "115,000.00",
     "Take To": {
       "name": "Amarr VIII (Oris) - Emperor Family Academy",
       "station_id": 60008494,
       "system_id": 30002187,
       "rating": 1
     },
-    "Sell Price": "137.80",
-    "Net Sales": "1,810,967.60",
-    "Gross Margin": "408,716.20",
-    "Sales Taxes": "970.68",
-    "Net Profit": "311,648.34",
+    "Sell Price": "155,400.00",
+    "Net Sales": "155,400.00",
+    "Gross Margin": "40,400.00",
+    "Sales Taxes": "83.29",
+    "Net Profit": "32,070.56",
     "Jumps": "40",
-    "Profit per Jump": "7,791.21",
-    "Profit Per Item": "23.71",
-    "ROI": "22.22%",
-    "Total Volume (m3)": "5,256.80"
+    "Profit per Jump": "801.76",
+    "Profit Per Item": "32,070.56",
+    "ROI": "27.89%",
+    "Total Volume (m3)": "0.01"
+  },
+  {
+    "Item ID": 56078,
+    "Item": "Internal-5 'Pochven' Filament",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "20",
+    "Buy Price": "77,500.00",
+    "Net Costs": "1,550,000.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "98,840.00",
+    "Net Sales": "1,976,800.00",
+    "Gross Margin": "426,800.00",
+    "Sales Taxes": "1,059.56",
+    "Net Profit": "320,843.52",
+    "Jumps": "33",
+    "Profit per Jump": "9,722.53",
+    "Profit Per Item": "16,042.18",
+    "ROI": "20.70%",
+    "Total Volume (m3)": "2.00"
+  },
+  {
+    "Item ID": 14029,
+    "Item": "Domination Explosive Shield Amplifier",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "540,000.00",
+    "Net Costs": "540,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "605,500.00",
+    "Net Sales": "605,500.00",
+    "Gross Margin": "65,500.00",
+    "Sales Taxes": "324.55",
+    "Net Profit": "33,045.20",
+    "Jumps": "40",
+    "Profit per Jump": "826.13",
+    "Profit Per Item": "33,045.20",
+    "ROI": "6.12%",
+    "Total Volume (m3)": "5.00"
+  },
+  {
+    "Item ID": 27321,
+    "Item": "Caldari Navy Mjolnir Rocket",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "619",
+    "Buy Price": "774.00",
+    "Net Costs": "479,106.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "876.60",
+    "Net Sales": "542,615.40",
+    "Gross Margin": "63,509.40",
+    "Sales Taxes": "290.84",
+    "Net Profit": "34,425.21",
+    "Jumps": "40",
+    "Profit per Jump": "860.63",
+    "Profit Per Item": "55.61",
+    "ROI": "7.19%",
+    "Total Volume (m3)": "3.10"
+  },
+  {
+    "Item ID": 3297,
+    "Item": "Small Standard Container",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "18",
+    "Buy Price": "2,799.00",
+    "Net Costs": "50,382.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "5,000.00",
+    "Net Sales": "90,000.00",
+    "Gross Margin": "39,618.00",
+    "Sales Taxes": "48.24",
+    "Net Profit": "34,794.00",
+    "Jumps": "9",
+    "Profit per Jump": "3,866.00",
+    "Profit Per Item": "1,933.00",
+    "ROI": "69.06%",
+    "Total Volume (m3)": "1,800.00"
   },
   {
     "Item ID": 5319,
@@ -725,33 +1247,178 @@
     "Total Volume (m3)": "250.00"
   },
   {
-    "Item ID": 1830,
-    "Item": "Nova Auto-Targeting Cruise Missile I",
+    "Item ID": 8419,
+    "Item": "Large Azeotropic Restrained Shield Extender",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "11,100",
-    "Buy Price": "156.50",
-    "Net Costs": "1,737,150.00",
+    "Quantity": "6",
+    "Buy Price": "30,020.00",
+    "Net Costs": "180,120.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "38,100.00",
+    "Net Sales": "228,600.00",
+    "Gross Margin": "48,480.00",
+    "Sales Taxes": "122.53",
+    "Net Profit": "36,227.04",
+    "Jumps": "33",
+    "Profit per Jump": "1,097.79",
+    "Profit Per Item": "6,037.84",
+    "ROI": "20.11%",
+    "Total Volume (m3)": "120.00"
+  },
+  {
+    "Item ID": 47184,
+    "Item": "Men's Gallente 'Defender' T-Shirt",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "10,070.00",
+    "Net Costs": "10,070.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "50,000.00",
+    "Net Sales": "50,000.00",
+    "Gross Margin": "39,930.00",
+    "Sales Taxes": "26.80",
+    "Net Profit": "37,250.00",
+    "Jumps": "14",
+    "Profit per Jump": "2,660.71",
+    "Profit Per Item": "37,250.00",
+    "ROI": "369.91%",
+    "Total Volume (m3)": "0.10"
+  },
+  {
+    "Item ID": 603,
+    "Item": "Merlin",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "8",
+    "Buy Price": "159,000.00",
+    "Net Costs": "1,272,000.00",
     "Take To": {
       "name": "Amarr VIII (Oris) - Emperor Family Academy",
       "station_id": 60008494,
       "system_id": 30002187,
       "rating": 1
     },
-    "Sell Price": "200.00",
-    "Net Sales": "2,220,000.00",
-    "Gross Margin": "482,850.00",
-    "Sales Taxes": "1,189.92",
-    "Net Profit": "363,858.00",
+    "Sell Price": "219,400.00",
+    "Net Sales": "1,755,200.00",
+    "Gross Margin": "483,200.00",
+    "Sales Taxes": "940.79",
+    "Net Profit": "389,121.28",
     "Jumps": "40",
-    "Profit per Jump": "9,096.45",
-    "Profit Per Item": "32.78",
-    "ROI": "20.95%",
-    "Total Volume (m3)": "555.00"
+    "Profit per Jump": "9,728.03",
+    "Profit Per Item": "48,640.16",
+    "ROI": "30.59%",
+    "Total Volume (m3)": "132,000.00"
+  },
+  {
+    "Item ID": 16187,
+    "Item": "Khanid Warbird Insignia",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "7",
+    "Buy Price": "89,000.00",
+    "Net Costs": "623,000.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "100,000.00",
+    "Net Sales": "700,000.00",
+    "Gross Margin": "77,000.00",
+    "Sales Taxes": "375.20",
+    "Net Profit": "39,480.00",
+    "Jumps": "14",
+    "Profit per Jump": "2,820.00",
+    "Profit Per Item": "5,640.00",
+    "ROI": "6.34%",
+    "Total Volume (m3)": "0.70"
+  },
+  {
+    "Item ID": 11541,
+    "Item": "Photon Microprocessor",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "9",
+    "Buy Price": "39,100.00",
+    "Net Costs": "351,900.00",
+    "Take To": {
+      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
+      "station_id": 60004588,
+      "system_id": 30002510,
+      "rating": 0.894581865921
+    },
+    "Sell Price": "46,020.00",
+    "Net Sales": "414,180.00",
+    "Gross Margin": "62,280.00",
+    "Sales Taxes": "222.00",
+    "Net Profit": "40,079.95",
+    "Jumps": "33",
+    "Profit per Jump": "1,214.54",
+    "Profit Per Item": "4,453.33",
+    "ROI": "11.39%",
+    "Total Volume (m3)": "9.00"
+  },
+  {
+    "Item ID": 15598,
+    "Item": "Caldari Navy Midshipman Insignia III",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "17",
+    "Buy Price": "11,790.00",
+    "Net Costs": "200,430.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "15,000.00",
+    "Net Sales": "255,000.00",
+    "Gross Margin": "54,570.00",
+    "Sales Taxes": "136.68",
+    "Net Profit": "40,902.00",
+    "Jumps": "14",
+    "Profit per Jump": "2,921.57",
+    "Profit Per Item": "2,406.00",
+    "ROI": "20.41%",
+    "Total Volume (m3)": "1.70"
   },
   {
     "Item ID": 5599,
@@ -762,9 +1429,9 @@
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "150",
+    "Quantity": "147",
     "Buy Price": "37,780.00",
-    "Net Costs": "5,667,000.00",
+    "Net Costs": "5,553,660.00",
     "Take To": {
       "name": "Amarr VIII (Oris) - Emperor Family Academy",
       "station_id": 60008494,
@@ -772,15 +1439,102 @@
       "rating": 1
     },
     "Sell Price": "42,990.00",
-    "Net Sales": "6,448,500.00",
-    "Gross Margin": "781,500.00",
-    "Sales Taxes": "3,456.40",
-    "Net Profit": "435,860.40",
+    "Net Sales": "6,319,530.00",
+    "Gross Margin": "765,870.00",
+    "Sales Taxes": "3,387.27",
+    "Net Profit": "427,143.19",
     "Jumps": "40",
-    "Profit per Jump": "10,896.51",
+    "Profit per Jump": "10,678.58",
     "Profit Per Item": "2,905.74",
     "ROI": "7.69%",
-    "Total Volume (m3)": "750.00"
+    "Total Volume (m3)": "735.00"
+  },
+  {
+    "Item ID": 16391,
+    "Item": "Compact Multispectrum Energized Membrane",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "4",
+    "Buy Price": "168,200.00",
+    "Net Costs": "672,800.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "189,100.00",
+    "Net Sales": "756,400.00",
+    "Gross Margin": "83,600.00",
+    "Sales Taxes": "405.43",
+    "Net Profit": "43,056.96",
+    "Jumps": "40",
+    "Profit per Jump": "1,076.42",
+    "Profit Per Item": "10,764.24",
+    "ROI": "6.40%",
+    "Total Volume (m3)": "20.00"
+  },
+  {
+    "Item ID": 15609,
+    "Item": "Imperial Navy Midshipman Insignia III",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "27",
+    "Buy Price": "12,600.00",
+    "Net Costs": "340,200.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "15,000.00",
+    "Net Sales": "405,000.00",
+    "Gross Margin": "64,800.00",
+    "Sales Taxes": "217.08",
+    "Net Profit": "43,092.00",
+    "Jumps": "14",
+    "Profit per Jump": "3,078.00",
+    "Profit Per Item": "1,596.00",
+    "ROI": "12.67%",
+    "Total Volume (m3)": "2.70"
+  },
+  {
+    "Item ID": 24494,
+    "Item": "Inferno Javelin Heavy Assault Missile",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "13,617",
+    "Buy Price": "74.20",
+    "Net Costs": "1,010,381.40",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "81.81",
+    "Net Sales": "1,114,006.77",
+    "Gross Margin": "103,625.37",
+    "Sales Taxes": "597.11",
+    "Net Profit": "43,914.61",
+    "Jumps": "40",
+    "Profit per Jump": "1,097.87",
+    "Profit Per Item": "3.22",
+    "ROI": "4.35%",
+    "Total Volume (m3)": "204.26"
   },
   {
     "Item ID": 15510,
@@ -791,9 +1545,9 @@
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "84",
+    "Quantity": "83",
     "Buy Price": "18,860.00",
-    "Net Costs": "1,584,240.00",
+    "Net Costs": "1,565,380.00",
     "Take To": {
       "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
       "station_id": 60005686,
@@ -801,15 +1555,218 @@
       "rating": 0.549668267075
     },
     "Sell Price": "25,500.00",
-    "Net Sales": "2,142,000.00",
-    "Gross Margin": "557,760.00",
-    "Sales Taxes": "1,148.11",
-    "Net Profit": "442,948.80",
+    "Net Sales": "2,116,500.00",
+    "Gross Margin": "551,120.00",
+    "Sales Taxes": "1,134.44",
+    "Net Profit": "437,675.60",
     "Jumps": "9",
-    "Profit per Jump": "49,216.53",
+    "Profit per Jump": "48,630.62",
     "Profit Per Item": "5,273.20",
     "ROI": "27.96%",
-    "Total Volume (m3)": "840.00"
+    "Total Volume (m3)": "830.00"
+  },
+  {
+    "Item ID": 20412,
+    "Item": "Datacore - Plasma Physics",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "11",
+    "Buy Price": "88,490.00",
+    "Net Costs": "973,390.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "97,840.00",
+    "Net Sales": "1,076,240.00",
+    "Gross Margin": "102,850.00",
+    "Sales Taxes": "576.86",
+    "Net Profit": "45,163.54",
+    "Jumps": "40",
+    "Profit per Jump": "1,129.09",
+    "Profit Per Item": "4,105.78",
+    "ROI": "4.64%",
+    "Total Volume (m3)": "1.10"
+  },
+  {
+    "Item ID": 55582,
+    "Item": "Myrmidon Biosecurity Responders SKIN",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "2",
+    "Buy Price": "1,271.00",
+    "Net Costs": "2,542.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "25,280.00",
+    "Net Sales": "50,560.00",
+    "Gross Margin": "48,018.00",
+    "Sales Taxes": "27.10",
+    "Net Profit": "45,307.98",
+    "Jumps": "40",
+    "Profit per Jump": "1,132.70",
+    "Profit Per Item": "22,653.99",
+    "ROI": "1,782.38%",
+    "Total Volume (m3)": "0.02"
+  },
+  {
+    "Item ID": 24505,
+    "Item": "Mjolnir Precision Light Missile",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "4,750",
+    "Buy Price": "44.91",
+    "Net Costs": "213,322.50",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "57.99",
+    "Net Sales": "275,452.50",
+    "Gross Margin": "62,130.00",
+    "Sales Taxes": "147.64",
+    "Net Profit": "47,365.75",
+    "Jumps": "40",
+    "Profit per Jump": "1,184.14",
+    "Profit Per Item": "9.97",
+    "ROI": "22.20%",
+    "Total Volume (m3)": "71.25"
+  },
+  {
+    "Item ID": 45887,
+    "Item": "Algos Exoplanets Hunter SKIN",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "900,000.00",
+    "Net Costs": "900,000.00",
+    "Take To": {
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
+    },
+    "Sell Price": "1,002,000.00",
+    "Net Sales": "1,002,000.00",
+    "Gross Margin": "102,000.00",
+    "Sales Taxes": "537.07",
+    "Net Profit": "48,292.80",
+    "Jumps": "14",
+    "Profit per Jump": "3,449.49",
+    "Profit Per Item": "48,292.80",
+    "ROI": "5.37%",
+    "Total Volume (m3)": "0.01"
+  },
+  {
+    "Item ID": 55553,
+    "Item": "Manticore Biosecurity Responders SKIN",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "7",
+    "Buy Price": "49,000.00",
+    "Net Costs": "343,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "59,080.00",
+    "Net Sales": "413,560.00",
+    "Gross Margin": "70,560.00",
+    "Sales Taxes": "221.67",
+    "Net Profit": "48,393.18",
+    "Jumps": "40",
+    "Profit per Jump": "1,209.83",
+    "Profit Per Item": "6,913.31",
+    "ROI": "14.11%",
+    "Total Volume (m3)": "0.07"
+  },
+  {
+    "Item ID": 594,
+    "Item": "Incursus",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "1",
+    "Buy Price": "258,900.00",
+    "Net Costs": "258,900.00",
+    "Take To": {
+      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
+      "station_id": 60005686,
+      "system_id": 30002053,
+      "rating": 0.549668267075
+    },
+    "Sell Price": "325,100.00",
+    "Net Sales": "325,100.00",
+    "Gross Margin": "66,200.00",
+    "Sales Taxes": "174.25",
+    "Net Profit": "48,774.64",
+    "Jumps": "9",
+    "Profit per Jump": "5,419.40",
+    "Profit Per Item": "48,774.64",
+    "ROI": "18.84%",
+    "Total Volume (m3)": "29,500.00"
+  },
+  {
+    "Item ID": 56131,
+    "Item": "Tranquil Electrical Filament",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "20",
+    "Buy Price": "259,900.00",
+    "Net Costs": "5,198,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "300,000.00",
+    "Net Sales": "6,000,000.00",
+    "Gross Margin": "802,000.00",
+    "Sales Taxes": "3,216.00",
+    "Net Profit": "480,400.00",
+    "Jumps": "40",
+    "Profit per Jump": "12,010.00",
+    "Profit Per Item": "24,020.00",
+    "ROI": "9.24%",
+    "Total Volume (m3)": "2.00"
   },
   {
     "Item ID": 25620,
@@ -839,64 +1796,6 @@
     "Profit Per Item": "426.73",
     "ROI": "5.85%",
     "Total Volume (m3)": "1.18"
-  },
-  {
-    "Item ID": 25598,
-    "Item": "Tripped Power Circuit",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "581",
-    "Buy Price": "1,522.00",
-    "Net Costs": "884,282.00",
-    "Take To": {
-      "name": "Rens VI - Moon 8 - Brutor Tribe Treasury",
-      "station_id": 60004588,
-      "system_id": 30002510,
-      "rating": 0.894581865921
-    },
-    "Sell Price": "1,700.00",
-    "Net Sales": "987,700.00",
-    "Gross Margin": "103,418.00",
-    "Sales Taxes": "529.41",
-    "Net Profit": "50,477.28",
-    "Jumps": "33",
-    "Profit per Jump": "1,529.61",
-    "Profit Per Item": "86.88",
-    "ROI": "5.71%",
-    "Total Volume (m3)": "5.81"
-  },
-  {
-    "Item ID": 25598,
-    "Item": "Tripped Power Circuit",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "581",
-    "Buy Price": "1,522.00",
-    "Net Costs": "884,282.00",
-    "Take To": {
-      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
-      "station_id": 60005686,
-      "system_id": 30002053,
-      "rating": 0.549668267075
-    },
-    "Sell Price": "1,700.00",
-    "Net Sales": "987,700.00",
-    "Gross Margin": "103,418.00",
-    "Sales Taxes": "529.41",
-    "Net Profit": "50,477.28",
-    "Jumps": "9",
-    "Profit per Jump": "5,608.59",
-    "Profit Per Item": "86.88",
-    "ROI": "5.71%",
-    "Total Volume (m3)": "5.81"
   },
   {
     "Item ID": 47299,
@@ -986,64 +1885,6 @@
     "Total Volume (m3)": "5.00"
   },
   {
-    "Item ID": 16303,
-    "Item": "'Halcyon' Core Equalizer I",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "12",
-    "Buy Price": "58,410.00",
-    "Net Costs": "700,920.00",
-    "Take To": {
-      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
-      "station_id": 60011866,
-      "system_id": 30002659,
-      "rating": 0.868406701643
-    },
-    "Sell Price": "66,550.00",
-    "Net Sales": "798,600.00",
-    "Gross Margin": "97,680.00",
-    "Sales Taxes": "428.05",
-    "Net Profit": "54,875.04",
-    "Jumps": "14",
-    "Profit per Jump": "3,919.65",
-    "Profit Per Item": "4,572.92",
-    "ROI": "7.83%",
-    "Total Volume (m3)": "60.00"
-  },
-  {
-    "Item ID": 55553,
-    "Item": "Manticore Biosecurity Responders SKIN",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "8",
-    "Buy Price": "49,000.00",
-    "Net Costs": "392,000.00",
-    "Take To": {
-      "name": "Amarr VIII (Oris) - Emperor Family Academy",
-      "station_id": 60008494,
-      "system_id": 30002187,
-      "rating": 1
-    },
-    "Sell Price": "59,080.00",
-    "Net Sales": "472,640.00",
-    "Gross Margin": "80,640.00",
-    "Sales Taxes": "253.34",
-    "Net Profit": "55,306.50",
-    "Jumps": "40",
-    "Profit per Jump": "1,382.66",
-    "Profit Per Item": "6,913.31",
-    "ROI": "14.11%",
-    "Total Volume (m3)": "0.08"
-  },
-  {
     "Item ID": 19235,
     "Item": "Gistum B-Type Explosive Shield Amplifier",
     "From": {
@@ -1073,33 +1914,33 @@
     "Total Volume (m3)": "5.00"
   },
   {
-    "Item ID": 603,
-    "Item": "Merlin",
+    "Item ID": 8225,
+    "Item": "Mark I Compact Power Diagnostic System",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "1",
-    "Buy Price": "150,000.00",
-    "Net Costs": "150,000.00",
+    "Quantity": "20",
+    "Buy Price": "11,800.00",
+    "Net Costs": "236,000.00",
     "Take To": {
-      "name": "Amarr VIII (Oris) - Emperor Family Academy",
-      "station_id": 60008494,
-      "system_id": 30002187,
-      "rating": 1
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
     },
-    "Sell Price": "219,400.00",
-    "Net Sales": "219,400.00",
-    "Gross Margin": "69,400.00",
-    "Sales Taxes": "117.60",
-    "Net Profit": "57,640.16",
-    "Jumps": "40",
-    "Profit per Jump": "1,441.00",
-    "Profit Per Item": "57,640.16",
-    "ROI": "38.43%",
-    "Total Volume (m3)": "16,500.00"
+    "Sell Price": "15,470.00",
+    "Net Sales": "309,400.00",
+    "Gross Margin": "73,400.00",
+    "Sales Taxes": "165.84",
+    "Net Profit": "56,816.16",
+    "Jumps": "14",
+    "Profit per Jump": "4,058.30",
+    "Profit Per Item": "2,840.81",
+    "ROI": "24.07%",
+    "Total Volume (m3)": "100.00"
   },
   {
     "Item ID": 33359,
@@ -1189,33 +2030,33 @@
     "Total Volume (m3)": "1.80"
   },
   {
-    "Item ID": 16527,
-    "Item": "'Arbalest' Rocket Launcher I",
+    "Item ID": 11695,
+    "Item": "Plasma Pulse Generator",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "2",
-    "Buy Price": "475,800.00",
-    "Net Costs": "951,600.00",
+    "Quantity": "314",
+    "Buy Price": "16,710.00",
+    "Net Costs": "5,246,940.00",
     "Take To": {
       "name": "Amarr VIII (Oris) - Emperor Family Academy",
       "station_id": 60008494,
       "system_id": 30002187,
       "rating": 1
     },
-    "Sell Price": "535,600.00",
-    "Net Sales": "1,071,200.00",
-    "Gross Margin": "119,600.00",
-    "Sales Taxes": "574.16",
-    "Net Profit": "62,183.68",
+    "Sell Price": "19,710.00",
+    "Net Sales": "6,188,940.00",
+    "Gross Margin": "942,000.00",
+    "Sales Taxes": "3,317.27",
+    "Net Profit": "610,272.82",
     "Jumps": "40",
-    "Profit per Jump": "1,554.59",
-    "Profit Per Item": "31,091.84",
-    "ROI": "6.53%",
-    "Total Volume (m3)": "10.00"
+    "Profit per Jump": "15,256.82",
+    "Profit Per Item": "1,943.54",
+    "ROI": "11.63%",
+    "Total Volume (m3)": "314.00"
   },
   {
     "Item ID": 594,
@@ -1247,33 +2088,33 @@
     "Total Volume (m3)": "29,500.00"
   },
   {
-    "Item ID": 16680,
-    "Item": "Phenolic Composites",
+    "Item ID": 245,
+    "Item": "Gamma S",
     "From": {
       "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
       "station_id": 60003760,
       "system_id": 30000142,
       "rating": 0.945913116665
     },
-    "Quantity": "10,000",
-    "Buy Price": "1,309.00",
-    "Net Costs": "13,090,000.00",
+    "Quantity": "1,799",
+    "Buy Price": "3,498.00",
+    "Net Costs": "6,292,902.00",
     "Take To": {
-      "name": "Amarr VIII (Oris) - Emperor Family Academy",
-      "station_id": 60008494,
-      "system_id": 30002187,
-      "rating": 1
+      "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant",
+      "station_id": 60011866,
+      "system_id": 30002659,
+      "rating": 0.868406701643
     },
-    "Sell Price": "1,451.00",
-    "Net Sales": "14,510,000.00",
-    "Gross Margin": "1,420,000.00",
-    "Sales Taxes": "7,777.36",
-    "Net Profit": "642,264.00",
-    "Jumps": "40",
-    "Profit per Jump": "16,056.60",
-    "Profit Per Item": "64.23",
-    "ROI": "4.91%",
-    "Total Volume (m3)": "2,000.00"
+    "Sell Price": "4,072.00",
+    "Net Sales": "7,325,528.00",
+    "Gross Margin": "1,032,626.00",
+    "Sales Taxes": "3,926.48",
+    "Net Profit": "639,977.70",
+    "Jumps": "14",
+    "Profit per Jump": "45,712.69",
+    "Profit Per Item": "355.74",
+    "ROI": "10.17%",
+    "Total Volume (m3)": "1,799.00"
   },
   {
     "Item ID": 16670,
@@ -1314,8 +2155,8 @@
       "rating": 0.945913116665
     },
     "Quantity": "8",
-    "Buy Price": "171,500.00",
-    "Net Costs": "1,372,000.00",
+    "Buy Price": "171,600.00",
+    "Net Costs": "1,372,800.00",
     "Take To": {
       "name": "Amarr VIII (Oris) - Emperor Family Academy",
       "station_id": 60008494,
@@ -1324,13 +2165,13 @@
     },
     "Sell Price": "190,000.00",
     "Net Sales": "1,520,000.00",
-    "Gross Margin": "148,000.00",
+    "Gross Margin": "147,200.00",
     "Sales Taxes": "814.72",
-    "Net Profit": "66,528.00",
+    "Net Profit": "65,728.00",
     "Jumps": "40",
-    "Profit per Jump": "1,663.20",
-    "Profit Per Item": "8,316.00",
-    "ROI": "4.85%",
+    "Profit per Jump": "1,643.20",
+    "Profit Per Item": "8,216.00",
+    "ROI": "4.79%",
     "Total Volume (m3)": "8.00"
   },
   {
@@ -1566,35 +2407,6 @@
     "Total Volume (m3)": "1.18"
   },
   {
-    "Item ID": 5933,
-    "Item": "Counterbalanced Compact Gyrostabilizer",
-    "From": {
-      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
-      "station_id": 60003760,
-      "system_id": 30000142,
-      "rating": 0.945913116665
-    },
-    "Quantity": "36",
-    "Buy Price": "49,890.00",
-    "Net Costs": "1,796,040.00",
-    "Take To": {
-      "name": "Hek VIII - Moon 12 - Boundless Creation Factory",
-      "station_id": 60005686,
-      "system_id": 30002053,
-      "rating": 0.549668267075
-    },
-    "Sell Price": "55,000.00",
-    "Net Sales": "1,980,000.00",
-    "Gross Margin": "183,960.00",
-    "Sales Taxes": "1,061.28",
-    "Net Profit": "77,832.00",
-    "Jumps": "9",
-    "Profit per Jump": "8,648.00",
-    "Profit Per Item": "2,162.00",
-    "ROI": "4.33%",
-    "Total Volume (m3)": "180.00"
-  },
-  {
     "Item ID": 15656,
     "Item": "Caldari Navy Commodore Insignia II",
     "From": {
@@ -1709,6 +2521,35 @@
     "Profit Per Item": "97,519.04",
     "ROI": "97.62%",
     "Total Volume (m3)": "0.01"
+  },
+  {
+    "Item ID": 16680,
+    "Item": "Phenolic Composites",
+    "From": {
+      "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant",
+      "station_id": 60003760,
+      "system_id": 30000142,
+      "rating": 0.945913116665
+    },
+    "Quantity": "15,000",
+    "Buy Price": "1,309.00",
+    "Net Costs": "19,635,000.00",
+    "Take To": {
+      "name": "Amarr VIII (Oris) - Emperor Family Academy",
+      "station_id": 60008494,
+      "system_id": 30002187,
+      "rating": 1
+    },
+    "Sell Price": "1,452.00",
+    "Net Sales": "21,780,000.00",
+    "Gross Margin": "2,145,000.00",
+    "Sales Taxes": "11,674.08",
+    "Net Profit": "977,592.00",
+    "Jumps": "40",
+    "Profit per Jump": "24,439.80",
+    "Profit Per Item": "65.17",
+    "ROI": "4.98%",
+    "Total Volume (m3)": "3,000.00"
   },
   {
     "Item ID": 48433,

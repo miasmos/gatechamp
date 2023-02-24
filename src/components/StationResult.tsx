@@ -6,6 +6,7 @@ import useFetchStation, {
   ParsedFetchStationItem,
   StationItem,
 } from "../hooks/useFetchStation";
+import { formatCurrency } from "../util/currency";
 import { StationFormState } from "./StationForm";
 import StationItemTable from "./StationItemTable";
 
@@ -56,7 +57,8 @@ function StationResult({ form, onReset }: StationResultProps) {
       for (let i = 0; i < currentItems.length; i++) {
         const item = currentItems[i];
         const isOverVolume = item.volume + currentWeight > maxWeight;
-        const isOverCost = item.netCosts + currentCost > maxCost;
+        const isOverCost =
+          item.quantity * item.buyPrice + currentCost > maxCost;
 
         if (isOverVolume || isOverCost) {
           const costRemaining = maxCost - currentCost;
@@ -75,6 +77,19 @@ function StationResult({ form, onReset }: StationResultProps) {
             currentCost += unitsCost;
             profit += unitsProfit;
             didAddItem = true;
+            // console.log(
+            //   `PARTIAL!!!!! Buy ${item.quantity} ${item.item}, ${
+            //     item.quantity
+            //   } @ ${formatCurrency(item.buyPrice)}, total cost ${formatCurrency(
+            //     item.netCosts
+            //   )}, total profit ${formatCurrency(
+            //     item.netProfit
+            //   )}, total weight ${
+            //     item.volume
+            //   }                  running weight ${currentWeight}m3, running cost$${formatCurrency(
+            //     currentCost
+            //   )}`
+            // );
 
             // TODO: recalculate remainder of item props
             boughtItems.push({
@@ -92,8 +107,20 @@ function StationResult({ form, onReset }: StationResultProps) {
           }
         } else {
           currentWeight += item.volume;
-          currentCost += item.netCosts;
-          profit += item.netProfit;
+          currentCost += item.quantity * item.buyPrice;
+          profit +=
+            item.quantity * item.sellPrice - item.quantity * item.buyPrice;
+          //   console.log(
+          //     `Buy ${item.quantity} ${item.item}, ${
+          //       item.quantity
+          //     } @ ${formatCurrency(item.buyPrice)}, total cost ${formatCurrency(
+          //       item.netCosts
+          //     )}, total profit ${formatCurrency(item.netProfit)}, total weight ${
+          //       item.volume
+          //     }                  running weight ${currentWeight}m3, running cost$${formatCurrency(
+          //       currentCost
+          //     )}`
+          //   );
           boughtItems.push(item);
           didAddItem = true;
         }

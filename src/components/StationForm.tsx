@@ -52,9 +52,9 @@ function StationForm({ onSubmit }: StationFormProps) {
     from: Object.values(StationEnum).map(() => false),
     to: Object.values(StationEnum).map(() => true),
     maxBudget: 200, // in millions
-    maxWeight: 50000,
+    maxWeight: 60000,
     maxWeight2: 5000,
-    minProfit: 0.05,
+    minProfit: 0.02,
     minRoi: 0.04, // percent
     routeSafety: RouteSecurity.LeastSafe,
     security: Object.values(SystemSecurity).map(() => false),
@@ -255,9 +255,9 @@ function StationForm({ onSubmit }: StationFormProps) {
           <Slider
             value={minProfit}
             onChange={onMinProfitChange}
-            min={0.05}
-            max={10}
-            step={0.05}
+            min={0.01}
+            max={1}
+            step={0.01}
           />
           <Typography sx={{ width: 20 }}>
             {formatCurrency(minProfit * 1000000)}

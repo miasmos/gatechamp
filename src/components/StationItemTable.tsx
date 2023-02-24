@@ -112,7 +112,10 @@ function StationItemTable({
           </Table>
         </TableContainer>
       </Paper>
-      <Stack mt={2} alignItems="flex-end">
+      <Stack direction="row" mt={2} mx={1} justifyContent="space-between">
+        <Typography>
+          {items.length} item{items.length === 1 ? "" : "s"}
+        </Typography>
         <ButtonGroup>
           <CopyToClipboard text={stringifiedBuyOrder}>
             <Button size="small" endIcon={<ContentCopyIcon />}>
