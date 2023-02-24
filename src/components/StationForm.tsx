@@ -213,37 +213,43 @@ function StationForm({ onSubmit }: StationFormProps) {
         </Stack>
 
         {/* Cargo */}
-        <Stack direction="row" spacing={3}>
-          <Stack direction="row" alignItems="center">
-            <Typography sx={{ width: 100 }} textAlign="right">
-              Cargo Hold 1
-            </Typography>
+        <Stack direction="row" spacing={4}>
+          <Stack direction="row" spacing={3}>
+            <Stack direction="row" alignItems="center">
+              <Typography sx={{ width: 100 }} textAlign="right">
+                Cargo Hold 1
+              </Typography>
+            </Stack>
+            <TextField
+              required
+              fullWidth
+              defaultValue={maxWeight}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">m³</InputAdornment>
+                ),
+              }}
+              onChange={onMaxWeightChange}
+            />
           </Stack>
-          <TextField
-            required
-            fullWidth
-            defaultValue={maxWeight}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m³</InputAdornment>,
-            }}
-            onChange={onMaxWeightChange}
-          />
-        </Stack>
-        <Stack direction="row" spacing={3}>
-          <Stack direction="row" alignItems="center">
-            <Typography sx={{ width: 100 }} textAlign="right">
-              Cargo Hold 2
-            </Typography>
+          <Stack direction="row" spacing={3}>
+            <Stack direction="row" alignItems="center">
+              <Typography sx={{ width: 100 }} textAlign="right">
+                Cargo Hold 2
+              </Typography>
+            </Stack>
+            <TextField
+              required
+              fullWidth
+              defaultValue={maxWeight2}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">m³</InputAdornment>
+                ),
+              }}
+              onChange={onMaxWeight2Change}
+            />
           </Stack>
-          <TextField
-            required
-            fullWidth
-            defaultValue={maxWeight2}
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m³</InputAdornment>,
-            }}
-            onChange={onMaxWeight2Change}
-          />
         </Stack>
 
         {/* Min Profit */}
