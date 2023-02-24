@@ -18,12 +18,10 @@
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
-    "store": "^2.0.12",
     "swr": "^2.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
-    "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^18.0.10",
     "@types/store": "^2.0.2",
     "@vitejs/plugin-react-swc": "^3.0.0",
