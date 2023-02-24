@@ -152,16 +152,18 @@ function StationForm({ onSubmit }: StationFormProps) {
             value={from}
             onChange={onFromChange}
           >
-            {Object.entries(StationEnum).map(([key, value]) => (
-              <FormControlLabel
-                key={value}
-                sx={{ ml: 6.5 }}
-                labelPlacement="start"
-                value={value}
-                control={<Radio />}
-                label={key}
-              />
-            ))}
+            {Object.entries(StationEnum)
+              .filter(([key]) => key !== "None")
+              .map(([key, value]) => (
+                <FormControlLabel
+                  key={value}
+                  sx={{ ml: 6.5 }}
+                  labelPlacement="start"
+                  value={value}
+                  control={<Radio />}
+                  label={key}
+                />
+              ))}
           </RadioGroup>
         </Stack>
 
@@ -173,17 +175,21 @@ function StationForm({ onSubmit }: StationFormProps) {
             </Typography>
           </Stack>
           <Stack direction="row" spacing={4}>
-            {Object.entries(StationEnum).map(([key, value], index) => (
-              <Stack key={value} direction="row" alignItems="center">
-                <Typography sx={{ width: 50 }} textAlign="right">
-                  {key}
-                </Typography>
-                <Checkbox
-                  checked={to[index]}
-                  onChange={(event) => onToChange(value, event.target.checked)}
-                />
-              </Stack>
-            ))}
+            {Object.entries(StationEnum)
+              .filter(([key]) => key !== "None")
+              .map(([key, value], index) => (
+                <Stack key={value} direction="row" alignItems="center">
+                  <Typography sx={{ width: 50 }} textAlign="right">
+                    {key}
+                  </Typography>
+                  <Checkbox
+                    checked={to[index]}
+                    onChange={(event) =>
+                      onToChange(value, event.target.checked)
+                    }
+                  />
+                </Stack>
+              ))}
           </Stack>
         </Stack>
 
