@@ -77,19 +77,6 @@ function StationResult({ form, onReset }: StationResultProps) {
             currentCost += unitsCost;
             profit += unitsProfit;
             didAddItem = true;
-            // console.log(
-            //   `PARTIAL!!!!! Buy ${item.quantity} ${item.item}, ${
-            //     item.quantity
-            //   } @ ${formatCurrency(item.buyPrice)}, total cost ${formatCurrency(
-            //     item.netCosts
-            //   )}, total profit ${formatCurrency(
-            //     item.netProfit
-            //   )}, total weight ${
-            //     item.volume
-            //   }                  running weight ${currentWeight}m3, running cost$${formatCurrency(
-            //     currentCost
-            //   )}`
-            // );
 
             // TODO: recalculate remainder of item props
             boughtItems.push({
@@ -110,17 +97,6 @@ function StationResult({ form, onReset }: StationResultProps) {
           currentCost += item.quantity * item.buyPrice;
           profit +=
             item.quantity * item.sellPrice - item.quantity * item.buyPrice;
-          //   console.log(
-          //     `Buy ${item.quantity} ${item.item}, ${
-          //       item.quantity
-          //     } @ ${formatCurrency(item.buyPrice)}, total cost ${formatCurrency(
-          //       item.netCosts
-          //     )}, total profit ${formatCurrency(item.netProfit)}, total weight ${
-          //       item.volume
-          //     }                  running weight ${currentWeight}m3, running cost$${formatCurrency(
-          //       currentCost
-          //     )}`
-          //   );
           boughtItems.push(item);
           didAddItem = true;
         }
