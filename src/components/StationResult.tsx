@@ -190,8 +190,12 @@ function StationResult({ form, onReset }: StationResultProps) {
 
   const { station, cargoHold1, cargoHold2 } = result;
   return (
-    <Stack spacing={3}>
-      <Typography variant="h2">{station.name}</Typography>
+    <Stack spacing={5}>
+      <Stack direction="row" alignItems="center">
+        <Typography variant="h2" mb={1}>
+          {station.name}
+        </Typography>
+      </Stack>
       <Stack spacing={5}>
         <StationItemTable
           title="Cargo Hold 1"
@@ -206,7 +210,7 @@ function StationResult({ form, onReset }: StationResultProps) {
           {...cargoHold2}
         />
       </Stack>
-      <Button variant="contained" onClick={onReset}>
+      <Button sx={{ height: 60 }} variant="contained" onClick={onReset}>
         Reset
       </Button>
     </Stack>

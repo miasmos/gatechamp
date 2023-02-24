@@ -37,16 +37,92 @@ function StationItemTable({
     () => stringifyItemsOrder(items, "buy"),
     [items]
   );
-  const stringifiedSellOrder = useMemo(
-    () => stringifyItemsOrder(items, "sell"),
-    [items]
-  );
+
+  const table =
+    items.length === 0 ? (
+      <Stack alignItems="center">
+        <Stack direction="row" alignItems="center">
+          <Typography textAlign="center">No Results</Typography>
+        </Stack>
+      </Stack>
+    ) : (
+      <>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: 300 }}>
+            <Table size="small" stickyHeader>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Item</TableCell>
+                  <TableCell align="right">Buy</TableCell>
+                  <TableCell align="right">Sell</TableCell>
+                  <TableCell align="right">Profit</TableCell>
+                  <TableCell align="right">Volume</TableCell>
+                  <TableCell align="right">Efficiency</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {items.map(
+                  ({
+                    item,
+                    efficiency,
+                    quantity,
+                    netProfit,
+                    buyPrice,
+                    sellPrice,
+                    volume,
+                  }) => (
+                    <TableRow
+                      key={item}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {item}
+                      </TableCell>
+                      <TableCell align="right">
+                        {quantity} @ Ƶ{formatCurrency(buyPrice)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {quantity} @ Ƶ{formatCurrency(sellPrice)}
+                      </TableCell>
+                      <TableCell align="right">
+                        Ƶ{formatCurrency(netProfit)}
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatCurrency(volume)} m³
+                      </TableCell>
+                      <TableCell align="right">
+                        {formatCurrency(efficiency)}
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+        <Stack direction="row" mt={3} mx={1} justifyContent="space-between">
+          <Typography>
+            {items.length} item{items.length === 1 ? "" : "s"}
+          </Typography>
+          <ButtonGroup>
+            <CopyToClipboard text={stringifiedBuyOrder}>
+              <Button size="small" endIcon={<ContentCopyIcon />}>
+                Buy
+              </Button>
+            </CopyToClipboard>
+          </ButtonGroup>
+        </Stack>
+      </>
+    );
+
   return (
     <Stack>
-      <Stack direction="row" justifyContent="space-between">
-        <Stack direction="row" spacing={0.5}>
-          <Typography variant="h4">{title}</Typography>
-          <Stack direction="row" alignItems="center" spacing={2}>
+      <Stack direction="row" justifyContent="space-between" mb={1.5}>
+        <Stack direction="row" spacing={2}>
+          <Stack direction="row" alignItems="center">
+            <Typography variant="h4">{title}</Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={2.5}>
             <Typography>
               {formatCurrency(volume)} / {formatCurrency(maxVolume)} m³
             </Typography>
@@ -59,76 +135,7 @@ function StationItemTable({
           Ƶ{formatCurrency(profit)} profit
         </Stack>
       </Stack>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 300 }}>
-          <Table size="small" stickyHeader>
-            <TableHead>
-              <TableRow>
-                <TableCell>Item</TableCell>
-                <TableCell align="right">Buy</TableCell>
-                <TableCell align="right">Sell</TableCell>
-                <TableCell align="right">Profit</TableCell>
-                <TableCell align="right">Volume</TableCell>
-                <TableCell align="right">Efficiency</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {items.map(
-                ({
-                  item,
-                  efficiency,
-                  quantity,
-                  netProfit,
-                  buyPrice,
-                  sellPrice,
-                  volume,
-                }) => (
-                  <TableRow
-                    key={item}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {item}
-                    </TableCell>
-                    <TableCell align="right">
-                      {quantity} @ Ƶ{formatCurrency(buyPrice)}
-                    </TableCell>
-                    <TableCell align="right">
-                      {quantity} @ Ƶ{formatCurrency(sellPrice)}
-                    </TableCell>
-                    <TableCell align="right">
-                      Ƶ{formatCurrency(netProfit)}
-                    </TableCell>
-                    <TableCell align="right">
-                      {formatCurrency(volume)} m³
-                    </TableCell>
-                    <TableCell align="right">
-                      {formatCurrency(efficiency)}
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      <Stack direction="row" mt={2} mx={1} justifyContent="space-between">
-        <Typography>
-          {items.length} item{items.length === 1 ? "" : "s"}
-        </Typography>
-        <ButtonGroup>
-          <CopyToClipboard text={stringifiedBuyOrder}>
-            <Button size="small" endIcon={<ContentCopyIcon />}>
-              Buy
-            </Button>
-          </CopyToClipboard>
-          <CopyToClipboard text={stringifiedSellOrder}>
-            <Button size="small" endIcon={<ContentCopyIcon />}>
-              Sell
-            </Button>
-          </CopyToClipboard>
-        </ButtonGroup>
-      </Stack>
+      {table}
     </Stack>
   );
 }
