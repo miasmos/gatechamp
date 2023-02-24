@@ -1,11 +1,14 @@
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
+import { Station } from "../enum";
 import useFetchStation, {
   ParsedFetchStationItem,
   StationItem,
 } from "../hooks/useFetchStation";
+import { getStationDisplayName } from "../util/eveTrade";
 import { StationFormState } from "./StationForm";
 import StationItemTable from "./StationItemTable";
 
@@ -154,6 +157,19 @@ function StationResult({ form, onReset }: StationResultProps) {
         ))
     );
 
+    // parse origin station
+    const originStationId = form.from.reduce<Station>(
+      (prev, current, index) => {
+        if (current && Station.None) {
+          const station = Object.values(Station)[index];
+          prev = station;
+        }
+
+        return prev;
+      },
+      Station.None
+    );
+
     // get most efficient items/destination
     const higherMaxWeight = Math.max(form.maxWeight, form.maxWeight2);
     const lowerMaxWeight = Math.min(form.maxWeight, form.maxWeight2);
@@ -166,6 +182,7 @@ function StationResult({ form, onReset }: StationResultProps) {
         ]
       )
       .sort((a, b) => b[1].profit - a[1].profit);
+    const origin = locations[Number(originStationId)];
     const destination = locations[Number(mostEfficientItems[0])];
     const cargoHold1Items = mostEfficientItems[1];
     const cargoHold2Items = getEfficientItems(
@@ -175,7 +192,8 @@ function StationResult({ form, onReset }: StationResultProps) {
     );
 
     return {
-      station: destination,
+      origin,
+      destination,
       cargoHold1: cargoHold1Items,
       cargoHold2: cargoHold2Items,
     };
@@ -188,13 +206,23 @@ function StationResult({ form, onReset }: StationResultProps) {
     return <>Loading...</>;
   }
 
-  const { station, cargoHold1, cargoHold2 } = result;
+  const { destination, origin, cargoHold1, cargoHold2 } = result;
   return (
     <Stack spacing={5}>
-      <Stack direction="row" alignItems="center">
-        <Typography variant="h2" mb={1}>
-          {station.name}
-        </Typography>
+      <Stack alignItems="center">
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Stack alignItems="center">
+            <Typography variant="h4" mb={1}>
+              {getStationDisplayName(origin)}
+            </Typography>
+          </Stack>
+          <ArrowRightAltIcon />
+          <Stack alignItems="center">
+            <Typography variant="h4" mb={1}>
+              {getStationDisplayName(destination)}
+            </Typography>
+          </Stack>
+        </Stack>
       </Stack>
       <Stack spacing={5}>
         <StationItemTable
@@ -206,7 +234,7 @@ function StationResult({ form, onReset }: StationResultProps) {
         <StationItemTable
           title="Cargo Hold 2"
           maxVolume={form.maxWeight2}
-          maxCost={form.maxBudget * 1000000}
+          maxCost={form.maxBudget * 1000000 - cargoHold1.cost}
           {...cargoHold2}
         />
       </Stack>

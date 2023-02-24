@@ -4,6 +4,7 @@ enum Station {
   Dodixie = "60011866",
   Rens = "60004588",
   Hek = "60005686",
+  None = "0",
 }
 
 enum Region {
@@ -12,6 +13,7 @@ enum Region {
   Domain = "10000043", // Amarr
   SinqLaison = "10000032", // Dodixie
   Heimatar = "10000030", // Rens
+  None = "0",
 }
 
 enum RouteSecurity {

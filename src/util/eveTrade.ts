@@ -1,6 +1,7 @@
 import { Region, Station } from "../enum";
 import { formatCurrency } from "./currency";
 import shipVolumeData from "../data/ship-volume.json";
+import { StationItem } from "../hooks/useFetchStation";
 
 const getStationRegion = (station: Station) => {
   switch (station) {
@@ -14,8 +15,25 @@ const getStationRegion = (station: Station) => {
       return Region.SinqLaison;
     case Station.Rens:
       return Region.Heimatar;
+    case Station.None:
+      return Region.None;
     default:
       throw new Error("unknown station");
+  }
+};
+
+const getStationDisplayName = (station: StationItem) => {
+  switch (station.station_id.toString()) {
+    case Station.Jita:
+      return "Jita";
+    case Station.Amarr:
+      return "Amarr";
+    case Station.Hek:
+      return "Hek";
+    case Station.Dodixie:
+      return "Dodixie";
+    case Station.Rens:
+      return "Rens";
   }
 };
 
@@ -45,4 +63,9 @@ const stringifyItemsOrder = (
     ""
   );
 
-export { getStationRegion, stringifyItemsOrder, getPackagedVolume };
+export {
+  getStationRegion,
+  stringifyItemsOrder,
+  getPackagedVolume,
+  getStationDisplayName,
+};
