@@ -13,15 +13,17 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { formatCurrency } from "../util/currency";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { EfficientItemsResult } from "./StationResult";
-import { stringifyItemsOrder } from "../util/eveTrade";
+import { stringifyItemOrder, stringifyItemsOrder } from "../util/eveTrade";
+import { EfficientItemsResult } from "../types";
 
 type StationItemTableProps = EfficientItemsResult & {
   title: string;
   maxVolume: number;
   maxCost: number;
+  onIgnore: (itemId: number) => void;
 };
 
 function StationItemTable({
@@ -32,9 +34,10 @@ function StationItemTable({
   maxVolume,
   maxCost,
   cost,
+  onIgnore,
 }: StationItemTableProps) {
   const stringifiedBuyOrder = useMemo(
-    () => stringifyItemsOrder(items, "buy"),
+    () => stringifyItemsOrder(items),
     [items]
   );
 
@@ -52,6 +55,7 @@ function StationItemTable({
             <Table size="small" stickyHeader>
               <TableHead>
                 <TableRow>
+                  <TableCell />
                   <TableCell>Item</TableCell>
                   <TableCell align="right">Buy</TableCell>
                   <TableCell align="right">Sell</TableCell>
@@ -64,6 +68,7 @@ function StationItemTable({
                 {items.map(
                   ({
                     item,
+                    itemId,
                     efficiency,
                     quantity,
                     netProfit,
@@ -74,11 +79,44 @@ function StationItemTable({
                   }) => (
                     <TableRow
                       key={item}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
                     >
-                      <TableCell component="th" scope="row">
-                        {item}
+                      <TableCell scope="row" sx={{ pl: 1, pr: 0 }}>
+                        <Stack direction="row" spacing={0.5}>
+                          <CloseIcon
+                            fontSize="small"
+                            color="primary"
+                            sx={{
+                              cursor: "pointer",
+                            }}
+                            onClick={() => onIgnore(itemId)}
+                          />
+                          <CopyToClipboard
+                            text={stringifyItemOrder({
+                              item,
+                              quantity,
+                              buyPrice,
+                            })}
+                          >
+                            <ContentCopyIcon
+                              fontSize="small"
+                              color="primary"
+                              sx={{
+                                cursor: "pointer",
+                                "&:hover": {
+                                  transform: "translate(-1px,-1px);",
+                                },
+                                "&:active": {
+                                  transform: "translate(1px,1px);",
+                                },
+                              }}
+                            />
+                          </CopyToClipboard>
+                        </Stack>
                       </TableCell>
+                      <TableCell scope="row">{item}</TableCell>
                       <TableCell align="right">
                         {quantity} @ Ƶ{formatCurrency(buyPrice)}
                       </TableCell>
@@ -101,7 +139,7 @@ function StationItemTable({
             </Table>
           </TableContainer>
         </Paper>
-        <Stack direction="row" mt={3} mx={1} justifyContent="space-between">
+        <Stack direction="row" mt={2} mx={1} justifyContent="space-between">
           <Typography>
             {items.length} item{items.length === 1 ? "" : "s"}
           </Typography>

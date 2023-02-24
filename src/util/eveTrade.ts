@@ -50,22 +50,25 @@ const stringifyItemsOrder = (
     item: string;
     quantity: number;
     buyPrice: number;
-    sellPrice: number;
-  }[],
-  mode: "buy" | "sell"
-) =>
-  items.reduce(
-    (prev, { item, quantity, buyPrice, sellPrice }) =>
-      `${prev}${item}\t${quantity}\t${formatCurrency(
-        mode === "buy" ? buyPrice : sellPrice,
-        "long"
-      )}\n`,
-    ""
-  );
+  }[]
+) => items.reduce((prev, item) => `${prev}${stringifyItemOrder(item)}\n`, "");
+
+const stringifyItemOrder = ({
+  item,
+  quantity,
+  buyPrice,
+}: {
+  item: string;
+  quantity: number;
+  buyPrice: number;
+}) => {
+  return `${item}\t${quantity}\t${formatCurrency(buyPrice, "long")}`;
+};
 
 export {
   getStationRegion,
   stringifyItemsOrder,
+  stringifyItemOrder,
   getPackagedVolume,
   getStationDisplayName,
 };

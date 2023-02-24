@@ -37,4 +37,9 @@ enum Tax {
   Level5 = "0.036",
 }
 
-export { Station, Region, RouteSecurity, SystemSecurity, Tax };
+enum CargoHold {
+  One = 1,
+  Two = 2,
+}
+
+export { Station, Region, RouteSecurity, SystemSecurity, Tax, CargoHold };
