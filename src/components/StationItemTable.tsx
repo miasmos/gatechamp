@@ -70,6 +70,7 @@ function StationItemTable({
                     buyPrice,
                     sellPrice,
                     volume,
+                    packagedVolume,
                   }) => (
                     <TableRow
                       key={item}
@@ -88,7 +89,7 @@ function StationItemTable({
                         Ƶ{formatCurrency(netProfit)}
                       </TableCell>
                       <TableCell align="right">
-                        {formatCurrency(volume)} m³
+                        {formatCurrency(packagedVolume || volume)} m³
                       </TableCell>
                       <TableCell align="right">
                         {formatCurrency(efficiency)}

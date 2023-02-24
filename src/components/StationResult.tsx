@@ -6,7 +6,6 @@ import useFetchStation, {
   ParsedFetchStationItem,
   StationItem,
 } from "../hooks/useFetchStation";
-import { formatCurrency } from "../util/currency";
 import { StationFormState } from "./StationForm";
 import StationItemTable from "./StationItemTable";
 
@@ -56,14 +55,15 @@ function StationResult({ form, onReset }: StationResultProps) {
 
       for (let i = 0; i < currentItems.length; i++) {
         const item = currentItems[i];
-        const isOverVolume = item.volume + currentWeight > maxWeight;
+        const normalizedVolume = item.packagedVolume || item.volume;
+        const isOverVolume = normalizedVolume + currentWeight > maxWeight;
         const isOverCost =
           item.quantity * item.buyPrice + currentCost > maxCost;
 
         if (isOverVolume || isOverCost) {
           const costRemaining = maxCost - currentCost;
           const weightRemaining = maxWeight - currentWeight;
-          const volumePerUnit = item.volume / item.quantity;
+          const volumePerUnit = normalizedVolume / item.quantity;
           const profitPerUnit = item.netProfit / item.quantity;
           const costUnitsCount = Math.floor(costRemaining / item.buyPrice);
           const weightUnitsCount = Math.floor(weightRemaining / volumePerUnit);
@@ -89,11 +89,11 @@ function StationResult({ form, onReset }: StationResultProps) {
               ...item,
               netProfit: item.netProfit - unitsProfit,
               quantity: item.quantity - unitsCount,
-              volume: item.volume - unitsVolume,
+              volume: normalizedVolume - unitsVolume,
             });
           }
         } else {
-          currentWeight += item.volume;
+          currentWeight += normalizedVolume;
           currentCost += item.quantity * item.buyPrice;
           profit +=
             item.quantity * item.sellPrice - item.quantity * item.buyPrice;

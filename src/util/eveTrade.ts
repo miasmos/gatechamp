@@ -1,5 +1,6 @@
 import { Region, Station } from "../enum";
 import { formatCurrency } from "./currency";
+import shipVolumeData from "../data/ship-volume.json";
 
 const getStationRegion = (station: Station) => {
   switch (station) {
@@ -16,6 +17,14 @@ const getStationRegion = (station: Station) => {
     default:
       throw new Error("unknown station");
   }
+};
+
+const getPackagedVolume = (id: number) => {
+  const idStr = id.toString();
+  if (idStr in shipVolumeData) {
+    return (shipVolumeData as Record<string, number>)[idStr];
+  }
+  return undefined;
 };
 
 const stringifyItemsOrder = (
@@ -36,4 +45,4 @@ const stringifyItemsOrder = (
     ""
   );
 
-export { getStationRegion, stringifyItemsOrder };
+export { getStationRegion, stringifyItemsOrder, getPackagedVolume };

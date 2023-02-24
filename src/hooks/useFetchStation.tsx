@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import useSWRImmutable from "swr/immutable";
-import { fetch, fetchMock } from "../api";
+import { fetchEveTrade, fetchMock } from "../api";
 import { Station, SystemSecurity } from "../enum";
 import { StationFormState } from "../components/StationForm";
-import { getStationRegion } from "../util/eveTrade";
+import { getStationRegion, getPackagedVolume } from "../util/eveTrade";
 import mockData from "../../mock/jita-to-all.json";
 
 interface StationItem {
@@ -31,6 +31,7 @@ interface ParsedFetchStationItem {
   sellPrice: number;
   takeTo: StationItem;
   volume: number;
+  packagedVolume: number | undefined;
 }
 
 interface FetchStationItem {
@@ -54,25 +55,34 @@ interface FetchStationItem {
 }
 
 const parseCurrency = (value: string) => parseFloat(value.replace(/,|%/g, ""));
-const parseItem = (props: FetchStationItem): ParsedFetchStationItem => ({
-  buyPrice: parseCurrency(props["Buy Price"]),
-  from: props.From,
-  grossMargin: parseCurrency(props["Gross Margin"]),
-  item: props.Item,
-  itemId: props["Item ID"],
-  jumps: parseCurrency(props.Jumps),
-  netCosts: parseCurrency(props["Net Costs"]),
-  netProfit: parseCurrency(props["Net Profit"]),
-  netSales: parseCurrency(props["Net Sales"]),
-  profitPerItem: parseCurrency(props["Profit Per Item"]),
-  profitPerJump: parseCurrency(props["Profit per Jump"]),
-  quantity: parseCurrency(props.Quantity),
-  roi: parseFloat(props.ROI) / 100,
-  salesTaxes: parseCurrency(props["Sales Taxes"]),
-  sellPrice: parseCurrency(props["Sell Price"]),
-  takeTo: props["Take To"],
-  volume: parseCurrency(props["Total Volume (m3)"]),
-});
+const parseItem = (props: FetchStationItem): ParsedFetchStationItem => {
+  const itemId = props["Item ID"];
+  const parsedVolume = parseCurrency(props["Total Volume (m3)"]);
+  const parsedQuantity = parseCurrency(props.Quantity);
+  const packagedVolume = getPackagedVolume(itemId);
+  return {
+    buyPrice: parseCurrency(props["Buy Price"]),
+    from: props.From,
+    grossMargin: parseCurrency(props["Gross Margin"]),
+    item: props.Item,
+    itemId,
+    jumps: parseCurrency(props.Jumps),
+    netCosts: parseCurrency(props["Net Costs"]),
+    netProfit: parseCurrency(props["Net Profit"]),
+    netSales: parseCurrency(props["Net Sales"]),
+    profitPerItem: parseCurrency(props["Profit Per Item"]),
+    profitPerJump: parseCurrency(props["Profit per Jump"]),
+    quantity: parsedQuantity,
+    roi: parseFloat(props.ROI) / 100,
+    salesTaxes: parseCurrency(props["Sales Taxes"]),
+    sellPrice: parseCurrency(props["Sell Price"]),
+    takeTo: props["Take To"],
+    volume: parsedVolume,
+    packagedVolume: packagedVolume
+      ? packagedVolume * parsedQuantity
+      : undefined,
+  };
+};
 
 function useFetchStation({
   from,
@@ -128,7 +138,7 @@ function useFetchStation({
   // fetch api
   const { data, error, isLoading } = useSWRImmutable<FetchStationItem[]>(
     `/?${query}`,
-    fetch,
+    fetchEveTrade,
     {
       shouldRetryOnError: false,
     }
