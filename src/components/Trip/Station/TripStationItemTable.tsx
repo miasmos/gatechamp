@@ -20,9 +20,9 @@ import {
   stringifyItemOrder,
   stringifyItemsOrder,
 } from "../../../util/eveTrade";
-import { EfficientItemsResult } from "../../../types";
+import { CargoBayItem } from "../../../hooks/useFetchTripStation";
 
-type TripStationItemTableProps = EfficientItemsResult & {
+type TripStationItemTableProps = CargoBayItem & {
   title: string;
   maxVolume: number;
   maxCost: number;

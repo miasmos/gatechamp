@@ -1,24 +1,35 @@
 import { useState } from "react";
-import { useMemo } from "react";
-import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
-import { ParsedFetchStationItem } from "../../../hooks/useFetchStation";
 import { TripState } from "../../../recoil/trip";
 import { getStationDisplayName } from "../../../util/eveTrade";
-import StationItemTable from "./TripStationItemTable";
-import { computeItemEfficiency } from "../../../util/item";
 import { CargoBay } from "../../../enum";
-import { Ship } from "../../../recoil/ships/atom";
+import {
+  FetchTripStationResultItem,
+  StationItem,
+} from "../../../hooks/useFetchTripStation";
+import TripStationItemTable from "./TripStationItemTable";
+import { formatCurrency } from "../../../util/currency";
 
-interface TripStationResultProps {
-  ship: Ship;
+type TripStationResultShipProps = {
   trip: TripState;
-  items: ParsedFetchStationItem[] | undefined;
-}
+  origin: StationItem;
+} & FetchTripStationResultItem;
 
-function TripStationResult({ trip, ship, items }: TripStationResultProps) {
+function TripStationResultShip({
+  trip,
+  ship,
+  origin,
+  cargo,
+  location,
+  totalProfit,
+}: TripStationResultShipProps) {
+  if (totalProfit === 0) {
+    return null;
+  }
+
+  const [main, fleetHanger] = cargo;
   const [
     {
       cargoBay1: { ignore: cargoBay1Ignore },
@@ -29,33 +40,6 @@ function TripStationResult({ trip, ship, items }: TripStationResultProps) {
     cargoBay1: { ignore: number[] };
     cargoBay2: { ignore: number[] };
   }>({ cargoBay1: { ignore: [] }, cargoBay2: { ignore: [] } });
-
-  const cargoBay1Result = useMemo(
-    () =>
-      computeItemEfficiency(
-        items,
-        trip.from,
-        trip.maxBudget,
-        ship.cargoBay.main,
-        cargoBay1Ignore
-      ),
-    [items, trip, ship, cargoBay1Ignore]
-  );
-  const cargoBay2Result = useMemo(() => {
-    if (
-      typeof cargoBay1Result === "undefined" ||
-      typeof ship.cargoBay.fleetHanger === "undefined"
-    ) {
-      return undefined;
-    }
-    return computeItemEfficiency(
-      items,
-      trip.from,
-      trip.maxBudget - cargoBay1Result.filteredItems.cost,
-      ship.cargoBay.fleetHanger,
-      cargoBay2Ignore
-    );
-  }, [items, trip, ship, cargoBay1Result, cargoBay2Ignore]);
 
   const ignoreCargoBayItem = (cargoBay: CargoBay) => (itemId: number) => {
     if (cargoBay === CargoBay.One) {
@@ -71,11 +55,6 @@ function TripStationResult({ trip, ship, items }: TripStationResultProps) {
     }
   };
 
-  if (!cargoBay1Result) {
-    return <>Loading...</>;
-  }
-
-  const { origin, destination, filteredItems } = cargoBay1Result;
   return (
     <Stack spacing={5}>
       <Stack alignItems="center">
@@ -88,26 +67,28 @@ function TripStationResult({ trip, ship, items }: TripStationResultProps) {
           <ArrowRightAltIcon />
           <Stack alignItems="center">
             <Typography variant="h4" mb={1}>
-              {getStationDisplayName(destination)}
+              {getStationDisplayName(location)}
             </Typography>
           </Stack>
         </Stack>
+        <Stack>{ship.name}</Stack>
+        <Stack>Ƶ{formatCurrency(totalProfit)} profit</Stack>
       </Stack>
       <Stack spacing={5}>
-        <StationItemTable
-          title="Cargo Hold 1"
+        <TripStationItemTable
+          title="Main"
           maxVolume={ship.cargoBay.main.volume}
           maxCost={trip.maxBudget * 1000000}
           onIgnore={ignoreCargoBayItem(CargoBay.One)}
-          {...filteredItems}
+          {...main}
         />
-        {cargoBay2Result && (
-          <StationItemTable
-            title="Cargo Hold 2"
+        {fleetHanger.volume > 0 && (
+          <TripStationItemTable
+            title="Fleet Hanger"
             maxVolume={ship.cargoBay.fleetHanger?.volume!}
-            maxCost={trip.maxBudget * 1000000 - filteredItems.cost}
+            maxCost={trip.maxBudget * 1000000 - main.cost}
             onIgnore={ignoreCargoBayItem(CargoBay.One)}
-            {...cargoBay2Result.filteredItems}
+            {...fleetHanger}
           />
         )}
       </Stack>
@@ -115,4 +96,4 @@ function TripStationResult({ trip, ship, items }: TripStationResultProps) {
   );
 }
 
-export default TripStationResult;
+export default TripStationResultShip;

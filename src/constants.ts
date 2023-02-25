@@ -1,3 +1,3 @@
-const EVE_TRADE_DOMAIN = import.meta.env.VITE_EVE_TRADE_DOMAIN;
+const EVE_TRADE_PLUS_DOMAIN = import.meta.env.VITE_EVE_TRADE_PLUS_DOMAIN;
 
-export { EVE_TRADE_DOMAIN };
+export { EVE_TRADE_PLUS_DOMAIN };

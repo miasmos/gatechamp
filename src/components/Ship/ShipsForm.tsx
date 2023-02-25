@@ -14,8 +14,11 @@ import ShipEditor from "./ShipEditor";
 import { addShipSetter } from "../../recoil/ships";
 import { AppRoute, CargoBayType } from "../../enum";
 import { useNavigate } from "react-router";
+import { NavigationIntention } from "../../types";
 
-function ShipsForm() {
+type ShipsFormProps = NavigationIntention;
+
+function ShipsForm({ to }: ShipsFormProps) {
   const navigate = useNavigate();
   const [{ editingIndex, isEditing }, setFormState] = useState<{
     editingIndex: number;
@@ -34,7 +37,7 @@ function ShipsForm() {
     if (!isFormValid) {
       return;
     }
-    navigate(AppRoute.TripConfig);
+    navigate(to);
   };
   const onAddShipClick = () => {
     if (isEditing) {

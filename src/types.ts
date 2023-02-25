@@ -1,15 +1,7 @@
-import { ParsedFetchStationItem } from "./hooks/useFetchStation";
+import { AppRoute } from "./enum";
 
-type ParsedFetchStationItemWithEfficiency = ParsedFetchStationItem & {
-  efficiency: number;
+type NavigationIntention = {
+  to: AppRoute | string;
 };
 
-type EfficientItemsResult = {
-  items: ParsedFetchStationItemWithEfficiency[];
-  remainingItems: ParsedFetchStationItemWithEfficiency[];
-  volume: number;
-  cost: number;
-  profit: number;
-};
-
-export type { ParsedFetchStationItemWithEfficiency, EfficientItemsResult };
+export type { NavigationIntention };

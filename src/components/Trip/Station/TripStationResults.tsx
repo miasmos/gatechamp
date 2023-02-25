@@ -1,38 +1,58 @@
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Button } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import useFetchStation from "../../../hooks/useFetchStation";
 import tripState, { clearTripSetter } from "../../../recoil/trip";
-import { AppRoute } from "../../../enum";
 import shipsState from "../../../recoil/ships/atom";
-import TripStationResult from "./TripStationResult";
+import { NavigationIntention } from "../../../types";
+import useFetchTripStation from "../../../hooks/useFetchTripStation";
+import TripStationResultShip from "./TripStationResultShip";
 
-function TripStationResults() {
+type TripStationResults = NavigationIntention;
+
+function TripStationResults({ to }: TripStationResults) {
   const navigate = useNavigate();
   const [trip, setTripState] = useRecoilState(tripState);
   const ships = useRecoilValue(shipsState);
   const clearTrip = clearTripSetter(setTripState);
-  const { items, hasError } = useFetchStation(trip);
+  const { data, isLoading, hasError } = useFetchTripStation(trip, ships);
+
+  // TODO: remove any here
+  const origin = useMemo(
+    () =>
+      data.find((record: any) => {
+        return record?.location.station_id.toString() === trip.from;
+      })?.location || {
+        name: "",
+        station_id: 0,
+        rating: 0,
+        system_id: 0,
+      },
+    [data]
+  );
 
   const onReset = () => {
     clearTrip();
-    navigate(AppRoute.Home);
+    navigate(to);
   };
 
   if (hasError) {
     console.log("error while fetching", hasError);
   }
+  if (isLoading) {
+    return <>Loading...</>;
+  }
 
   return (
     <Stack spacing={5}>
       <Stack>
-        {ships.ships.map((ship) => (
-          <TripStationResult
-            key={ship.id}
-            ship={ship}
+        {data.map((node, index) => (
+          <TripStationResultShip
+            key={index}
             trip={trip}
-            items={items}
+            origin={origin}
+            {...node}
           />
         ))}
       </Stack>

@@ -30,8 +30,11 @@ import tripState, {
   taxSetter,
   toSetter,
 } from "../../../recoil/trip";
+import { NavigationIntention } from "../../../types";
 
-function TripStationForm() {
+type TripStationProps = NavigationIntention;
+
+function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
   const [
     { from, to, maxBudget, minProfit, minRoi, routeSafety, security, tax },
@@ -61,7 +64,7 @@ function TripStationForm() {
     if (!isFormValid) {
       return;
     }
-    navigate(AppRoute.TripResult);
+    navigate(navigateTo);
   };
 
   return (

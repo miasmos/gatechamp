@@ -2,9 +2,9 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Outlet } from "react-router";
 import { AppRoute } from "../enum";
-import Link from "./Link";
+import Link from "../components/Link";
 
-function Layout() {
+function RootLayout() {
   return (
     <Box className="App">
       <Link href={AppRoute.Home}>
@@ -15,4 +15,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default RootLayout;

@@ -1,16 +1,19 @@
-import Axios, { AxiosInstance } from "axios";
-import { EVE_TRADE_DOMAIN } from "./constants";
+import Axios from "axios";
+import { EVE_TRADE_PLUS_DOMAIN } from "./constants";
 import { wait } from "./util/promise";
 
-const EveTradeClient = Axios.create({
-  baseURL: `https://${EVE_TRADE_DOMAIN}`,
+const EveTradePlusClient = Axios.create({
+  baseURL: `http://${EVE_TRADE_PLUS_DOMAIN}`,
   timeout: 30000,
 });
 
-const fetch = (client: AxiosInstance, url: string) =>
-  client.get(url).then((response) => response.data);
+const getEveTradePlus = (url: string) =>
+  EveTradePlusClient.get(url).then((response) => response.data);
 
-const fetchEveTrade = (url: string) => fetch(EveTradeClient, url);
+const postEveTradePlus =
+  <T>(data: T) =>
+  (url: string) =>
+    EveTradePlusClient.post(url, data).then((response) => response.data);
 
 const fetchMock =
   <T>(data: T) =>
@@ -19,4 +22,4 @@ const fetchMock =
     return data;
   };
 
-export { fetchEveTrade, fetchMock };
+export { getEveTradePlus, postEveTradePlus, fetchMock };
