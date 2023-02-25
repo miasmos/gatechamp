@@ -2,33 +2,28 @@ import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
-import { TripState } from "../../../recoil/trip";
 import { getStationDisplayName } from "../../../util/eveTrade";
 import { CargoBay } from "../../../enum";
-import {
-  FetchTripStationResultItem,
-  StationItem,
-} from "../../../hooks/useFetchTripStation";
 import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";
+import { NavigationIntention } from "../../../types";
+import { useRecoilState, useRecoilValue } from "recoil";
+import tripDetailState from "../../../recoil/tripDetail/atom";
+import tripState from "../../../recoil/trip/atom";
+import getShipById from "../../../recoil/ships/selectors/getShipById";
+import { useNavigate } from "react-router";
+import { clearTripSetter } from "../../../recoil/trip";
+import Button from "@mui/material/Button";
 
-type TripStationResultShipProps = {
-  trip: TripState;
-  origin: StationItem;
-} & FetchTripStationResultItem;
+type TripStationDetailProps = NavigationIntention;
 
-function TripStationResultShip({
-  trip,
-  ship,
-  origin,
-  cargo,
-  location,
-  totalProfit,
-}: TripStationResultShipProps) {
-  if (totalProfit === 0) {
-    return null;
-  }
-
+function TripStationDetail({ to }: TripStationDetailProps) {
+  const navigate = useNavigate();
+  const { cargo, origin, location, shipId, totalProfit } =
+    useRecoilValue(tripDetailState);
+  const [trip, setTripState] = useRecoilState(tripState);
+  const ship = useRecoilValue(getShipById(shipId));
+  const clearTrip = clearTripSetter(setTripState);
   const [main, fleetHanger] = cargo;
   const [
     {
@@ -40,6 +35,11 @@ function TripStationResultShip({
     cargoBay1: { ignore: number[] };
     cargoBay2: { ignore: number[] };
   }>({ cargoBay1: { ignore: [] }, cargoBay2: { ignore: [] } });
+
+  const onReset = () => {
+    clearTrip();
+    navigate(to);
+  };
 
   const ignoreCargoBayItem = (cargoBay: CargoBay) => (itemId: number) => {
     if (cargoBay === CargoBay.One) {
@@ -71,13 +71,13 @@ function TripStationResultShip({
             </Typography>
           </Stack>
         </Stack>
-        <Stack>{ship.name}</Stack>
+        <Stack>{ship?.name}</Stack>
         <Stack>Ƶ{formatCurrency(totalProfit)} profit</Stack>
       </Stack>
       <Stack spacing={5}>
         <TripStationItemTable
           title="Main"
-          maxVolume={ship.cargoBay.main.volume}
+          maxVolume={ship?.cargoBay.main.volume || 0}
           maxCost={trip.maxBudget * 1000000}
           onIgnore={ignoreCargoBayItem(CargoBay.One)}
           {...main}
@@ -85,15 +85,18 @@ function TripStationResultShip({
         {fleetHanger.volume > 0 && (
           <TripStationItemTable
             title="Fleet Hanger"
-            maxVolume={ship.cargoBay.fleetHanger?.volume!}
+            maxVolume={ship?.cargoBay.fleetHanger.volume || 0}
             maxCost={trip.maxBudget * 1000000 - main.cost}
             onIgnore={ignoreCargoBayItem(CargoBay.One)}
             {...fleetHanger}
           />
         )}
       </Stack>
+      <Button sx={{ height: 60 }} variant="contained" onClick={onReset}>
+        Reset
+      </Button>
     </Stack>
   );
 }
 
-export default TripStationResultShip;
+export default TripStationDetail;

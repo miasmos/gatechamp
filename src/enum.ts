@@ -3,8 +3,9 @@ enum AppRoute {
   Trip = "trip",
   StationFlow = "station",
   ManageShips = "manage-ships",
-  ConfigureTrip = "configure-trip",
-  Result = "result",
+  ConfigureRoute = "configure-route",
+  Overview = "overview",
+  Detail = "detail",
 }
 
 enum Station {

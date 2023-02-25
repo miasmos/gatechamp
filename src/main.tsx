@@ -14,10 +14,11 @@ import { ThemeProvider } from "@emotion/react";
 import { AppRoute } from "./enum";
 import ShipsForm from "./components/Ship/ShipsForm";
 import TripStationForm from "./components/Trip/Station/TripStationForm";
-import TripStationResults from "./components/Trip/Station/TripStationResults";
+import TripStationOverview from "./components/Trip/Station/TripStationOverview";
 import AppLayout from "./layout/RootLayout";
 import TripLayout from "./layout/TripLayout";
 import StationFlowLayout from "./layout/StationFlowLayout";
+import TripStationDetail from "./components/Trip/Station/TripStationDetail";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,16 +33,19 @@ const router = createBrowserRouter(
         <Route index element={<Navigate to={AppRoute.StationFlow} />} />
 
         <Route path={AppRoute.StationFlow} element={<StationFlowLayout />}>
-          <Route index element={<ShipsForm to={AppRoute.ConfigureTrip} />} />
+          <Route index element={<ShipsForm to={AppRoute.ConfigureRoute} />} />
           <Route
-            path={AppRoute.ConfigureTrip}
-            element={<TripStationForm to={`../${AppRoute.Result}`} />}
+            path={AppRoute.ConfigureRoute}
+            element={<TripStationForm to={`../${AppRoute.Overview}`} />}
           />
           <Route
-            path={AppRoute.Result}
-            element={<TripStationResults to={AppRoute.Home} />}
+            path={AppRoute.Overview}
+            element={<TripStationOverview to={`../${AppRoute.Detail}`} />}
           />
-          <Route path="test" element={<>test</>} />
+          <Route
+            path={AppRoute.Detail}
+            element={<TripStationDetail to={AppRoute.Home} />}
+          />
         </Route>
       </Route>
     </Route>

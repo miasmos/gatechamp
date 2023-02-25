@@ -50,12 +50,25 @@ type FetchTripStationResultItem = {
   cargo: CargoBayItem[];
 };
 
+type FetchTripStationResult = {
+  origin: StationItem;
+  items: FetchTripStationResultItem[];
+};
+
 function useFetchTripStation(trip: TripState, ships: ShipsState) {
   const {
-    data = [],
+    data = {
+      origin: {
+        name: "",
+        station_id: 0,
+        rating: 0,
+        system_id: 0,
+      },
+      items: [],
+    },
     error,
     isLoading,
-  } = useSWR<FetchTripStationResultItem[]>(
+  } = useSWR<FetchTripStationResult>(
     `/api/trip/station`,
     postEveTradePlus({ trip, ships }),
     {
@@ -73,4 +86,9 @@ function useFetchTripStation(trip: TripState, ships: ShipsState) {
 }
 
 export default useFetchTripStation;
-export type { FetchTripStationResultItem, StationItem, CargoBayItem };
+export type {
+  FetchTripStationResult,
+  FetchTripStationResultItem,
+  StationItem,
+  CargoBayItem,
+};

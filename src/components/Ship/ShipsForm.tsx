@@ -78,7 +78,7 @@ function ShipsForm({ to }: ShipsFormProps) {
   return (
     <>
       <Typography variant="h4" mb={5}>
-        Station to Station
+        Add your ships
       </Typography>
       <Stack>
         <Stack direction="column" spacing={2}>

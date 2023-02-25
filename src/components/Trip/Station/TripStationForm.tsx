@@ -70,7 +70,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
   return (
     <>
       <Typography variant="h4" mb={5}>
-        Station to Station
+        Configure your route
       </Typography>
       <Stack direction="column" spacing={2}>
         {/* From */}
