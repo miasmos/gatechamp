@@ -4,14 +4,23 @@ import { RouteSecurity, Station, SystemSecurity, Tax } from "../../enum";
 
 const { persistAtom } = recoilPersist();
 
-const stationFormState = atom({
-  key: "StationForm",
+interface TripState {
+  from: Station;
+  to: boolean[];
+  maxBudget: number;
+  minProfit: number;
+  minRoi: number;
+  routeSafety: RouteSecurity;
+  security: boolean[];
+  tax: number;
+}
+
+const tripState = atom<TripState>({
+  key: "TripState",
   default: {
     from: Station.Jita,
     to: Object.values(Station).map(() => true),
     maxBudget: 200, // in millions
-    maxWeight: 60000,
-    maxWeight2: 5000,
     minProfit: 0.02,
     minRoi: 0.04, // percent
     routeSafety: RouteSecurity.LeastSafe,
@@ -21,4 +30,5 @@ const stationFormState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export default stationFormState;
+export default tripState;
+export type { TripState };

@@ -1,3 +1,9 @@
+enum AppRoute {
+  Home = "/",
+  TripConfig = "/trip/configure",
+  TripResult = "/trip/result",
+}
+
 enum Station {
   Jita = "60003760",
   Amarr = "60008494",
@@ -37,9 +43,23 @@ enum Tax {
   Level5 = "0.036",
 }
 
-enum CargoHold {
+enum CargoBay {
   One = 1,
   Two = 2,
 }
 
-export { Station, Region, RouteSecurity, SystemSecurity, Tax, CargoHold };
+enum CargoBayType {
+  Main,
+  FleetHanger,
+}
+
+export {
+  AppRoute,
+  Station,
+  Region,
+  RouteSecurity,
+  SystemSecurity,
+  Tax,
+  CargoBay,
+  CargoBayType,
+};

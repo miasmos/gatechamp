@@ -1,10 +1,9 @@
 import { useMemo } from "react";
-import useSWRImmutable from "swr/immutable";
-import { fetchEveTrade, fetchMock } from "../api";
+import useSWR from "swr";
+import { fetchEveTrade } from "../api";
 import { Station, SystemSecurity } from "../enum";
-import { StationFormState } from "../components/StationForm";
+import { TripState } from "../recoil/trip";
 import { getStationRegion, getPackagedVolume } from "../util/eveTrade";
-import mockData from "../../mock/jita-to-all.json";
 
 interface StationItem {
   name: string;
@@ -93,7 +92,7 @@ function useFetchStation({
   routeSafety,
   security,
   tax,
-}: StationFormState) {
+}: TripState) {
   // sanitize/format inputs
   const serializeStation = (values: boolean[]) =>
     values.reduce((prev, current, index) => {
@@ -136,11 +135,13 @@ function useFetchStation({
     .join("&");
 
   // fetch api
-  const { data, error, isLoading } = useSWRImmutable<FetchStationItem[]>(
+  const { data, error, isLoading } = useSWR<FetchStationItem[]>(
     `/?${query}`,
     fetchEveTrade,
     {
       shouldRetryOnError: false,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: false,
     }
   );
 

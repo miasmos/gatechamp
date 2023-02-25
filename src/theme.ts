@@ -1,4 +1,6 @@
-import { createTheme, Theme } from "@mui/material";
+import { createTheme } from "@mui/material";
+import { LinkProps } from "@mui/material/Link";
+import Link from "./components/Link";
 
 const palette = createTheme();
 const theme = createTheme(
@@ -25,10 +27,19 @@ const theme = createTheme(
         styleOverrides: {
           root: {
             color: palette.palette.primary.main,
+            textDecoration: "none",
             ":visited": {
               color: palette.palette.primary.main,
             },
           },
+        },
+        defaultProps: {
+          component: Link,
+        } as LinkProps,
+      },
+      MuiButtonBase: {
+        defaultProps: {
+          LinkComponent: Link,
         },
       },
     },

@@ -1,5 +1,7 @@
-import { StationFormState } from "../components/StationForm";
+import { Station } from "../enum";
 import { ParsedFetchStationItem, StationItem } from "../hooks/useFetchStation";
+import { Ship, ShipCargoBay } from "../recoil/ships";
+import { TripState } from "../recoil/trip";
 import {
   ParsedFetchStationItemWithEfficiency,
   EfficientItemsResult,
@@ -99,9 +101,10 @@ const getItemEfficiency = ({
 
 const computeItemEfficiency = (
   items: ParsedFetchStationItem[] | undefined,
-  form: StationFormState,
-  cargoHold1Ignore: number[],
-  cargoHold2Ignore: number[]
+  originId: Station,
+  maxBudget: number,
+  cargoBay: ShipCargoBay<any>,
+  ignoredItemIds: number[]
 ) => {
   if (!items) {
     return undefined;
@@ -141,37 +144,27 @@ const computeItemEfficiency = (
   );
 
   // get most efficient items/destination
-  const higherMaxWeight = Math.max(form.maxWeight, form.maxWeight2);
-  const lowerMaxWeight = Math.min(form.maxWeight, form.maxWeight2);
-
   const [mostEfficientItems] = Object.entries(itemsByStation)
     .map<[string, ReturnType<typeof getEfficientItems>]>(
       ([stationId, items]) => [
         stationId,
         getEfficientItems(
           items,
-          higherMaxWeight,
-          form.maxBudget * 1000000,
-          cargoHold1Ignore
+          cargoBay.volume,
+          maxBudget * 1000000,
+          ignoredItemIds
         ),
       ]
     )
     .sort((a, b) => b[1].profit - a[1].profit);
-  const origin = locations[Number(form.from)];
+  const origin = locations[Number(originId)];
   const destination = locations[Number(mostEfficientItems[0])];
-  const cargoHold1Items = mostEfficientItems[1];
-  const cargoHold2Items = getEfficientItems(
-    cargoHold1Items.remainingItems,
-    lowerMaxWeight,
-    form.maxBudget * 1000000 - cargoHold1Items.cost,
-    cargoHold2Ignore
-  );
+  const filteredItems = mostEfficientItems[1];
 
   return {
     origin,
     destination,
-    cargoHold1: cargoHold1Items,
-    cargoHold2: cargoHold2Items,
+    filteredItems,
   };
 };
 

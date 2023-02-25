@@ -14,19 +14,22 @@ import {
   Button,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { formatCurrency } from "../util/currency";
+import { formatCurrency } from "../../../util/currency";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { stringifyItemOrder, stringifyItemsOrder } from "../util/eveTrade";
-import { EfficientItemsResult } from "../types";
+import {
+  stringifyItemOrder,
+  stringifyItemsOrder,
+} from "../../../util/eveTrade";
+import { EfficientItemsResult } from "../../../types";
 
-type StationItemTableProps = EfficientItemsResult & {
+type TripStationItemTableProps = EfficientItemsResult & {
   title: string;
   maxVolume: number;
   maxCost: number;
   onIgnore: (itemId: number) => void;
 };
 
-function StationItemTable({
+function TripStationItemTable({
   items,
   volume,
   profit,
@@ -35,7 +38,7 @@ function StationItemTable({
   maxCost,
   cost,
   onIgnore,
-}: StationItemTableProps) {
+}: TripStationItemTableProps) {
   const stringifiedBuyOrder = useMemo(
     () => stringifyItemsOrder(items),
     [items]
@@ -146,7 +149,7 @@ function StationItemTable({
           <ButtonGroup>
             <CopyToClipboard text={stringifiedBuyOrder}>
               <Button size="small" endIcon={<ContentCopyIcon />}>
-                Buy
+                Buy All
               </Button>
             </CopyToClipboard>
           </ButtonGroup>
@@ -179,4 +182,4 @@ function StationItemTable({
   );
 }
 
-export default StationItemTable;
+export default TripStationItemTable;

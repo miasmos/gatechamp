@@ -1,138 +1,67 @@
-import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import { formatCurrency } from "../util/currency";
-import {
-  RouteSecurity,
-  Station as StationEnum,
-  SystemSecurity,
-  Tax,
-} from "../enum";
 import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import RadioGroup from "@mui/material/RadioGroup";
-import { useRecoilState } from "recoil";
-import stationFormState from "../recoil/stationForm/atom";
+import { formatCurrency } from "../../../util/currency";
+import {
+  AppRoute,
+  RouteSecurity,
+  Station,
+  Station as StationEnum,
+  SystemSecurity,
+  Tax,
+} from "../../../enum";
+import tripState, {
+  fromSetter,
+  hasAToStation,
+  ignoreSecuritySetter,
+  maxBudgetSetter,
+  minProfitSetter,
+  minRoiSetter,
+  routeSafetySetter,
+  taxSetter,
+  toSetter,
+} from "../../../recoil/trip";
 
-interface StationFormState {
-  from: StationEnum;
-  to: boolean[];
-  maxBudget: number;
-  maxWeight: number;
-  maxWeight2: number;
-  minProfit: number;
-  minRoi: number;
-  routeSafety: RouteSecurity;
-  security: boolean[];
-  tax: number;
-}
-
-interface StationFormProps {
-  onSubmit: (state: StationFormState) => void;
-}
-
-function StationForm({ onSubmit }: StationFormProps) {
+function TripStationForm() {
+  const navigate = useNavigate();
   const [
-    {
-      from,
-      to,
-      maxBudget,
-      maxWeight,
-      maxWeight2,
-      minProfit,
-      minRoi,
-      routeSafety,
-      security,
-      tax,
-    },
-    setState,
-  ] = useRecoilState(stationFormState);
-  const validateForm = () => !Number.isNaN(maxWeight) && hasStation(to);
-  const onMaxBudgetChange = (_: any, value: number | number[]) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      maxBudget: value as number,
-    }));
-  const onMaxWeightChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      maxWeight: Number(event.target.value),
-    }));
-  const onMaxWeight2Change = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      maxWeight2: Number(event.target.value),
-    }));
+    { from, to, maxBudget, minProfit, minRoi, routeSafety, security, tax },
+    setTripState,
+  ] = useRecoilState(tripState);
+  const hasStation = useRecoilValue(hasAToStation);
   const onMinProfitChange = (_: any, value: number | number[]) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      minProfit: value as number,
-    }));
+    minProfitSetter(setTripState)(value as number);
   const onMinRoiChange = (_: any, value: number | number[]) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      minRoi: value as number,
-    }));
+    minRoiSetter(setTripState)(value as number);
+  const onMaxBudgetChange = (_: any, value: number | number[]) =>
+    maxBudgetSetter(setTripState)(value as number);
   const onSafetyChange = (event: SelectChangeEvent<RouteSecurity>) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      routeSafety: event.target.value as RouteSecurity,
-    }));
+    routeSafetySetter(setTripState)(event.target.value as RouteSecurity);
   const onTaxChange = (event: SelectChangeEvent<number>) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      tax: Number(event.target.value),
-    }));
-  const onIgnoreSecurity = (currentValue: SystemSecurity, value: boolean) => {
-    const nextArr = security.slice();
-    const index = Object.values(SystemSecurity).findIndex(
-      (value) => value === currentValue
-    );
-    nextArr[index] = value;
-    setState((state: StationFormState) => ({ ...state, security: nextArr }));
-  };
+    taxSetter(setTripState)(Number(event.target.value));
+  const onIgnoreSecurity = (currentValue: SystemSecurity, value: boolean) =>
+    ignoreSecuritySetter(setTripState)(security, currentValue, value);
   const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setState((state: StationFormState) => ({
-      ...state,
-      from: event.target.value as StationEnum,
-    }));
-  const onToChange = (currentValue: StationEnum, value: boolean) => {
-    const nextArr = to.slice();
-    const index = Object.values(StationEnum).findIndex(
-      (value) => value === currentValue
-    );
-    nextArr[index] = value;
-    setState((state: StationFormState) => ({ ...state, to: nextArr }));
-  };
-  const hasStation = (values: boolean[]) =>
-    values.filter((value) => Boolean(value)).length > 0;
-  const onSearchClick = () => {
-    if (!validateForm()) {
+    fromSetter(setTripState)(event.target.value as Station);
+  const onToChange = (currentValue: StationEnum, value: boolean) =>
+    toSetter(setTripState)(to, currentValue, value);
+
+  const isFormValid = hasStation;
+
+  const onRouteClick = () => {
+    if (!isFormValid) {
       return;
     }
-    onSubmit({
-      from,
-      to,
-      maxBudget,
-      maxWeight,
-      maxWeight2,
-      minProfit,
-      minRoi,
-      routeSafety,
-      security,
-      tax,
-    });
+    navigate(AppRoute.TripResult);
   };
 
   return (
@@ -212,46 +141,6 @@ function StationForm({ onSubmit }: StationFormProps) {
           <Typography sx={{ width: 20 }}>
             {formatCurrency(maxBudget * 1000000)}
           </Typography>
-        </Stack>
-
-        {/* Cargo */}
-        <Stack direction="row" spacing={4}>
-          <Stack direction="row" spacing={3}>
-            <Stack direction="row" alignItems="center">
-              <Typography sx={{ width: 100 }} textAlign="right">
-                Cargo Hold 1
-              </Typography>
-            </Stack>
-            <TextField
-              required
-              fullWidth
-              defaultValue={maxWeight}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">m³</InputAdornment>
-                ),
-              }}
-              onChange={onMaxWeightChange}
-            />
-          </Stack>
-          <Stack direction="row" spacing={3}>
-            <Stack direction="row" alignItems="center">
-              <Typography sx={{ width: 100 }} textAlign="right">
-                Cargo Hold 2
-              </Typography>
-            </Stack>
-            <TextField
-              required
-              fullWidth
-              defaultValue={maxWeight2}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">m³</InputAdornment>
-                ),
-              }}
-              onChange={onMaxWeight2Change}
-            />
-          </Stack>
         </Stack>
 
         {/* Min Profit */}
@@ -357,8 +246,8 @@ function StationForm({ onSubmit }: StationFormProps) {
         <Button
           sx={{ height: 60 }}
           variant="contained"
-          disabled={!validateForm()}
-          onClick={onSearchClick}
+          disabled={!isFormValid}
+          onClick={onRouteClick}
         >
           Route
         </Button>
@@ -367,5 +256,4 @@ function StationForm({ onSubmit }: StationFormProps) {
   );
 }
 
-export default StationForm;
-export type { StationFormState };
+export default TripStationForm;
