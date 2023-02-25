@@ -8,10 +8,9 @@ import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";
 import { NavigationIntention } from "../../../types";
 import { useRecoilState, useRecoilValue } from "recoil";
-import tripDetailState from "../../../recoil/tripDetail/atom";
 import tripState from "../../../recoil/trip/atom";
 import getShipById from "../../../recoil/ships/selectors/getShipById";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { clearTripSetter } from "../../../recoil/trip";
 import Button from "@mui/material/Button";
 
@@ -19,8 +18,8 @@ type TripStationDetailProps = NavigationIntention;
 
 function TripStationDetail({ to }: TripStationDetailProps) {
   const navigate = useNavigate();
-  const { cargo, origin, location, shipId, totalProfit } =
-    useRecoilValue(tripDetailState);
+  const routerLocation = useLocation();
+  const { cargo, origin, location, shipId, totalProfit } = routerLocation.state;
   const [trip, setTripState] = useRecoilState(tripState);
   const ship = useRecoilValue(getShipById(shipId));
   const clearTrip = clearTripSetter(setTripState);

@@ -9,7 +9,6 @@ import {
 import { TripState } from "../../../recoil/trip";
 import { getStationDisplayName } from "../../../util/eveTrade";
 import { formatCurrency } from "../../../util/currency";
-import Link from "../../Link";
 
 type TripStationOverviewListItemProps = {
   trip: TripState;

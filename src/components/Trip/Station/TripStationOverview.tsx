@@ -6,7 +6,6 @@ import tripState from "../../../recoil/trip";
 import shipsState from "../../../recoil/ships";
 import useFetchTripStation from "../../../hooks/useFetchTripStation";
 import TripStationOverviewListItem from "./TripStationOverviewListItem";
-import tripDetailState from "../../../recoil/tripDetail";
 import { NavigationIntention } from "../../../types";
 
 type TripStationOverviewProps = NavigationIntention;
@@ -15,15 +14,15 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   const navigate = useNavigate();
   const trip = useRecoilValue(tripState);
   const ships = useRecoilValue(shipsState);
-  const setTripDetail = useSetRecoilState(tripDetailState);
   const { data, isLoading, hasError } = useFetchTripStation(trip, ships);
   const onSelect = (index: number) => {
-    setTripDetail({
-      origin: data.origin,
-      shipId: data.items[index].ship.id,
-      ...data.items[index],
+    navigate(to, {
+      state: {
+        origin: data.origin,
+        shipId: data.items[index].ship.id,
+        ...data.items[index],
+      },
     });
-    navigate(to);
   };
 
   if (hasError) {
