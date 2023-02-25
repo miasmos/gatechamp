@@ -126,7 +126,10 @@ function ShipEditor({
           sx={{ cursor: "pointer" }}
           fontSize="small"
           color="primary"
-          onClick={() => deleteShip(index)}
+          onClick={() => {
+            deleteShip(index);
+            editEnd();
+          }}
         />
         {!editing && (
           <EditIcon
