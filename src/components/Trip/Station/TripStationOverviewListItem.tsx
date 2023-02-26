@@ -21,6 +21,8 @@ function TripStationOverviewListItem({
   origin,
   location,
   totalProfit,
+  totalCost,
+  totalVolume,
   onSelect,
 }: TripStationOverviewListItemProps) {
   if (totalProfit === 0) {
@@ -28,18 +30,40 @@ function TripStationOverviewListItem({
   }
 
   return (
-    <Paper sx={{ minWidth: 500, cursor: "pointer" }} onClick={onSelect}>
-      <Stack direction="row" px={6} py={4} justifyContent="space-between">
-        <Stack direction="row">
-          <Typography>{getStationDisplayName(origin)}</Typography>
-          <ArrowRightAltIcon />
-          <Typography>{getStationDisplayName(location)}</Typography>
+    <Paper sx={{ minWidth: 350, cursor: "pointer" }} onClick={onSelect}>
+      <Stack px={6} py={3}>
+        <Stack direction="row" justifyContent="space-between">
+          <Stack direction="row">
+            <Typography variant="h6" textAlign="left">
+              {getStationDisplayName(origin)}
+            </Typography>
+            <Stack direction="row" alignItems="center">
+              &nbsp;
+              <ArrowRightAltIcon />
+              &nbsp;
+            </Stack>
+            <Typography variant="h6" textAlign="left">
+              {getStationDisplayName(location)}
+            </Typography>
+          </Stack>
+          <Stack direction="row">
+            <Typography variant="h6" textAlign="right">
+              Ƶ{formatCurrency(totalProfit)}
+            </Typography>
+          </Stack>
         </Stack>
-        <Stack>
-          <Typography>{ship.name}</Typography>
-        </Stack>
-        <Stack>
-          <Typography>Ƶ{formatCurrency(totalProfit)} profit</Typography>
+
+        <Stack direction="row" justifyContent="space-between" mt={0.5}>
+          <Stack>
+            <Typography variant="body2" textAlign="left">
+              {ship.name}
+            </Typography>
+          </Stack>
+          <Stack>
+            <Typography variant="body2" textAlign="right">
+              Ƶ{formatCurrency(totalCost)}
+            </Typography>
+          </Stack>
         </Stack>
       </Stack>
     </Paper>

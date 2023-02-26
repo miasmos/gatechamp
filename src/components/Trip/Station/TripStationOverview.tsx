@@ -34,9 +34,7 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
 
   return (
     <Stack spacing={5}>
-      <Typography variant="h4" mb={5}>
-        Choose your trip
-      </Typography>
+      <Typography variant="h4">Choose your trip</Typography>
       <Stack spacing={2}>
         {data.items.map((node, index) => (
           <TripStationOverviewListItem

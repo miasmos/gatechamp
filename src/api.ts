@@ -4,7 +4,7 @@ import { wait } from "./util/promise";
 
 const EveTradePlusClient = Axios.create({
   baseURL: `http://${EVE_TRADE_PLUS_DOMAIN}`,
-  timeout: 30000,
+  timeout: 60000,
 });
 
 const getEveTradePlus = (url: string) =>

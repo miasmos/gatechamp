@@ -184,7 +184,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
           )}%`}</Typography>
         </Stack>
 
-        <Stack direction="row">
+        <Stack direction="row" justifyContent="center">
           {/* Route Safety */}
           <Stack direction="row" spacing={3}>
             <Stack direction="row" alignItems="center">
@@ -219,10 +219,10 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
         </Stack>
 
         {/* Security */}
-        <Stack direction="row" spacing={3}>
+        <Stack direction="row" spacing={3} justifyContent="center">
           <Stack direction="row" alignItems="center">
             <Typography sx={{ width: 100 }} textAlign="right">
-              Ignore
+              Avoid
             </Typography>
           </Stack>
           <Stack direction="row" spacing={4}>

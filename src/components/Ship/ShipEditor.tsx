@@ -77,15 +77,15 @@ function ShipEditor({
               placeholder="Name"
               onChange={onNameChange}
               disableUnderline
-              sx={{ width: 80 }}
+              sx={{ width: 70 }}
             />
           ) : (
-            <Typography>{name}</Typography>
+            <Typography textAlign="left">{name}</Typography>
           )}
         </Stack>
         <Stack justifyContent="center">
-          {Object.entries(cargoBay).map(([key, { volume, type }], index) => (
-            <Stack direction="row" key={index}>
+          {Object.entries(cargoBay).map(([_, { volume, type }], index) => (
+            <Stack direction="row" key={index} justifyContent="flex-end">
               {editing ? (
                 <Input
                   defaultValue={volume}
@@ -95,7 +95,7 @@ function ShipEditor({
                     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
                   ) => onCargoBayVolumeChange(event, type)}
                   disableUnderline
-                  inputProps={{ style: { textAlign: "right" } }}
+                  inputProps={{ style: { textAlign: "right", padding: 0 } }}
                   sx={{ width: 80 }}
                 />
               ) : (

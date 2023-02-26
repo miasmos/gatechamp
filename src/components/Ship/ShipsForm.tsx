@@ -81,7 +81,15 @@ function ShipsForm({ to }: ShipsFormProps) {
         Add your ships
       </Typography>
       <Stack>
-        <Stack direction="column" spacing={2}>
+        <Stack
+          direction="column"
+          pl={3.5}
+          pr={2}
+          py={1}
+          spacing={2}
+          maxHeight={400}
+          sx={{ overflowY: "scroll" }}
+        >
           {ships.ships.map((ship, index) => (
             <ShipEditor
               key={ship.id}
