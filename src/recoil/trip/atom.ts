@@ -5,7 +5,8 @@ import { RouteSecurity, Station, SystemSecurity, Tax } from "../../enum";
 const { persistAtom } = recoilPersist();
 
 interface TripState {
-  from: Station;
+  id: string;
+  from: boolean[];
   to: boolean[];
   maxBudget: number;
   minProfit: number;
@@ -18,7 +19,8 @@ interface TripState {
 const tripState = atom<TripState>({
   key: "TripState",
   default: {
-    from: Station.Jita,
+    id: "1", // used as api call unique id, refetch when it changes
+    from: Object.values(Station).map(() => true),
     to: Object.values(Station).map(() => true),
     maxBudget: 200, // in millions
     minProfit: 0.02,

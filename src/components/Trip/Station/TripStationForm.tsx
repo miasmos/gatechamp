@@ -6,21 +6,16 @@ import Slider from "@mui/material/Slider";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import Radio from "@mui/material/Radio";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import RadioGroup from "@mui/material/RadioGroup";
 import { formatCurrency } from "../../../util/currency";
 import {
-  AppRoute,
   RouteSecurity,
-  Station,
   Station as StationEnum,
   SystemSecurity,
   Tax,
 } from "../../../enum";
 import tripState, {
   fromSetter,
+  generateIdSetter,
   hasAToStation,
   ignoreSecuritySetter,
   maxBudgetSetter,
@@ -54,8 +49,8 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
     taxSetter(setTripState)(Number(event.target.value));
   const onIgnoreSecurity = (currentValue: SystemSecurity, value: boolean) =>
     ignoreSecuritySetter(setTripState)(security, currentValue, value);
-  const onFromChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    fromSetter(setTripState)(event.target.value as Station);
+  const onFromChange = (currentValue: StationEnum, value: boolean) =>
+    fromSetter(setTripState)(from, currentValue, value);
   const onToChange = (currentValue: StationEnum, value: boolean) =>
     toSetter(setTripState)(to, currentValue, value);
 
@@ -65,6 +60,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
     if (!isFormValid) {
       return;
     }
+    generateIdSetter(setTripState)();
     navigate(navigateTo);
   };
 
@@ -81,25 +77,23 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
               From
             </Typography>
           </Stack>
-          <RadioGroup
-            sx={{ ml: "0 !important" }}
-            row
-            value={from}
-            onChange={onFromChange}
-          >
+          <Stack direction="row" spacing={4}>
             {Object.entries(StationEnum)
               .filter(([key]) => key !== "None")
-              .map(([key, value]) => (
-                <FormControlLabel
-                  key={value}
-                  sx={{ ml: 6.5 }}
-                  labelPlacement="start"
-                  value={value}
-                  control={<Radio />}
-                  label={key}
-                />
+              .map(([key, value], index) => (
+                <Stack key={value} direction="row" alignItems="center">
+                  <Typography sx={{ width: 50 }} textAlign="right">
+                    {key}
+                  </Typography>
+                  <Checkbox
+                    checked={from[index]}
+                    onChange={(event) =>
+                      onFromChange(value, event.target.checked)
+                    }
+                  />
+                </Stack>
               ))}
-          </RadioGroup>
+          </Stack>
         </Stack>
 
         {/* To */}

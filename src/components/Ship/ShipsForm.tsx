@@ -12,7 +12,7 @@ import {
 } from "../../recoil/ships";
 import ShipEditor from "./ShipEditor";
 import { addShipSetter } from "../../recoil/ships";
-import { AppRoute, CargoBayType } from "../../enum";
+import { CargoBayType } from "../../enum";
 import { useNavigate } from "react-router";
 import { NavigationIntention } from "../../types";
 import MainButton from "../MainButton";

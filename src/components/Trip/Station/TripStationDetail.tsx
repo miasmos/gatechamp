@@ -12,7 +12,6 @@ import tripState from "../../../recoil/trip/atom";
 import getShipById from "../../../recoil/ships/selectors/getShipById";
 import { useLocation, useNavigate } from "react-router";
 import { clearTripSetter } from "../../../recoil/trip";
-import Button from "@mui/material/Button";
 import MainButton from "../../MainButton";
 
 type TripStationDetailProps = NavigationIntention;
@@ -20,9 +19,9 @@ type TripStationDetailProps = NavigationIntention;
 function TripStationDetail({ to }: TripStationDetailProps) {
   const navigate = useNavigate();
   const routerLocation = useLocation();
-  const { cargo, origin, location, shipId, totalProfit } = routerLocation.state;
+  const { cargo, origin, destination, ship, totalProfit } =
+    routerLocation.state;
   const [trip, setTripState] = useRecoilState(tripState);
-  const ship = useRecoilValue(getShipById(shipId));
   const clearTrip = clearTripSetter(setTripState);
   const [main, fleetHanger] = cargo;
   const [
@@ -67,7 +66,7 @@ function TripStationDetail({ to }: TripStationDetailProps) {
           <ArrowRightAltIcon />
           <Stack alignItems="center">
             <Typography variant="h4" mb={1}>
-              {getStationDisplayName(location)}
+              {getStationDisplayName(destination)}
             </Typography>
           </Stack>
         </Stack>

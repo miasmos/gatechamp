@@ -46,41 +46,34 @@ type FetchTripStationResultItem = {
   totalVolume: number;
   totalProfit: number;
   ship: Ship;
-  location: StationItem;
+  destination: StationItem;
+  origin: StationItem;
   cargo: CargoBayItem[];
 };
 
-type FetchTripStationResult = {
-  origin: StationItem;
-  items: FetchTripStationResultItem[];
-};
+type FetchTripStationResult = FetchTripStationResultItem[];
 
-function useFetchTripStation(trip: TripState, ships: ShipsState) {
+function useFetchTripStation(id: string, trip: TripState, ships: ShipsState) {
   const {
-    data = {
-      origin: {
-        name: "",
-        station_id: 0,
-        rating: 0,
-        system_id: 0,
-      },
-      items: [],
-    },
+    data = [],
     error,
     isLoading,
+    isValidating,
   } = useSWR<FetchTripStationResult>(
-    `/api/trip/station`,
+    `/api/trip/station?id=${id}`,
     postEveTradePlus({ trip, ships }),
     {
       shouldRetryOnError: false,
       revalidateOnReconnect: false,
       revalidateOnFocus: false,
+      revalidateIfStale: false,
     }
   );
 
   return {
     data,
     isLoading,
+    isValidating,
     hasError: error,
   };
 }

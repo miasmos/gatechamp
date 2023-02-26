@@ -7,6 +7,7 @@ import maxBudgetSetter from "./setters/maxBudgetSetter";
 import routeSafetySetter from "./setters/routeSafetySetter";
 import taxSetter from "./setters/taxSetter";
 import toSetter from "./setters/toSetter";
+import generateIdSetter from "./setters/generateIdSetter";
 import ignoreSecuritySetter from "./setters/ignoreSecutitySetter";
 import hasAToStation from "./selectors/hasAToStation";
 
@@ -21,6 +22,7 @@ export {
   routeSafetySetter,
   taxSetter,
   toSetter,
+  generateIdSetter,
 };
 export { hasAToStation };
 export type { TripState };

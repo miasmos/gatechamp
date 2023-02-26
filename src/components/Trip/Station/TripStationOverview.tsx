@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import Stack from "@mui/material/Stack";
@@ -14,21 +14,21 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   const navigate = useNavigate();
   const trip = useRecoilValue(tripState);
   const ships = useRecoilValue(shipsState);
-  const { data, isLoading, hasError } = useFetchTripStation(trip, ships);
+  const { data, isValidating, isLoading, hasError } = useFetchTripStation(
+    trip.id,
+    trip,
+    ships
+  );
   const onSelect = (index: number) => {
     navigate(to, {
-      state: {
-        origin: data.origin,
-        shipId: data.items[index].ship.id,
-        ...data.items[index],
-      },
+      state: data[index],
     });
   };
 
   if (hasError) {
     console.log("error while fetching", hasError);
   }
-  if (isLoading) {
+  if (isLoading || isValidating) {
     return <>Loading...</>;
   }
 
@@ -42,11 +42,10 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
         py={2}
         sx={{ overflowY: "scroll" }}
       >
-        {data.items.map((node, index) => (
+        {data.map((node, index) => (
           <TripStationOverviewListItem
             key={index}
             trip={trip}
-            origin={data.origin}
             onSelect={() => onSelect(index)}
             {...node}
           />

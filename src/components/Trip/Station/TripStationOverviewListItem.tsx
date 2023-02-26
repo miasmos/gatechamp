@@ -19,7 +19,7 @@ type TripStationOverviewListItemProps = {
 function TripStationOverviewListItem({
   ship,
   origin,
-  location,
+  destination,
   totalProfit,
   totalCost,
   totalVolume,
@@ -43,7 +43,7 @@ function TripStationOverviewListItem({
               &nbsp;
             </Stack>
             <Typography variant="h6" textAlign="left">
-              {getStationDisplayName(location)}
+              {getStationDisplayName(destination)}
             </Typography>
           </Stack>
           <Stack direction="row">
