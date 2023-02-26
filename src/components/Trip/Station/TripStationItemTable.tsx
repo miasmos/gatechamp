@@ -161,19 +161,30 @@ function TripStationItemTable({
     <Stack>
       <Stack direction="row" justifyContent="space-between" mb={1.5}>
         <Stack direction="row" spacing={2}>
-          <Stack direction="row" alignItems="center">
-            <Typography variant="h4">{title}</Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" spacing={2.5}>
-            <Typography>
-              {formatCurrency(volume)} / {formatCurrency(maxVolume)} m³
+          <Stack direction="row" alignItems="flex-end">
+            <Typography variant="h4" lineHeight={0.9}>
+              {title}
             </Typography>
-            <Typography>
+          </Stack>
+          <Stack direction="row" alignItems="flex-end">
+            <Typography variant="body2">
               Ƶ{formatCurrency(cost)} / {formatCurrency(maxCost)}
+            </Typography>
+            <Typography
+              ml={0.25}
+              mt={2}
+              lineHeight={1.1}
+              variant="h6"
+              fontWeight="normal"
+            >
+              &nbsp;|&nbsp;
+            </Typography>
+            <Typography variant="body2">
+              {formatCurrency(volume)} / {formatCurrency(maxVolume)} m³
             </Typography>
           </Stack>
         </Stack>
-        <Stack direction="row" alignItems="center">
+        <Stack direction="row" alignItems="flex-end">
           Ƶ{formatCurrency(profit)} profit
         </Stack>
       </Stack>
