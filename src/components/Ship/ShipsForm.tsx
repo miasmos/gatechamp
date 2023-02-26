@@ -15,6 +15,7 @@ import { addShipSetter } from "../../recoil/ships";
 import { AppRoute, CargoBayType } from "../../enum";
 import { useNavigate } from "react-router";
 import { NavigationIntention } from "../../types";
+import MainButton from "../MainButton";
 
 type ShipsFormProps = NavigationIntention;
 
@@ -85,7 +86,7 @@ function ShipsForm({ to }: ShipsFormProps) {
           direction="column"
           pl={3.5}
           pr={2}
-          py={1}
+          py={2}
           spacing={2}
           maxHeight={400}
           sx={{ overflowY: "scroll" }}
@@ -114,15 +115,10 @@ function ShipsForm({ to }: ShipsFormProps) {
           </Button>
         </Stack>
       </Stack>
-      <Stack mt={5}>
-        <Button
-          sx={{ height: 60 }}
-          variant="contained"
-          disabled={!isFormValid}
-          onClick={onNextClick}
-        >
+      <Stack direction="row" mt={5} justifyContent="center">
+        <MainButton disabled={!isFormValid} onClick={onNextClick}>
           Next
-        </Button>
+        </MainButton>
       </Stack>
     </>
   );

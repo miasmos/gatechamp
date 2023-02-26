@@ -35,7 +35,13 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   return (
     <Stack spacing={5}>
       <Typography variant="h4">Choose your trip</Typography>
-      <Stack spacing={2}>
+      <Stack
+        spacing={2}
+        maxHeight={420}
+        px={2}
+        py={2}
+        sx={{ overflowY: "scroll" }}
+      >
         {data.items.map((node, index) => (
           <TripStationOverviewListItem
             key={index}

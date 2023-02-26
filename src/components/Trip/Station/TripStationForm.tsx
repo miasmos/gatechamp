@@ -31,6 +31,7 @@ import tripState, {
   toSetter,
 } from "../../../recoil/trip";
 import { NavigationIntention } from "../../../types";
+import MainButton from "../../MainButton";
 
 type TripStationProps = NavigationIntention;
 
@@ -245,15 +246,10 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
           </Stack>
         </Stack>
       </Stack>
-      <Stack mt={5}>
-        <Button
-          sx={{ height: 60 }}
-          variant="contained"
-          disabled={!isFormValid}
-          onClick={onRouteClick}
-        >
+      <Stack mt={5} direction="row" justifyContent="center">
+        <MainButton disabled={!isFormValid} onClick={onRouteClick}>
           Route
-        </Button>
+        </MainButton>
       </Stack>
     </>
   );

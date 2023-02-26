@@ -13,6 +13,7 @@ import getShipById from "../../../recoil/ships/selectors/getShipById";
 import { useLocation, useNavigate } from "react-router";
 import { clearTripSetter } from "../../../recoil/trip";
 import Button from "@mui/material/Button";
+import MainButton from "../../MainButton";
 
 type TripStationDetailProps = NavigationIntention;
 
@@ -86,14 +87,14 @@ function TripStationDetail({ to }: TripStationDetailProps) {
             title="Fleet Hanger"
             maxVolume={ship?.cargoBay.fleetHanger.volume || 0}
             maxCost={trip.maxBudget * 1000000 - main.cost}
-            onIgnore={ignoreCargoBayItem(CargoBay.One)}
+            onIgnore={ignoreCargoBayItem(CargoBay.Two)}
             {...fleetHanger}
           />
         )}
       </Stack>
-      <Button sx={{ height: 60 }} variant="contained" onClick={onReset}>
-        Reset
-      </Button>
+      <Stack mt={5} direction="row" justifyContent="center">
+        <MainButton onClick={onReset}>Reset</MainButton>
+      </Stack>
     </Stack>
   );
 }
