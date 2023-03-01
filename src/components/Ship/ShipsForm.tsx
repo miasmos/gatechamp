@@ -89,7 +89,7 @@ function ShipsForm({ to }: ShipsFormProps) {
           py={2}
           spacing={2}
           maxHeight={400}
-          sx={{ overflowY: "scroll" }}
+          sx={{ overflowY: ships.ships.length > 4 ? "scroll" : "auto" }}
         >
           {ships.ships.map((ship, index) => (
             <ShipEditor

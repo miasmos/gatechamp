@@ -6,6 +6,7 @@ enum AppRoute {
   ConfigureRoute = "configure-route",
   Overview = "overview",
   Detail = "detail",
+  Route = "route",
 }
 
 enum Station {

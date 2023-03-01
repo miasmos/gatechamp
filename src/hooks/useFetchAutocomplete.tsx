@@ -1,0 +1,55 @@
+import useSWR from "swr/immutable";
+import { getEveTradePlus } from "../api";
+
+enum AutocompleteType {
+  SolarSystem = "solar-system",
+}
+
+type ElasticSearchHit<T> = {
+  _index: string;
+  _id: string;
+  _score: number;
+  _source: T;
+};
+
+type ElasticSearchResult<T> = {
+  took: number;
+  timed_out: boolean;
+  hits: {
+    total: {
+      value: number;
+      relation: string;
+    };
+    max_score: number;
+    hits: ElasticSearchHit<T>[];
+  };
+};
+
+function useFetchAutocomplete<T>(
+  name: string,
+  type: AutocompleteType = AutocompleteType.SolarSystem
+) {
+  const {
+    data = { hits: { hits: [] } },
+    error,
+    isLoading,
+    isValidating,
+  } = useSWR<ElasticSearchResult<T>>(
+    `/api/autocomplete/${type}?name=${name}`,
+    getEveTradePlus,
+    {
+      shouldRetryOnError: true,
+    }
+  );
+
+  return {
+    data,
+    isLoading,
+    isValidating,
+    hasError: error,
+  };
+}
+
+export default useFetchAutocomplete;
+export { AutocompleteType };
+export type { ElasticSearchResult, ElasticSearchHit };

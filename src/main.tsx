@@ -19,6 +19,16 @@ import AppLayout from "./layout/RootLayout";
 import TripLayout from "./layout/TripLayout";
 import StationFlowLayout from "./layout/StationFlowLayout";
 import TripStationDetail from "./components/Trip/Station/TripStationDetail";
+import RouteForm from "./components/RouteForm";
+
+// TODO: allow ignoring prohibited trade items
+// TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
+// TODO: route mapping: automatically push a route to the user's eve client using the eve waypoint api
+// TODO: stopwatch, timing route from point to point, can use the eve api to fetch user's location periodically
+// TODO: get live item ignore working again
+// TODO: desktop notification if there's a gate camp on the current in progress route (kills by a gate, parse gank-intel channel?)
+// TODO: isk earned per day tracker
+// TODO: loading animation
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,7 +37,8 @@ const router = createBrowserRouter(
       element={<AppLayout />}
       errorElement={<>Not Found</>}
     >
-      <Route index element={<Navigate to={AppRoute.Trip} />} />
+      <Route index element={<Navigate to={AppRoute.Route} />} />
+      <Route path={AppRoute.Route} element={<RouteForm />} />
 
       <Route path={AppRoute.Trip} element={<TripLayout />}>
         <Route index element={<Navigate to={AppRoute.StationFlow} />} />
