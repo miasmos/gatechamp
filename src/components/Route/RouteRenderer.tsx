@@ -9,12 +9,14 @@ type RouteRendererProps = {
   route: FetchRouteResult;
   position?: number;
   onAvoid: (solarSystemID: number, name: string) => void;
+  showProgress?: boolean;
 } & Omit<StackProps, "position">;
 
 function RouteRenderer({
   route,
   position = route.route.length,
   onAvoid,
+  showProgress = false,
   ...props
 }: RouteRendererProps) {
   const [{ selectedIndex }, setState] = useState<{
@@ -30,11 +32,15 @@ function RouteRenderer({
   return (
     <Stack direction="row" spacing={2} {...props}>
       {route.jumps > 0 && (
-        <Stack justifyContent="center">
+        <Stack mt={4}>
           <Stack direction="row">
             <Typography>{position}</Typography>
-            <Typography>&nbsp;/&nbsp;</Typography>
-            <Typography>{route.jumps}</Typography>
+            {showProgress && (
+              <>
+                <Typography>&nbsp;/&nbsp;</Typography>
+                <Typography>{route.jumps}</Typography>
+              </>
+            )}
           </Stack>
         </Stack>
       )}

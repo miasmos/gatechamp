@@ -27,18 +27,6 @@ enum Region {
   None = "0",
 }
 
-enum RouteSecurity {
-  Shortest = "shortest",
-  Safest = "secure",
-  LeastSafe = "insecure",
-}
-
-enum SystemSecurity {
-  HighSec = "high_sec",
-  LowSec = "low_sec",
-  NullSec = "null_sec",
-}
-
 enum Tax {
   NoSkill = "0.08",
   Level1 = "0.0712",
@@ -58,13 +46,4 @@ enum CargoBayType {
   FleetHanger,
 }
 
-export {
-  AppRoute,
-  Station,
-  Region,
-  RouteSecurity,
-  SystemSecurity,
-  Tax,
-  CargoBay,
-  CargoBayType,
-};
+export { AppRoute, Station, Region, Tax, CargoBay, CargoBayType };

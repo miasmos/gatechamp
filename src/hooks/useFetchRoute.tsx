@@ -36,7 +36,12 @@ function useFetchRoute(
   }: Pick<
     RouteState,
     "avoidGateCamp" | "avoidHics" | "avoidSmartBombs" | "avoidEntryGateCamp"
-  >
+  > = {
+    avoidGateCamp: false,
+    avoidHics: false,
+    avoidSmartBombs: false,
+    avoidEntryGateCamp: false,
+  }
 ) {
   const areInputsValid =
     typeof originSolarSystemId === "number" &&

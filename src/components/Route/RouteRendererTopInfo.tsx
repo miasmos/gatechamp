@@ -9,7 +9,7 @@ type RouteRendererTopInfoProps = {
 function RouteRendererTopInfo({
   route,
   mb = 2,
-  height = 50,
+  height = 20,
   selectedIndex,
   ...props
 }: RouteRendererTopInfoProps) {

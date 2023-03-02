@@ -110,7 +110,11 @@ function RouteForm() {
         </Stack>
         <Stack alignItems="flex-start" direction="row" spacing={2}>
           {avoidedSolarSystems.map(({ name }, index) => (
-            <Chip label={name} onDelete={() => onUnavoidSolarSystem(index)} />
+            <Chip
+              key={name}
+              label={name}
+              onDelete={() => onUnavoidSolarSystem(index)}
+            />
           ))}
         </Stack>
         <RouteRenderer route={data} width={800} onAvoid={onAvoidSolarSystem} />

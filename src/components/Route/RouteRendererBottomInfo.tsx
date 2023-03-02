@@ -25,57 +25,69 @@ function RouteRendererBottomInfo({
       height={height}
       {...props}
     >
-      {route.route.map(({ name, gateCamp, hics, smartBombs, kills }) => (
-        <Box
-          width={`${100 / route.route.length}%`}
-          sx={{
-            opacity: gateCamp ? 1 : 0,
-          }}
-          key={name}
-        >
-          <Typography
-            variant="body2"
-            whiteSpace="nowrap"
-            textAlign="left"
+      {route.route.map(
+        ({
+          name,
+          gateCamp,
+          hics,
+          smartBombs,
+          kills,
+          entry: { gateCamp: entryGateCamp },
+          exit: { gateCamp: exitGateCamp },
+        }) => (
+          <Box
+            width={`${100 / route.route.length}%`}
             sx={{
-              visibility: kills > 0 ? "visible" : "none",
-              pointerEvents: kills > 0 ? "all" : "none",
+              opacity: gateCamp ? 1 : 0,
             }}
+            key={name}
           >
-            {name}
-          </Typography>
-
-          <Stack direction="row">
-            <Stack
+            <Typography
+              variant="body2"
+              whiteSpace="nowrap"
+              textAlign={exitGateCamp && !entryGateCamp ? "right" : "left"}
               sx={{
                 visibility: kills > 0 ? "visible" : "none",
                 pointerEvents: kills > 0 ? "all" : "none",
               }}
             >
-              <Tooltip title="Kills">
-                <ErrorIcon sx={{ fontSize: 15 }} />
-              </Tooltip>
-              <Typography variant="body2" fontSize={11}>
-                {kills}
-              </Typography>
+              {name}
+            </Typography>
+
+            <Stack
+              direction={exitGateCamp && !entryGateCamp ? "row-reverse" : "row"}
+            >
+              <Stack
+                sx={{
+                  visibility: kills > 0 ? "visible" : "none",
+                  pointerEvents: kills > 0 ? "all" : "none",
+                }}
+              >
+                <Tooltip title="Kills">
+                  <ErrorIcon sx={{ fontSize: 15 }} />
+                </Tooltip>
+                <Typography variant="body2" fontSize={11}>
+                  {kills}
+                </Typography>
+              </Stack>
+              <Stack display={hics ? "flex" : "none"}>
+                <Tooltip title="Heavy Interdiction Cruisers">
+                  <CallSplitIcon
+                    sx={{
+                      fontSize: 15,
+                    }}
+                  />
+                </Tooltip>
+              </Stack>
+              <Stack display={smartBombs ? "flex" : "none"}>
+                <Tooltip title="Smart Bombs">
+                  <TungstenIcon sx={{ fontSize: 15 }} />
+                </Tooltip>
+              </Stack>
             </Stack>
-            <Stack display={hics ? "flex" : "none"}>
-              <Tooltip title="Heavy Interdiction Cruisers">
-                <CallSplitIcon
-                  sx={{
-                    fontSize: 15,
-                  }}
-                />
-              </Tooltip>
-            </Stack>
-            <Stack display={smartBombs ? "flex" : "none"}>
-              <Tooltip title="Smart Bombs">
-                <TungstenIcon sx={{ fontSize: 15 }} />
-              </Tooltip>
-            </Stack>
-          </Stack>
-        </Box>
-      ))}
+          </Box>
+        )
+      )}
     </Stack>
   );
 }

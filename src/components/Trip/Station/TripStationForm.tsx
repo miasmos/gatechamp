@@ -7,21 +7,14 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Checkbox from "@mui/material/Checkbox";
 import { formatCurrency } from "../../../util/currency";
-import {
-  RouteSecurity,
-  Station as StationEnum,
-  SystemSecurity,
-  Tax,
-} from "../../../enum";
+import { Station as StationEnum, Tax } from "../../../enum";
 import tripState, {
   fromSetter,
   generateIdSetter,
   hasAToStation,
-  ignoreSecuritySetter,
   maxBudgetSetter,
   minProfitSetter,
   minRoiSetter,
-  routeSafetySetter,
   taxSetter,
   toSetter,
 } from "../../../recoil/trip";
@@ -32,10 +25,8 @@ type TripStationProps = NavigationIntention;
 
 function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
-  const [
-    { from, to, maxBudget, minProfit, minRoi, routeSafety, security, tax },
-    setTripState,
-  ] = useRecoilState(tripState);
+  const [{ from, to, maxBudget, minProfit, minRoi, tax }, setTripState] =
+    useRecoilState(tripState);
   const hasStation = useRecoilValue(hasAToStation);
   const onMinProfitChange = (_: any, value: number | number[]) =>
     minProfitSetter(setTripState)(value as number);
@@ -43,12 +34,8 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
     minRoiSetter(setTripState)(value as number);
   const onMaxBudgetChange = (_: any, value: number | number[]) =>
     maxBudgetSetter(setTripState)(value as number);
-  const onSafetyChange = (event: SelectChangeEvent<RouteSecurity>) =>
-    routeSafetySetter(setTripState)(event.target.value as RouteSecurity);
   const onTaxChange = (event: SelectChangeEvent<number>) =>
     taxSetter(setTripState)(Number(event.target.value));
-  const onIgnoreSecurity = (currentValue: SystemSecurity, value: boolean) =>
-    ignoreSecuritySetter(setTripState)(security, currentValue, value);
   const onFromChange = (currentValue: StationEnum, value: boolean) =>
     fromSetter(setTripState)(from, currentValue, value);
   const onToChange = (currentValue: StationEnum, value: boolean) =>
@@ -180,22 +167,6 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
         </Stack>
 
         <Stack direction="row" justifyContent="center">
-          {/* Route Safety */}
-          <Stack direction="row" spacing={3}>
-            <Stack direction="row" alignItems="center">
-              <Typography sx={{ width: 100 }} textAlign="right">
-                Safety
-              </Typography>
-            </Stack>
-            <Select value={routeSafety} onChange={onSafetyChange}>
-              {Object.entries(RouteSecurity).map(([key, value]) => (
-                <MenuItem key={value} value={value}>
-                  {key}
-                </MenuItem>
-              ))}
-            </Select>
-          </Stack>
-
           {/* Tax */}
           <Stack direction="row" spacing={3}>
             <Stack direction="row" alignItems="center">
@@ -210,33 +181,6 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
                 </MenuItem>
               ))}
             </Select>
-          </Stack>
-        </Stack>
-
-        {/* Security */}
-        <Stack direction="row" spacing={3} justifyContent="center">
-          <Stack direction="row" alignItems="center">
-            <Typography sx={{ width: 100 }} textAlign="right">
-              Avoid
-            </Typography>
-          </Stack>
-          <Stack direction="row" spacing={4}>
-            {Object.entries(SystemSecurity).map(([key, value], index) => (
-              <Stack
-                key={value}
-                direction="row"
-                alignItems="center"
-                spacing={1}
-              >
-                <Typography sx={{ width: 50 }}>{key}</Typography>
-                <Checkbox
-                  checked={security[index]}
-                  onChange={(event) =>
-                    onIgnoreSecurity(value, event.target.checked)
-                  }
-                />
-              </Stack>
-            ))}
           </Stack>
         </Stack>
       </Stack>
