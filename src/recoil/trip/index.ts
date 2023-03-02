@@ -8,7 +8,7 @@ import routeSafetySetter from "./setters/routeSafetySetter";
 import taxSetter from "./setters/taxSetter";
 import toSetter from "./setters/toSetter";
 import generateIdSetter from "./setters/generateIdSetter";
-import ignoreSecuritySetter from "./setters/ignoreSecutitySetter";
+import ignoreSecuritySetter from "./setters/ignoreSecuritySetter";
 import hasAToStation from "./selectors/hasAToStation";
 
 export default atom;

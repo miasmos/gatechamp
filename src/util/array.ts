@@ -13,10 +13,6 @@ const to2dArray = <T extends Record<string, any>>(
         : rows[rows.length - 1].push(key)) && rows,
     []
   );
-  const lastRow = result[result.length - 1];
-  while (lastRow.length < width) {
-    lastRow.push({});
-  }
   return result;
 };
 

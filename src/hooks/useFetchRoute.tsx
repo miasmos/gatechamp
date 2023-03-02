@@ -10,6 +10,7 @@ type StargateSummary = {
 };
 
 type SolarSystemSummary = {
+  index: number;
   name: string;
   solarSystemID: number;
   security: number;
@@ -24,11 +25,13 @@ type FetchRouteResult = {
 
 function useFetchRoute(
   originSolarSystemId: number | undefined,
-  destinationSolarSystemId: number | undefined
+  destinationSolarSystemId: number | undefined,
+  avoidedSolarSystems: number[] = []
 ) {
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
     typeof destinationSolarSystemId === "number";
+  const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
 
   const {
     data = { jumps: 0, route: [] },
@@ -37,7 +40,7 @@ function useFetchRoute(
     isValidating,
   } = useSWR<FetchRouteResult>(
     areInputsValid
-      ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}`
+      ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}`
       : null,
     getEveTradePlus,
     {

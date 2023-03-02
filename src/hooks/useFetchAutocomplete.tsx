@@ -29,13 +29,14 @@ function useFetchAutocomplete<T>(
   name: string,
   type: AutocompleteType = AutocompleteType.SolarSystem
 ) {
+  const areInputsValid = name.length > 0;
   const {
     data = { hits: { hits: [] } },
     error,
     isLoading,
     isValidating,
   } = useSWR<ElasticSearchResult<T>>(
-    `/api/autocomplete/${type}?name=${name}`,
+    areInputsValid ? `/api/autocomplete/${type}?name=${name}` : null,
     getEveTradePlus,
     {
       shouldRetryOnError: true,

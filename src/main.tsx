@@ -19,7 +19,7 @@ import AppLayout from "./layout/RootLayout";
 import TripLayout from "./layout/TripLayout";
 import StationFlowLayout from "./layout/StationFlowLayout";
 import TripStationDetail from "./components/Trip/Station/TripStationDetail";
-import RouteForm from "./components/RouteForm";
+import RouteForm from "./components/Route/RouteForm";
 
 // TODO: allow ignoring prohibited trade items
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       element={<AppLayout />}
       errorElement={<>Not Found</>}
     >
-      <Route index element={<Navigate to={AppRoute.Route} />} />
+      <Route index element={<Navigate to={AppRoute.Trip} />} />
       <Route path={AppRoute.Route} element={<RouteForm />} />
 
       <Route path={AppRoute.Trip} element={<TripLayout />}>
