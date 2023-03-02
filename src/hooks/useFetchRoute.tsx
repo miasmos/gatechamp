@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { getEveTradePlus } from "../api";
+import { RouteState } from "../recoil/route";
 
 type StargateSummary = {
   stargateID: number;
@@ -26,7 +27,16 @@ type FetchRouteResult = {
 function useFetchRoute(
   originSolarSystemId: number | undefined,
   destinationSolarSystemId: number | undefined,
-  avoidedSolarSystems: number[] = []
+  avoidedSolarSystems: number[] = [],
+  {
+    avoidGateCamp = false,
+    avoidHics = false,
+    avoidSmartBombs = false,
+    avoidEntryGateCamp = false,
+  }: Pick<
+    RouteState,
+    "avoidGateCamp" | "avoidHics" | "avoidSmartBombs" | "avoidEntryGateCamp"
+  >
 ) {
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
@@ -40,7 +50,7 @@ function useFetchRoute(
     isValidating,
   } = useSWR<FetchRouteResult>(
     areInputsValid
-      ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}`
+      ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
       : null,
     getEveTradePlus,
     {
@@ -48,6 +58,7 @@ function useFetchRoute(
       revalidateOnReconnect: false,
       revalidateOnFocus: false,
       revalidateIfStale: false,
+      refreshInterval: 3000,
     }
   );
 

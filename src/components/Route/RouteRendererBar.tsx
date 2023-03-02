@@ -100,7 +100,7 @@ function RouteRendererBar({
                     <Box>
                       <Tick
                         className="gate-camp__exit"
-                        direction={"down-right"}
+                        direction={"up-right"}
                         color={
                           exitSmartBombs
                             ? smartBombsColor

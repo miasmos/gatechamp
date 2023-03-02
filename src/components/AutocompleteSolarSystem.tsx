@@ -11,10 +11,14 @@ import { SolarSystem } from "../types";
 
 type AutocompleteProps = {
   onChange: (solarSystem: SolarSystem) => void;
+  defaultValue?: string;
 };
 
-function AutocompleteSolarSystem({ onChange }: AutocompleteProps) {
-  const [value, setValue] = useState<string>("");
+function AutocompleteSolarSystem({
+  onChange,
+  defaultValue = "",
+}: AutocompleteProps) {
+  const [value, setValue] = useState<string>(defaultValue);
   const { data, isLoading, isValidating, hasError } =
     useFetchAutocomplete<SolarSystem>(value, AutocompleteType.SolarSystem);
 

@@ -13,7 +13,7 @@ type RouteRendererProps = {
 
 function RouteRenderer({
   route,
-  position = 6,
+  position = route.route.length,
   onAvoid,
   ...props
 }: RouteRendererProps) {

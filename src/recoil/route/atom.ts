@@ -12,7 +12,8 @@ interface RouteState {
   origin: number | undefined;
   destination: number | undefined;
   avoidedSolarSystems: AvoidedSolarSystem[];
-  avoidGateCamps: boolean;
+  avoidGateCamp: boolean;
+  avoidEntryGateCamp: boolean;
   avoidHics: boolean;
   avoidSmartBombs: boolean;
 }
@@ -23,7 +24,8 @@ const routeState = atom<RouteState>({
     origin: undefined,
     destination: undefined,
     avoidedSolarSystems: [],
-    avoidGateCamps: false,
+    avoidGateCamp: false,
+    avoidEntryGateCamp: false,
     avoidHics: false,
     avoidSmartBombs: false,
   },

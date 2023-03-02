@@ -1,11 +1,11 @@
 import { SetterOrUpdater } from "recoil";
 import { RouteState } from "../atom";
 
-const avoidGateCampsSetter =
+const avoidEntryGateCampSetter =
   (setter: SetterOrUpdater<RouteState>) => (value: boolean) =>
     setter((state) => ({
       ...state,
-      avoidGateCamps: value,
+      avoidEntryGateCamp: value,
     }));
 
-export default avoidGateCampsSetter;
+export default avoidEntryGateCampSetter;
