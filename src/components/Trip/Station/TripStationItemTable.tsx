@@ -88,14 +88,14 @@ function TripStationItemTable({
                     >
                       <TableCell scope="row" sx={{ pl: 1, pr: 0 }}>
                         <Stack direction="row" spacing={0.5}>
-                          <CloseIcon
+                          {/* <CloseIcon
                             fontSize="small"
                             color="primary"
                             sx={{
                               cursor: "pointer",
                             }}
                             onClick={() => onIgnore(itemId)}
-                          />
+                          /> */}
                           <CopyToClipboard
                             text={stringifyItemOrder({
                               item,

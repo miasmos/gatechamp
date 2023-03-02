@@ -20,12 +20,14 @@ type Ship = {
 
 interface ShipsState {
   ships: Ship[];
+  shipsSelected: boolean[];
 }
 
 const shipsState = atom<ShipsState>({
   key: "ShipsState",
   default: {
     ships: [],
+    shipsSelected: [],
   },
   effects_UNSTABLE: [persistAtom],
 });

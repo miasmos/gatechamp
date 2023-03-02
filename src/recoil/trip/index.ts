@@ -7,7 +7,7 @@ import maxBudgetSetter from "./setters/maxBudgetSetter";
 import taxSetter from "./setters/taxSetter";
 import toSetter from "./setters/toSetter";
 import generateIdSetter from "./setters/generateIdSetter";
-import hasAToStation from "./selectors/hasAToStation";
+import hasStation from "./selectors/hasStation";
 
 export default atom;
 export {
@@ -20,5 +20,5 @@ export {
   toSetter,
   generateIdSetter,
 };
-export { hasAToStation };
+export { hasStation };
 export type { TripState };

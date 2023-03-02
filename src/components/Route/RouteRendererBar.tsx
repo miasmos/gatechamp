@@ -23,7 +23,7 @@ function RouteRendererBar({
   ...props
 }: RouteRendererProps) {
   const smartBombsColor = "red";
-  const hicsColor = "yellow";
+  const hicsColor = "darkorange";
   const gateCampColor = "black";
   return (
     <Stack position="relative" {...props}>

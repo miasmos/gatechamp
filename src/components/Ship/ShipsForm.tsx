@@ -9,6 +9,7 @@ import {
   deleteShipSetter,
   getShipCountSelector,
   hasValidShipSelector,
+  selectShipSetter,
 } from "../../recoil/ships";
 import ShipEditor from "./ShipEditor";
 import { addShipSetter } from "../../recoil/ships";
@@ -16,6 +17,7 @@ import { CargoBayType } from "../../enum";
 import { useNavigate } from "react-router";
 import { NavigationIntention } from "../../types";
 import MainButton from "../MainButton";
+import { Checkbox } from "@mui/material";
 
 type ShipsFormProps = NavigationIntention;
 
@@ -63,6 +65,8 @@ function ShipsForm({ to }: ShipsFormProps) {
       isEditing: true,
     }));
   };
+  const onSelectShipClick = (index: number, value: boolean) =>
+    selectShipSetter(setShipsState)(ships.shipsSelected, index, value);
   const editStart = (index: number) =>
     setFormState((state) => ({
       ...state,
@@ -85,22 +89,33 @@ function ShipsForm({ to }: ShipsFormProps) {
         <Stack
           direction="column"
           pl={3.5}
-          pr={2}
           py={2}
           spacing={2}
           maxHeight={400}
           sx={{ overflowY: ships.ships.length > 4 ? "scroll" : "auto" }}
         >
           {ships.ships.map((ship, index) => (
-            <ShipEditor
-              key={ship.id}
-              {...ship}
-              editing={isEditing && editingIndex === index}
-              index={index}
-              editStart={editStart}
-              editEnd={editEnd}
-              onDelete={deleteShip}
-            />
+            <Stack direction="row" key={ship.id}>
+              <Stack flexGrow={1}>
+                <ShipEditor
+                  {...ship}
+                  editing={isEditing && editingIndex === index}
+                  index={index}
+                  editStart={editStart}
+                  editEnd={editEnd}
+                  onDelete={deleteShip}
+                />
+              </Stack>
+              <Stack justifyContent="center">
+                <Checkbox
+                  disabled={editingIndex === index}
+                  checked={ships.shipsSelected[index]}
+                  onChange={() =>
+                    onSelectShipClick(index, !ships.shipsSelected[index])
+                  }
+                />
+              </Stack>
+            </Stack>
           ))}
         </Stack>
         <Stack alignItems="center" mt={2}>

@@ -1,17 +1,15 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Stack, Typography, Chip, Checkbox } from "@mui/material";
+import { Stack, Typography, Checkbox } from "@mui/material";
 import { SolarSystem } from "../../types";
 import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRenderer from "./RouteRenderer";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import routeState from "../../recoil/route/atom";
 import {
-  addAvoidSystemSetter,
   avoidEntryGateCampSetter,
   avoidGateCampSetter,
   avoidHicsSetter,
   avoidSmartBombsSetter,
-  deleteAvoidSystemSetter,
   destinationSetter,
   originSetter,
 } from "../../recoil/route";
@@ -39,10 +37,6 @@ function RouteForm() {
     originSetter(setRouteState)(solarSystem.solarSystemID);
   const onDestinationChange = (solarSystem: SolarSystem) =>
     destinationSetter(setRouteState)(solarSystem.solarSystemID);
-  const onAvoidSolarSystem = (solarSystemID: number, name: string) =>
-    addAvoidSystemSetter(setRouteState)({ solarSystemID, name });
-  const onUnavoidSolarSystem = (index: number) =>
-    deleteAvoidSystemSetter(setRouteState)(index);
   const onAvoidGateCamp = (value: boolean) =>
     avoidGateCampSetter(setRouteState)(value);
   const onAvoidEntryGateCamp = (value: boolean) =>
@@ -50,10 +44,6 @@ function RouteForm() {
   const onAvoidHics = (value: boolean) => avoidHicsSetter(setRouteState)(value);
   const onAvoidSmartBombs = (value: boolean) =>
     avoidSmartBombsSetter(setRouteState)(value);
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <Stack>
@@ -108,16 +98,7 @@ function RouteForm() {
             </Stack>
           </Stack>
         </Stack>
-        <Stack alignItems="flex-start" direction="row" spacing={2}>
-          {avoidedSolarSystems.map(({ name }, index) => (
-            <Chip
-              key={name}
-              label={name}
-              onDelete={() => onUnavoidSolarSystem(index)}
-            />
-          ))}
-        </Stack>
-        <RouteRenderer width={800} />
+        <RouteRenderer width={800} alwaysShowDestination alwaysShowOrigin />
       </Stack>
     </Stack>
   );

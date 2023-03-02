@@ -53,7 +53,7 @@ type FetchTripStationResultItem = {
 
 type FetchTripStationResult = FetchTripStationResultItem[];
 
-function useFetchTripStation(id: string, trip: TripState, ships: ShipsState) {
+function useFetchTripStation(id: string, trip: TripState, ships: Ship[]) {
   const {
     data = [],
     error,

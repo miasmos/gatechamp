@@ -4,6 +4,8 @@ import { FetchRouteResult } from "../../hooks/useFetchRoute";
 type RouteRendererTopInfoProps = {
   route: FetchRouteResult;
   selectedIndex: number;
+  alwaysShowOrigin?: boolean;
+  alwaysShowDestination?: boolean;
 } & StackProps;
 
 function RouteRendererTopInfo({
@@ -11,6 +13,8 @@ function RouteRendererTopInfo({
   mb = 2,
   height = 20,
   selectedIndex,
+  alwaysShowDestination = false,
+  alwaysShowOrigin = false,
   ...props
 }: RouteRendererTopInfoProps) {
   return (
@@ -25,7 +29,13 @@ function RouteRendererTopInfo({
         <Stack
           width={`${100 / route.route.length}%`}
           sx={{
-            opacity: selectedIndex === index && !gateCamp ? 1 : 0,
+            opacity:
+              (selectedIndex === index ||
+                (index === 0 && alwaysShowOrigin) ||
+                (index === route.route.length - 1 && alwaysShowDestination)) &&
+              !gateCamp
+                ? 1
+                : 0,
           }}
           key={name}
           justifyContent="flex-end"

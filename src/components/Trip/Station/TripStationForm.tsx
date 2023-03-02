@@ -11,7 +11,7 @@ import { Station as StationEnum, Tax } from "../../../enum";
 import tripState, {
   fromSetter,
   generateIdSetter,
-  hasAToStation,
+  hasStation,
   maxBudgetSetter,
   minProfitSetter,
   minRoiSetter,
@@ -27,7 +27,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
   const [{ from, to, maxBudget, minProfit, minRoi, tax }, setTripState] =
     useRecoilState(tripState);
-  const hasStation = useRecoilValue(hasAToStation);
+  const hasValidStation = useRecoilValue(hasStation);
   const onMinProfitChange = (_: any, value: number | number[]) =>
     minProfitSetter(setTripState)(value as number);
   const onMinRoiChange = (_: any, value: number | number[]) =>
@@ -41,7 +41,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
   const onToChange = (currentValue: StationEnum, value: boolean) =>
     toSetter(setTripState)(to, currentValue, value);
 
-  const isFormValid = hasStation;
+  const isFormValid = hasValidStation;
 
   const onRouteClick = () => {
     if (!isFormValid) {
@@ -69,7 +69,11 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
               .filter(([key]) => key !== "None")
               .map(([key, value], index) => (
                 <Stack key={value} direction="row" alignItems="center">
-                  <Typography sx={{ width: 50 }} textAlign="right">
+                  <Typography
+                    sx={{ width: 50, cursor: "pointer" }}
+                    textAlign="right"
+                    onClick={() => onFromChange(value, !from[index])}
+                  >
                     {key}
                   </Typography>
                   <Checkbox
@@ -95,7 +99,11 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
               .filter(([key]) => key !== "None")
               .map(([key, value], index) => (
                 <Stack key={value} direction="row" alignItems="center">
-                  <Typography sx={{ width: 50 }} textAlign="right">
+                  <Typography
+                    sx={{ width: 50, cursor: "pointer" }}
+                    textAlign="right"
+                    onClick={() => onToChange(value, !to[index])}
+                  >
                     {key}
                   </Typography>
                   <Checkbox

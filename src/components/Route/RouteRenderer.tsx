@@ -15,11 +15,15 @@ import {
 type RouteRendererProps = {
   position?: number;
   showProgress?: boolean;
+  alwaysShowOrigin?: boolean;
+  alwaysShowDestination?: boolean;
 } & Omit<StackProps, "position">;
 
 function RouteRenderer({
   position = 0,
   showProgress = false,
+  alwaysShowDestination = false,
+  alwaysShowOrigin = false,
   ...props
 }: RouteRendererProps) {
   const setRouteState = useSetRecoilState(routeState);
@@ -65,7 +69,12 @@ function RouteRenderer({
           </Stack>
         )}
         <Stack direction="column" justifyContent="center" width="92.8%">
-          <RouteRendererTopInfo route={route} selectedIndex={selectedIndex} />
+          <RouteRendererTopInfo
+            route={route}
+            selectedIndex={selectedIndex}
+            alwaysShowDestination={alwaysShowDestination}
+            alwaysShowOrigin={alwaysShowOrigin}
+          />
           <RouteRendererBar
             route={route}
             position={position}

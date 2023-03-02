@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import Stack from "@mui/material/Stack";
 import tripState from "../../../recoil/trip";
-import shipsState from "../../../recoil/ships";
+import { getSelectedShipsSelector } from "../../../recoil/ships";
 import useFetchTripStation from "../../../hooks/useFetchTripStation";
 import TripStationOverviewListItem from "./TripStationOverviewListItem";
 import { NavigationIntention } from "../../../types";
@@ -16,11 +16,11 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   const navigate = useNavigate();
   const setRouteState = useSetRecoilState(routeState);
   const trip = useRecoilValue(tripState);
-  const ships = useRecoilValue(shipsState);
+  const selectedShips = useRecoilValue(getSelectedShipsSelector);
   const { data, isValidating, isLoading, hasError } = useFetchTripStation(
     trip.id,
     trip,
-    ships
+    selectedShips
   );
   const setRouteOrigin = (solarSystemID: number) =>
     originSetter(setRouteState)(solarSystemID);
