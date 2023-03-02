@@ -1,59 +1,99 @@
-import { Stack, StackProps, Typography } from "@mui/material";
+import { Chip, Stack, StackProps, Typography } from "@mui/material";
 import { useState } from "react";
-import { FetchRouteResult } from "../../hooks/useFetchRoute";
+import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
 import RouteRendererTopInfo from "./RouteRendererTopInfo";
 import RouteRendererBar from "./RouteRendererBar";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import routeState from "../../recoil/route/atom";
+import {
+  addAvoidSystemSetter,
+  deleteAvoidSystemSetter,
+} from "../../recoil/route";
 
 type RouteRendererProps = {
-  route: FetchRouteResult;
   position?: number;
-  onAvoid: (solarSystemID: number, name: string) => void;
   showProgress?: boolean;
 } & Omit<StackProps, "position">;
 
 function RouteRenderer({
-  route,
-  position = route.route.length,
-  onAvoid,
+  position = 0,
   showProgress = false,
   ...props
 }: RouteRendererProps) {
+  const setRouteState = useSetRecoilState(routeState);
   const [{ selectedIndex }, setState] = useState<{
     selectedIndex: number;
   }>({ selectedIndex: -1 });
+  const { origin, destination, avoidedSolarSystems } =
+    useRecoilValue(routeState);
+  const {
+    data: route,
+    isLoading,
+    isValidating,
+  } = useFetchRoute(
+    origin,
+    destination,
+    avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID)
+  );
 
   const onSelectIndex = (routeIndex: number) =>
     setState((state) => ({
       ...state,
       selectedIndex: routeIndex,
     }));
+  const onAvoidSolarSystem = (solarSystemID: number, name: string) =>
+    addAvoidSystemSetter(setRouteState)({ solarSystemID, name });
+  const onUnavoidSolarSystem = (index: number) =>
+    deleteAvoidSystemSetter(setRouteState)(index);
 
   return (
-    <Stack direction="row" spacing={2} {...props}>
-      {route.jumps > 0 && (
-        <Stack mt={4}>
-          <Stack direction="row">
-            <Typography>{position}</Typography>
-            {showProgress && (
-              <>
-                <Typography>&nbsp;/&nbsp;</Typography>
-                <Typography>{route.jumps}</Typography>
-              </>
-            )}
+    <Stack {...props}>
+      <Stack direction="row" spacing={2}>
+        {route.jumps > 0 && (
+          <Stack mt={4}>
+            <Stack direction="row">
+              <Typography>{showProgress ? position : route.jumps}</Typography>
+              {showProgress && (
+                <>
+                  <Typography>&nbsp;/&nbsp;</Typography>
+                  <Typography>{route.jumps}</Typography>
+                </>
+              )}
+            </Stack>
           </Stack>
+        )}
+        <Stack direction="column" justifyContent="center" width="92.8%">
+          <RouteRendererTopInfo route={route} selectedIndex={selectedIndex} />
+          <RouteRendererBar
+            route={route}
+            position={position}
+            selectedIndex={selectedIndex}
+            onSelectIndex={onSelectIndex}
+            onAvoid={onAvoidSolarSystem}
+          />
+          <RouteRendererBottomInfo route={route} />
         </Stack>
-      )}
-      <Stack direction="column" justifyContent="center" width="92.8%">
-        <RouteRendererTopInfo route={route} selectedIndex={selectedIndex} />
-        <RouteRendererBar
-          route={route}
-          position={position}
-          selectedIndex={selectedIndex}
-          onSelectIndex={onSelectIndex}
-          onAvoid={onAvoid}
-        />
-        <RouteRendererBottomInfo route={route} />
+        <Stack>
+          <FavoriteIcon
+            sx={{
+              transition: "all 1s ease-out 0s",
+              transform: isValidating ? "scale(2)" : "scale(0.8)",
+              mt: "33px",
+            }}
+            fontSize="small"
+          />
+        </Stack>
+      </Stack>
+      <Stack alignItems="flex-start" direction="row" spacing={2}>
+        {avoidedSolarSystems.map(({ name }, index) => (
+          <Chip
+            key={name}
+            label={name}
+            onDelete={() => onUnavoidSolarSystem(index)}
+          />
+        ))}
       </Stack>
     </Stack>
   );

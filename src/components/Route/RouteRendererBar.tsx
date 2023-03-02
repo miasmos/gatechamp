@@ -7,6 +7,7 @@ import Tick from "./Tick";
 type RouteRendererProps = {
   route: FetchRouteResult;
   position: number;
+  showPosition?: boolean;
   onAvoid: (solarSystemID: number, name: string) => void;
   onSelectIndex: (routeIndex: number) => void;
   selectedIndex: number;
@@ -15,6 +16,7 @@ type RouteRendererProps = {
 function RouteRendererBar({
   route,
   position,
+  showPosition = false,
   selectedIndex,
   onAvoid,
   onSelectIndex,
@@ -130,6 +132,7 @@ function RouteRendererBar({
                     zIndex={4}
                     my="3px"
                     height="100%"
+                    ml={arrIndex === 0 ? "3px" : 0}
                     width={`calc(100% - ${
                       arrIndex === route.route.length - 1 ? 3 : 0
                     }px)`}
@@ -150,7 +153,11 @@ function RouteRendererBar({
                     zIndex={4}
                     height="100%"
                     left={-1}
-                    width={position > index ? `calc(100% + 2px)` : "0%"}
+                    width={
+                      !showPosition || position > index
+                        ? `calc(100% + 2px)`
+                        : "0%"
+                    }
                     sx={{
                       background: getSecurityColor(security),
                       transition: "width 0.5s",

@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import Stack from "@mui/material/Stack";
@@ -7,11 +7,14 @@ import shipsState from "../../../recoil/ships";
 import useFetchTripStation from "../../../hooks/useFetchTripStation";
 import TripStationOverviewListItem from "./TripStationOverviewListItem";
 import { NavigationIntention } from "../../../types";
+import routeState from "../../../recoil/route/atom";
+import { destinationSetter, originSetter } from "../../../recoil/route";
 
 type TripStationOverviewProps = NavigationIntention;
 
 function TripStationOverview({ to }: TripStationOverviewProps) {
   const navigate = useNavigate();
+  const setRouteState = useSetRecoilState(routeState);
   const trip = useRecoilValue(tripState);
   const ships = useRecoilValue(shipsState);
   const { data, isValidating, isLoading, hasError } = useFetchTripStation(
@@ -19,7 +22,14 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
     trip,
     ships
   );
+  const setRouteOrigin = (solarSystemID: number) =>
+    originSetter(setRouteState)(solarSystemID);
+  const setRouteDestination = (solarSystemID: number) =>
+    destinationSetter(setRouteState)(solarSystemID);
   const onSelect = (index: number) => {
+    const { origin, destination } = data[index];
+    setRouteOrigin(origin.system_id);
+    setRouteDestination(destination.system_id);
     navigate(to, {
       state: data[index],
     });

@@ -117,7 +117,7 @@ function RouteForm() {
             />
           ))}
         </Stack>
-        <RouteRenderer route={data} width={800} onAvoid={onAvoidSolarSystem} />
+        <RouteRenderer width={800} />
       </Stack>
     </Stack>
   );
