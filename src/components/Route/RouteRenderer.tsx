@@ -75,14 +75,14 @@ function RouteRenderer({
           />
           <RouteRendererBottomInfo route={route} />
         </Stack>
-        <Stack>
+        <Stack fontSize={15}>
           <FavoriteIcon
             sx={{
               transition: "all 1s ease-out 0s",
-              transform: isValidating ? "scale(2)" : "scale(0.8)",
-              mt: "33px",
+              transform: isValidating ? "scale(2.4)" : "scale(1)",
+              mt: "36px",
             }}
-            fontSize="small"
+            fontSize="inherit"
           />
         </Stack>
       </Stack>
