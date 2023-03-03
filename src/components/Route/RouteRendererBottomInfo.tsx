@@ -1,8 +1,9 @@
 import { Stack, Box, Typography, Tooltip, StackProps } from "@mui/material";
 import { FetchRouteResult } from "../../hooks/useFetchRoute";
 import CallSplitIcon from "@mui/icons-material/CallSplit";
+import RocketIcon from "@mui/icons-material/Rocket";
 import TungstenIcon from "@mui/icons-material/Tungsten";
-import ErrorIcon from "@mui/icons-material/Error";
+import SkullIcon from "../icon/SkullIcon";
 
 type RouteRendererProps = {
   route: FetchRouteResult;
@@ -32,6 +33,7 @@ function RouteRendererBottomInfo({
           hics,
           smartBombs,
           kills,
+          attackers,
           entry: { gateCamp: entryGateCamp },
           exit: { gateCamp: exitGateCamp },
         }) => (
@@ -64,10 +66,18 @@ function RouteRendererBottomInfo({
                 }}
               >
                 <Tooltip title="Kills">
-                  <ErrorIcon sx={{ fontSize: 15 }} />
+                  <SkullIcon />
                 </Tooltip>
                 <Typography variant="body2" fontSize={11}>
                   {kills}
+                </Typography>
+              </Stack>
+              <Stack>
+                <Tooltip title="Attackers">
+                  <RocketIcon sx={{ fontSize: 15 }} />
+                </Tooltip>
+                <Typography variant="body2" fontSize={11}>
+                  {attackers}
                 </Typography>
               </Stack>
               <Stack display={hics ? "flex" : "none"}>

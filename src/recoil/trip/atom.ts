@@ -6,6 +6,7 @@ const { persistAtom } = recoilPersist();
 
 interface TripState {
   id: string;
+  otherCargo: number;
   from: boolean[];
   to: boolean[];
   maxBudget: number;
@@ -28,6 +29,7 @@ const tripState = atom<TripState>({
     minProfit: 0.02,
     minRoi: 0.04, // percent
     tax: Number(Tax.Level3), // percent
+    otherCargo: 0,
   },
   effects_UNSTABLE: [persistAtom],
 });

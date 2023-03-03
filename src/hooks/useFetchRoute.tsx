@@ -17,6 +17,7 @@ type SolarSystemSummary = {
   security: number;
   entry: StargateSummary;
   exit: StargateSummary;
+  attackers: number;
 } & Omit<StargateSummary, "stargateID">;
 
 type FetchRouteResult = {

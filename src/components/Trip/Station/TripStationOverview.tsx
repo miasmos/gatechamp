@@ -50,7 +50,7 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
         maxHeight={420}
         px={2}
         py={2}
-        sx={{ overflowY: "scroll" }}
+        sx={{ overflowY: data.length > 4 ? "scroll" : "initial" }}
       >
         {data.map((node, index) => (
           <TripStationOverviewListItem

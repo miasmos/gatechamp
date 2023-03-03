@@ -9,24 +9,30 @@ import Checkbox from "@mui/material/Checkbox";
 import { formatCurrency } from "../../../util/currency";
 import { Station as StationEnum, Tax } from "../../../enum";
 import tripState, {
+  clearOtherCargoSetter,
   fromSetter,
   generateIdSetter,
   hasStationSelector,
   maxBudgetSetter,
   minProfitSetter,
   minRoiSetter,
+  otherCargoSetter,
   taxSetter,
   toSetter,
 } from "../../../recoil/trip";
 import { NavigationIntention } from "../../../types";
 import MainButton from "../../MainButton";
+import { TextField } from "@mui/material";
+import { ChangeEvent, useEffect } from "react";
 
 type TripStationProps = NavigationIntention;
 
 function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
-  const [{ from, to, maxBudget, minProfit, minRoi, tax }, setTripState] =
-    useRecoilState(tripState);
+  const [
+    { from, to, maxBudget, minProfit, minRoi, tax, otherCargo },
+    setTripState,
+  ] = useRecoilState(tripState);
   const hasValidStation = useRecoilValue(hasStationSelector);
   const onMinProfitChange = (_: any, value: number | number[]) =>
     minProfitSetter(setTripState)(value as number);
@@ -40,6 +46,9 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
     fromSetter(setTripState)(from, currentValue, value);
   const onToChange = (currentValue: StationEnum, value: boolean) =>
     toSetter(setTripState)(to, currentValue, value);
+  const onOtherCargoChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => otherCargoSetter(setTripState)(event.target.value);
 
   const isFormValid = hasValidStation;
 
@@ -50,6 +59,10 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
     generateIdSetter(setTripState)();
     navigate(navigateTo);
   };
+
+  useEffect(() => {
+    clearOtherCargoSetter(setTripState)();
+  }, []);
 
   return (
     <>
@@ -174,7 +187,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
           )}%`}</Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="center">
+        <Stack direction="row" justifyContent="center" spacing={5}>
           {/* Tax */}
           <Stack direction="row" spacing={3}>
             <Stack direction="row" alignItems="center">
@@ -189,6 +202,20 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
                 </MenuItem>
               ))}
             </Select>
+          </Stack>
+          {/* m3 taken */}
+          <Stack direction="row" spacing={3}>
+            <Stack direction="row" alignItems="center">
+              <Typography textAlign="right" whiteSpace="nowrap">
+                Other Cargo (m³)
+              </Typography>
+            </Stack>
+            <TextField
+              onChange={onOtherCargoChange}
+              value={otherCargo}
+              type="number"
+              sx={{ width: 100 }}
+            />
           </Stack>
         </Stack>
       </Stack>

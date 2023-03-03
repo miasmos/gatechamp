@@ -8,6 +8,8 @@ import taxSetter from "./setters/taxSetter";
 import toSetter from "./setters/toSetter";
 import generateIdSetter from "./setters/generateIdSetter";
 import hasStationSelector from "./selectors/hasStationSelector";
+import otherCargoSetter from "./setters/otherCargoSetter";
+import clearOtherCargoSetter from "./setters/clearOtherCargoSetter";
 
 export default atom;
 export {
@@ -19,6 +21,8 @@ export {
   taxSetter,
   toSetter,
   generateIdSetter,
+  otherCargoSetter,
+  clearOtherCargoSetter,
 };
 export { hasStationSelector };
 export type { TripState };
