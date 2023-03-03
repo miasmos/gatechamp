@@ -7,19 +7,21 @@ import { CargoBay } from "../../../enum";
 import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";
 import { NavigationIntention } from "../../../types";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import tripState from "../../../recoil/trip/atom";
 import { useLocation, useNavigate } from "react-router";
 import { clearTripSetter } from "../../../recoil/trip";
 import MainButton from "../../MainButton";
 import RouteRenderer from "../../Route/RouteRenderer";
+import { getJumpsSelector } from "../../../recoil/route";
 
 type TripStationDetailProps = NavigationIntention;
 
 function TripStationDetail({ to }: TripStationDetailProps) {
   const navigate = useNavigate();
   const routerLocation = useLocation();
-  const { cargo, origin, destination, ship, totalProfit } =
+  const jumps = useRecoilValue(getJumpsSelector);
+  const { cargo, origin, destination, ship, totalProfit, profitPerJump } =
     routerLocation.state;
   const [trip, setTripState] = useRecoilState(tripState);
 
@@ -53,6 +55,7 @@ function TripStationDetail({ to }: TripStationDetailProps) {
       }));
     }
   };
+  const iskPerJump = jumps ? totalProfit / jumps : profitPerJump;
 
   return (
     <Stack>
@@ -71,7 +74,12 @@ function TripStationDetail({ to }: TripStationDetailProps) {
           </Stack>
         </Stack>
         <Stack>{ship?.name}</Stack>
-        <Stack>Ƶ{formatCurrency(totalProfit)} profit</Stack>
+        <Stack>
+          <Typography>
+            Ƶ{formatCurrency(totalProfit)} profit | Ƶ
+            {formatCurrency(iskPerJump)} / jump
+          </Typography>
+        </Stack>
         <RouteRenderer mt={1} width={800} />
       </Stack>
       <Stack spacing={5}>

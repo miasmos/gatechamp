@@ -5,38 +5,35 @@ import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import { ChangeEvent } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   deleteShipSetter,
   editShipCargoVolumeSetter,
   editShipSetter,
-  Ship,
+  editShipStaticSetter,
+  getShipByIndexSelector,
 } from "../../recoil/ships";
 import shipsState from "../../recoil/ships/atom";
 import Input from "@mui/material/Input";
 import { CargoBayType } from "../../enum";
+import AutocompleteShip from "../AutocompleteShip";
+import { EveShip } from "../../types";
 
-type ShipEditorProps = Ship & {
+type ShipEditorProps = {
   editing: boolean;
   index: number;
-  onDelete: (index: number) => void;
   editStart: (index: number) => void;
   editEnd: () => void;
 };
 
-function ShipEditor({
-  editing,
-  index,
-  editStart,
-  editEnd,
-  onDelete,
-  ...ship
-}: ShipEditorProps) {
-  const { name, cargoBay } = ship;
+function ShipEditor({ editing, index, editStart, editEnd }: ShipEditorProps) {
   const setShipsState = useSetRecoilState(shipsState);
+  const ship = useRecoilValue(getShipByIndexSelector(index));
+  const { name, cargoBay, static: staticData } = ship;
   const editShip = editShipSetter(setShipsState);
   const deleteShip = deleteShipSetter(setShipsState);
   const editShipCargoVolume = editShipCargoVolumeSetter(setShipsState);
+  const editShipStatic = editShipStaticSetter(setShipsState);
 
   const onNameChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,7 +42,14 @@ function ShipEditor({
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     type: CargoBayType
   ) => editShipCargoVolume(index, type, Number(event.target.value));
-  const isFormValid = name.length > 0 && cargoBay.main.volume > 0;
+  const onHullChange = (ship: EveShip) => {
+    editShipStatic(index, ship);
+    editShipCargoVolume(index, CargoBayType.Main, ship.capacity);
+  };
+  const isFormValid =
+    name.length > 0 &&
+    cargoBay.main.volume > 0 &&
+    staticData.typeName.length > 0;
 
   return (
     <Paper
@@ -68,19 +72,31 @@ function ShipEditor({
         height={40}
         justifyContent="space-between"
       >
-        <Stack justifyContent="center">
-          {editing ? (
-            <Input
-              defaultValue={name}
-              placeholder="Name"
-              onChange={onNameChange}
-              disableUnderline
-              sx={{ width: 70 }}
-            />
-          ) : (
-            <Typography textAlign="left">{name}</Typography>
-          )}
+        <Stack justifyContent="center" sx={{ width: 210 }}>
+          <Stack>
+            {editing ? (
+              <>
+                <Input
+                  defaultValue={name}
+                  placeholder="Name"
+                  onChange={onNameChange}
+                  disableUnderline
+                />
+                <AutocompleteShip
+                  onChange={onHullChange}
+                  defaultValue={staticData.typeName}
+                  placeholder="Hull"
+                />
+              </>
+            ) : (
+              <>
+                <Typography textAlign="left">{name}</Typography>
+                <Typography textAlign="left">{staticData.typeName}</Typography>
+              </>
+            )}
+          </Stack>
         </Stack>
+
         <Stack justifyContent="center">
           {Object.entries(cargoBay).map(([_, { volume, type }], index) => (
             <Stack direction="row" key={index} justifyContent="flex-end">

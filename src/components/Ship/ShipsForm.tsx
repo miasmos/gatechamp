@@ -32,7 +32,6 @@ function ShipsForm({ to }: ShipsFormProps) {
   const hasValidShip = useRecoilValue(hasValidShipSelector);
   const shipCount = useRecoilValue(getShipCountSelector);
   const addShip = addShipSetter(setShipsState);
-  const deleteShip = deleteShipSetter(setShipsState);
 
   const isFormValid = hasValidShip && !isEditing;
 
@@ -48,6 +47,12 @@ function ShipsForm({ to }: ShipsFormProps) {
     }
     addShip({
       name: "",
+      static: {
+        typeID: 0,
+        typeName: "",
+        capacity: 0,
+        graphicID: 0,
+      },
       cargoBay: {
         main: {
           volume: 0,
@@ -98,12 +103,10 @@ function ShipsForm({ to }: ShipsFormProps) {
             <Stack direction="row" key={ship.id}>
               <Stack flexGrow={1}>
                 <ShipEditor
-                  {...ship}
                   editing={isEditing && editingIndex === index}
                   index={index}
                   editStart={editStart}
                   editEnd={editEnd}
-                  onDelete={deleteShip}
                 />
               </Stack>
               <Stack justifyContent="center">

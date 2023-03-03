@@ -22,6 +22,7 @@ function TripStationOverviewListItem({
   destination,
   totalProfit,
   totalCost,
+  profitPerJump,
   totalVolume,
   onSelect,
 }: TripStationOverviewListItemProps) {
@@ -61,7 +62,7 @@ function TripStationOverviewListItem({
           </Stack>
           <Stack>
             <Typography variant="body2" textAlign="right">
-              Ƶ{formatCurrency(totalCost)}
+              Ƶ{formatCurrency(profitPerJump)} / jump
             </Typography>
           </Stack>
         </Stack>

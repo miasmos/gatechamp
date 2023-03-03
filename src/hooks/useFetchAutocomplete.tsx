@@ -3,6 +3,7 @@ import { getEveTradePlus } from "../api";
 
 enum AutocompleteType {
   SolarSystem = "solar-system",
+  Ship = "ship",
 }
 
 type ElasticSearchHit<T> = {
@@ -26,7 +27,7 @@ type ElasticSearchResult<T> = {
 };
 
 function useFetchAutocomplete<T>(
-  name: string,
+  name: string = "",
   type: AutocompleteType = AutocompleteType.SolarSystem
 ) {
   const areInputsValid = name.length > 0;
@@ -44,7 +45,7 @@ function useFetchAutocomplete<T>(
   );
 
   return {
-    data,
+    data: data as ElasticSearchResult<T>,
     isLoading,
     isValidating,
     hasError: error,

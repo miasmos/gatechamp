@@ -11,7 +11,7 @@ import { Station as StationEnum, Tax } from "../../../enum";
 import tripState, {
   fromSetter,
   generateIdSetter,
-  hasStation,
+  hasStationSelector,
   maxBudgetSetter,
   minProfitSetter,
   minRoiSetter,
@@ -27,7 +27,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
   const [{ from, to, maxBudget, minProfit, minRoi, tax }, setTripState] =
     useRecoilState(tripState);
-  const hasValidStation = useRecoilValue(hasStation);
+  const hasValidStation = useRecoilValue(hasStationSelector);
   const onMinProfitChange = (_: any, value: number | number[]) =>
     minProfitSetter(setTripState)(value as number);
   const onMinRoiChange = (_: any, value: number | number[]) =>

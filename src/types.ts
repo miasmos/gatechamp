@@ -4,7 +4,7 @@ type NavigationIntention = {
   to: AppRoute | string;
 };
 
-type SolarSystem = {
+type EveSolarSystem = {
   regionID: number;
   constellationID: number;
   solarSystemID: number;
@@ -33,4 +33,11 @@ type SolarSystem = {
   securityClass: string;
 };
 
-export type { NavigationIntention, SolarSystem };
+type EveShip = {
+  typeID: number;
+  typeName: string;
+  capacity: number;
+  graphicID: number;
+};
+
+export type { NavigationIntention, EveSolarSystem, EveShip };

@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { postEveTradePlus } from "../api";
-import { Ship, ShipsState } from "../recoil/ships";
+import { Ship } from "../recoil/ships";
 import { TripState } from "../recoil/trip";
 
 interface StationItem {
@@ -46,6 +46,7 @@ type FetchTripStationResultItem = {
   totalVolume: number;
   totalProfit: number;
   ship: Ship;
+  profitPerJump: number;
   destination: StationItem;
   origin: StationItem;
   cargo: CargoBayItem[];

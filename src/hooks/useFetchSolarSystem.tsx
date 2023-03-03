@@ -1,6 +1,6 @@
 import useSWRImmutable from "swr/immutable";
 import { getEveTradePlus } from "../api";
-import { SolarSystem } from "../types";
+import { EveSolarSystem } from "../types";
 
 function useFetchSolarSystem(solarSystemId: number) {
   const {
@@ -8,7 +8,7 @@ function useFetchSolarSystem(solarSystemId: number) {
     error,
     isLoading,
     isValidating,
-  } = useSWRImmutable<SolarSystem>(
+  } = useSWRImmutable<EveSolarSystem>(
     `/api/solar-system?ids=${solarSystemId}`,
     getEveTradePlus,
     {

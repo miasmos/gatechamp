@@ -1,15 +1,17 @@
 import { Chip, Stack, StackProps, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
 import RouteRendererTopInfo from "./RouteRendererTopInfo";
 import RouteRendererBar from "./RouteRendererBar";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import routeState from "../../recoil/route/atom";
 import {
   addAvoidSystemSetter,
   deleteAvoidSystemSetter,
+  jumpsSetter,
 } from "../../recoil/route";
 
 type RouteRendererProps = {
@@ -36,11 +38,13 @@ function RouteRenderer({
     data: route,
     isLoading,
     isValidating,
+    hasError,
   } = useFetchRoute(
     origin,
     destination,
     avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID)
   );
+  const setJumps = (jumps: number) => jumpsSetter(setRouteState)(jumps);
 
   const onSelectIndex = (routeIndex: number) =>
     setState((state) => ({
@@ -51,6 +55,12 @@ function RouteRenderer({
     addAvoidSystemSetter(setRouteState)({ solarSystemID, name });
   const onUnavoidSolarSystem = (index: number) =>
     deleteAvoidSystemSetter(setRouteState)(index);
+
+  useEffect(() => {
+    if (route?.jumps) {
+      setJumps(route.jumps);
+    }
+  }, [route]);
 
   return (
     <Stack {...props}>
@@ -85,14 +95,21 @@ function RouteRenderer({
           <RouteRendererBottomInfo route={route} />
         </Stack>
         <Stack fontSize={15}>
-          <FavoriteIcon
-            sx={{
-              transition: "all 1s ease-out 0s",
-              transform: isValidating ? "scale(2.4)" : "scale(1)",
-              mt: "36px",
-            }}
-            fontSize="inherit"
-          />
+          {hasError ? (
+            <FavoriteBorderOutlinedIcon
+              sx={{ opacity: 0.7, mt: "36px" }}
+              fontSize="inherit"
+            />
+          ) : (
+            <FavoriteIcon
+              sx={{
+                transition: "all 1s ease-out 0s",
+                transform: isValidating ? "scale(2.4)" : "scale(1)",
+                mt: "36px",
+              }}
+              fontSize="inherit"
+            />
+          )}
         </Stack>
       </Stack>
       <Stack alignItems="flex-start" direction="row" spacing={2}>

@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 import { CargoBayType } from "../../enum";
+import { EveShip } from "../../types";
 
 const { persistAtom } = recoilPersist();
 
@@ -16,6 +17,7 @@ type Ship = {
     main: ShipCargoBay<CargoBayType.Main>;
     fleetHanger: ShipCargoBay<CargoBayType.FleetHanger>;
   };
+  static: EveShip;
 };
 
 interface ShipsState {

@@ -1,7 +1,7 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
 import { Stack, Typography, Checkbox } from "@mui/material";
-import { SolarSystem } from "../../types";
-import useFetchRoute from "../../hooks/useFetchRoute";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import { EveSolarSystem } from "../../types";
 import RouteRenderer from "./RouteRenderer";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import routeState from "../../recoil/route/atom";
@@ -10,33 +10,42 @@ import {
   avoidGateCampSetter,
   avoidHicsSetter,
   avoidSmartBombsSetter,
+  destinationNameSetter,
   destinationSetter,
+  originNameSetter,
   originSetter,
 } from "../../recoil/route";
+import { SyntheticEvent } from "react";
 
 function RouteForm() {
   const setRouteState = useSetRecoilState(routeState);
   const {
-    origin,
-    destination,
-    avoidedSolarSystems,
     avoidGateCamp,
     avoidEntryGateCamp,
     avoidHics,
     avoidSmartBombs,
-  } = useRecoilValue(routeState);
-
-  const { data, isLoading, isValidating } = useFetchRoute(
     origin,
     destination,
-    avoidedSolarSystems.map((data) => data.solarSystemID),
-    { avoidGateCamp, avoidHics, avoidSmartBombs, avoidEntryGateCamp }
-  );
+    originName,
+    destinationName,
+  } = useRecoilValue(routeState);
+  const setDestination = destinationSetter(setRouteState);
+  const setOrigin = originSetter(setRouteState);
+  const setDestinationName = destinationNameSetter(setRouteState);
+  const setOriginName = originNameSetter(setRouteState);
 
-  const onOriginChange = (solarSystem: SolarSystem) =>
+  const onOriginChange = (solarSystem: EveSolarSystem) =>
     originSetter(setRouteState)(solarSystem.solarSystemID);
-  const onDestinationChange = (solarSystem: SolarSystem) =>
+  const onOriginNameChange = (
+    _: SyntheticEvent<Element, Event>,
+    nextValue: string
+  ) => setOriginName(nextValue);
+  const onDestinationChange = (solarSystem: EveSolarSystem) =>
     destinationSetter(setRouteState)(solarSystem.solarSystemID);
+  const onDestinationNameChange = (
+    _: SyntheticEvent<Element, Event>,
+    nextValue: string
+  ) => setDestinationName(nextValue);
   const onAvoidGateCamp = (value: boolean) =>
     avoidGateCampSetter(setRouteState)(value);
   const onAvoidEntryGateCamp = (value: boolean) =>
@@ -44,6 +53,17 @@ function RouteForm() {
   const onAvoidHics = (value: boolean) => avoidHicsSetter(setRouteState)(value);
   const onAvoidSmartBombs = (value: boolean) =>
     avoidSmartBombsSetter(setRouteState)(value);
+  const onSwap = () => {
+    setDestinationName(originName);
+    setOriginName(destinationName);
+
+    if (origin) {
+      setDestination(origin);
+    }
+    if (destination) {
+      setOrigin(destination);
+    }
+  };
 
   return (
     <Stack>
@@ -58,11 +78,24 @@ function RouteForm() {
           >
             <Stack>
               <Typography>Origin</Typography>
-              <AutocompleteSolarSystem onChange={onOriginChange} />
+              <AutocompleteSolarSystem
+                controlled
+                onChange={onOriginChange}
+                onInputChange={onOriginNameChange}
+                value={originName}
+              />
+            </Stack>
+            <Stack onClick={onSwap}>
+              <SwapHorizIcon sx={{ mt: 2, cursor: "pointer" }} />
             </Stack>
             <Stack>
               <Typography>Destination</Typography>
-              <AutocompleteSolarSystem onChange={onDestinationChange} />
+              <AutocompleteSolarSystem
+                controlled
+                onChange={onDestinationChange}
+                onInputChange={onDestinationNameChange}
+                value={destinationName}
+              />
             </Stack>
           </Stack>
           <Stack direction="row" justifyContent="center" spacing={5}>
