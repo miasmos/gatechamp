@@ -21,6 +21,7 @@ import {
   stringifyItemsOrder,
 } from "../../../util/eveTrade";
 import { CargoBayItem } from "../../../hooks/useFetchTripStation";
+import ProgressBar from "../../ProgressBar";
 
 type TripStationItemTableProps = CargoBayItem & {
   title: string;
@@ -166,26 +167,45 @@ function TripStationItemTable({
               {title}
             </Typography>
           </Stack>
-          <Stack direction="row" alignItems="flex-end">
-            <Typography variant="body2">
-              Ƶ{formatCurrency(cost)} / {formatCurrency(maxCost)}
-            </Typography>
-            <Typography
-              ml={0.25}
-              mt={2}
-              lineHeight={1.1}
-              variant="h6"
-              fontWeight="normal"
-            >
-              &nbsp;|&nbsp;
-            </Typography>
-            <Typography variant="body2">
-              {formatCurrency(volume)} / {formatCurrency(maxVolume)} m³
-            </Typography>
+          <Stack direction="row" alignItems="flex-end" spacing={2}>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <ProgressBar
+                width={40}
+                height={10}
+                progress={cost / maxCost}
+                color="black"
+              />
+              <Stack direction="row">
+                <Typography variant="body2" mt={0.3}>
+                  Ƶ
+                </Typography>
+                <Typography>{formatCurrency(cost)}</Typography>
+              </Stack>
+            </Stack>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <ProgressBar
+                width={40}
+                height={10}
+                progress={volume / maxVolume}
+                color="black"
+              />
+              <Stack direction="row">
+                <Typography>{formatCurrency(volume)}</Typography>
+                <Typography variant="body2" mt={0.3}>
+                  &nbsp;m³
+                </Typography>
+              </Stack>
+            </Stack>
           </Stack>
         </Stack>
-        <Stack direction="row" alignItems="flex-end">
-          Ƶ{formatCurrency(profit)} profit
+        <Stack direction="row">
+          <Typography variant="body2" mt={0.3}>
+            Ƶ
+          </Typography>
+          <Typography>{formatCurrency(profit)}</Typography>
+          <Typography variant="body2" mt={0.4}>
+            &nbsp;profit
+          </Typography>
         </Stack>
       </Stack>
       {table}

@@ -28,7 +28,7 @@ function RouteRendererBar({
   return (
     <Stack position="relative" {...props}>
       <Stack className="route__row">
-        <Stack direction="row" zIndex={1}>
+        <Stack direction="row" zIndex={1} minHeight={15} width="100%">
           {route.route.map(
             (
               {

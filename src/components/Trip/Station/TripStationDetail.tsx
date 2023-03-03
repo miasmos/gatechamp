@@ -74,11 +74,25 @@ function TripStationDetail({ to }: TripStationDetailProps) {
           </Stack>
         </Stack>
         <Stack>{ship?.name}</Stack>
-        <Stack>
-          <Typography>
-            Ƶ{formatCurrency(totalProfit)} profit | Ƶ
-            {formatCurrency(iskPerJump)} / jump
-          </Typography>
+        <Stack direction="row" spacing={2}>
+          <Stack direction="row">
+            <Typography variant="body2" mt={0.3}>
+              Ƶ
+            </Typography>
+            <Typography>{formatCurrency(totalProfit)}</Typography>
+            <Typography variant="body2" mt={0.4}>
+              &nbsp;profit
+            </Typography>
+          </Stack>
+          <Stack direction="row">
+            <Typography variant="body2" mt={0.3}>
+              Ƶ
+            </Typography>
+            <Typography>{formatCurrency(iskPerJump)}</Typography>
+            <Typography variant="body2" mt={0.4}>
+              &nbsp;/ jump
+            </Typography>
+          </Stack>
         </Stack>
         <RouteRenderer mt={1} width={800} />
       </Stack>
