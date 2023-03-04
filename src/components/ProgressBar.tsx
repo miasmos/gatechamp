@@ -36,7 +36,7 @@ function ProgressBar({ progress, ...props }: ProgressBarProps) {
         zIndex={2}
         sx={{
           width: `${progress * 100}%`,
-          visibility: progress < 0.01 ? "hidden" : "visible",
+          visibility: progress < 0.05 ? "hidden" : "visible",
         }}
       />
     </StyledProgressBar>

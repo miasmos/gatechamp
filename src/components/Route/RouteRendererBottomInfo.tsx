@@ -27,16 +27,19 @@ function RouteRendererBottomInfo({
       {...props}
     >
       {route.route.map(
-        ({
-          name,
-          gateCamp,
-          hics,
-          smartBombs,
-          kills,
-          attackers,
-          entry: { gateCamp: entryGateCamp },
-          exit: { gateCamp: exitGateCamp },
-        }) => (
+        (
+          {
+            name,
+            gateCamp,
+            hics,
+            smartBombs,
+            kills,
+            attackers,
+            entry: { gateCamp: entryGateCamp },
+            exit: { gateCamp: exitGateCamp },
+          },
+          index
+        ) => (
           <Box
             width={`${100 / route.route.length}%`}
             sx={{
@@ -47,9 +50,12 @@ function RouteRendererBottomInfo({
             <Typography
               variant="body2"
               whiteSpace="nowrap"
-              textAlign={exitGateCamp && !entryGateCamp ? "right" : "left"}
               sx={{
-                visibility: kills > 0 ? "visible" : "none",
+                visibility:
+                  kills > 0 &&
+                  (index === 0 || route.route[index - 1].kills === 0)
+                    ? "visible"
+                    : "none",
                 pointerEvents: kills > 0 ? "all" : "none",
               }}
             >
