@@ -38,10 +38,7 @@ function useFetchAutocomplete<T>(
     isValidating,
   } = useSWR<ElasticSearchResult<T>>(
     areInputsValid ? `/api/autocomplete/${type}?name=${name}` : null,
-    getEveTradePlus,
-    {
-      shouldRetryOnError: true,
-    }
+    getEveTradePlus
   );
 
   return {

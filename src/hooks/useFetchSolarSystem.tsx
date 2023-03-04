@@ -10,10 +10,7 @@ function useFetchSolarSystem(solarSystemId: number) {
     isValidating,
   } = useSWRImmutable<EveSolarSystem>(
     `/api/solar-system?ids=${solarSystemId}`,
-    getEveTradePlus,
-    {
-      shouldRetryOnError: true,
-    }
+    getEveTradePlus
   );
 
   return {

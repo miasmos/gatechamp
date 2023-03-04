@@ -10,6 +10,7 @@ import selectShipSetter from "./setters/selectShipSetter";
 import getSelectedShipsSelector from "./selectors/getSelectedShipsSelector";
 import editShipStaticSetter from "./setters/editShipStaticSetter";
 import getShipByIndexSelector from "./selectors/getShipByIndexSelector";
+import selectAllShipSetter from "./setters/selectAllShipSetter";
 
 export default atom;
 export {
@@ -25,5 +26,6 @@ export {
   deleteShipSetter,
   selectShipSetter,
   editShipStaticSetter,
+  selectAllShipSetter,
 };
 export type { Ship, ShipCargoBay, ShipsState };

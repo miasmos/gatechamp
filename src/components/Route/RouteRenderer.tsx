@@ -1,4 +1,4 @@
-import { Chip, Stack, StackProps, Typography } from "@mui/material";
+import { Chip, Stack, StackProps, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
@@ -94,21 +94,25 @@ function RouteRenderer({
           />
           <RouteRendererBottomInfo route={route} />
         </Stack>
-        <Stack fontSize={15}>
+        <Stack fontSize={15} display={route.route.length > 0 ? "flex" : "none"}>
           {hasError ? (
-            <FavoriteBorderOutlinedIcon
-              sx={{ opacity: 0.7, mt: "36px" }}
-              fontSize="inherit"
-            />
+            <Tooltip title="Offline">
+              <FavoriteBorderOutlinedIcon
+                sx={{ opacity: 0.7, mt: "36px" }}
+                fontSize="inherit"
+              />
+            </Tooltip>
           ) : (
-            <FavoriteIcon
-              sx={{
-                transition: "all 1s ease-out 0s",
-                transform: isValidating ? "scale(2.4)" : "scale(1)",
-                mt: "36px",
-              }}
-              fontSize="inherit"
-            />
+            <Tooltip title="Online">
+              <FavoriteIcon
+                sx={{
+                  transition: "all 1s ease-out 0s",
+                  transform: isValidating ? "scale(1.8)" : "scale(1)",
+                  mt: "36px",
+                }}
+                fontSize="inherit"
+              />
+            </Tooltip>
           )}
         </Stack>
       </Stack>

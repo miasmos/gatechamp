@@ -9,13 +9,13 @@ const StyledProgressBar = styled(Stack)(({ theme }) => ({
     color: theme.palette.text.primary,
   },
   ".progress-bar__border": {
-    border: `2px solid ${theme.palette.text.primary}`,
+    border: `2px solid #212121`,
     borderRadius: 6,
   },
   ".progress-bar__bar": {
     transition: "0.5s width",
     borderRadius: 6,
-    background: theme.palette.text.primary,
+    background: "#212121",
   },
 }));
 
@@ -36,6 +36,7 @@ function ProgressBar({ progress, ...props }: ProgressBarProps) {
         zIndex={2}
         sx={{
           width: `${progress * 100}%`,
+          visibility: progress < 0.01 ? "hidden" : "visible",
         }}
       />
     </StyledProgressBar>

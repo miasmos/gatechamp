@@ -169,12 +169,7 @@ function TripStationItemTable({
           </Stack>
           <Stack direction="row" alignItems="flex-end" spacing={2}>
             <Stack direction="row" alignItems="center" spacing={0.5}>
-              <ProgressBar
-                width={40}
-                height={10}
-                progress={cost / maxCost}
-                color="black"
-              />
+              <ProgressBar width={40} height={10} progress={cost / maxCost} />
               <Stack direction="row">
                 <Typography variant="body2" mt={0.3}>
                   Ƶ
@@ -187,7 +182,6 @@ function TripStationItemTable({
                 width={40}
                 height={10}
                 progress={volume / maxVolume}
-                color="black"
               />
               <Stack direction="row">
                 <Typography>{formatCurrency(volume)}</Typography>

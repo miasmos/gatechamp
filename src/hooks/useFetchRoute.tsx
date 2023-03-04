@@ -60,7 +60,6 @@ function useFetchRoute(
       : null,
     getEveTradePlus,
     {
-      shouldRetryOnError: false,
       revalidateOnReconnect: false,
       revalidateOnFocus: false,
       revalidateIfStale: false,
