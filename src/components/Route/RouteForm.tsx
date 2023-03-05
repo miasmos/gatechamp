@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Stack, Typography, Checkbox } from "@mui/material";
+import { Stack, Typography, Checkbox, Tooltip } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { EveSolarSystem } from "../../types";
 import RouteRenderer from "./RouteRenderer";

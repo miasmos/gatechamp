@@ -1,12 +1,9 @@
+import { Suspense } from "react";
 import { AppBar as MuiAppBar, Link, Stack, Typography } from "@mui/material";
-import { useRecoilValue } from "recoil";
-import { EVE_TRADE_PLUS_DOMAIN } from "../constants";
 import { AppRoute } from "../enum";
-import { isLoggedInSelector } from "../recoil/user";
+import AppBarAvatar, { AppBarAvatarLoading } from "./AppBarAvatar";
 
 function AppBar() {
-  const isLoggedIn = useRecoilValue(isLoggedInSelector);
-
   return (
     <MuiAppBar color="transparent" elevation={0} sx={{ height: 90 }}>
       <Stack
@@ -24,13 +21,9 @@ function AppBar() {
           </Link>
         </Stack>
         <Stack justifyContent="center" height="100%">
-          {isLoggedIn ? (
-            <>:)</>
-          ) : (
-            <Link href={`${EVE_TRADE_PLUS_DOMAIN}/api/auth/login`}>
-              <img src="/login.png" />
-            </Link>
-          )}
+          <Suspense fallback={<AppBarAvatarLoading />}>
+            <AppBarAvatar />
+          </Suspense>
         </Stack>
       </Stack>
     </MuiAppBar>

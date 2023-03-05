@@ -17,7 +17,9 @@ const get = (url: string, headers?: Record<string, any>) =>
 const post =
   <T>(data: T) =>
   (url: string) =>
-    ApiClient.post(url, data).then((response) => response.data);
+    ApiClient.post(url, data, {
+      withCredentials: true,
+    }).then((response) => response.data);
 
 const fetchMock =
   <T>(data: T) =>

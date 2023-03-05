@@ -4,6 +4,7 @@ import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
 import RouteRendererTopInfo from "./RouteRendererTopInfo";
 import RouteRendererBar from "./RouteRendererBar";
+import PublishIcon from "@mui/icons-material/Publish";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -13,6 +14,8 @@ import {
   deleteAvoidSystemSetter,
   jumpsSetter,
 } from "../../recoil/route";
+import { isLoggedInSelector } from "../../recoil/user";
+import usePushRoute from "../../hooks/usePushRoute";
 
 type RouteRendererProps = {
   position?: number;
@@ -29,11 +32,18 @@ function RouteRenderer({
   ...props
 }: RouteRendererProps) {
   const setRouteState = useSetRecoilState(routeState);
-  const [{ selectedIndex }, setState] = useState<{
+  const isLoggedIn = useRecoilValue(isLoggedInSelector);
+
+  const [{ selectedIndex, pushedRouteId }, setState] = useState<{
     selectedIndex: number;
-  }>({ selectedIndex: -1 });
+    pushedRouteId: undefined | number;
+  }>({
+    selectedIndex: -1,
+    pushedRouteId: undefined,
+  });
   const { origin, destination, avoidedSolarSystems } =
     useRecoilValue(routeState);
+
   const {
     data: route,
     isLoading,
@@ -44,8 +54,14 @@ function RouteRenderer({
     destination,
     avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID)
   );
-  const setJumps = (jumps: number) => jumpsSetter(setRouteState)(jumps);
+  const hasValidRoute = route.route.length > 0;
+  usePushRoute(
+    route.route.map(({ solarSystemID }) => solarSystemID),
+    pushedRouteId,
+    isLoggedIn && hasValidRoute
+  );
 
+  const setJumps = (jumps: number) => jumpsSetter(setRouteState)(jumps);
   const onSelectIndex = (routeIndex: number) =>
     setState((state) => ({
       ...state,
@@ -55,6 +71,12 @@ function RouteRenderer({
     addAvoidSystemSetter(setRouteState)({ solarSystemID, name });
   const onUnavoidSolarSystem = (index: number) =>
     deleteAvoidSystemSetter(setRouteState)(index);
+  const onPushRoute = () =>
+    setState((state) => ({
+      ...state,
+      pushedRouteId: typeof pushedRouteId === "number" ? pushedRouteId + 1 : 0,
+      lastPushedRouteId: pushedRouteId,
+    }));
 
   useEffect(() => {
     if (route?.jumps) {
@@ -124,6 +146,20 @@ function RouteRenderer({
             onDelete={() => onUnavoidSolarSystem(index)}
           />
         ))}
+      </Stack>
+      <Stack>
+        {isLoggedIn && (
+          <Tooltip title="Push to Eve Client">
+            <PublishIcon
+              sx={{
+                mt: 2,
+                cursor: hasValidRoute ? "pointer" : "default",
+                opacity: hasValidRoute ? 1 : 0.6,
+              }}
+              onClick={onPushRoute}
+            />
+          </Tooltip>
+        )}
       </Stack>
     </Stack>
   );

@@ -22,6 +22,7 @@ type SolarSystemSummary = {
 
 type FetchRouteResult = {
   jumps: number;
+  hash: string;
   route: SolarSystemSummary[];
 };
 
@@ -50,13 +51,13 @@ function useFetchRoute(
   const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
 
   const {
-    data = { jumps: 0, route: [] },
+    data = { jumps: 0, route: [], hash: "" },
     error,
     isLoading,
     isValidating,
   } = useSWR<FetchRouteResult>(
     areInputsValid
-      ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
+      ? `/api/route/get?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
       : null,
     get,
     {

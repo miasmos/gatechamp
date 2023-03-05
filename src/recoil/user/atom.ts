@@ -7,6 +7,22 @@ interface UserState {
   loggedIn: boolean;
   loginExpiresAt: Date | undefined;
   activeCharacter: number;
+  character: Record<number, Character>;
+}
+
+interface Character {
+  alliance_id?: number;
+  faction_id?: number;
+  title?: string;
+  ancestry_id: number;
+  birthday: Date;
+  bloodline_id: number;
+  corporation_id: number;
+  description: string;
+  gender: string;
+  name: string;
+  race_id: number;
+  security_status: number;
 }
 
 const userState = atom<UserState>({
@@ -15,6 +31,7 @@ const userState = atom<UserState>({
     loggedIn: false,
     loginExpiresAt: undefined,
     activeCharacter: -1,
+    character: {},
   },
   effects_UNSTABLE: [persistAtom],
 });

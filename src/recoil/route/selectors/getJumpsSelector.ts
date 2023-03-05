@@ -1,9 +1,9 @@
 import { selector } from "recoil";
-import shipsState from "../atom";
+import routeState from "../atom";
 
 const getJumpsSelector = selector({
   key: "RouteState:Jumps",
-  get: ({ get }) => get(shipsState).jumps,
+  get: ({ get }) => get(routeState).jumps,
 });
 
 export default getJumpsSelector;

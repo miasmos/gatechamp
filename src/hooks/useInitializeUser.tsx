@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { parseISO, addMinutes, isBefore } from "date-fns";
+import { useEffect, useLayoutEffect } from "react";
+import { useRecoilState } from "recoil";
+import { parseISO, addMinutes, subMinutes, isBefore, isAfter } from "date-fns";
 import Cookies from "js-cookie";
+import { useInterval } from "usehooks-ts";
 import userState from "../recoil/user/atom";
 import { getWithResponse } from "../api";
 import { userSetter } from "../recoil/user";
@@ -9,10 +10,28 @@ import { userSetter } from "../recoil/user";
 let didInitializeUser = false;
 
 function useInitializeUser() {
-  const setUserState = useSetRecoilState(userState);
+  const [
+    { loggedIn, loginExpiresAt, activeCharacter, character },
+    setUserState,
+  ] = useRecoilState(userState);
   const setUser = userSetter(setUserState);
 
-  useEffect(() => {
+  useInterval(
+    async () => {
+      const willExpireSoon = isAfter(
+        subMinutes(Date.now(), 1),
+        loginExpiresAt!
+      );
+      if (willExpireSoon) {
+        await getWithResponse("/api/auth/refresh", {
+          "x-character-id": activeCharacter,
+        });
+      }
+    },
+    loggedIn ? 1 * 60 * 1000 : null
+  ); // 1m
+
+  useLayoutEffect(() => {
     if (didInitializeUser) {
       return;
     }
@@ -30,6 +49,7 @@ function useInitializeUser() {
       let isLoggedIn = false;
 
       if (doesAuthTokenExist) {
+        console.log("auth token exists");
         const isExpiryBeforeNow = isBefore(
           addMinutes(new Date(), 1),
           expiryDate
@@ -41,13 +61,16 @@ function useInitializeUser() {
       }
 
       if (!isLoggedIn) {
+        console.log("auth token does not exist");
         // not logged in, attempt refresh
         if (refreshTokenExists) {
+          console.log("attempting refresh");
+
           try {
             await getWithResponse("/api/auth/refresh", {
               "x-character-id": activeCharacterId,
             });
-
+            console.log("logged in");
             // logged in
             isLoggedIn = true;
           } catch {}
@@ -55,12 +78,14 @@ function useInitializeUser() {
       }
 
       if (isLoggedIn) {
+        console.log("logged in");
         setUser({
           loggedIn: true,
           activeCharacter: Number(activeCharacterId),
           loginExpiresAt: expiryDate,
         });
       } else {
+        console.log("not logged in");
         setUser({
           loggedIn: false,
           activeCharacter: -1,
