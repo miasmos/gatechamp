@@ -1,15 +1,16 @@
-import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Outlet } from "react-router";
-import { AppRoute } from "../enum";
-import Link from "../components/Link";
+import AppBar from "../components/AppBar";
+import useInitializeUser from "../hooks/useInitializeUser";
+import useWebSocket from "../hooks/useWebSocket";
 
 function RootLayout() {
+  useInitializeUser();
+  useWebSocket();
+
   return (
     <Box className="App">
-      <Link href={AppRoute.Home}>
-        <Typography variant="h2">EveTrade+</Typography>
-      </Link>
+      <AppBar />
       <Outlet />
     </Box>
   );

@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { getEveTradePlus } from "../api";
+import { get } from "../api";
 import { RouteState } from "../recoil/route";
 
 type StargateSummary = {
@@ -58,7 +58,7 @@ function useFetchRoute(
     areInputsValid
       ? `/api/route?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
       : null,
-    getEveTradePlus,
+    get,
     {
       revalidateOnReconnect: false,
       revalidateOnFocus: false,

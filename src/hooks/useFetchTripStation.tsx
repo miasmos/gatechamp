@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { postEveTradePlus } from "../api";
+import { post } from "../api";
 import { Ship } from "../recoil/ships";
 import { TripState } from "../recoil/trip";
 
@@ -62,7 +62,7 @@ function useFetchTripStation(id: string, trip: TripState, ships: Ship[]) {
     isValidating,
   } = useSWR<FetchTripStationResult>(
     `/api/trip/station?id=${id}`,
-    postEveTradePlus({ trip, ships }),
+    post({ trip, ships }),
     {
       shouldRetryOnError: false,
       revalidateOnReconnect: false,

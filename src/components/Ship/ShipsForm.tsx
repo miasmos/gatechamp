@@ -89,19 +89,20 @@ function ShipsForm({ to }: ShipsFormProps) {
       editingIndex: -1,
       isEditing: false,
     }));
-
+  const hasShips = ships.ships.length > 0;
+  const hasScrollBar = ships.ships.length > 4;
   return (
     <>
       <Typography variant="h4" mb={5}>
         Add your ships
       </Typography>
       <Stack>
-        <Stack>
+        <Stack display={hasShips ? "flex" : "none"}>
           <Stack
             flexShrink={1}
             direction="column"
             alignItems="flex-end"
-            pr={2.2}
+            pr={hasScrollBar ? 2.2 : 0}
           >
             <Checkbox
               checked={areAllShipsSelected}
@@ -116,7 +117,7 @@ function ShipsForm({ to }: ShipsFormProps) {
             py={2}
             spacing={2}
             maxHeight={400}
-            sx={{ overflowY: ships.ships.length > 4 ? "scroll" : "auto" }}
+            sx={{ overflowY: hasScrollBar ? "scroll" : "auto" }}
           >
             {ships.ships.map((ship, index) => (
               <Stack direction="row" key={ship.id}>

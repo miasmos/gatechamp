@@ -2,18 +2,22 @@ import Axios from "axios";
 import { EVE_TRADE_PLUS_DOMAIN } from "./constants";
 import { wait } from "./util/promise";
 
-const EveTradePlusClient = Axios.create({
-  baseURL: `http://${EVE_TRADE_PLUS_DOMAIN}`,
+const ApiClient = Axios.create({
+  baseURL: EVE_TRADE_PLUS_DOMAIN,
   timeout: 60000,
 });
 
-const getEveTradePlus = (url: string) =>
-  EveTradePlusClient.get(url).then((response) => response.data);
-
-const postEveTradePlus =
+const getWithResponse = (url: string, headers?: Record<string, any>) =>
+  ApiClient.get(url, {
+    headers,
+    withCredentials: true,
+  });
+const get = (url: string, headers?: Record<string, any>) =>
+  getWithResponse(url, headers).then((response) => response.data);
+const post =
   <T>(data: T) =>
   (url: string) =>
-    EveTradePlusClient.post(url, data).then((response) => response.data);
+    ApiClient.post(url, data).then((response) => response.data);
 
 const fetchMock =
   <T>(data: T) =>
@@ -22,4 +26,4 @@ const fetchMock =
     return data;
   };
 
-export { getEveTradePlus, postEveTradePlus, fetchMock };
+export { get, post, getWithResponse, fetchMock };

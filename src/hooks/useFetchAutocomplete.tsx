@@ -1,5 +1,5 @@
 import useSWR from "swr/immutable";
-import { getEveTradePlus } from "../api";
+import { get } from "../api";
 
 enum AutocompleteType {
   SolarSystem = "solar-system",
@@ -38,7 +38,7 @@ function useFetchAutocomplete<T>(
     isValidating,
   } = useSWR<ElasticSearchResult<T>>(
     areInputsValid ? `/api/autocomplete/${type}?name=${name}` : null,
-    getEveTradePlus
+    get
   );
 
   return {
