@@ -1,30 +1,42 @@
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import useSWR from "swr";
 import { get } from "../api";
+import killsState from "../recoil/kills/atom";
 import { RouteState } from "../recoil/route";
+import { serializeEvent } from "./useKillsWebsocket";
 
-type StargateSummary = {
-  stargateID: number;
+type RouteJumpSummary = {
+  solarSystemID: number;
+  security: number;
+  name: string;
+  entry: number;
+  exit: number;
+};
+
+type RouteSummary = {
+  origin: number;
+  destination: number;
+  jumps: number;
+  route: RouteJumpSummary[];
+};
+
+type KillSummary = {
+  id: number;
   kills: number;
   hics: boolean;
   smartBombs: boolean;
-  gateCamp: boolean; // for gates within our path
-};
-
-type SolarSystemSummary = {
-  index: number;
-  name: string;
-  solarSystemID: number;
-  security: number;
-  entry: StargateSummary;
-  exit: StargateSummary;
+  gateCamp: boolean;
   attackers: number;
-} & Omit<StargateSummary, "stargateID">;
-
-type FetchRouteResult = {
-  jumps: number;
-  hash: string;
-  route: SolarSystemSummary[];
+  attackerIds: string[];
 };
+
+type SolarSystemKillSummary = KillSummary & {
+  entry: KillSummary;
+  exit: KillSummary;
+};
+
+type FetchRouteResult = RouteSummary & { kills: SolarSystemKillSummary[] };
 
 function useFetchRoute(
   originSolarSystemId: number | undefined,
@@ -45,13 +57,15 @@ function useFetchRoute(
     avoidEntryGateCamp: false,
   }
 ) {
+  const [{ subscriptions, bySolarSystem, byStargate }, setKillsState] =
+    useRecoilState(killsState);
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
     typeof destinationSolarSystemId === "number";
   const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
 
   const {
-    data = { jumps: 0, route: [], hash: "" },
+    data = { jumps: 0, route: [], kills: [], origin: -1, destination: -1 },
     error,
     isLoading,
     isValidating,
@@ -64,9 +78,59 @@ function useFetchRoute(
       revalidateOnReconnect: false,
       revalidateOnFocus: false,
       revalidateIfStale: false,
-      refreshInterval: 3000,
     }
   );
+
+  useEffect(() => {
+    if (data.kills.length > 0) {
+      console.log(data.kills);
+      const solarSystemEvents: string[] = [];
+      const stargateEvents: string[] = [];
+      const stargateKillSummaries: Record<string, KillSummary> = {};
+      const solarSystemKillSummaries: Record<string, KillSummary> = {};
+
+      data.kills.forEach((kill) => {
+        const { id, entry, exit } = kill;
+        solarSystemKillSummaries[id.toString()] = kill;
+        solarSystemEvents.push(serializeEvent("kills", "solar-system", id));
+
+        if (entry.id) {
+          stargateKillSummaries[entry.id.toString()] = entry;
+          stargateEvents.push(serializeEvent("kills", "stargate", entry.id));
+        }
+        if (exit.id) {
+          stargateKillSummaries[entry.id.toString()] = exit;
+          stargateEvents.push(serializeEvent("kills", "stargate", exit.id));
+        }
+      });
+
+      const eventIds = solarSystemEvents.concat(stargateEvents);
+      const nextAddSubscriptions = eventIds.filter(
+        (eventId) => !subscriptions.includes(eventId)
+      );
+      const nextRemoveSubscriptions = subscriptions.filter(
+        (eventId) => !eventIds.includes(eventId)
+      );
+      const nextSubscriptions = subscriptions.filter(
+        (eventId) => !nextAddSubscriptions.includes(eventId)
+      );
+
+      setKillsState((state) => ({
+        ...state,
+        addSubscription: nextAddSubscriptions,
+        removeSubscription: nextRemoveSubscriptions,
+        subscriptions: nextSubscriptions,
+        bySolarSystem: {
+          ...bySolarSystem,
+          ...solarSystemKillSummaries,
+        },
+        byStargate: {
+          ...byStargate,
+          ...stargateKillSummaries,
+        },
+      }));
+    }
+  }, [data.kills]);
 
   return {
     data,
@@ -77,4 +141,4 @@ function useFetchRoute(
 }
 
 export default useFetchRoute;
-export type { StargateSummary, SolarSystemSummary, FetchRouteResult };
+export type { FetchRouteResult, RouteJumpSummary, RouteSummary, KillSummary };

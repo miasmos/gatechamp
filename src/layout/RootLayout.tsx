@@ -4,11 +4,11 @@ import AppBar from "../components/AppBar";
 import ErrorBoundary from "../components/ErrorBoundary";
 import DebugObserver from "../components/RecoilObserver";
 import useInitializeUser from "../hooks/useInitializeUser";
-import useWebSocket from "../hooks/useWebSocket";
+import useKillsWebsocket from "../hooks/useKillsWebsocket";
 
 function RootLayout() {
   useInitializeUser();
-  useWebSocket();
+  useKillsWebsocket();
 
   return (
     <Box className="App">

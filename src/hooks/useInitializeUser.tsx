@@ -10,10 +10,8 @@ import { userSetter } from "../recoil/user";
 let didInitializeUser = false;
 
 function useInitializeUser() {
-  const [
-    { loggedIn, loginExpiresAt, activeCharacter, character },
-    setUserState,
-  ] = useRecoilState(userState);
+  const [{ loggedIn, loginExpiresAt, activeCharacter }, setUserState] =
+    useRecoilState(userState);
   const setUser = userSetter(setUserState);
 
   useInterval(
@@ -22,10 +20,21 @@ function useInitializeUser() {
         subMinutes(Date.now(), 1),
         loginExpiresAt!
       );
+      console.log(
+        "check login state",
+        willExpireSoon,
+        subMinutes(Date.now(), 1),
+        loginExpiresAt
+      );
+
       if (willExpireSoon) {
-        await getWithResponse("/api/auth/refresh", {
-          "x-character-id": activeCharacter,
-        });
+        try {
+          await getWithResponse("/api/auth/refresh", {
+            "x-character-id": activeCharacter,
+          });
+        } catch (error: any) {
+          console.error(error);
+        }
       }
     },
     loggedIn ? 1 * 60 * 1000 : null

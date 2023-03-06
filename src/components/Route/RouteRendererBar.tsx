@@ -1,11 +1,10 @@
 import { Box, Stack, Typography, StackProps } from "@mui/material";
-import { FetchRouteResult } from "../../hooks/useFetchRoute";
+import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import { getSecurityColor } from "../../util/eveTrade";
-import Tooltip from "@mui/material/Tooltip";
-import Tick from "./Tick";
+import RouteRendererTick from "./RouteRendererTick";
 
 type RouteRendererProps = {
-  route: FetchRouteResult;
+  route: RouteJumpSummary[];
   position: number;
   showPosition?: boolean;
   onAvoid: (solarSystemID: number, name: string) => void;
@@ -22,41 +21,20 @@ function RouteRendererBar({
   onSelectIndex,
   ...props
 }: RouteRendererProps) {
-  const smartBombsColor = "red";
-  const hicsColor = "darkorange";
-  const gateCampColor = "black";
   return (
     <Stack position="relative" {...props}>
       <Stack className="route__row">
         <Stack direction="row" zIndex={1} minHeight={15} width="100%">
-          {route.route.map(
-            (
-              {
-                index,
-                solarSystemID,
-                name,
-                security,
-                entry: {
-                  smartBombs: entrySmartBombs,
-                  hics: entryHics,
-                  gateCamp: entryGateCamp,
-                } = {},
-                exit: {
-                  smartBombs: exitSmartBombs,
-                  hics: exitHics,
-                  gateCamp: exitGateCamp,
-                } = {},
-              },
-              arrIndex
-            ) => (
+          {route.map(
+            ({ solarSystemID, name, security, entry, exit }, arrIndex) => (
               <Stack
                 className="route__solar-system"
                 position="relative"
                 direction="row"
-                width={`${100 / route.route.length}%`}
+                width={`${100 / route.length}%`}
                 height={15}
                 key={`r2${name}${arrIndex}`}
-                onMouseEnter={() => onSelectIndex(index)}
+                onMouseEnter={() => onSelectIndex(arrIndex)}
                 onMouseLeave={() => onSelectIndex(-1)}
                 sx={{ cursor: "pointer" }}
                 onClick={() => onAvoid && onAvoid(solarSystemID, name)}
@@ -65,7 +43,7 @@ function RouteRendererBar({
                   <Typography
                     position="absolute"
                     zIndex={5}
-                    display={selectedIndex === index ? "block" : "none"}
+                    display={selectedIndex === arrIndex ? "block" : "none"}
                     fontWeight="bold"
                     fontSize="0.7em"
                     left="50%"
@@ -74,52 +52,18 @@ function RouteRendererBar({
                     AVOID
                   </Typography>
                 </Stack>
-                {entryGateCamp && (
-                  <Tooltip title="Entry Gate">
-                    <Box>
-                      <Tick
-                        className="gate-camp__entry"
-                        direction="up-left"
-                        color={
-                          entrySmartBombs
-                            ? smartBombsColor
-                            : entryHics
-                            ? hicsColor
-                            : gateCampColor
-                        }
-                        position="absolute"
-                        zIndex={4}
-                        left={1}
-                        width={4}
-                        height={6}
-                        bottom={-9}
-                      />
-                    </Box>
-                  </Tooltip>
-                )}
-                {exitGateCamp && (
-                  <Tooltip title="Exit Gate">
-                    <Box>
-                      <Tick
-                        className="gate-camp__exit"
-                        direction={"up-right"}
-                        color={
-                          exitSmartBombs
-                            ? smartBombsColor
-                            : exitHics
-                            ? hicsColor
-                            : gateCampColor
-                        }
-                        position="absolute"
-                        zIndex={4}
-                        right={1}
-                        width={4}
-                        height={6}
-                        bottom={-9}
-                      />
-                    </Box>
-                  </Tooltip>
-                )}
+                <RouteRendererTick
+                  type="entry"
+                  direction="up-left"
+                  title="Entry Gate"
+                  stargateId={entry}
+                />
+                <RouteRendererTick
+                  type="exit"
+                  direction="up-right"
+                  title="Exit Gate"
+                  stargateId={exit}
+                />
                 <Stack
                   position="absolute"
                   height="100%"
@@ -134,7 +78,7 @@ function RouteRendererBar({
                     height="100%"
                     ml={arrIndex === 0 ? "3px" : 0}
                     width={`calc(100% - ${
-                      arrIndex === route.route.length - 1 ? 3 : 0
+                      arrIndex === route.length - 1 ? 3 : 0
                     }px)`}
                     sx={{
                       background: "white",
@@ -154,7 +98,7 @@ function RouteRendererBar({
                     height="100%"
                     left={-1}
                     width={
-                      !showPosition || position > index
+                      !showPosition || position > arrIndex
                         ? `calc(100% + 2px)`
                         : "0%"
                     }

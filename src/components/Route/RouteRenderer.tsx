@@ -6,8 +6,8 @@ import RouteRendererTopInfo from "./RouteRendererTopInfo";
 import RouteRendererBar from "./RouteRendererBar";
 import PublishIcon from "@mui/icons-material/Publish";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import CircleIcon from "@mui/icons-material/Circle";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import routeState from "../../recoil/route/atom";
 import {
   addAvoidSystemSetter,
@@ -16,6 +16,7 @@ import {
 } from "../../recoil/route";
 import { isLoggedInSelector } from "../../recoil/user";
 import usePushRoute from "../../hooks/usePushRoute";
+import { isConnectedSelector } from "../../recoil/user";
 
 type RouteRendererProps = {
   position?: number;
@@ -31,6 +32,7 @@ function RouteRenderer({
   alwaysShowOrigin = false,
   ...props
 }: RouteRendererProps) {
+  const isConnected = useRecoilValue(isConnectedSelector);
   const setRouteState = useSetRecoilState(routeState);
   const isLoggedIn = useRecoilValue(isLoggedInSelector);
 
@@ -102,38 +104,56 @@ function RouteRenderer({
         )}
         <Stack direction="column" justifyContent="center" width="92.8%">
           <RouteRendererTopInfo
-            route={route}
+            route={route.route}
             selectedIndex={selectedIndex}
             alwaysShowDestination={alwaysShowDestination}
             alwaysShowOrigin={alwaysShowOrigin}
           />
           <RouteRendererBar
-            route={route}
+            route={route.route}
             position={position}
             selectedIndex={selectedIndex}
             onSelectIndex={onSelectIndex}
             onAvoid={onAvoidSolarSystem}
           />
-          <RouteRendererBottomInfo route={route} />
+          <RouteRendererBottomInfo route={route.route} />
         </Stack>
-        <Stack fontSize={15} display={route.route.length > 0 ? "flex" : "none"}>
-          {hasError ? (
+        <Stack
+          fontSize={13}
+          display={route.route.length > 0 ? "flex" : "none"}
+          direction="row"
+        >
+          {!isConnected ? (
             <Tooltip title="Offline">
-              <FavoriteBorderOutlinedIcon
-                sx={{ opacity: 0.7, mt: "36px" }}
+              <CircleOutlinedIcon
+                sx={{ opacity: 0.7, mt: "37px" }}
                 fontSize="inherit"
               />
             </Tooltip>
           ) : (
             <Tooltip title="Online">
-              <FavoriteIcon
+              <Stack
                 sx={{
-                  transition: "all 1s ease-out 0s",
-                  transform: isValidating ? "scale(1.8)" : "scale(1)",
-                  mt: "36px",
+                  mt: "41px",
+                  boxShadow: "0 0 1px 1px #0000001a",
+                  width: 5,
+                  height: 5,
+                  "@keyframes pulse": {
+                    from: {
+                      boxShadow: `0 0 0 0 rgba(0, 0, 0, 0.4)`,
+                    },
+                    to: {
+                      boxShadow: `0 0 0 9px rgba(0, 0, 0, 0)`,
+                    },
+                  },
+                  borderRadius: "50%",
+                  animation: "pulse 3s infinite",
                 }}
-                fontSize="inherit"
-              />
+                alignItems="center"
+                justifyContent="center"
+              >
+                <CircleIcon fontSize="inherit" htmlColor="green" />
+              </Stack>
             </Tooltip>
           )}
         </Stack>

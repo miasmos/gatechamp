@@ -5,6 +5,7 @@ const { persistAtom } = recoilPersist();
 
 interface UserState {
   loggedIn: boolean;
+  isConnected: boolean;
   loginExpiresAt: Date | undefined;
   activeCharacter: number;
   character: Record<number, Character>;
@@ -29,6 +30,7 @@ const userState = atom<UserState>({
   key: "UserState",
   default: {
     loggedIn: false,
+    isConnected: false,
     loginExpiresAt: undefined,
     activeCharacter: -1,
     character: {},

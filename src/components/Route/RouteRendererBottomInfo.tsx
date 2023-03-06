@@ -1,12 +1,9 @@
-import { Stack, Box, Typography, Tooltip, StackProps } from "@mui/material";
-import { FetchRouteResult } from "../../hooks/useFetchRoute";
-import CallSplitIcon from "@mui/icons-material/CallSplit";
-import RocketIcon from "@mui/icons-material/Rocket";
-import TungstenIcon from "@mui/icons-material/Tungsten";
-import SkullIcon from "../icon/SkullIcon";
+import { Stack, StackProps } from "@mui/material";
+import { RouteJumpSummary } from "../../hooks/useFetchRoute";
+import RouteRendererBottomInfoItem from "./RouteRendererBottomInfoItem";
 
 type RouteRendererProps = {
-  route: FetchRouteResult;
+  route: RouteJumpSummary[];
   position?: number;
 } & StackProps;
 
@@ -26,84 +23,17 @@ function RouteRendererBottomInfo({
       height={height}
       {...props}
     >
-      {route.route.map(
-        (
-          {
-            name,
-            gateCamp,
-            hics,
-            smartBombs,
-            kills,
-            attackers,
-            entry: { gateCamp: entryGateCamp },
-            exit: { gateCamp: exitGateCamp },
-          },
-          index
-        ) => (
-          <Box
-            width={`${100 / route.route.length}%`}
-            sx={{
-              opacity: gateCamp ? 1 : 0,
-            }}
-            key={name}
-          >
-            <Typography
-              variant="body2"
-              whiteSpace="nowrap"
-              sx={{
-                visibility:
-                  kills > 0 &&
-                  (index === 0 || route.route[index - 1].kills === 0)
-                    ? "visible"
-                    : "none",
-                pointerEvents: kills > 0 ? "all" : "none",
-              }}
-            >
-              {name}
-            </Typography>
-
-            <Stack
-              direction={exitGateCamp && !entryGateCamp ? "row-reverse" : "row"}
-            >
-              <Stack
-                sx={{
-                  visibility: kills > 0 ? "visible" : "none",
-                  pointerEvents: kills > 0 ? "all" : "none",
-                }}
-              >
-                <Tooltip title="Kills">
-                  <SkullIcon />
-                </Tooltip>
-                <Typography variant="body2" fontSize={11}>
-                  {kills}
-                </Typography>
-              </Stack>
-              <Stack>
-                <Tooltip title="Attackers">
-                  <RocketIcon sx={{ fontSize: 15 }} />
-                </Tooltip>
-                <Typography variant="body2" fontSize={11}>
-                  {attackers}
-                </Typography>
-              </Stack>
-              <Stack display={hics ? "flex" : "none"}>
-                <Tooltip title="Heavy Interdiction Cruisers">
-                  <CallSplitIcon
-                    sx={{
-                      fontSize: 15,
-                    }}
-                  />
-                </Tooltip>
-              </Stack>
-              <Stack display={smartBombs ? "flex" : "none"}>
-                <Tooltip title="Smart Bombs">
-                  <TungstenIcon sx={{ fontSize: 15 }} />
-                </Tooltip>
-              </Stack>
-            </Stack>
-          </Box>
-        )
-      )}
+      {route.map((solarSystem, index) => (
+        <RouteRendererBottomInfoItem
+          key={index}
+          index={index}
+          count={route.length}
+          previousSolarSystemId={
+            index === 0 ? undefined : route[index - 1].solarSystemID
+          }
+          {...solarSystem}
+        />
+      ))}
     </Stack>
   );
 }
