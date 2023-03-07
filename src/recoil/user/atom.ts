@@ -6,7 +6,7 @@ const { persistAtom } = recoilPersist();
 interface UserState {
   loggedIn: boolean;
   isConnected: boolean;
-  loginExpiresAt: Date | undefined;
+  loginExpiresAt: string | undefined;
   activeCharacter: number;
   character: Record<string, Character>;
 }

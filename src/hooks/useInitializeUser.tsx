@@ -21,12 +21,15 @@ function useInitializeUser() {
         Date.now(),
         Intl.DateTimeFormat().resolvedOptions().timeZone
       );
-      const willExpireSoon = isAfter(addMinutes(now, 1), loginExpiresAt!);
+      const willExpireSoon = isAfter(
+        addMinutes(now, 1),
+        parseISO(loginExpiresAt!)
+      );
       console.log(
         "check login state",
         willExpireSoon,
         addMinutes(now, 1),
-        loginExpiresAt!
+        parseISO(loginExpiresAt!)
       );
 
       if (willExpireSoon) {
@@ -61,11 +64,12 @@ function useInitializeUser() {
 
       if (doesAuthTokenExist) {
         console.log("auth token exists");
-        const isExpiryBeforeNow = isBefore(
-          addMinutes(new Date(), 1),
-          expiryDate
+        const now = zonedTimeToUtc(
+          Date.now(),
+          Intl.DateTimeFormat().resolvedOptions().timeZone
         );
-        if (isExpiryBeforeNow) {
+        const willExpireSoon = isAfter(addMinutes(now, 1), expiryDate);
+        if (!willExpireSoon) {
           // logged in
           isLoggedIn = true;
         }
@@ -93,7 +97,7 @@ function useInitializeUser() {
         setUser({
           loggedIn: true,
           activeCharacter: Number(activeCharacterId),
-          loginExpiresAt: expiryDate,
+          loginExpiresAt: expiryDate.toISOString(),
         });
       } else {
         console.log("not logged in");
