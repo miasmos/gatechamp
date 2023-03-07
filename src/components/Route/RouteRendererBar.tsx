@@ -33,7 +33,7 @@ function RouteRendererBar({
                 direction="row"
                 width={`${100 / route.length}%`}
                 height={15}
-                key={`r2${name}${arrIndex}`}
+                key={name}
                 onMouseEnter={() => onSelectIndex(arrIndex)}
                 onMouseLeave={() => onSelectIndex(-1)}
                 sx={{ cursor: "pointer" }}

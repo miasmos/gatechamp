@@ -25,7 +25,7 @@ function RouteRendererBottomInfo({
     >
       {route.map((solarSystem, index) => (
         <RouteRendererBottomInfoItem
-          key={index}
+          key={solarSystem.name}
           index={index}
           count={route.length}
           previousSolarSystemId={

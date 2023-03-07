@@ -83,7 +83,6 @@ function useFetchRoute(
 
   useEffect(() => {
     if (data.kills.length > 0) {
-      console.log(data.kills);
       const solarSystemEvents: string[] = [];
       const stargateEvents: string[] = [];
       const stargateKillSummaries: Record<string, KillSummary> = {};

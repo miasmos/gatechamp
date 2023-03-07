@@ -28,7 +28,7 @@ function RouteRendererTopInfo({
     >
       {route.map((solarSystem, index) => (
         <RouteRendererTopInfoItem
-          key={index}
+          key={solarSystem.name}
           index={index}
           selectedIndex={selectedIndex}
           count={route.length}
