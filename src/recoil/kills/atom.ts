@@ -1,5 +1,8 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 import { KillSummary } from "../../hooks/useFetchRoute";
+
+const { persistAtom } = recoilPersist();
 
 interface KillState {
   subscriptions: string[];
@@ -18,6 +21,7 @@ const killsState = atom<KillState>({
     bySolarSystem: {},
     byStargate: {},
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export default killsState;
