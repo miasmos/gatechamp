@@ -8,10 +8,11 @@ import userState from "../recoil/user/atom";
 function useWebSocket() {
   const setUserState = useSetRecoilState(userState);
   const setIsConnected = isConnectedSetter(setUserState);
-  const { sendMessage, lastMessage, readyState } = useWebSocketLib(
-    EVE_TRADE_PLUS_WEBSOCKET_DOMAIN,
-    { share: true, shouldReconnect: () => true }
-  );
+  const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } =
+    useWebSocketLib(EVE_TRADE_PLUS_WEBSOCKET_DOMAIN, {
+      share: true,
+      shouldReconnect: () => true,
+    });
 
   useEffect(() => {
     setIsConnected(readyState === ReadyState.OPEN);
@@ -25,14 +26,14 @@ function useWebSocket() {
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
   }[readyState];
 
-  const sendJson = (event: string, data: any) =>
-    sendMessage(JSON.stringify([event, data]));
-  const receiveJson = (event: MessageEvent | null) => {
-    if (!event) {
-      return null;
+  const sendEvent = (event: string, data: any) =>
+    sendJsonMessage([event, data]);
+  const receiveEvent = (event: any) => {
+    if (!Array.isArray(event) || event.length < 2) {
+      return undefined;
     }
     try {
-      const [eventName, data] = JSON.parse(event.data);
+      const [eventName, data] = event;
       return { event: eventName, data };
     } catch {
       console.error("Got malformed json");
@@ -40,8 +41,10 @@ function useWebSocket() {
   };
 
   return {
-    sendJson,
-    lastMessage: receiveJson(lastMessage),
+    sendEvent,
+    receiveEvent,
+    lastMessage,
+    lastJsonMessage,
     readyState,
     connectionStatus,
   };

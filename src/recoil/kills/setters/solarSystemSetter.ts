@@ -4,15 +4,13 @@ import { KillState } from "../atom";
 
 const solarSystemSetter =
   (setter: SetterOrUpdater<KillState>) =>
-  (solarSystemId: number, kill: KillSummary) => {
-    const result = setter(({ bySolarSystem, ...state }) => ({
+  (solarSystemId: number, kill: KillSummary) =>
+    setter(({ bySolarSystem, ...state }) => ({
       ...state,
       bySolarSystem: {
         ...bySolarSystem,
         [solarSystemId.toString()]: kill,
       },
     }));
-    console.log(result);
-    return result;
-  };
+
 export default solarSystemSetter;

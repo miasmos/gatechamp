@@ -1,4 +1,5 @@
-import { Tooltip, Box } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { Tooltip, Box, Theme } from "@mui/material";
 import { ComponentProps } from "react";
 import { useRecoilValue } from "recoil";
 import { getStargateSelector } from "../../recoil/kills";
@@ -17,29 +18,32 @@ function RouteRendererTick({
   direction,
   type,
 }: RouteRendererTickProps) {
+  const theme = useTheme() as Theme;
   const { smartBombs, hics, gateCamp } = useRecoilValue(
     getStargateSelector(stargateId)
   );
-  const smartBombsColor = "red";
-  const hicsColor = "darkorange";
-  const gateCampColor = "black";
 
   if (!gateCamp) {
     return null;
   }
 
+  const { killSummary } = theme.palette;
+  const color = smartBombs
+    ? killSummary.smartBomb
+    : hics
+    ? killSummary.hic
+    : killSummary.gateCamp;
   return (
     <Tooltip title={title}>
       <Box>
         <Tick
-          className={`gate-camp__${type}`}
+          color={color}
+          className={`gate-camp__${type} gate-camp-id__${stargateId}`}
           direction={direction}
-          color={
-            smartBombs ? smartBombsColor : hics ? hicsColor : gateCampColor
-          }
           position="absolute"
           zIndex={4}
-          left={1}
+          left={type === "entry" ? 1 : "initial"}
+          right={type === "exit" ? 1 : "initial"}
           width={4}
           height={6}
           bottom={-9}

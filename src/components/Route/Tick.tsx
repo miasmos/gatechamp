@@ -28,7 +28,7 @@ function Tick({
     borderTop = `${height}px solid transparent`;
   } else if (direction === "down-right") {
     borderRight = `${width}px solid ${color}`;
-    borderTop = `${height}px solid transparent`;
+    borderBottom = `${height}px solid transparent`;
   }
   return (
     <Box

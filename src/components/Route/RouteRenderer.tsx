@@ -116,7 +116,12 @@ function RouteRenderer({
             onSelectIndex={onSelectIndex}
             onAvoid={onAvoidSolarSystem}
           />
-          <RouteRendererBottomInfo route={route.route} />
+          <RouteRendererBottomInfo
+            route={route.route}
+            selectedIndex={selectedIndex}
+            alwaysShowDestination={alwaysShowDestination}
+            alwaysShowOrigin={alwaysShowOrigin}
+          />
         </Stack>
         <Stack
           fontSize={13}

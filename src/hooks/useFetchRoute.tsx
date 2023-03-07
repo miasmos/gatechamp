@@ -98,7 +98,7 @@ function useFetchRoute(
           stargateEvents.push(serializeEvent("kills", "stargate", entry.id));
         }
         if (exit.id) {
-          stargateKillSummaries[entry.id.toString()] = exit;
+          stargateKillSummaries[exit.id.toString()] = exit;
           stargateEvents.push(serializeEvent("kills", "stargate", exit.id));
         }
       });

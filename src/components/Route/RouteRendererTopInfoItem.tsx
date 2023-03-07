@@ -17,19 +17,18 @@ function GateCampRendererTopInfoItem({
   selectedIndex,
   alwaysShowOrigin,
   alwaysShowDestination,
-  solarSystemID,
   name,
+  solarSystemID,
 }: GateCampRendererTopInfoItemProps) {
-  const { gateCamp } = useRecoilValue(getSolarSystemSelector(solarSystemID));
+  const { kills } = useRecoilValue(getSolarSystemSelector(solarSystemID));
   return (
     <Stack
       width={`${100 / count}%`}
       sx={{
         opacity:
-          (selectedIndex === index ||
-            (index === 0 && alwaysShowOrigin) ||
-            (index === count - 1 && alwaysShowDestination)) &&
-          !gateCamp
+          (selectedIndex === index && kills === 0) ||
+          (index === 0 && alwaysShowOrigin) ||
+          (index === count - 1 && alwaysShowDestination)
             ? 1
             : 0,
       }}

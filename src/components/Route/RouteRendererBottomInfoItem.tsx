@@ -1,45 +1,44 @@
-import { Box, Typography, Stack, Tooltip } from "@mui/material";
+import { Box, Typography, Stack, Tooltip, Theme } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { RouteJumpSummary } from "../../hooks/useFetchRoute";
-import {
-  getSolarSystemSelector,
-  getStargateSelector,
-} from "../../recoil/kills";
+import { getSolarSystemSelector } from "../../recoil/kills";
 import SkullIcon from "../icon/SkullIcon";
 import CallSplitIcon from "@mui/icons-material/CallSplit";
 import RocketIcon from "@mui/icons-material/Rocket";
 import TungstenIcon from "@mui/icons-material/Tungsten";
+import { useTheme } from "@emotion/react";
 
 type RouteRendererBottomInfoItemProps = RouteJumpSummary & {
   count: number;
   index: number;
-  previousSolarSystemId: number | undefined;
+  selectedIndex: number;
+  alwaysShowDestination: boolean;
+  alwaysShowOrigin: boolean;
 };
 
 function RouteRendererBottomInfoItem({
   name,
-  index,
   count,
-  entry,
-  exit,
+  index,
+  selectedIndex,
   solarSystemID,
-  previousSolarSystemId,
+  alwaysShowDestination,
+  alwaysShowOrigin,
 }: RouteRendererBottomInfoItemProps) {
-  const { kills: previousKills } = useRecoilValue(
-    getSolarSystemSelector(previousSolarSystemId)
-  );
-  const { gateCamp, kills, attackers, hics, smartBombs } = useRecoilValue(
+  const theme = useTheme() as Theme;
+  const { kills, attackers, hics, smartBombs } = useRecoilValue(
     getSolarSystemSelector(solarSystemID)
   );
-  const { gateCamp: entryGateCamp } = useRecoilValue(
-    getStargateSelector(entry)
-  );
-  const { gateCamp: exitGateCamp } = useRecoilValue(getStargateSelector(exit));
+  const displayTitle =
+    (!(alwaysShowOrigin && index === 0) &&
+      !(alwaysShowDestination && index === count - 1) &&
+      kills > 0) ||
+    kills === 0;
   return (
     <Box
       width={`${100 / count}%`}
       sx={{
-        opacity: gateCamp ? 1 : 0,
+        opacity: kills > 0 ? 1 : 0,
       }}
       key={name}
     >
@@ -47,20 +46,16 @@ function RouteRendererBottomInfoItem({
         variant="body2"
         whiteSpace="nowrap"
         sx={{
-          visibility:
-            kills > 0 && (index === 0 || previousKills === 0)
-              ? "visible"
-              : "none",
-          pointerEvents: kills > 0 ? "all" : "none",
+          display: displayTitle ? "block" : "none",
         }}
       >
         {name}
       </Typography>
 
-      <Stack direction={exitGateCamp && !entryGateCamp ? "row-reverse" : "row"}>
+      <Stack direction="row" justifyContent="center" mt={0.3}>
         <Stack
           sx={{
-            visibility: kills > 0 ? "visible" : "none",
+            visibility: kills > 0 ? "visible" : "hidden",
             pointerEvents: kills > 0 ? "all" : "none",
           }}
         >
@@ -85,12 +80,16 @@ function RouteRendererBottomInfoItem({
               sx={{
                 fontSize: 15,
               }}
+              htmlColor={theme.palette.killSummary.hic}
             />
           </Tooltip>
         </Stack>
         <Stack display={smartBombs ? "flex" : "none"}>
           <Tooltip title="Smart Bombs">
-            <TungstenIcon sx={{ fontSize: 15 }} />
+            <TungstenIcon
+              sx={{ fontSize: 15 }}
+              htmlColor={theme.palette.killSummary.smartBomb}
+            />
           </Tooltip>
         </Stack>
       </Stack>

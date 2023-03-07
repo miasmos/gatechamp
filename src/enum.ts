@@ -46,4 +46,16 @@ enum CargoBayType {
   FleetHanger,
 }
 
-export { AppRoute, Station, Region, Tax, CargoBay, CargoBayType };
+enum WebSocketEvent {
+  Kills = "kills",
+}
+
+export {
+  AppRoute,
+  Station,
+  Region,
+  Tax,
+  CargoBay,
+  CargoBayType,
+  WebSocketEvent,
+};

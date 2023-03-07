@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { WebSocketEvent } from "../enum";
 import {
   addSubscriptionsSetter,
   clearSubscriptionsSetter,
@@ -30,54 +31,55 @@ function useKillsWebsocket() {
   const setSolarSystem = solarSystemSetter(setKillsState);
   const setStargate = stargateSetter(setKillsState);
 
-  const { sendJson, lastMessage } = useWebSocket();
+  const { sendEvent, receiveEvent, lastJsonMessage } = useWebSocket();
 
   useEffect(() => {
     clearSubscriptions();
   }, []);
 
   useEffect(() => {
-    if (addSubscription.length > 0) {
-      addSubscription.forEach((eventId) =>
-        sendJson("subscribe", { event: eventId })
-      );
-      setAddSubscriptions(addSubscription);
-    }
-  }, [addSubscription]);
-
-  useEffect(() => {
     if (removeSubscription.length > 0) {
       removeSubscription.forEach((eventId) =>
-        sendJson("unsubscribe", { event: eventId })
+        sendEvent("unsubscribe", { event: eventId })
       );
       setRemoveSubscriptions(removeSubscription);
     }
   }, [removeSubscription]);
 
   useEffect(() => {
-    if (lastMessage) {
-      const { event, data } = lastMessage;
-      const { name, type, id } = deserializeEvent(event);
+    if (addSubscription.length > 0) {
+      addSubscription.forEach((eventId) =>
+        sendEvent("subscribe", { event: eventId })
+      );
+      setAddSubscriptions(addSubscription);
+    }
+  }, [addSubscription]);
 
-      console.log("got message", lastMessage);
+  useEffect(() => {
+    if (lastJsonMessage) {
+      const message = receiveEvent(lastJsonMessage);
+      if (!message) {
+        return;
+      }
+      const { name, type, id } = deserializeEvent(message.event);
 
-      if (name !== "kills") {
+      if (name !== WebSocketEvent.Kills) {
         return;
       }
 
       switch (type) {
         case "solar-system":
-          setSolarSystem(Number(id), data);
+          setSolarSystem(Number(id), message.data);
           break;
         case "stargate":
-          setStargate(Number(id), data);
+          setStargate(Number(id), message.data);
           break;
         default:
           console.error("got unknown eventType in Kills websocket:", type);
           break;
       }
     }
-  }, [lastMessage]);
+  }, [lastJsonMessage]);
 }
 
 export default useKillsWebsocket;

@@ -19,6 +19,11 @@ declare module "@mui/material/styles/createPalette" {
         s0p0: string;
       };
     };
+    killSummary: {
+      smartBomb: string;
+      hic: string;
+      gateCamp: string;
+    };
   };
   interface Palette extends PaletteExtended {}
   interface PaletteOptions extends PaletteExtended {}
@@ -39,6 +44,11 @@ const colors = {
       s0p1: "#6d2126",
       s0p0: "#8c3263",
     },
+  },
+  killSummary: {
+    smartBomb: "red",
+    hic: "darkorange",
+    gateCamp: "black",
   },
 };
 

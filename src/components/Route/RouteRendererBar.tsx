@@ -55,13 +55,13 @@ function RouteRendererBar({
                 <RouteRendererTick
                   type="entry"
                   direction="up-left"
-                  title="Entry Gate"
+                  title="Entry Gate Camp"
                   stargateId={entry}
                 />
                 <RouteRendererTick
                   type="exit"
                   direction="up-right"
-                  title="Exit Gate"
+                  title="Exit Gate Camp"
                   stargateId={exit}
                 />
                 <Stack

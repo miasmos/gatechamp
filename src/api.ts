@@ -1,4 +1,5 @@
 import Axios from "axios";
+import Cookies from "js-cookie";
 import { EVE_TRADE_PLUS_DOMAIN } from "./constants";
 import { wait } from "./util/promise";
 
@@ -7,18 +8,24 @@ const ApiClient = Axios.create({
   timeout: 60000,
 });
 
-const getWithResponse = (url: string, headers?: Record<string, any>) =>
+const getWithResponse = (url: string, headers: Record<string, any> = {}) =>
   ApiClient.get(url, {
     headers,
     withCredentials: true,
   });
-const get = (url: string, headers?: Record<string, any>) =>
-  getWithResponse(url, headers).then((response) => response.data);
+const get = (url: string, headers: Record<string, any> = {}) =>
+  getWithResponse(url, {
+    ...headers,
+    "x-character-id": Cookies.get("active_character_id"),
+  }).then((response) => response.data);
 const post =
   <T>(data: T) =>
   (url: string) =>
     ApiClient.post(url, data, {
       withCredentials: true,
+      headers: {
+        "x-character-id": Cookies.get("active_character_id"),
+      },
     }).then((response) => response.data);
 
 const fetchMock =

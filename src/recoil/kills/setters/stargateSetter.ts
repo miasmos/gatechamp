@@ -4,16 +4,13 @@ import { KillState } from "../atom";
 
 const stargateSetter =
   (setter: SetterOrUpdater<KillState>) =>
-  (stargateId: number, kill: KillSummary) => {
-    const result = setter(({ byStargate, ...state }) => ({
+  (stargateId: number, kill: KillSummary) =>
+    setter(({ byStargate, ...state }) => ({
       ...state,
       byStargate: {
         ...byStargate,
         [stargateId.toString()]: kill,
       },
     }));
-    console.log(result);
-    return result;
-  };
 
 export default stargateSetter;

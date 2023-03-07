@@ -2,8 +2,9 @@ import { Button, Link, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { EVE_TRADE_PLUS_DOMAIN } from "../constants";
+import useFetchCharacter from "../hooks/useFetchCharacter";
 import useFetchLogout from "../hooks/useFetchLogout";
-import { characterSelector, loggedInSetter } from "../recoil/user";
+import { loggedInSetter } from "../recoil/user";
 import userState from "../recoil/user/atom";
 
 function AppBarAvatar() {
@@ -11,10 +12,8 @@ function AppBarAvatar() {
     shouldLogout: false,
   });
   const { loggedIn, activeCharacter } = useRecoilValue(userState);
+  const { data: character, isLoading } = useFetchCharacter(loggedIn);
   const setUserState = useSetRecoilState(userState);
-  const character = useRecoilValue(
-    characterSelector({ loggedIn, characterId: activeCharacter })
-  );
   const onLogoutClick = () => {
     loggedInSetter(setUserState)();
     setState((state) => ({ ...state, shouldLogout: true }));

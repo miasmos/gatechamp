@@ -5,14 +5,20 @@ import RouteRendererBottomInfoItem from "./RouteRendererBottomInfoItem";
 type RouteRendererProps = {
   route: RouteJumpSummary[];
   position?: number;
+  selectedIndex: number;
+  alwaysShowDestination: boolean;
+  alwaysShowOrigin: boolean;
 } & StackProps;
 
 function RouteRendererBottomInfo({
   route,
   height = 50,
   mt = 2,
+  selectedIndex,
   direction = "row",
   className,
+  alwaysShowDestination,
+  alwaysShowOrigin,
   ...props
 }: RouteRendererProps) {
   return (
@@ -27,10 +33,10 @@ function RouteRendererBottomInfo({
         <RouteRendererBottomInfoItem
           key={solarSystem.name}
           index={index}
+          selectedIndex={selectedIndex}
           count={route.length}
-          previousSolarSystemId={
-            index === 0 ? undefined : route[index - 1].solarSystemID
-          }
+          alwaysShowDestination={alwaysShowDestination}
+          alwaysShowOrigin={alwaysShowOrigin}
           {...solarSystem}
         />
       ))}
