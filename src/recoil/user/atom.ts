@@ -8,7 +8,7 @@ interface UserState {
   isConnected: boolean;
   loginExpiresAt: Date | undefined;
   activeCharacter: number;
-  character: Record<number, Character>;
+  character: Record<string, Character>;
 }
 
 interface Character {
@@ -39,4 +39,4 @@ const userState = atom<UserState>({
 });
 
 export default userState;
-export type { UserState };
+export type { UserState, Character };

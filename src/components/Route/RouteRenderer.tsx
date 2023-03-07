@@ -1,4 +1,11 @@
-import { Chip, Stack, StackProps, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  Stack,
+  StackProps,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import useFetchRoute from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
@@ -6,8 +13,6 @@ import RouteRendererTopInfo from "./RouteRendererTopInfo";
 import RouteRendererBar from "./RouteRendererBar";
 import PublishIcon from "@mui/icons-material/Publish";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import CircleIcon from "@mui/icons-material/Circle";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import routeState from "../../recoil/route/atom";
 import {
   addAvoidSystemSetter,
@@ -17,6 +22,7 @@ import {
 import { isLoggedInSelector } from "../../recoil/user";
 import usePushRoute from "../../hooks/usePushRoute";
 import { isConnectedSelector } from "../../recoil/user";
+import OnlineIndicator from "../OnlineIndicator";
 
 type RouteRendererProps = {
   position?: number;
@@ -43,8 +49,15 @@ function RouteRenderer({
     selectedIndex: -1,
     pushedRouteId: undefined,
   });
-  const { origin, destination, avoidedSolarSystems } =
-    useRecoilValue(routeState);
+  const {
+    origin,
+    destination,
+    avoidedSolarSystems,
+    avoidEntryGateCamp,
+    avoidGateCamp,
+    avoidHics,
+    avoidSmartBombs,
+  } = useRecoilValue(routeState);
 
   const {
     data: route,
@@ -54,7 +67,8 @@ function RouteRenderer({
   } = useFetchRoute(
     origin,
     destination,
-    avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID)
+    avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID),
+    { avoidEntryGateCamp, avoidGateCamp, avoidHics, avoidSmartBombs }
   );
   const hasValidRoute = route.route.length > 0;
   usePushRoute(
@@ -69,8 +83,12 @@ function RouteRenderer({
       ...state,
       selectedIndex: routeIndex,
     }));
-  const onAvoidSolarSystem = (solarSystemID: number, name: string) =>
+  const onAvoidSolarSystem = (solarSystemID: number, name: string) => {
+    if (solarSystemID === origin || solarSystemID === destination) {
+      return;
+    }
     addAvoidSystemSetter(setRouteState)({ solarSystemID, name });
+  };
   const onUnavoidSolarSystem = (index: number) =>
     deleteAvoidSystemSetter(setRouteState)(index);
   const onPushRoute = () =>
@@ -123,45 +141,14 @@ function RouteRenderer({
             alwaysShowOrigin={alwaysShowOrigin}
           />
         </Stack>
-        <Stack
-          fontSize={13}
-          display={route.route.length > 0 ? "flex" : "none"}
-          direction="row"
-        >
-          {!isConnected ? (
-            <Tooltip title="Offline">
-              <CircleOutlinedIcon
-                sx={{ opacity: 0.7, mt: "37px" }}
-                fontSize="inherit"
-              />
-            </Tooltip>
-          ) : (
-            <Tooltip title="Online">
-              <Stack
-                sx={{
-                  mt: "41px",
-                  boxShadow: "0 0 1px 1px #0000001a",
-                  width: 5,
-                  height: 5,
-                  "@keyframes pulse": {
-                    from: {
-                      boxShadow: `0 0 0 0 rgba(0, 0, 0, 0.4)`,
-                    },
-                    to: {
-                      boxShadow: `0 0 0 9px rgba(0, 0, 0, 0)`,
-                    },
-                  },
-                  borderRadius: "50%",
-                  animation: "pulse 3s infinite",
-                }}
-                alignItems="center"
-                justifyContent="center"
-              >
-                <CircleIcon fontSize="inherit" htmlColor="green" />
-              </Stack>
-            </Tooltip>
-          )}
-        </Stack>
+        <Box display={route.route.length > 0 ? "block" : "none"}>
+          <OnlineIndicator
+            ml={0.7}
+            online={isConnected}
+            fontSize="small"
+            mt={5.1}
+          />
+        </Box>
       </Stack>
       <Stack alignItems="flex-start" direction="row" spacing={2}>
         {avoidedSolarSystems.map(({ name }, index) => (

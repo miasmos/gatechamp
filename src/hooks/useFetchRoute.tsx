@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import useSWR from "swr";
 import { get } from "../api";
+import { WebSocketEvent } from "../enum";
 import killsState from "../recoil/kills/atom";
 import { RouteState } from "../recoil/route";
 import { serializeEvent } from "./useKillsWebsocket";
@@ -63,7 +64,6 @@ function useFetchRoute(
     typeof originSolarSystemId === "number" &&
     typeof destinationSolarSystemId === "number";
   const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
-
   const {
     data = { jumps: 0, route: [], kills: [], origin: -1, destination: -1 },
     error,
@@ -75,8 +75,8 @@ function useFetchRoute(
       : null,
     get,
     {
-      revalidateOnReconnect: false,
-      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+      revalidateOnFocus: true,
       revalidateIfStale: false,
     }
   );
@@ -91,15 +91,21 @@ function useFetchRoute(
       data.kills.forEach((kill) => {
         const { id, entry, exit } = kill;
         solarSystemKillSummaries[id.toString()] = kill;
-        solarSystemEvents.push(serializeEvent("kills", "solar-system", id));
+        solarSystemEvents.push(
+          serializeEvent(WebSocketEvent.Kills, "solar-system", id)
+        );
 
         if (entry.id) {
           stargateKillSummaries[entry.id.toString()] = entry;
-          stargateEvents.push(serializeEvent("kills", "stargate", entry.id));
+          stargateEvents.push(
+            serializeEvent(WebSocketEvent.Kills, "stargate", entry.id)
+          );
         }
         if (exit.id) {
           stargateKillSummaries[exit.id.toString()] = exit;
-          stargateEvents.push(serializeEvent("kills", "stargate", exit.id));
+          stargateEvents.push(
+            serializeEvent(WebSocketEvent.Kills, "stargate", exit.id)
+          );
         }
       });
 

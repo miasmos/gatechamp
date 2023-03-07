@@ -48,13 +48,30 @@ const colors = {
   killSummary: {
     smartBomb: "red",
     hic: "darkorange",
-    gateCamp: "black",
+    gateCamp: "white",
   },
 };
 
 const palette = createTheme({
   palette: {
     ...colors,
+    primary: {
+      main: "#ffffff",
+      light: "#eee",
+      contrastText: "#222",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+    text: {
+      primary: "#ffffff",
+      secondary: "#ddd",
+      disabled: "rgba(255,255,255,0.77)",
+    },
+    background: {
+      default: "transparent",
+      paper: "transparent",
+    },
   },
 });
 
@@ -69,12 +86,24 @@ const theme = createTheme(
             placeItems: "center",
             minWidth: "320px",
             minHeight: "100vh",
+            background: "url(/background.jpg)",
+            backgroundSize: "cover",
+            backgroundRepeat: "none",
           },
           "#root": {
             maxWidth: "1280px",
             margin: "0 auto",
             padding: "2rem",
             textAlign: "center",
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            ".MuiOutlinedInput-notchedOutline": {
+              borderColor: "inherit",
+            },
           },
         },
       },
@@ -91,6 +120,17 @@ const theme = createTheme(
         defaultProps: {
           component: Link,
         } as LinkProps,
+      },
+      MuiList: {
+        styleOverrides: {
+          root: {
+            background: palette.palette.primary.main,
+            color: palette.palette.primary.contrastText,
+            " *": {
+              fontWeight: "bold",
+            },
+          },
+        },
       },
       MuiButtonBase: {
         defaultProps: {

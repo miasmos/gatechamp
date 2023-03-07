@@ -54,7 +54,7 @@ function TripStationItemTable({
       </Stack>
     ) : (
       <>
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Paper sx={{ width: "100%", overflow: "hidden" }} elevation={10}>
           <TableContainer sx={{ maxHeight: 300 }}>
             <Table size="small" stickyHeader>
               <TableHead>
@@ -150,7 +150,7 @@ function TripStationItemTable({
           <ButtonGroup>
             <CopyToClipboard text={stringifiedBuyOrder}>
               <Button size="small" endIcon={<ContentCopyIcon />}>
-                Buy All
+                Copy All
               </Button>
             </CopyToClipboard>
           </ButtonGroup>
@@ -169,7 +169,12 @@ function TripStationItemTable({
           </Stack>
           <Stack direction="row" alignItems="flex-end" spacing={2}>
             <Stack direction="row" alignItems="center" spacing={0.5}>
-              <ProgressBar width={40} height={10} progress={cost / maxCost} />
+              <ProgressBar
+                width={40}
+                height={10}
+                progress={cost / maxCost}
+                color="#fff"
+              />
               <Stack direction="row">
                 <Typography variant="body2" mt={0.3}>
                   Ƶ
@@ -182,6 +187,7 @@ function TripStationItemTable({
                 width={40}
                 height={10}
                 progress={volume / maxVolume}
+                color="#fff"
               />
               <Stack direction="row">
                 <Typography>{formatCurrency(volume)}</Typography>

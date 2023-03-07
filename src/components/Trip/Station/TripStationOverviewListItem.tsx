@@ -31,7 +31,11 @@ function TripStationOverviewListItem({
   }
 
   return (
-    <Paper sx={{ minWidth: 350, cursor: "pointer" }} onClick={onSelect}>
+    <Paper
+      elevation={10}
+      sx={{ minWidth: 350, cursor: "pointer" }}
+      onClick={onSelect}
+    >
       <Stack px={6} py={3}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row">

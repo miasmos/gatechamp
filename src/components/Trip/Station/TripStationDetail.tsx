@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
@@ -7,22 +7,30 @@ import { CargoBay } from "../../../enum";
 import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";
 import { NavigationIntention } from "../../../types";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import tripState from "../../../recoil/trip/atom";
 import { useLocation, useNavigate } from "react-router";
 import { clearTripSetter } from "../../../recoil/trip";
 import MainButton from "../../MainButton";
 import RouteRenderer from "../../Route/RouteRenderer";
-import { getJumpsSelector } from "../../../recoil/route";
+import {
+  destinationSetter,
+  getJumpsSelector,
+  originSetter,
+} from "../../../recoil/route";
+import routeState from "../../../recoil/route/atom";
 
 type TripStationDetailProps = NavigationIntention;
 
 function TripStationDetail({ to }: TripStationDetailProps) {
   const navigate = useNavigate();
   const routerLocation = useLocation();
+  const setRoute = useSetRecoilState(routeState);
   const jumps = useRecoilValue(getJumpsSelector);
   const { cargo, origin, destination, ship, totalProfit, profitPerJump } =
     routerLocation.state;
+  const setOrigin = originSetter(setRoute);
+  const setDestination = destinationSetter(setRoute);
   const [trip, setTripState] = useRecoilState(tripState);
 
   const clearTrip = clearTripSetter(setTripState);
@@ -56,6 +64,11 @@ function TripStationDetail({ to }: TripStationDetailProps) {
     }
   };
   const iskPerJump = jumps ? totalProfit / jumps : profitPerJump;
+
+  useEffect(() => {
+    setOrigin(origin.system_id);
+    setDestination(destination.system_id);
+  }, []);
 
   return (
     <Stack>

@@ -53,6 +53,7 @@ function ShipEditor({ editing, index, editStart, editEnd }: ShipEditorProps) {
 
   return (
     <Paper
+      elevation={10}
       sx={{
         position: "relative",
         ".ship-editor__actions": {

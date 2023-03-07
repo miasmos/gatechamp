@@ -1,12 +1,21 @@
 /// <reference types="vite-plugin-svgr/client" />
-import { Stack, StackProps } from "@mui/material";
+import { Stack, StackProps, styled } from "@mui/material";
 import { forwardRef } from "react";
 import { ReactComponent } from "../../../public/skull.svg";
 
-const SkullIcon = forwardRef((props: StackProps, ref) => {
+const StyledSkullIcon = styled(ReactComponent)(({ color }) => ({
+  ".st1": {
+    stroke: color,
+  },
+  ".st2": {
+    fill: color,
+  },
+}));
+
+const SkullIcon = forwardRef(({ color, ...props }: StackProps, ref) => {
   return (
     <Stack {...props} ref={ref}>
-      <ReactComponent width={15} />
+      <StyledSkullIcon color={color as string} width={15} />
     </Stack>
   );
 });

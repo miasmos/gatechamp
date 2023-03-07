@@ -60,7 +60,7 @@ function RouteRendererBottomInfoItem({
           }}
         >
           <Tooltip title="Kills">
-            <SkullIcon />
+            <SkullIcon color="white" />
           </Tooltip>
           <Typography variant="body2" fontSize={11}>
             {kills}

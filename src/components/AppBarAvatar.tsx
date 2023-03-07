@@ -2,17 +2,23 @@ import { Button, Link, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { EVE_TRADE_PLUS_DOMAIN } from "../constants";
-import useFetchCharacter from "../hooks/useFetchCharacter";
 import useFetchLogout from "../hooks/useFetchLogout";
-import { loggedInSetter } from "../recoil/user";
+import { isOnlineSelector } from "../recoil/status";
+import {
+  characterSelector,
+  isLoggedInSelector,
+  loggedInSetter,
+} from "../recoil/user";
 import userState from "../recoil/user/atom";
+import OnlineIndicator from "./OnlineIndicator";
 
 function AppBarAvatar() {
   const [{ shouldLogout }, setState] = useState<{ shouldLogout: boolean }>({
     shouldLogout: false,
   });
-  const { loggedIn, activeCharacter } = useRecoilValue(userState);
-  const { data: character, isLoading } = useFetchCharacter(loggedIn);
+  const isCharacterOnline = useRecoilValue(isOnlineSelector);
+  const loggedIn = useRecoilValue(isLoggedInSelector);
+  const character = useRecoilValue(characterSelector);
   const setUserState = useSetRecoilState(userState);
   const onLogoutClick = () => {
     loggedInSetter(setUserState)();
@@ -30,10 +36,13 @@ function AppBarAvatar() {
   return (
     <Stack>
       {loggedIn ? (
-        <Stack direction="row" spacing={4} alignItems="center">
-          <Typography>{character.name}</Typography>
+        <Stack direction="row" alignItems="center" spacing={5}>
+          <Stack direction="row" spacing={2}>
+            <OnlineIndicator online={isCharacterOnline} fontSize="small" />
+            <Typography lineHeight={1.3}>{character.name}</Typography>
+          </Stack>
           <Link onClick={onLogoutClick}>
-            <Button variant="contained" size="small">
+            <Button variant="outlined" size="small">
               Logout
             </Button>
           </Link>

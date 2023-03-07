@@ -48,6 +48,7 @@ enum CargoBayType {
 
 enum WebSocketEvent {
   Kills = "kills",
+  Status = "status",
 }
 
 export {

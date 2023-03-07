@@ -21,6 +21,8 @@ function RouteRendererBar({
   onSelectIndex,
   ...props
 }: RouteRendererProps) {
+  const isStartOrEnd =
+    selectedIndex === 0 || selectedIndex === route.length - 1;
   return (
     <Stack position="relative" {...props}>
       <Stack className="route__row">
@@ -36,14 +38,18 @@ function RouteRendererBar({
                 key={name}
                 onMouseEnter={() => onSelectIndex(arrIndex)}
                 onMouseLeave={() => onSelectIndex(-1)}
-                sx={{ cursor: "pointer" }}
+                sx={{ cursor: isStartOrEnd ? "default" : "pointer" }}
                 onClick={() => onAvoid && onAvoid(solarSystemID, name)}
               >
                 <Stack justifyContent="center" width="100%">
                   <Typography
                     position="absolute"
                     zIndex={5}
-                    display={selectedIndex === arrIndex ? "block" : "none"}
+                    display={
+                      selectedIndex === arrIndex && !isStartOrEnd
+                        ? "block"
+                        : "none"
+                    }
                     fontWeight="bold"
                     fontSize="0.7em"
                     left="50%"

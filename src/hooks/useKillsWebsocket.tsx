@@ -17,7 +17,7 @@ const deserializeEvent = (event: string) => {
 };
 
 const serializeEvent = (
-  name: "kills",
+  name: WebSocketEvent.Kills,
   type: "solar-system" | "stargate",
   id: number
 ) => `${name}:${type}:${id}`;

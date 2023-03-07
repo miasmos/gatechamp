@@ -2,20 +2,21 @@ import { Box, Stack, StackProps, styled } from "@mui/material";
 
 type ProgressBarProps = {
   progress: number;
-} & StackProps;
+  color: string;
+} & Omit<StackProps, "color">;
 
-const StyledProgressBar = styled(Stack)(({ theme }) => ({
+const StyledProgressBar = styled(Stack)(({ theme, color }) => ({
   ".progress-bar__border, .progress-bar__bar": {
     color: theme.palette.text.primary,
   },
   ".progress-bar__border": {
-    border: `2px solid #212121`,
+    border: `2px solid ${color}`,
     borderRadius: 6,
   },
   ".progress-bar__bar": {
     transition: "0.5s width",
     borderRadius: 6,
-    background: "#212121",
+    background: color,
   },
 }));
 

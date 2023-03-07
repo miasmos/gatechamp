@@ -12,19 +12,15 @@ function useWebSocket() {
     useWebSocketLib(EVE_TRADE_PLUS_WEBSOCKET_DOMAIN, {
       share: true,
       shouldReconnect: () => true,
+      reconnectInterval: (attempts: number) =>
+        Math.min(attempts * 5 * 1000, 30 * 1000), // 5s
+      reconnectAttempts: Number.MAX_SAFE_INTEGER,
+      retryOnError: true,
     });
 
   useEffect(() => {
     setIsConnected(readyState === ReadyState.OPEN);
   }, [readyState]);
-
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: "Connecting",
-    [ReadyState.OPEN]: "Open",
-    [ReadyState.CLOSING]: "Closing",
-    [ReadyState.CLOSED]: "Closed",
-    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
-  }[readyState];
 
   const sendEvent = (event: string, data: any) =>
     sendJsonMessage([event, data]);
@@ -46,7 +42,6 @@ function useWebSocket() {
     lastMessage,
     lastJsonMessage,
     readyState,
-    connectionStatus,
   };
 }
 
