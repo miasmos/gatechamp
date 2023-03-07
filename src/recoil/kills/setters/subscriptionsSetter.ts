@@ -30,4 +30,14 @@ const removeSubscriptionsSetter =
       };
     });
 
-export { removeSubscriptionsSetter, addSubscriptionsSetter };
+const clearSubscriptionsSetter = (setter: SetterOrUpdater<KillState>) => () =>
+  setter((state) => ({
+    ...state,
+    subscriptions: [],
+  }));
+
+export {
+  removeSubscriptionsSetter,
+  addSubscriptionsSetter,
+  clearSubscriptionsSetter,
+};

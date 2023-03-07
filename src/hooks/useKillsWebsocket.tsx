@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   addSubscriptionsSetter,
+  clearSubscriptionsSetter,
   removeSubscriptionsSetter,
   solarSystemSetter,
   stargateSetter,
@@ -25,10 +26,15 @@ function useKillsWebsocket() {
   const { addSubscription, removeSubscription } = useRecoilValue(killsState);
   const setAddSubscriptions = addSubscriptionsSetter(setKillsState);
   const setRemoveSubscriptions = removeSubscriptionsSetter(setKillsState);
+  const clearSubscriptions = clearSubscriptionsSetter(setKillsState);
   const setSolarSystem = solarSystemSetter(setKillsState);
   const setStargate = stargateSetter(setKillsState);
 
   const { sendJson, lastMessage } = useWebSocket();
+
+  useEffect(() => {
+    clearSubscriptions();
+  }, []);
 
   useEffect(() => {
     if (addSubscription.length > 0) {

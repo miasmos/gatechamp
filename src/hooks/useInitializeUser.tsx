@@ -1,7 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useRecoilState } from "recoil";
 import { parseISO, addMinutes, isBefore, isAfter } from "date-fns";
-import { zonedTimeToUtc } from "date-fns-tz";
 import Cookies from "js-cookie";
 import { useInterval } from "usehooks-ts";
 import userState from "../recoil/user/atom";
@@ -17,10 +16,7 @@ function useInitializeUser() {
 
   useInterval(
     async () => {
-      const now = zonedTimeToUtc(
-        Date.now(),
-        Intl.DateTimeFormat().resolvedOptions().timeZone
-      );
+      const now = parseISO(new Date().toISOString());
       const willExpireSoon = isAfter(addMinutes(now, 1), loginExpiresAt!);
       console.log(
         "check login state",

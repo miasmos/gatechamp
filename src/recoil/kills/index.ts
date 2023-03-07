@@ -7,6 +7,7 @@ import getSubscriptionsSelector from "./selectors/getSubscriptionsSelector";
 import {
   addSubscriptionsSetter,
   removeSubscriptionsSetter,
+  clearSubscriptionsSetter,
 } from "./setters/subscriptionsSetter";
 
 export default atom;
@@ -20,4 +21,5 @@ export {
   stargateSetter,
   addSubscriptionsSetter,
   removeSubscriptionsSetter,
+  clearSubscriptionsSetter,
 };
