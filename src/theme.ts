@@ -32,17 +32,17 @@ declare module "@mui/material/styles/createPalette" {
 const colors = {
   eve: {
     security: {
-      s1p0: "#2e74dc",
-      s0p9: "#389cf3",
-      s0p8: "#48cff4",
-      s0p7: "#5bdcaa",
-      s0p6: "#73e352",
-      s0p5: "#eeff83",
-      s0p4: "#df6a0d",
-      s0p3: "#c94816",
-      s0p2: "#bb0f19",
-      s0p1: "#6d2126",
-      s0p0: "#8c3263",
+      s1p0: "#2c75e2",
+      s0p9: "#3a9aeb",
+      s0p8: "#4ecdf7",
+      s0p7: "#61dba4",
+      s0p6: "#72e655",
+      s0p5: "#f4fe83",
+      s0p4: "#dc6d07",
+      s0p3: "#ce440f",
+      s0p2: "#bc1117",
+      s0p1: "#732121",
+      s0p0: "#8d3364",
     },
   },
   killSummary: {

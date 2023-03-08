@@ -3,18 +3,20 @@ import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import RouteRendererBottomInfoItem from "./RouteRendererBottomInfoItem";
 
 type RouteRendererProps = {
-  route: RouteJumpSummary[];
+  node: RouteJumpSummary;
   position?: number;
-  selectedIndex: number;
+  index: number;
+  count: number;
   alwaysShowDestination: boolean;
   alwaysShowOrigin: boolean;
 } & StackProps;
 
 function RouteRendererBottomInfo({
-  route,
+  node,
+  index,
+  count,
   height = 50,
   mt = 2,
-  selectedIndex,
   direction = "row",
   className,
   alwaysShowDestination,
@@ -23,23 +25,20 @@ function RouteRendererBottomInfo({
 }: RouteRendererProps) {
   return (
     <Stack
-      className={`route__info-bottom ${className}`}
+      className="route__bottom-info"
       direction={direction}
       mt={mt}
       height={height}
       {...props}
     >
-      {route.map((solarSystem, index) => (
-        <RouteRendererBottomInfoItem
-          key={solarSystem.name}
-          index={index}
-          selectedIndex={selectedIndex}
-          count={route.length}
-          alwaysShowDestination={alwaysShowDestination}
-          alwaysShowOrigin={alwaysShowOrigin}
-          {...solarSystem}
-        />
-      ))}
+      <RouteRendererBottomInfoItem
+        key={node.name}
+        index={index}
+        count={count}
+        alwaysShowDestination={alwaysShowDestination}
+        alwaysShowOrigin={alwaysShowOrigin}
+        {...node}
+      />
     </Stack>
   );
 }

@@ -1,5 +1,6 @@
 import { Box, Typography, Stack, Tooltip, Theme } from "@mui/material";
 import { useRecoilValue } from "recoil";
+import clsx from "clsx";
 import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import { getSolarSystemSelector } from "../../recoil/kills";
 import SkullIcon from "../icon/SkullIcon";
@@ -11,7 +12,6 @@ import { useTheme } from "@emotion/react";
 type RouteRendererBottomInfoItemProps = RouteJumpSummary & {
   count: number;
   index: number;
-  selectedIndex: number;
   alwaysShowDestination: boolean;
   alwaysShowOrigin: boolean;
 };
@@ -20,7 +20,6 @@ function RouteRendererBottomInfoItem({
   name,
   count,
   index,
-  selectedIndex,
   solarSystemID,
   alwaysShowDestination,
   alwaysShowOrigin,
@@ -34,15 +33,21 @@ function RouteRendererBottomInfoItem({
       !(alwaysShowDestination && index === count - 1) &&
       kills > 0) ||
     kills === 0;
+  const verticalKillThreshold = 20;
   return (
     <Box
-      width={`${100 / count}%`}
+      className={clsx({
+        "route-renderer__bottom-info": true,
+        "route-renderer__bottom-info--has-kills": kills > 0,
+      })}
+      width="100%"
       sx={{
         opacity: kills > 0 ? 1 : 0,
       }}
       key={name}
     >
       <Typography
+        className="route-renderer__bottom-info__title"
         variant="body2"
         whiteSpace="nowrap"
         sx={{
@@ -52,12 +57,19 @@ function RouteRendererBottomInfoItem({
         {name}
       </Typography>
 
-      <Stack direction="row" justifyContent="center" mt={0.3}>
+      <Stack
+        direction={count > verticalKillThreshold ? "column" : "row"}
+        justifyContent="center"
+        mt={0.3}
+        spacing={count > verticalKillThreshold ? 0.2 : 0}
+      >
         <Stack
           sx={{
             visibility: kills > 0 ? "visible" : "hidden",
             pointerEvents: kills > 0 ? "all" : "none",
           }}
+          justifyContent="center"
+          direction={count > verticalKillThreshold ? "row" : "column"}
         >
           <Tooltip title="Kills">
             <SkullIcon color="white" />
@@ -66,7 +78,10 @@ function RouteRendererBottomInfoItem({
             {kills}
           </Typography>
         </Stack>
-        <Stack>
+        <Stack
+          justifyContent="center"
+          direction={count > verticalKillThreshold ? "row" : "column"}
+        >
           <Tooltip title="Attackers">
             <RocketIcon sx={{ fontSize: 15 }} />
           </Tooltip>
@@ -74,7 +89,7 @@ function RouteRendererBottomInfoItem({
             {attackers}
           </Typography>
         </Stack>
-        <Stack display={hics ? "flex" : "none"}>
+        <Stack display={hics ? "flex" : "none"} alignItems="center">
           <Tooltip title="Heavy Interdiction Cruisers">
             <CallSplitIcon
               sx={{
@@ -84,7 +99,7 @@ function RouteRendererBottomInfoItem({
             />
           </Tooltip>
         </Stack>
-        <Stack display={smartBombs ? "flex" : "none"}>
+        <Stack display={smartBombs ? "flex" : "none"} alignItems="center">
           <Tooltip title="Smart Bombs">
             <TungstenIcon
               sx={{ fontSize: 15 }}

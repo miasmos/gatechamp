@@ -1,9 +1,15 @@
-import { Box, Chip, Stack, StackProps, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import {
+  Box,
+  Chip,
+  Stack,
+  StackProps,
+  styled,
+  Typography,
+} from "@mui/material";
+import clsx from "clsx";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useEffect } from "react";
 import useFetchRoute from "../../hooks/useFetchRoute";
-import RouteRendererBottomInfo from "./RouteRendererBottomInfo";
-import RouteRendererTopInfo from "./RouteRendererTopInfo";
-import RouteRendererBar from "./RouteRendererBar";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import routeState from "../../recoil/route/atom";
 import {
@@ -12,9 +18,9 @@ import {
   jumpsSetter,
   routeSetter,
 } from "../../recoil/route";
-import { isLoggedInSelector } from "../../recoil/user";
 import { isConnectedSelector } from "../../recoil/user";
 import OnlineIndicator from "../OnlineIndicator";
+import RouteRendererItem from "./RouteRendererItem";
 
 type RouteRendererProps = {
   position?: number;
@@ -22,6 +28,32 @@ type RouteRendererProps = {
   alwaysShowOrigin?: boolean;
   alwaysShowDestination?: boolean;
 } & Omit<StackProps, "position">;
+
+const StyledRouteRenderer = styled(Stack)(({}) => ({
+  ".route-renderer__item:hover": {
+    ".route__info-top-item:not(.route__info-top-item--has-kills)": {
+      opacity: 1,
+    },
+    ".route-renderer__bar": {
+      ".route-renderer__bar__avoid-text": {
+        display: "block",
+      },
+      ".route__solar-system": {
+        cursor: "pointer",
+      },
+    },
+  },
+  "&.route-renderer--always-show-origin, &.route-renderer--always-show-destination":
+    {
+      ".route-renderer__item:first-of-type .route__solar-system, .route-renderer__item:last-of-type .route__solar-system":
+        {
+          cursor: "default",
+          ".route-renderer__bar__avoid-text": {
+            display: "none",
+          },
+        },
+    },
+}));
 
 function RouteRenderer({
   position = 0,
@@ -32,14 +64,8 @@ function RouteRenderer({
 }: RouteRendererProps) {
   const isConnected = useRecoilValue(isConnectedSelector);
   const setRouteState = useSetRecoilState(routeState);
-  const isLoggedIn = useRecoilValue(isLoggedInSelector);
   const setRouteRoute = routeSetter(setRouteState);
 
-  const [{ selectedIndex }, setState] = useState<{
-    selectedIndex: number;
-  }>({
-    selectedIndex: -1,
-  });
   const {
     origin,
     destination,
@@ -63,11 +89,6 @@ function RouteRenderer({
   );
 
   const setJumps = (jumps: number) => jumpsSetter(setRouteState)(jumps);
-  const onSelectIndex = (routeIndex: number) =>
-    setState((state) => ({
-      ...state,
-      selectedIndex: routeIndex,
-    }));
   const onAvoidSolarSystem = (solarSystemID: number, name: string) => {
     if (solarSystemID === origin || solarSystemID === destination) {
       return;
@@ -85,48 +106,62 @@ function RouteRenderer({
   }, [route]);
 
   return (
-    <Stack {...props}>
+    <StyledRouteRenderer
+      {...props}
+      className={clsx({
+        "route-renderer": true,
+        "route-renderer--always-show-origin": alwaysShowDestination,
+        "route-renderer--always-show-destination": alwaysShowDestination,
+      })}
+    >
       <Stack direction="row" spacing={2}>
-        {route.jumps > 0 && (
-          <Stack mt={4}>
-            <Stack direction="row">
-              <Typography>{showProgress ? position : route.jumps}</Typography>
-              {showProgress && (
-                <>
-                  <Typography>&nbsp;/&nbsp;</Typography>
-                  <Typography>{route.jumps}</Typography>
-                </>
-              )}
-            </Stack>
+        <Stack mt={4}>
+          <Stack
+            direction="row"
+            sx={{
+              opacity: route.jumps === 0 ? 0 : 1,
+              width: 23,
+              transition: route.jumps === 0 ? "" : "opacity 100ms",
+            }}
+          >
+            <Typography>{showProgress ? position : route.jumps}</Typography>
+            {showProgress && (
+              <>
+                <Typography>&nbsp;/&nbsp;</Typography>
+                <Typography>{route.jumps}</Typography>
+              </>
+            )}
           </Stack>
-        )}
-        <Stack
-          direction="column"
-          justifyContent="center"
-          width="97%"
-          maxWidth={900}
-        >
-          <RouteRendererTopInfo
-            route={route.route}
-            selectedIndex={selectedIndex}
-            alwaysShowDestination={alwaysShowDestination}
-            alwaysShowOrigin={alwaysShowOrigin}
-          />
-          <RouteRendererBar
-            route={route.route}
-            position={position}
-            selectedIndex={selectedIndex}
-            onSelectIndex={onSelectIndex}
-            onAvoid={onAvoidSolarSystem}
-          />
-          <RouteRendererBottomInfo
-            route={route.route}
-            selectedIndex={selectedIndex}
-            alwaysShowDestination={alwaysShowDestination}
-            alwaysShowOrigin={alwaysShowOrigin}
-          />
         </Stack>
-        <Box display={route.route.length > 0 ? "block" : "none"}>
+        <TransitionGroup
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            width: "92%",
+          }}
+          unmountOnExit
+          mountOnEnter
+        >
+          {route.route.map((node, index) => (
+            <CSSTransition
+              classNames="route-renderer__item-wrapper"
+              key={node.solarSystemID}
+              timeout={300}
+            >
+              <RouteRendererItem
+                node={node}
+                index={index}
+                count={route.route.length}
+                onAvoidSolarSystem={onAvoidSolarSystem}
+              />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
+        <Box
+          display={route.route.length > 0 ? "block" : "none"}
+          className="route-renderer__indicator"
+        >
           <OnlineIndicator
             ml={0.7}
             online={isConnected}
@@ -144,7 +179,7 @@ function RouteRenderer({
           />
         ))}
       </Stack>
-    </Stack>
+    </StyledRouteRenderer>
   );
 }
 

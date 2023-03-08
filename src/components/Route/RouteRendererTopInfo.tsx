@@ -3,40 +3,39 @@ import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import RouteRendererTopInfoItem from "./RouteRendererTopInfoItem";
 
 type RouteRendererTopInfoProps = {
-  route: RouteJumpSummary[];
-  selectedIndex: number;
+  node: RouteJumpSummary;
+  count: number;
+  index: number;
   alwaysShowOrigin?: boolean;
   alwaysShowDestination?: boolean;
 } & StackProps;
 
 function RouteRendererTopInfo({
-  route,
+  node,
+  count,
+  index,
   mb = 2,
   height = 20,
-  selectedIndex,
   alwaysShowDestination = false,
   alwaysShowOrigin = false,
   ...props
 }: RouteRendererTopInfoProps) {
   return (
     <Stack
-      className="route__info-top"
+      className="route__top-info"
       direction="row"
       mb={mb}
       height={height}
       {...props}
     >
-      {route.map((solarSystem, index) => (
-        <RouteRendererTopInfoItem
-          key={solarSystem.name}
-          index={index}
-          selectedIndex={selectedIndex}
-          count={route.length}
-          alwaysShowDestination={alwaysShowDestination}
-          alwaysShowOrigin={alwaysShowOrigin}
-          {...solarSystem}
-        />
-      ))}
+      <RouteRendererTopInfoItem
+        key={node.name}
+        index={index}
+        count={count}
+        alwaysShowDestination={alwaysShowDestination}
+        alwaysShowOrigin={alwaysShowOrigin}
+        {...node}
+      />
     </Stack>
   );
 }
