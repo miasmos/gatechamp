@@ -8,10 +8,16 @@ type OnlineIndicatorProps = {
 
 function OnlineIndicator({ online, ...props }: OnlineIndicatorProps) {
   return (
-    <Stack direction="row" alignItems="center" {...props}>
+    <Stack direction="row" alignItems="center" {...props} width={10}>
       {!online ? (
         <Tooltip title="Offline">
-          <CircleOutlinedIcon sx={{ opacity: 0.4 }} fontSize="inherit" />
+          <Stack
+            sx={{ width: 5, height: 5 }}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircleOutlinedIcon sx={{ opacity: 0.4 }} fontSize="inherit" />
+          </Stack>
         </Tooltip>
       ) : (
         <Tooltip title="Online">
