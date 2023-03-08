@@ -1,35 +1,31 @@
-import useSWR from "swr";
-import { post } from "../api";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { getJumpsSelector, pushedRouteIdSetter } from "../recoil/route";
+import routeState from "../recoil/route/atom";
+import { isLoggedInSelector } from "../recoil/user";
+import useFetchPushRoute from "./useFetchPushRoute";
 
-function usePushRoute(
-  solarSystemIds: number[],
-  requestId: number | undefined,
-  sendRequest: boolean
-) {
-  const areInputsValid =
-    solarSystemIds.length > 0 && sendRequest && typeof requestId === "number";
-  const {
-    data = { jumps: 0, route: [] },
-    error,
-    isLoading,
-    isValidating,
-  } = useSWR<void>(
-    areInputsValid ? `/api/route/push?id=${requestId}` : null,
-    post({ ids: solarSystemIds }),
-    {
-      revalidateOnReconnect: false,
-      revalidateOnFocus: false,
-      revalidateIfStale: false,
-      shouldRetryOnError: false,
+function usePushRoute() {
+  const [{ pushedRouteId, route }, setRouteState] = useRecoilState(routeState);
+  const isLoggedIn = useRecoilValue(isLoggedInSelector);
+  const jumps = useRecoilValue(getJumpsSelector);
+  const setPushedRouteId = pushedRouteIdSetter(setRouteState);
+  const canPushRoute = isLoggedIn && jumps > 0 && route.length > 0;
+
+  useFetchPushRoute(route, pushedRouteId, canPushRoute);
+
+  useEffect(() => {
+    setPushedRouteId(true);
+  }, []);
+
+  const onPushRoute = () => {
+    if (jumps === 0) {
+      return;
     }
-  );
-
-  return {
-    data,
-    isLoading,
-    isValidating,
-    hasError: error,
+    setPushedRouteId();
   };
+
+  return { canPushRoute, pushRoute: onPushRoute };
 }
 
 export default usePushRoute;

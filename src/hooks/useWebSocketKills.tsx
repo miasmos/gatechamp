@@ -9,6 +9,7 @@ import {
   stargateSetter,
 } from "../recoil/kills";
 import killsState from "../recoil/kills/atom";
+import { isLoggedInSelector, isConnectedSelector } from "../recoil/user";
 import useWebSocket from "./useWebSocket";
 
 const deserializeEvent = (event: string) => {
@@ -23,6 +24,8 @@ const serializeEvent = (
 ) => `${name}:${type}:${id}`;
 
 function useKillsWebsocket() {
+  const loggedIn = useRecoilValue(isLoggedInSelector);
+  const isConnected = useRecoilValue(isConnectedSelector);
   const setKillsState = useSetRecoilState(killsState);
   const { addSubscription, removeSubscription } = useRecoilValue(killsState);
   const setAddSubscriptions = addSubscriptionsSetter(setKillsState);

@@ -6,8 +6,9 @@ type UserStatus = {
   lastLogout: String;
   location: {
     solarSystemID: number;
-    stationID: number;
-    structureID: number;
+    stationID: number | undefined;
+    structureID: number | undefined;
+    solarSystemName: string;
   };
   ship: {
     itemID: number;
@@ -31,8 +32,9 @@ const statusState = atom<StatusState>({
       lastLogout: "",
       location: {
         solarSystemID: 0,
-        stationID: 0,
-        structureID: 0,
+        stationID: undefined,
+        structureID: undefined,
+        solarSystemName: "",
       },
       ship: {
         itemID: 0,

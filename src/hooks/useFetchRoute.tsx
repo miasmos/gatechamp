@@ -5,7 +5,7 @@ import { get } from "../api";
 import { WebSocketEvent } from "../enum";
 import killsState from "../recoil/kills/atom";
 import { RouteState } from "../recoil/route";
-import { serializeEvent } from "./useKillsWebsocket";
+import { serializeEvent } from "./useWebSocketKills";
 
 type RouteJumpSummary = {
   solarSystemID: number;
@@ -62,7 +62,9 @@ function useFetchRoute(
     useRecoilState(killsState);
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
-    typeof destinationSolarSystemId === "number";
+    originSolarSystemId > 0 &&
+    typeof destinationSolarSystemId === "number" &&
+    destinationSolarSystemId > 0;
   const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
   const {
     data = { jumps: 0, route: [], kills: [], origin: -1, destination: -1 },

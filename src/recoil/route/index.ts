@@ -12,6 +12,10 @@ import jumpsSetter from "./setters/jumpsSetter";
 import originNameSetter from "./setters/originNameSetter";
 import destinationNameSetter from "./setters/destinationNameSetter";
 import getJumpsSelector from "./selectors/getJumpsSelector";
+import getIsUsingMyLocationSelector from "./selectors/getIsUsingMyLocationSelector";
+import isUsingMyLocationSetter from "./setters/isUsingMyLocationSetter";
+import pushedRouteIdSetter from "./setters/pushedRouteIdSetter";
+import routeSetter from "./setters/routeSetter";
 
 export default atom;
 export {
@@ -26,6 +30,9 @@ export {
   originNameSetter,
   destinationNameSetter,
   jumpsSetter,
+  isUsingMyLocationSetter,
+  pushedRouteIdSetter,
+  routeSetter,
 };
-export { getJumpsSelector };
+export { getJumpsSelector, getIsUsingMyLocationSelector };
 export type { RouteState };

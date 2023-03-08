@@ -1,11 +1,11 @@
 import { SetterOrUpdater } from "recoil";
 import { UserState } from "../atom";
 
-const loggedInSetter = (setter: SetterOrUpdater<UserState>) => () =>
-  setter((state) => ({
-    ...state,
-    loggedIn: false,
-    activeCharacter: -1,
-  }));
+const loggedInSetter =
+  (setter: SetterOrUpdater<UserState>) => (loggedIn: boolean) =>
+    setter((state) => ({
+      ...state,
+      loggedIn,
+    }));
 
 export default loggedInSetter;

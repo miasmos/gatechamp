@@ -42,10 +42,7 @@ function ShipEditor({ editing, index, editStart, editEnd }: ShipEditorProps) {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     type: CargoBayType
   ) => editShipCargoVolume(index, type, Number(event.target.value));
-  const onHullChange = (ship: EveShip) => {
-    editShipStatic(index, ship);
-    editShipCargoVolume(index, CargoBayType.Main, ship.capacity);
-  };
+  const onHullChange = (ship: EveShip) => editShipStatic(index, ship);
   const isFormValid =
     name.length > 0 &&
     cargoBay.main.volume > 0 &&

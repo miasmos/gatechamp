@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { ReadyState } from "react-use-websocket";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { WebSocketEvent } from "../enum";
 import {
@@ -41,15 +40,19 @@ function useStatusWebsocket() {
       return;
     }
 
-    if (loggedIn && !isSubscribed) {
-      const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
-      sendEvent("subscribe", { event: eventId });
-      setIsSubscribed(true);
+    if (loggedIn) {
+      if (!isSubscribed) {
+        const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
+        sendEvent("subscribe", { event: eventId });
+        setIsSubscribed(true);
+      }
     }
-    if (!loggedIn && isSubscribed) {
-      const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
-      sendEvent("unsubscribe", { event: eventId });
-      setIsSubscribed(false);
+    if (!loggedIn) {
+      if (isSubscribed) {
+        const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
+        sendEvent("unsubscribe", { event: eventId });
+        setIsSubscribed(false);
+      }
     }
   }, [loggedIn, isSubscribed, isConnected]);
 

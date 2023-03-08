@@ -1,6 +1,9 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
 import { Stack, Typography, Checkbox, Tooltip } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import PublishIcon from "@mui/icons-material/Publish";
+import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
 import { EveSolarSystem } from "../../types";
 import RouteRenderer from "./RouteRenderer";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -16,8 +19,17 @@ import {
   originSetter,
 } from "../../recoil/route";
 import { SyntheticEvent } from "react";
+import { isLoggedInSelector } from "../../recoil/user";
+import useMyLocation from "../../hooks/useMyLocation";
+import usePushRoute from "../../hooks/usePushRoute";
 
 function RouteForm() {
+  const {
+    canUseMyLocation,
+    isMyLocationAvailable,
+    onUseMyLocation,
+    isUsingMyLocation,
+  } = useMyLocation();
   const setRouteState = useSetRecoilState(routeState);
   const {
     avoidGateCamp,
@@ -29,10 +41,13 @@ function RouteForm() {
     originName,
     destinationName,
   } = useRecoilValue(routeState);
+  const isLoggedIn = useRecoilValue(isLoggedInSelector);
   const setDestination = destinationSetter(setRouteState);
   const setOrigin = originSetter(setRouteState);
   const setDestinationName = destinationNameSetter(setRouteState);
   const setOriginName = originNameSetter(setRouteState);
+
+  const { canPushRoute, pushRoute } = usePushRoute();
 
   const onOriginChange = (solarSystem: EveSolarSystem) =>
     originSetter(setRouteState)(solarSystem.solarSystemID);
@@ -54,6 +69,9 @@ function RouteForm() {
   const onAvoidSmartBombs = (value: boolean) =>
     avoidSmartBombsSetter(setRouteState)(value);
   const onSwap = () => {
+    if (isLoggedIn && isMyLocationAvailable) {
+      return;
+    }
     setDestinationName(originName);
     setOriginName(destinationName);
 
@@ -64,6 +82,16 @@ function RouteForm() {
       setOrigin(destination);
     }
   };
+
+  const canSwap =
+    origin &&
+    destination &&
+    originName &&
+    destinationName &&
+    !isMyLocationAvailable;
+  const LocationIcon = isMyLocationAvailable
+    ? MyLocationIcon
+    : LocationSearchingIcon;
 
   return (
     <Stack mt={5}>
@@ -77,25 +105,77 @@ function RouteForm() {
             mb={2}
           >
             <Stack>
-              <Typography>Origin</Typography>
-              <AutocompleteSolarSystem
-                controlled
-                onChange={onOriginChange}
-                onInputChange={onOriginNameChange}
-                value={originName}
-              />
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Stack>
+                  <Typography>&nbsp;</Typography>
+                  <Tooltip title="Use My Location">
+                    <Stack>
+                      <LocationIcon
+                        sx={{
+                          cursor: canUseMyLocation ? "pointer" : "default",
+                          opacity: canUseMyLocation ? 1 : 0.4,
+                          zIndex: 2,
+                        }}
+                        onClick={() => onUseMyLocation(!isUsingMyLocation)}
+                      />
+                    </Stack>
+                  </Tooltip>
+                </Stack>
+                <Stack>
+                  <Typography>Origin</Typography>
+                  <AutocompleteSolarSystem
+                    controlled
+                    onChange={onOriginChange}
+                    onInputChange={onOriginNameChange}
+                    value={originName}
+                    disabled={isMyLocationAvailable}
+                  />
+                </Stack>
+              </Stack>
             </Stack>
             <Stack onClick={onSwap}>
-              <SwapHorizIcon sx={{ mt: 2, cursor: "pointer" }} />
+              <Tooltip title="Swap">
+                <SwapHorizIcon
+                  sx={{
+                    mt: 2,
+                    cursor: canSwap ? "pointer" : "default",
+                    opacity: canSwap ? 1 : 0.4,
+                  }}
+                />
+              </Tooltip>
             </Stack>
-            <Stack>
-              <Typography>Destination</Typography>
-              <AutocompleteSolarSystem
-                controlled
-                onChange={onDestinationChange}
-                onInputChange={onDestinationNameChange}
-                value={destinationName}
-              />
+            <Stack
+              direction="row"
+              spacing={2}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Stack>
+                <Typography>Destination</Typography>
+                <AutocompleteSolarSystem
+                  controlled
+                  onChange={onDestinationChange}
+                  onInputChange={onDestinationNameChange}
+                  value={destinationName}
+                />
+              </Stack>
+              <Stack>
+                <Tooltip title="Push to Eve Client">
+                  <PublishIcon
+                    sx={{
+                      mt: 2,
+                      cursor: canPushRoute ? "pointer" : "default",
+                      opacity: canPushRoute ? 1 : 0.4,
+                    }}
+                    onClick={pushRoute}
+                  />
+                </Tooltip>
+              </Stack>
             </Stack>
           </Stack>
           <Stack direction="row" justifyContent="center" spacing={5} mt={1}>

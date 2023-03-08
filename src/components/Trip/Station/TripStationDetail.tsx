@@ -19,10 +19,14 @@ import {
   originSetter,
 } from "../../../recoil/route";
 import routeState from "../../../recoil/route/atom";
+import useMyLocation from "../../../hooks/useMyLocation";
+import usePushRoute from "../../../hooks/usePushRoute";
 
 type TripStationDetailProps = NavigationIntention;
 
 function TripStationDetail({ to }: TripStationDetailProps) {
+  const { onUseMyLocation } = useMyLocation();
+  const { pushRoute } = usePushRoute();
   const navigate = useNavigate();
   const routerLocation = useLocation();
   const setRoute = useSetRecoilState(routeState);
@@ -68,6 +72,8 @@ function TripStationDetail({ to }: TripStationDetailProps) {
   useEffect(() => {
     setOrigin(origin.system_id);
     setDestination(destination.system_id);
+    onUseMyLocation(true);
+    pushRoute();
   }, []);
 
   return (
@@ -107,9 +113,9 @@ function TripStationDetail({ to }: TripStationDetailProps) {
             </Typography>
           </Stack>
         </Stack>
-        <RouteRenderer mt={1} width={800} />
+        <RouteRenderer mt={1} width="100%" />
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={5} mt={5}>
         <TripStationItemTable
           title="Main"
           maxVolume={ship?.cargoBay.main.volume || 0}

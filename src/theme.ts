@@ -96,6 +96,31 @@ const theme = createTheme(
             padding: "2rem",
             textAlign: "center",
           },
+          'input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-results-button, input[type="search"]::-webkit-search-results-decoration':
+            {
+              display: "none",
+            },
+        },
+      },
+      MuiAutocomplete: {
+        styleOverrides: {
+          root: {
+            "&.MuiAutocomplete-clearIndicator": {
+              color: palette.palette.primary.main,
+              background: palette.palette.primary.main,
+              borderColor: palette.palette.primary.main,
+            },
+            "&:hover.MuiAutocomplete-clearIndicator": {
+              color: palette.palette.primary.main,
+              background: palette.palette.primary.main,
+              borderColor: palette.palette.primary.main,
+            },
+            "&.Mui-focused.MuiAutocomplete-clearIndicator": {
+              color: palette.palette.primary.main,
+              background: palette.palette.primary.main,
+              borderColor: palette.palette.primary.main,
+            },
+          },
         },
       },
       MuiOutlinedInput: {

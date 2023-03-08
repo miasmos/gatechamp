@@ -4,6 +4,7 @@ import {
   TextField,
 } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
+import ClearIcon from "@mui/icons-material/Clear";
 import useFetchAutocomplete, {
   AutocompleteType,
 } from "../hooks/useFetchAutocomplete";
@@ -36,6 +37,7 @@ function AutocompleteShip({
         id="autocomplete"
         disableClearable
         options={data.hits.hits}
+        clearIcon={<ClearIcon fontSize="small" />}
         onChange={(_, { _source }: any) => onChange(_source)}
         isOptionEqualToValue={({ _source: s1 }, { _source: s2 }) => s1 === s2}
         inputValue={value}

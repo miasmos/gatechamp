@@ -41,28 +41,29 @@ const stringifyItemOrder = ({
 const getSecurityColor = (security: number) => {
   const { s1p0, s0p0, s0p1, s0p2, s0p3, s0p4, s0p5, s0p6, s0p7, s0p8, s0p9 } =
     colors.eve.security;
-  if (security === 1) {
-    return s1p0;
-  } else if (security < 1 && security >= 0.9) {
-    return s0p9;
-  } else if (security < 0.9 && security >= 0.8) {
-    return s0p8;
-  } else if (security < 0.8 && security >= 0.7) {
-    return s0p7;
-  } else if (security < 0.7 && security >= 0.6) {
-    return s0p6;
-  } else if (security < 0.6 && security >= 0.5) {
-    return s0p5;
-  } else if (security < 0.5 && security >= 0.4) {
-    return s0p4;
-  } else if (security < 0.4 && security >= 0.3) {
-    return s0p3;
-  } else if (security < 0.3 && security >= 0.2) {
-    return s0p2;
-  } else if (security < 0.2 && security >= 0.1) {
-    return s0p1;
+  const roundedSecurity = Math.round(security * 10) / 10;
+  if (roundedSecurity >= 1) {
+    return s1p0; // #2c75e2
+  } else if (roundedSecurity < 1 && roundedSecurity >= 0.9) {
+    return s0p9; // #3a9aeb
+  } else if (roundedSecurity < 0.9 && roundedSecurity >= 0.8) {
+    return s0p8; // #4ecdf7
+  } else if (roundedSecurity < 0.8 && roundedSecurity >= 0.7) {
+    return s0p7; // #61dba4
+  } else if (roundedSecurity < 0.7 && roundedSecurity >= 0.6) {
+    return s0p6; // #72e655
+  } else if (roundedSecurity < 0.6 && roundedSecurity >= 0.5) {
+    return s0p5; // #f4fe83
+  } else if (roundedSecurity < 0.5 && roundedSecurity >= 0.4) {
+    return s0p4; // #dc6d07
+  } else if (roundedSecurity < 0.4 && roundedSecurity >= 0.3) {
+    return s0p3; // #ce440f
+  } else if (roundedSecurity < 0.3 && roundedSecurity >= 0.2) {
+    return s0p2; // #bc1117
+  } else if (roundedSecurity < 0.2 && roundedSecurity >= 0.1) {
+    return s0p1; // #732121
   }
-  return s0p0;
+  return s0p0; // #8d3364
 };
 
 export {

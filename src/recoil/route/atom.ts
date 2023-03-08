@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 type AvoidedSolarSystem = {
   name: string;
@@ -16,6 +19,9 @@ interface RouteState {
   avoidHics: boolean;
   avoidSmartBombs: boolean;
   jumps: number;
+  isUsingMyLocation: boolean;
+  route: number[];
+  pushedRouteId: undefined | number;
 }
 
 const routeState = atom<RouteState>({
@@ -31,7 +37,11 @@ const routeState = atom<RouteState>({
     avoidHics: false,
     avoidSmartBombs: false,
     jumps: 0,
+    isUsingMyLocation: false,
+    route: [],
+    pushedRouteId: undefined,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export default routeState;

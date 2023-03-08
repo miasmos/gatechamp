@@ -1,21 +1,45 @@
 import { Box } from "@mui/system";
+import { useEffect } from "react";
 import { Outlet } from "react-router";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import AppBar from "../components/AppBar";
 import ErrorBoundary from "../components/ErrorBoundary";
 import DebugObserver from "../components/RecoilObserver";
 import useFetchCharacter from "../hooks/useFetchCharacter";
 import useInitializeUser from "../hooks/useInitializeUser";
-import useKillsWebsocket from "../hooks/useKillsWebsocket";
-import useStatusWebsocket from "../hooks/useStatusWebsocket";
+import useWebSocketKills from "../hooks/useWebSocketKills";
+import useWebSocketStatus from "../hooks/useWebSocketStatus";
+import shipsState, { Ship } from "../recoil/ships/atom";
 import userState from "../recoil/user/atom";
 
 function RootLayout() {
+  const [{ ships, shipsSelected }, setShipState] = useRecoilState(shipsState);
   const { loggedIn } = useRecoilValue(userState);
   useInitializeUser();
-  useKillsWebsocket();
-  useStatusWebsocket();
+  useWebSocketKills();
+  useWebSocketStatus();
   useFetchCharacter(loggedIn);
+
+  useEffect(() => {
+    const nextShipsSelected: boolean[] = [];
+    const nextShips = ships.reduce<Ship[]>((prev, current, index) => {
+      const isShipValid =
+        current.name.length > 0 &&
+        current.static.typeName.length > 0 &&
+        current.cargoBay.main.volume > 0;
+      if (isShipValid) {
+        prev.push(current);
+        nextShipsSelected.push(shipsSelected[index]);
+      }
+      return prev;
+    }, []);
+
+    setShipState((state) => ({
+      ...state,
+      ships: nextShips,
+      shipsSelected: nextShipsSelected,
+    }));
+  }, []);
 
   return (
     <Box className="App">
