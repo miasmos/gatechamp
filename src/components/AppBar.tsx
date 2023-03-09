@@ -1,13 +1,8 @@
 import { Suspense } from "react";
-import {
-  AppBar as MuiAppBar,
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { AppBar as MuiAppBar, Link, Stack, useTheme } from "@mui/material";
 import { AppRoute } from "../enum";
 import AppBarAvatar, { AppBarAvatarLoading } from "./AppBarAvatar";
+import { LogoIcon } from "./icon";
 
 function AppBar() {
   const theme = useTheme();
@@ -33,9 +28,7 @@ function AppBar() {
       >
         <Stack justifyContent="center" height="100%">
           <Link href={AppRoute.Home}>
-            <Typography variant="h5" fontWeight="normal">
-              EveTrade+
-            </Typography>
+            <LogoIcon color={theme.palette.primary.main} width={180} mt={1} />
           </Link>
         </Stack>
         <Stack justifyContent="center" height="100%">

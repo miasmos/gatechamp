@@ -49,7 +49,7 @@ function AppBarAvatar() {
         </Stack>
       ) : (
         <Link href={`${EVE_TRADE_PLUS_DOMAIN}/api/auth/login`}>
-          <img src="/login.png" />
+          <img src="/login.png" width={200} />
         </Link>
       )}
     </Stack>

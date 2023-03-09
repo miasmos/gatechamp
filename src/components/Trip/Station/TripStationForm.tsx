@@ -73,7 +73,7 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
 
   return (
     <>
-      <Typography variant="h4" mb={5}>
+      <Typography variant="h3" mb={5}>
         Configure your route
       </Typography>
       <Stack direction="column" spacing={2}>

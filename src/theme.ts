@@ -29,6 +29,7 @@ declare module "@mui/material/styles/createPalette" {
   interface PaletteOptions extends PaletteExtended {}
 }
 
+const primary = "#222";
 const colors = {
   eve: {
     security: {
@@ -46,17 +47,37 @@ const colors = {
     },
   },
   killSummary: {
-    smartBomb: "red",
-    hic: "darkorange",
-    gateCamp: "white",
+    smartBomb: "#ec1c24",
+    hic: "#9c309e",
+    gateCamp: primary,
   },
 };
 
 const palette = createTheme({
+  typography: {
+    h1: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+    h2: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+    h3: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+    h4: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+    h5: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+    h6: {
+      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+    },
+  },
   palette: {
     ...colors,
     primary: {
-      main: "#222",
+      main: primary,
       light: "#333",
       contrastText: "#fff",
     },
@@ -64,7 +85,7 @@ const palette = createTheme({
       main: "#f50057",
     },
     text: {
-      primary: "#222",
+      primary: primary,
       secondary: "#333",
       disabled: "rgba(22,22,22,0.77)",
     },

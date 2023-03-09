@@ -11,6 +11,7 @@ import {
   VertIcon,
   AtronIcon,
 } from "./icon";
+import { palette } from "../theme";
 
 type LoadingAnimationProps = {
   duration?: number;
@@ -51,7 +52,13 @@ function LoadingAnimation({
     setState((state) => ({
       ...state,
       show,
-      shipIcon: <NextIcon width="90%" alignItems="center" />,
+      shipIcon: (
+        <NextIcon
+          width="90%"
+          color={palette.palette.primary.main}
+          alignItems="center"
+        />
+      ),
       array: nextArray,
     }));
   };
@@ -114,11 +121,13 @@ function LoadingAnimation({
               className="loading-animation__left"
               width={6 * scale}
               style={{ marginLeft: "-1px" }}
+              color={palette.palette.primary.main}
             />
             <VertIcon
               className="loading-animation__right"
               width={6 * scale}
               style={{ marginRight: "-1px" }}
+              color={palette.palette.primary.main}
             />
           </Stack>
           <Box

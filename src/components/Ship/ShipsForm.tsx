@@ -92,9 +92,7 @@ function ShipsForm({ to }: ShipsFormProps) {
   const hasScrollBar = ships.ships.length > 4;
   return (
     <>
-      <Typography variant="h4" mb={5}>
-        Add your ships
-      </Typography>
+      <Typography variant="h3">Add your ships</Typography>
       <Stack>
         <Stack display={hasShips ? "flex" : "none"}>
           <Stack

@@ -54,7 +54,7 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   }
 
   return (
-    <Stack spacing={5}>
+    <Stack spacing={3}>
       <Typography variant="h4">Choose your trip</Typography>
       <Stack
         spacing={2}

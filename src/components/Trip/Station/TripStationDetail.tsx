@@ -81,13 +81,13 @@ function TripStationDetail({ to }: TripStationDetailProps) {
       <Stack alignItems="center">
         <Stack direction="row" alignItems="center" spacing={2}>
           <Stack alignItems="center">
-            <Typography variant="h4" mb={1}>
+            <Typography variant="h3" mb={1}>
               {getStationDisplayName(origin)}
             </Typography>
           </Stack>
-          <ArrowRightAltIcon />
+          <ArrowRightAltIcon fontSize="large" />
           <Stack alignItems="center">
-            <Typography variant="h4" mb={1}>
+            <Typography variant="h3" mb={1}>
               {getStationDisplayName(destination)}
             </Typography>
           </Stack>

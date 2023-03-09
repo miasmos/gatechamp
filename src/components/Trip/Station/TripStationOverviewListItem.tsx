@@ -39,7 +39,7 @@ function TripStationOverviewListItem({
       <Stack px={6} py={3}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row">
-            <Typography variant="h6" textAlign="left">
+            <Typography variant="h5" textAlign="left">
               {getStationDisplayName(origin)}
             </Typography>
             <Stack direction="row" alignItems="center">
@@ -47,12 +47,12 @@ function TripStationOverviewListItem({
               <ArrowRightAltIcon />
               &nbsp;
             </Stack>
-            <Typography variant="h6" textAlign="left">
+            <Typography variant="h5" textAlign="left">
               {getStationDisplayName(destination)}
             </Typography>
           </Stack>
           <Stack direction="row">
-            <Typography variant="h6" textAlign="right">
+            <Typography variant="h5" textAlign="right">
               Ƶ{formatCurrency(totalProfit)}
             </Typography>
           </Stack>
