@@ -1,11 +1,18 @@
-import { Box } from "@mui/system";
+import { Stack } from "@mui/material";
 import { Outlet } from "react-router";
 
 function TripLayout() {
   return (
-    <Box className="Trip">
+    <Stack
+      className="layout__trip"
+      width="100%"
+      alignSelf="center"
+      justifyContent="center"
+      minHeight="69vh"
+      direction="row"
+    >
       <Outlet />
-    </Box>
+    </Stack>
   );
 }
 

@@ -94,7 +94,7 @@ function RouteForm() {
     : LocationSearchingIcon;
 
   return (
-    <Stack mt={5}>
+    <Stack width="100%" alignSelf="center">
       <Stack direction="column" spacing={3}>
         <Stack direction="column">
           <Stack
@@ -217,7 +217,7 @@ function RouteForm() {
             </Stack>
           </Stack>
         </Stack>
-        <RouteRenderer width={800} alwaysShowDestination alwaysShowOrigin />
+        <RouteRenderer alwaysShowDestination alwaysShowOrigin minWidth={800} />
       </Stack>
     </Stack>
   );

@@ -21,6 +21,7 @@ import {
 import { isConnectedSelector } from "../../recoil/user";
 import OnlineIndicator from "../OnlineIndicator";
 import RouteRendererItem from "./RouteRendererItem";
+import { getTitleSequenceSelector } from "../../recoil/kills";
 
 type RouteRendererProps = {
   position?: number;
@@ -31,7 +32,7 @@ type RouteRendererProps = {
 
 const StyledRouteRenderer = styled(Stack)(({}) => ({
   ".route-renderer__item:hover": {
-    ".route__info-top-item:not(.route__info-top-item--has-kills)": {
+    ".route__info-top-item": {
       opacity: 1,
     },
     ".route-renderer__bar": {
@@ -43,6 +44,12 @@ const StyledRouteRenderer = styled(Stack)(({}) => ({
       },
     },
   },
+  ".route-renderer__item.route-renderer__item--always-show-bottom-title:hover":
+    {
+      ".route__info-top-item": {
+        opacity: 0,
+      },
+    },
   "&.route-renderer--always-show-origin, &.route-renderer--always-show-destination":
     {
       ".route-renderer__item:first-of-type .route__solar-system, .route-renderer__item:last-of-type .route__solar-system":
@@ -60,6 +67,7 @@ function RouteRenderer({
   showProgress = false,
   alwaysShowDestination = false,
   alwaysShowOrigin = false,
+  width = "100%",
   ...props
 }: RouteRendererProps) {
   const isConnected = useRecoilValue(isConnectedSelector);
@@ -87,6 +95,7 @@ function RouteRenderer({
     avoidedSolarSystems.map(({ solarSystemID }) => solarSystemID),
     { avoidEntryGateCamp, avoidGateCamp, avoidHics, avoidSmartBombs }
   );
+  const showTitle = useRecoilValue(getTitleSequenceSelector(route.route));
 
   const setJumps = (jumps: number) => jumpsSetter(setRouteState)(jumps);
   const onAvoidSolarSystem = (solarSystemID: number, name: string) => {
@@ -108,77 +117,95 @@ function RouteRenderer({
   return (
     <StyledRouteRenderer
       {...props}
+      width={width}
       className={clsx({
         "route-renderer": true,
         "route-renderer--always-show-origin": alwaysShowDestination,
         "route-renderer--always-show-destination": alwaysShowDestination,
       })}
+      minHeight={140}
+      justifyContent="center"
+      alignItems="center"
+      direction="row"
     >
-      <Stack direction="row" spacing={2}>
-        <Stack mt={4}>
-          <Stack
-            direction="row"
-            sx={{
-              opacity: route.jumps === 0 ? 0 : 1,
-              width: 23,
-              transition: route.jumps === 0 ? "" : "opacity 100ms",
-            }}
-          >
-            <Typography>{showProgress ? position : route.jumps}</Typography>
-            {showProgress && (
-              <>
-                <Typography>&nbsp;/&nbsp;</Typography>
-                <Typography>{route.jumps}</Typography>
-              </>
-            )}
-          </Stack>
-        </Stack>
-        <TransitionGroup
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            width: "92%",
-          }}
-          unmountOnExit
-          mountOnEnter
-        >
-          {route.route.map((node, index) => (
-            <CSSTransition
-              classNames="route-renderer__item-wrapper"
-              key={node.solarSystemID}
-              timeout={300}
+      {route.hasRoute ? (
+        <>
+          <Stack direction="row" spacing={2}>
+            <Stack mt={4}>
+              <Stack
+                direction="row"
+                sx={{
+                  opacity: route.jumps === 0 ? 0 : 1,
+                  width: 23,
+                  transition: route.jumps === 0 ? "" : "opacity 100ms",
+                }}
+              >
+                <Typography>{showProgress ? position : route.jumps}</Typography>
+                {showProgress && (
+                  <>
+                    <Typography>&nbsp;/&nbsp;</Typography>
+                    <Typography>{route.jumps}</Typography>
+                  </>
+                )}
+              </Stack>
+            </Stack>
+            <TransitionGroup
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                width: "92%",
+              }}
             >
-              <RouteRendererItem
-                node={node}
-                index={index}
-                count={route.route.length}
-                onAvoidSolarSystem={onAvoidSolarSystem}
+              {route.route.map((node, index) => (
+                <CSSTransition
+                  classNames="route-renderer__item-wrapper"
+                  key={node.solarSystemID}
+                  timeout={300}
+                >
+                  <RouteRendererItem
+                    node={node}
+                    index={index}
+                    count={route.route.length}
+                    onAvoidSolarSystem={onAvoidSolarSystem}
+                    alwaysShowTopTitle={
+                      (index === 0 && alwaysShowOrigin) ||
+                      (index === route.route.length - 1 &&
+                        alwaysShowDestination &&
+                        !showTitle[index])
+                    }
+                    alwaysShowBottomTitle={showTitle[index]}
+                  />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+            <Box
+              display={route.route.length > 0 ? "block" : "none"}
+              className="route-renderer__indicator"
+            >
+              <OnlineIndicator
+                ml={0.7}
+                online={isConnected}
+                fontSize="small"
+                mt={5.1}
               />
-            </CSSTransition>
-          ))}
-        </TransitionGroup>
-        <Box
-          display={route.route.length > 0 ? "block" : "none"}
-          className="route-renderer__indicator"
-        >
-          <OnlineIndicator
-            ml={0.7}
-            online={isConnected}
-            fontSize="small"
-            mt={5.1}
-          />
-        </Box>
-      </Stack>
-      <Stack alignItems="flex-start" direction="row" spacing={2}>
-        {avoidedSolarSystems.map(({ name }, index) => (
-          <Chip
-            key={name}
-            label={name}
-            onDelete={() => onUnavoidSolarSystem(index)}
-          />
-        ))}
-      </Stack>
+            </Box>
+          </Stack>
+          <Stack alignItems="flex-start" direction="row" spacing={2}>
+            {avoidedSolarSystems.map(({ name }, index) => (
+              <Chip
+                key={name}
+                label={name}
+                onDelete={() => onUnavoidSolarSystem(index)}
+              />
+            ))}
+          </Stack>
+        </>
+      ) : (
+        <Stack>
+          <Typography>No gate-to-gate route</Typography>
+        </Stack>
+      )}
     </StyledRouteRenderer>
   );
 }

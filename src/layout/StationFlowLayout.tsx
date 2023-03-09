@@ -1,11 +1,11 @@
-import { Box } from "@mui/system";
+import { Stack } from "@mui/material";
 import { Outlet } from "react-router";
 
 function StationFlowLayout() {
   return (
-    <Box className="Station-Flow">
+    <Stack className="layout__station-flow" alignSelf="center">
       <Outlet />
-    </Box>
+    </Stack>
   );
 }
 

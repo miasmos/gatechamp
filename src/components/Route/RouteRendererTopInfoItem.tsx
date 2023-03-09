@@ -5,18 +5,12 @@ import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import { getSolarSystemSelector } from "../../recoil/kills";
 
 type GateCampRendererTopInfoItemProps = RouteJumpSummary & {
-  count: number;
-  index: number;
-  alwaysShowOrigin: boolean;
-  alwaysShowDestination: boolean;
+  alwaysShowTitle?: boolean;
 };
 
 function GateCampRendererTopInfoItem({
-  count,
-  index,
-  alwaysShowOrigin,
-  alwaysShowDestination,
   name,
+  alwaysShowTitle,
   solarSystemID,
 }: GateCampRendererTopInfoItemProps) {
   const { kills } = useRecoilValue(getSolarSystemSelector(solarSystemID));
@@ -26,13 +20,10 @@ function GateCampRendererTopInfoItem({
       className={clsx({
         "route__info-top-item": true,
         "route__info-top-item--has-kills": kills > 0,
+        "route__info-top-item--always-show-title": alwaysShowTitle,
       })}
       sx={{
-        opacity:
-          (index === 0 && alwaysShowOrigin) ||
-          (index === count - 1 && alwaysShowDestination)
-            ? 1
-            : 0,
+        opacity: alwaysShowTitle ? 1 : 0,
       }}
       key={name}
       justifyContent="flex-end"

@@ -38,7 +38,7 @@ function RouteRendererTick({
       <Box>
         <Tick
           color={color}
-          className={`gate-camp__${type} gate-camp-id__${stargateId}`}
+          className={`gate-camp__${type} gate-camp-id__${stargateId} gate-camp`}
           direction={direction}
           position="absolute"
           zIndex={4}

@@ -10,30 +10,20 @@ import TungstenIcon from "@mui/icons-material/Tungsten";
 import { useTheme } from "@emotion/react";
 
 type RouteRendererBottomInfoItemProps = RouteJumpSummary & {
-  count: number;
-  index: number;
-  alwaysShowDestination: boolean;
-  alwaysShowOrigin: boolean;
+  alwaysShowTitle?: boolean;
+  direction: "horizontal" | "vertical";
 };
 
 function RouteRendererBottomInfoItem({
   name,
-  count,
-  index,
   solarSystemID,
-  alwaysShowDestination,
-  alwaysShowOrigin,
+  alwaysShowTitle = false,
+  direction = "horizontal",
 }: RouteRendererBottomInfoItemProps) {
   const theme = useTheme() as Theme;
   const { kills, attackers, hics, smartBombs } = useRecoilValue(
     getSolarSystemSelector(solarSystemID)
   );
-  const displayTitle =
-    (!(alwaysShowOrigin && index === 0) &&
-      !(alwaysShowDestination && index === count - 1) &&
-      kills > 0) ||
-    kills === 0;
-  const verticalKillThreshold = 20;
   return (
     <Box
       className={clsx({
@@ -50,18 +40,19 @@ function RouteRendererBottomInfoItem({
         className="route-renderer__bottom-info__title"
         variant="body2"
         whiteSpace="nowrap"
+        textAlign="center"
         sx={{
-          display: displayTitle ? "block" : "none",
+          opacity: alwaysShowTitle ? 1 : 0,
         }}
       >
         {name}
       </Typography>
 
       <Stack
-        direction={count > verticalKillThreshold ? "column" : "row"}
+        direction={direction === "vertical" ? "column" : "row"}
         justifyContent="center"
         mt={0.3}
-        spacing={count > verticalKillThreshold ? 0.2 : 0}
+        spacing={direction === "vertical" ? 0.2 : 0}
       >
         <Stack
           sx={{
@@ -69,7 +60,7 @@ function RouteRendererBottomInfoItem({
             pointerEvents: kills > 0 ? "all" : "none",
           }}
           justifyContent="center"
-          direction={count > verticalKillThreshold ? "row" : "column"}
+          direction={direction === "vertical" ? "row" : "column"}
         >
           <Tooltip title="Kills">
             <SkullIcon color="white" />
@@ -80,7 +71,7 @@ function RouteRendererBottomInfoItem({
         </Stack>
         <Stack
           justifyContent="center"
-          direction={count > verticalKillThreshold ? "row" : "column"}
+          direction={direction === "vertical" ? "row" : "column"}
         >
           <Tooltip title="Attackers">
             <RocketIcon sx={{ fontSize: 15 }} />

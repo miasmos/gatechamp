@@ -8,7 +8,12 @@ import useFetchTripStation from "../../../hooks/useFetchTripStation";
 import TripStationOverviewListItem from "./TripStationOverviewListItem";
 import { NavigationIntention } from "../../../types";
 import routeState from "../../../recoil/route/atom";
-import { destinationSetter, originSetter } from "../../../recoil/route";
+import {
+  clearRouteSetter,
+  destinationSetter,
+  originSetter,
+} from "../../../recoil/route";
+import { useEffect } from "react";
 
 type TripStationOverviewProps = NavigationIntention;
 
@@ -17,6 +22,7 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
   const setRouteState = useSetRecoilState(routeState);
   const trip = useRecoilValue(tripState);
   const selectedShips = useRecoilValue(getSelectedShipsSelector);
+  const clearRoute = clearRouteSetter(setRouteState);
   const { data, isValidating, isLoading, hasError } = useFetchTripStation(
     trip.id,
     trip,
@@ -34,6 +40,12 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
       state: data[index],
     });
   };
+
+  // useEffect(() => {
+  //   // clear the route ids used for pushing to eve client
+  //   // otherwise we have a race condition when navigating to TripStationDetail
+  //   clearRoute();
+  // }, []);
 
   if (hasError) {
     console.log("error while fetching", hasError);

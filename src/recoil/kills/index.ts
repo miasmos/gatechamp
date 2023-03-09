@@ -5,6 +5,7 @@ import solarSystemSetter from "./setters/solarSystemSetter";
 import stargateSetter from "./setters/stargateSetter";
 import getSubscriptionsSelector from "./selectors/getSubscriptionsSelector";
 import getIsSubscribedSelector from "./selectors/getIsSubscribedSelector";
+import getTitleSequenceSelector from "./selectors/getTitleSequenceSelector";
 import {
   addSubscriptionsSetter,
   removeSubscriptionsSetter,
@@ -17,6 +18,7 @@ export {
   getStargateSelector,
   getSubscriptionsSelector,
   getIsSubscribedSelector,
+  getTitleSequenceSelector,
 };
 export {
   solarSystemSetter,

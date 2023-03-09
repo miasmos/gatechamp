@@ -16,6 +16,7 @@ import getIsUsingMyLocationSelector from "./selectors/getIsUsingMyLocationSelect
 import isUsingMyLocationSetter from "./setters/isUsingMyLocationSetter";
 import pushedRouteIdSetter from "./setters/pushedRouteIdSetter";
 import routeSetter from "./setters/routeSetter";
+import clearRouteSetter from "./setters/clearRouteSetter";
 
 export default atom;
 export {
@@ -33,6 +34,7 @@ export {
   isUsingMyLocationSetter,
   pushedRouteIdSetter,
   routeSetter,
+  clearRouteSetter,
 };
 export { getJumpsSelector, getIsUsingMyLocationSelector };
 export type { RouteState };

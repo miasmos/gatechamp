@@ -20,6 +20,7 @@ type RouteSummary = {
   destination: number;
   jumps: number;
   route: RouteJumpSummary[];
+  hasRoute: boolean;
 };
 
 type KillSummary = {
@@ -67,7 +68,14 @@ function useFetchRoute(
     destinationSolarSystemId > 0;
   const avoidedSolarSystemsStr = avoidedSolarSystems.join(",");
   const {
-    data = { jumps: 0, route: [], kills: [], origin: -1, destination: -1 },
+    data = {
+      jumps: 0,
+      route: [],
+      hasRoute: true,
+      kills: [],
+      origin: -1,
+      destination: -1,
+    },
     error,
     isLoading,
     isValidating,
