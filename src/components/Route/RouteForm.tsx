@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Stack, Typography, Checkbox, Tooltip } from "@mui/material";
+import { Stack, Typography, Checkbox, Tooltip, useTheme } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -24,6 +24,7 @@ import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
 
 function RouteForm() {
+  const theme = useTheme();
   const {
     canUseMyLocation,
     isMyLocationAvailable,
@@ -98,11 +99,18 @@ function RouteForm() {
       <Stack direction="column" spacing={3}>
         <Stack direction="column">
           <Stack
+            className="route-form__inputs"
             direction="row"
             alignItems="center"
-            spacing={3}
             justifyContent="center"
+            spacing={{ md: 3, sm: 0 }}
             mb={2}
+            sx={{
+              [theme.breakpoints.down("sm")]: {
+                flexDirection: "column",
+                "> *": { my: theme.spacing(1) },
+              },
+            }}
           >
             <Stack>
               <Stack
@@ -142,18 +150,29 @@ function RouteForm() {
               <Tooltip title="Swap">
                 <SwapHorizIcon
                   sx={{
-                    mt: 2,
+                    mt: { md: 2, sm: 0 },
                     cursor: canSwap ? "pointer" : "default",
                     opacity: canSwap ? 1 : 0.4,
+                    [theme.breakpoints.down("sm")]: {
+                      ml: theme.spacing(5),
+                    },
                   }}
                 />
               </Tooltip>
             </Stack>
             <Stack
               direction="row"
-              spacing={2}
+              spacing={{ md: 2, sm: 0 }}
               alignItems="center"
               justifyContent="center"
+              sx={{
+                [theme.breakpoints.down("sm")]: {
+                  flexDirection: "row-reverse",
+                  "> *": {
+                    mx: theme.spacing(1),
+                  },
+                },
+              }}
             >
               <Stack>
                 <Typography>Destination</Typography>
@@ -217,7 +236,7 @@ function RouteForm() {
             </Stack>
           </Stack>
         </Stack>
-        <RouteRenderer alwaysShowDestination alwaysShowOrigin minWidth={800} />
+        <RouteRenderer alwaysShowDestination alwaysShowOrigin />
       </Stack>
     </Stack>
   );

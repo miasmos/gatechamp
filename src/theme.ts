@@ -80,19 +80,22 @@ const theme = createTheme(
     components: {
       MuiCssBaseline: {
         styleOverrides: {
+          html: {
+            height: "100vh",
+            width: "100vw",
+          },
           body: {
-            margin: 0,
-            display: "flex",
-            placeItems: "center",
-            minWidth: "320px",
-            minHeight: "100vh",
             background: "url(/background.jpg)",
             backgroundSize: "cover",
             backgroundRepeat: "none",
+            textAlign: "center",
+            width: "100vw",
+            overflowX: "hidden",
           },
           "#root": {
-            width: "100vw",
             textAlign: "center",
+            width: "100%",
+            height: "100%",
           },
           'input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-results-button, input[type="search"]::-webkit-search-results-decoration':
             {
@@ -118,6 +121,10 @@ const theme = createTheme(
               background: palette.palette.primary.main,
               borderColor: palette.palette.primary.main,
             },
+          },
+          listbox: {
+            background: palette.palette.primary.main,
+            color: palette.palette.primary.contrastText,
           },
         },
       },

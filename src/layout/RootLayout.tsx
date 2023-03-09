@@ -44,13 +44,13 @@ function RootLayout() {
   }, []);
 
   return (
-    <Box width="100%" className="layout__root">
+    <Box width="100%" height="100%" className="layout__root">
       <>
         <DebugObserver />
         <ErrorBoundary>
           <AppBar />
           <Container
-            sx={{ display: "flex", flex: 1, mt: "90px", minHeight: "65vh" }}
+            sx={{ display: "flex", flex: 1, mt: "90px", minHeight: "70vh" }}
           >
             <Outlet />
           </Container>

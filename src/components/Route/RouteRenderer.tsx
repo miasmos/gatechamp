@@ -5,6 +5,7 @@ import {
   StackProps,
   styled,
   Typography,
+  useTheme,
 } from "@mui/material";
 import clsx from "clsx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -35,13 +36,13 @@ const StyledRouteRenderer = styled(Stack)(({}) => ({
     ".route__info-top-item": {
       opacity: 1,
     },
-    ".route-renderer__bar": {
-      ".route-renderer__bar__avoid-text": {
-        display: "block",
-      },
-      ".route__solar-system": {
-        cursor: "pointer",
-      },
+  },
+  ".route-renderer__bar:hover": {
+    ".route-renderer__bar__avoid-text": {
+      display: "block",
+    },
+    ".route__solar-system": {
+      cursor: "pointer",
     },
   },
   ".route-renderer__item.route-renderer__item--always-show-bottom-title:hover":
@@ -70,6 +71,7 @@ function RouteRenderer({
   width = "100%",
   ...props
 }: RouteRendererProps) {
+  const theme = useTheme();
   const isConnected = useRecoilValue(isConnectedSelector);
   const setRouteState = useSetRecoilState(routeState);
   const setRouteRoute = routeSetter(setRouteState);
@@ -126,11 +128,42 @@ function RouteRenderer({
       minHeight={140}
       justifyContent="center"
       alignItems="center"
-      direction="row"
+      direction="column"
     >
       {route.hasRoute ? (
         <>
-          <Stack direction="row" spacing={2}>
+          <Stack
+            className="route-renderer__avoided-solar-systems"
+            direction="column"
+            spacing={2}
+            width="100%"
+            mb={2}
+            justifyContent="center"
+          >
+            <Stack direction="column" justifyContent="center">
+              <Typography
+                variant="body2"
+                sx={{ opacity: avoidedSolarSystems.length === 0 ? 0 : 1 }}
+              >
+                Avoid
+              </Typography>
+            </Stack>
+            <Stack
+              alignItems="flex-start"
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              {avoidedSolarSystems.map(({ name }, index) => (
+                <Chip
+                  key={name}
+                  label={name}
+                  onDelete={() => onUnavoidSolarSystem(index)}
+                />
+              ))}
+            </Stack>
+          </Stack>
+          <Stack direction="row" spacing={2} width="100%">
             <Stack mt={4}>
               <Stack
                 direction="row"
@@ -155,6 +188,9 @@ function RouteRenderer({
                 flexDirection: "row",
                 justifyContent: "flex-start",
                 width: "92%",
+                [theme.breakpoints.down("sm")]: {
+                  width: "80%",
+                },
               }}
             >
               {route.route.map((node, index) => (
@@ -174,7 +210,13 @@ function RouteRenderer({
                         alwaysShowDestination &&
                         !showTitle[index])
                     }
-                    alwaysShowBottomTitle={showTitle[index]}
+                    alwaysShowBottomTitle={
+                      !(
+                        (index === 0 && alwaysShowOrigin) ||
+                        (index === route.route.length - 1 &&
+                          alwaysShowDestination)
+                      ) && showTitle[index]
+                    }
                   />
                 </CSSTransition>
               ))}
@@ -190,15 +232,6 @@ function RouteRenderer({
                 mt={5.1}
               />
             </Box>
-          </Stack>
-          <Stack alignItems="flex-start" direction="row" spacing={2}>
-            {avoidedSolarSystems.map(({ name }, index) => (
-              <Chip
-                key={name}
-                label={name}
-                onDelete={() => onUnavoidSolarSystem(index)}
-              />
-            ))}
           </Stack>
         </>
       ) : (

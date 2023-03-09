@@ -62,7 +62,7 @@ function RouteRendererBottomInfoItem({
           justifyContent="center"
           direction={direction === "vertical" ? "row" : "column"}
         >
-          <Tooltip title="Kills">
+          <Tooltip title={kills > 0 ? "Kills" : null}>
             <SkullIcon color="white" />
           </Tooltip>
           <Typography variant="body2" fontSize={11}>
@@ -73,7 +73,7 @@ function RouteRendererBottomInfoItem({
           justifyContent="center"
           direction={direction === "vertical" ? "row" : "column"}
         >
-          <Tooltip title="Attackers">
+          <Tooltip title={kills > 0 ? "Attackers" : null}>
             <RocketIcon sx={{ fontSize: 15 }} />
           </Tooltip>
           <Typography variant="body2" fontSize={11}>
@@ -81,7 +81,7 @@ function RouteRendererBottomInfoItem({
           </Typography>
         </Stack>
         <Stack display={hics ? "flex" : "none"} alignItems="center">
-          <Tooltip title="Heavy Interdiction Cruisers">
+          <Tooltip title={kills > 0 ? "Heavy Interdiction Cruisers" : null}>
             <CallSplitIcon
               sx={{
                 fontSize: 15,
@@ -91,7 +91,7 @@ function RouteRendererBottomInfoItem({
           </Tooltip>
         </Stack>
         <Stack display={smartBombs ? "flex" : "none"} alignItems="center">
-          <Tooltip title="Smart Bombs">
+          <Tooltip title={kills > 0 ? "Smart Bombs" : null}>
             <TungstenIcon
               sx={{ fontSize: 15 }}
               htmlColor={theme.palette.killSummary.smartBomb}
