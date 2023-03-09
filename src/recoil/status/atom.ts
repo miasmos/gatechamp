@@ -15,6 +15,9 @@ type UserStatus = {
     name: string;
     typeID: number;
   };
+  wallet: {
+    personal: number;
+  };
 };
 
 interface StatusState {
@@ -40,6 +43,9 @@ const statusState = atom<StatusState>({
         itemID: 0,
         name: "",
         typeID: 0,
+      },
+      wallet: {
+        personal: 0,
       },
     },
   },

@@ -5,6 +5,7 @@ import isSubscribedSetter from "./setters/isSubscribedSetter";
 import isOnlineSelector from "./selectors/isOnlineSelector";
 import hasLocationSelector from "./selectors/hasLocationSelector";
 import getLocationSelector from "./selectors/getLocationSelector";
+import getPersonalWalletBalance from "./selectors/getPersonalWalletBalance";
 
 export default atom;
 export { statusSetter, isSubscribedSetter };
@@ -13,4 +14,5 @@ export {
   isOnlineSelector,
   hasLocationSelector,
   getLocationSelector,
+  getPersonalWalletBalance,
 };

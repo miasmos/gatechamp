@@ -31,8 +31,7 @@ function useStatusWebsocket() {
   const setStatus = statusSetter(setStatusState);
   const setIsSubscribed = isSubscribedSetter(setStatusState);
 
-  const { sendEvent, receiveEvent, lastJsonMessage, readyState } =
-    useWebSocket();
+  const { sendEvent, receiveEvent, lastJsonMessage } = useWebSocket();
 
   useEffect(() => {
     if (!isConnected) {

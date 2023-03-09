@@ -52,15 +52,12 @@ const StyledRouteRenderer = styled(Stack)(({}) => ({
         opacity: 0,
       },
     },
-  "&.route-renderer--always-show-origin, &.route-renderer--always-show-destination":
+  ".route-renderer__item:first-of-type .route__solar-system, .route-renderer__item:last-of-type .route__solar-system":
     {
-      ".route-renderer__item:first-of-type .route__solar-system, .route-renderer__item:last-of-type .route__solar-system":
-        {
-          cursor: "default",
-          ".route-renderer__bar__avoid-text": {
-            display: "none",
-          },
-        },
+      cursor: "default",
+      ".route-renderer__bar__avoid-text": {
+        display: "none",
+      },
     },
   "&.route-renderer--always-show-destination": {
     ".route-renderer__item:nth-last-of-type(2) .route__info-top-item": {
@@ -220,7 +217,8 @@ function RouteRenderer({
                     alwaysShowTopTitle={
                       (index === 0 && alwaysShowOrigin) ||
                       (index === route.route.length - 1 &&
-                        alwaysShowDestination)
+                        alwaysShowDestination) ||
+                      (!showTitle[index] && route.route.length === 1)
                     }
                     alwaysShowBottomTitle={
                       !(

@@ -24,11 +24,13 @@ import MainButton from "../../MainButton";
 import { TextField } from "@mui/material";
 import { ChangeEvent, useEffect } from "react";
 import Checkbox from "../../Checkbox";
+import { getPersonalWalletBalance } from "../../../recoil/status";
 
 type TripStationProps = NavigationIntention;
 
 function TripStationForm({ to: navigateTo }: TripStationProps) {
   const navigate = useNavigate();
+  const balance = useRecoilValue(getPersonalWalletBalance);
   const [
     { from, to, maxBudget, minProfit, minRoi, tax, otherCargo },
     setTripState,
@@ -62,6 +64,9 @@ function TripStationForm({ to: navigateTo }: TripStationProps) {
 
   useEffect(() => {
     clearOtherCargoSetter(setTripState)();
+    if (balance > 0) {
+      onMaxBudgetChange(undefined, balance);
+    }
   }, []);
 
   return (
