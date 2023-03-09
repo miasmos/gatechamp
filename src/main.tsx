@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import { ThemeProvider } from "@emotion/react";
@@ -31,6 +33,12 @@ import "@fontsource/roboto/700.css";
 // TODO: get live item ignore working again
 // TODO: desktop notification if there's a gate camp on the current in progress route (kills by a gate, parse gank-intel channel?)
 // TODO: isk earned per day tracker
+
+Sentry.init({
+  dsn: "https://c13cc5ecbe5243e48abede58b7bbd356@o1405566.ingest.sentry.io/4504810771644428",
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 1.0,
+});
 
 const router = createBrowserRouter(
   createRoutesFromElements(
