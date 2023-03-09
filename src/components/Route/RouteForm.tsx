@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Stack, Typography, Checkbox, Tooltip, useTheme } from "@mui/material";
+import { Stack, Typography, useTheme } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -22,6 +22,8 @@ import { SyntheticEvent } from "react";
 import { isLoggedInSelector } from "../../recoil/user";
 import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
+import Tooltip from "../Tooltip";
+import Checkbox from "../Checkbox";
 
 function RouteForm() {
   const theme = useTheme();
@@ -119,7 +121,7 @@ function RouteForm() {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Stack>
+                <Stack spacing={0.5}>
                   <Typography>&nbsp;</Typography>
                   <Tooltip title="Use My Location">
                     <Stack>
@@ -134,7 +136,7 @@ function RouteForm() {
                     </Stack>
                   </Tooltip>
                 </Stack>
-                <Stack>
+                <Stack spacing={0.5}>
                   <Typography>Origin</Typography>
                   <AutocompleteSolarSystem
                     controlled
@@ -150,7 +152,7 @@ function RouteForm() {
               <Tooltip title="Swap">
                 <SwapHorizIcon
                   sx={{
-                    mt: { md: 2, sm: 0 },
+                    mt: { md: 2.5, sm: 0 },
                     cursor: canSwap ? "pointer" : "default",
                     opacity: canSwap ? 1 : 0.4,
                     [theme.breakpoints.down("sm")]: {
@@ -174,7 +176,7 @@ function RouteForm() {
                 },
               }}
             >
-              <Stack>
+              <Stack spacing={0.5}>
                 <Typography>Destination</Typography>
                 <AutocompleteSolarSystem
                   controlled
@@ -183,7 +185,7 @@ function RouteForm() {
                   value={destinationName}
                 />
               </Stack>
-              <Stack>
+              <Stack spacing={0.5}>
                 <Typography>&nbsp;</Typography>
                 <Tooltip title="Push to Eve Client">
                   <PublishIcon

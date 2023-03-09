@@ -21,6 +21,11 @@ import StationFlowLayout from "./layout/StationFlowLayout";
 import TripStationDetail from "./components/Trip/Station/TripStationDetail";
 import RouteForm from "./components/Route/RouteForm";
 
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 // TODO: allow ignoring prohibited trade items
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
 // TODO: route mapping: automatically push a route to the user's eve client using the eve waypoint api

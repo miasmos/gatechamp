@@ -56,20 +56,20 @@ const palette = createTheme({
   palette: {
     ...colors,
     primary: {
-      main: "#ffffff",
-      light: "#eee",
-      contrastText: "#222",
+      main: "#222",
+      light: "#333",
+      contrastText: "#fff",
     },
     secondary: {
       main: "#f50057",
     },
     text: {
-      primary: "#ffffff",
-      secondary: "#ddd",
-      disabled: "rgba(255,255,255,0.77)",
+      primary: "#222",
+      secondary: "#333",
+      disabled: "rgba(22,22,22,0.77)",
     },
     background: {
-      default: "transparent",
+      default: "#fff",
       paper: "transparent",
     },
   },
@@ -85,9 +85,6 @@ const theme = createTheme(
             width: "100vw",
           },
           body: {
-            background: "url(/background.jpg)",
-            backgroundSize: "cover",
-            backgroundRepeat: "none",
             textAlign: "center",
             width: "100vw",
             overflowX: "hidden",
@@ -101,6 +98,16 @@ const theme = createTheme(
             {
               display: "none",
             },
+          "::-webkit-scrollbar": {
+            width: 7,
+          },
+          "::-webkit-scrollbar-track": {
+            background: "transparent",
+          },
+          "::-webkit-scrollbar-thumb": {
+            background: palette.palette.primary.main,
+            outline: "none",
+          },
         },
       },
       MuiAutocomplete: {
@@ -123,8 +130,17 @@ const theme = createTheme(
             },
           },
           listbox: {
-            background: palette.palette.primary.main,
-            color: palette.palette.primary.contrastText,
+            background: palette.palette.primary.contrastText,
+            color: palette.palette.primary.main,
+          },
+        },
+      },
+      MuiSlider: {
+        styleOverrides: {
+          root: {
+            ".MuiSlider-rail": {
+              opacity: 1,
+            },
           },
         },
       },
@@ -151,20 +167,56 @@ const theme = createTheme(
           component: Link,
         } as LinkProps,
       },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            borderColor: palette.palette.background.paper,
+            background: palette.palette.background.paper,
+            ".MuiChip-deleteIcon": {
+              color: palette.palette.primary.main,
+            },
+            ".MuiChip-deleteIcon:hover": {
+              color: palette.palette.primary.main,
+            },
+            "&.MuiChip-clickable:hover": {
+              background: palette.palette.background.paper,
+            },
+          },
+        },
+      },
       MuiList: {
         styleOverrides: {
           root: {
+            background: palette.palette.primary.contrastText,
+            color: palette.palette.primary.main,
+          },
+        },
+      },
+      MuiTooltip: {
+        styleOverrides: {
+          tooltip: {
             background: palette.palette.primary.main,
             color: palette.palette.primary.contrastText,
-            " *": {
-              fontWeight: "bold",
-            },
+          },
+          arrow: {
+            color: palette.palette.primary.main,
           },
         },
       },
       MuiButtonBase: {
         defaultProps: {
           LinkComponent: Link,
+          disableRipple: true,
+        },
+      },
+      MuiCheckbox: {
+        styleOverrides: {
+          root: {
+            borderWidth: "1px",
+            "&:hover": {
+              background: palette.palette.background.paper,
+            },
+          },
         },
       },
     },
@@ -173,4 +225,4 @@ const theme = createTheme(
 );
 
 export default theme;
-export { colors };
+export { colors, palette };

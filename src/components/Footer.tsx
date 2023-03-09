@@ -1,8 +1,6 @@
 import { Container, Stack, styled } from "@mui/material";
-import Typography from "@mui/material/Typography";
 
 const StyledFooter = styled("footer")(({ theme }) => ({
-  background: theme.palette.primary.contrastText,
   padding: "40px 0",
   width: "100%",
   marginTop: 100,

@@ -1,8 +1,9 @@
 import { useTheme } from "@emotion/react";
-import { Tooltip, Box, Theme } from "@mui/material";
+import { Box, Theme } from "@mui/material";
 import { ComponentProps } from "react";
 import { useRecoilValue } from "recoil";
 import { getStargateSelector } from "../../recoil/kills";
+import Tooltip from "../Tooltip";
 import Tick from "./Tick";
 
 type RouteRendererTickProps = {

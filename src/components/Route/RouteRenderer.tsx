@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useEffect } from "react";
 import useFetchRoute from "../../hooks/useFetchRoute";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import routeState from "../../recoil/route/atom";
 import {
@@ -61,6 +62,16 @@ const StyledRouteRenderer = styled(Stack)(({}) => ({
           },
         },
     },
+  "&.route-renderer--always-show-destination": {
+    ".route-renderer__item:nth-last-of-type(2) .route__info-top-item": {
+      justifyContent: "flex-end",
+    },
+  },
+  "&.route-renderer--always-show-origin": {
+    ".route-renderer__item:nth-of-type(2) .route__info-top-item": {
+      justifyContent: "flex-start",
+    },
+  },
 }));
 
 function RouteRenderer({
@@ -141,12 +152,12 @@ function RouteRenderer({
             justifyContent="center"
           >
             <Stack direction="column" justifyContent="center">
-              <Typography
+              {/* <Typography
                 variant="body2"
                 sx={{ opacity: avoidedSolarSystems.length === 0 ? 0 : 1 }}
               >
                 Avoid
-              </Typography>
+              </Typography> */}
             </Stack>
             <Stack
               alignItems="flex-start"
@@ -157,8 +168,13 @@ function RouteRenderer({
               {avoidedSolarSystems.map(({ name }, index) => (
                 <Chip
                   key={name}
+                  clickable
+                  variant="outlined"
+                  size="small"
                   label={name}
                   onDelete={() => onUnavoidSolarSystem(index)}
+                  onClick={() => onUnavoidSolarSystem(index)}
+                  deleteIcon={<ClearIcon />}
                 />
               ))}
             </Stack>
@@ -188,9 +204,6 @@ function RouteRenderer({
                 flexDirection: "row",
                 justifyContent: "flex-start",
                 width: "92%",
-                [theme.breakpoints.down("sm")]: {
-                  width: "80%",
-                },
               }}
             >
               {route.route.map((node, index) => (
@@ -207,8 +220,7 @@ function RouteRenderer({
                     alwaysShowTopTitle={
                       (index === 0 && alwaysShowOrigin) ||
                       (index === route.route.length - 1 &&
-                        alwaysShowDestination &&
-                        !showTitle[index])
+                        alwaysShowDestination)
                     }
                     alwaysShowBottomTitle={
                       !(

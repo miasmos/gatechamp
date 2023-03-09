@@ -41,29 +41,92 @@ const stringifyItemOrder = ({
 const getSecurityColor = (security: number) => {
   const { s1p0, s0p0, s0p1, s0p2, s0p3, s0p4, s0p5, s0p6, s0p7, s0p8, s0p9 } =
     colors.eve.security;
-  const roundedSecurity = Math.round(security * 10) / 10;
-  if (roundedSecurity >= 1) {
+  const displaySecurity = getDisplaySecurity(security);
+  if (typeof displaySecurity !== "number") {
+    return undefined;
+  }
+
+  if (displaySecurity >= 1) {
     return s1p0; // #2c75e2
-  } else if (roundedSecurity < 1 && roundedSecurity >= 0.9) {
+  } else if (displaySecurity < 1 && displaySecurity >= 0.9) {
     return s0p9; // #3a9aeb
-  } else if (roundedSecurity < 0.9 && roundedSecurity >= 0.8) {
+  } else if (displaySecurity < 0.9 && displaySecurity >= 0.8) {
     return s0p8; // #4ecdf7
-  } else if (roundedSecurity < 0.8 && roundedSecurity >= 0.7) {
+  } else if (displaySecurity < 0.8 && displaySecurity >= 0.7) {
     return s0p7; // #61dba4
-  } else if (roundedSecurity < 0.7 && roundedSecurity >= 0.6) {
+  } else if (displaySecurity < 0.7 && displaySecurity >= 0.6) {
     return s0p6; // #72e655
-  } else if (roundedSecurity < 0.6 && roundedSecurity >= 0.5) {
+  } else if (displaySecurity < 0.6 && displaySecurity >= 0.5) {
     return s0p5; // #f4fe83
-  } else if (roundedSecurity < 0.5 && roundedSecurity >= 0.4) {
+  } else if (displaySecurity < 0.5 && displaySecurity >= 0.4) {
     return s0p4; // #dc6d07
-  } else if (roundedSecurity < 0.4 && roundedSecurity >= 0.3) {
+  } else if (displaySecurity < 0.4 && displaySecurity >= 0.3) {
     return s0p3; // #ce440f
-  } else if (roundedSecurity < 0.3 && roundedSecurity >= 0.2) {
+  } else if (displaySecurity < 0.3 && displaySecurity >= 0.2) {
     return s0p2; // #bc1117
-  } else if (roundedSecurity < 0.2 && roundedSecurity >= 0.1) {
+  } else if (displaySecurity < 0.2 && displaySecurity >= 0.1) {
     return s0p1; // #732121
   }
   return s0p0; // #8d3364
+};
+
+const getDisplaySecurity = (trueSecurity: number | undefined) => {
+  if (typeof trueSecurity !== "number") {
+    return undefined;
+  }
+  if (trueSecurity >= 0 && trueSecurity <= 0.05) {
+    return Math.ceil(trueSecurity * 10) / 10;
+  }
+  return Math.round(trueSecurity * 10) / 10;
+};
+
+const isLowSecurity = (trueSecurity: number) =>
+  trueSecurity < 0.5 && trueSecurity >= 0.1;
+
+const isHighSecurity = (trueSecurity: number) => trueSecurity >= 0.5;
+
+const isNullSecurity = (trueSecurity: number) => trueSecurity < 0.1;
+
+const isCrossingSecurityBoundary = (
+  originTrueSecurity: number | undefined,
+  destinationTrueSecurity: number | undefined
+) => {
+  if (
+    typeof originTrueSecurity !== "number" ||
+    typeof destinationTrueSecurity !== "number"
+  ) {
+    return { isHigher: false, isLower: false, isCrossing: false };
+  }
+  let isHigher = false;
+  let isLower = false;
+  let isCrossing = false;
+  if (isNullSecurity(originTrueSecurity)) {
+    if (
+      isHighSecurity(destinationTrueSecurity) ||
+      isLowSecurity(destinationTrueSecurity)
+    ) {
+      isHigher = true;
+      isCrossing = true;
+    }
+  } else if (isLowSecurity(originTrueSecurity)) {
+    if (isHighSecurity(destinationTrueSecurity)) {
+      isHigher = true;
+      isCrossing = true;
+    } else if (isNullSecurity(destinationTrueSecurity)) {
+      isLower = true;
+      isCrossing = true;
+    }
+  } else if (isHighSecurity(originTrueSecurity)) {
+    if (
+      isNullSecurity(destinationTrueSecurity) ||
+      isLowSecurity(destinationTrueSecurity)
+    ) {
+      isLower = true;
+      isCrossing = true;
+    }
+  }
+
+  return { isHigher, isLower, isCrossing };
 };
 
 export {
@@ -71,4 +134,9 @@ export {
   stringifyItemOrder,
   getStationDisplayName,
   getSecurityColor,
+  getDisplaySecurity,
+  isLowSecurity,
+  isHighSecurity,
+  isNullSecurity,
+  isCrossingSecurityBoundary,
 };

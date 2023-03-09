@@ -16,4 +16,7 @@ const to2dArray = <T extends Record<string, any>>(
   return result;
 };
 
-export { to2dArray };
+const randomIndexFromArray = (array: any[]): number =>
+  Math.floor(Math.random() * array.length);
+
+export { to2dArray, randomIndexFromArray };

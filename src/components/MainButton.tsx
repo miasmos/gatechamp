@@ -1,4 +1,5 @@
 import Button, { ButtonProps } from "@mui/material/Button";
+import { palette } from "../theme";
 
 function MainButton({ sx = {}, variant = "outlined", ...props }: ButtonProps) {
   return (
@@ -7,7 +8,7 @@ function MainButton({ sx = {}, variant = "outlined", ...props }: ButtonProps) {
         height: 60,
         width: 200,
         borderWidth: 2,
-        borderColor: "#fff",
+        borderColor: palette.palette.primary.main,
         ":hover": {
           borderWidth: 2,
         },

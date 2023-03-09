@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import shipsState from "../../recoil/ships/atom";
 import {
-  deleteShipSetter,
   getShipCountSelector,
   hasValidShipSelector,
   selectAllShipSetter,
@@ -18,8 +17,8 @@ import { CargoBayType } from "../../enum";
 import { useNavigate } from "react-router";
 import { NavigationIntention } from "../../types";
 import MainButton from "../MainButton";
-import { Checkbox } from "@mui/material";
 import getAreAllShipsSelected from "../../recoil/ships/selectors/getAreAllShipsSelectedSelector";
+import Checkbox from "../Checkbox";
 
 type ShipsFormProps = NavigationIntention;
 
@@ -106,6 +105,7 @@ function ShipsForm({ to }: ShipsFormProps) {
           >
             <Checkbox
               checked={areAllShipsSelected}
+              size="medium"
               onClick={() => onSelectAllShipClick(!areAllShipsSelected)}
             />
           </Stack>
@@ -131,6 +131,7 @@ function ShipsForm({ to }: ShipsFormProps) {
                 </Stack>
                 <Stack justifyContent="center">
                   <Checkbox
+                    size="medium"
                     disabled={editingIndex === index}
                     checked={ships.shipsSelected[index]}
                     onChange={() =>

@@ -26,9 +26,14 @@ function GateCampRendererTopInfoItem({
         opacity: alwaysShowTitle ? 1 : 0,
       }}
       key={name}
-      justifyContent="flex-end"
+      justifyContent="center"
+      direction="row"
     >
-      <Typography variant="body2" whiteSpace="nowrap">
+      <Typography
+        variant="body2"
+        whiteSpace="nowrap"
+        className="route__info-top-item__title"
+      >
         {name}
       </Typography>
     </Stack>

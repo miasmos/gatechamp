@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Tooltip, Theme } from "@mui/material";
+import { Box, Typography, Stack, Theme } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import clsx from "clsx";
 import { RouteJumpSummary } from "../../hooks/useFetchRoute";
@@ -8,6 +8,7 @@ import CallSplitIcon from "@mui/icons-material/CallSplit";
 import RocketIcon from "@mui/icons-material/Rocket";
 import TungstenIcon from "@mui/icons-material/Tungsten";
 import { useTheme } from "@emotion/react";
+import Tooltip from "../Tooltip";
 
 type RouteRendererBottomInfoItemProps = RouteJumpSummary & {
   alwaysShowTitle?: boolean;
@@ -32,7 +33,7 @@ function RouteRendererBottomInfoItem({
       })}
       width="100%"
       sx={{
-        opacity: kills > 0 ? 1 : 0,
+        opacity: kills > 0 || alwaysShowTitle ? 1 : 0,
       }}
       key={name}
     >
@@ -63,7 +64,7 @@ function RouteRendererBottomInfoItem({
           direction={direction === "vertical" ? "row" : "column"}
         >
           <Tooltip title={kills > 0 ? "Kills" : null}>
-            <SkullIcon color="white" />
+            <SkullIcon color={theme.palette.primary.main} />
           </Tooltip>
           <Typography variant="body2" fontSize={11}>
             {kills}
@@ -72,6 +73,10 @@ function RouteRendererBottomInfoItem({
         <Stack
           justifyContent="center"
           direction={direction === "vertical" ? "row" : "column"}
+          sx={{
+            visibility: kills > 0 ? "visible" : "hidden",
+            pointerEvents: kills > 0 ? "all" : "none",
+          }}
         >
           <Tooltip title={kills > 0 ? "Attackers" : null}>
             <RocketIcon sx={{ fontSize: 15 }} />

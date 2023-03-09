@@ -1,6 +1,7 @@
-import { Stack, StackProps, Tooltip } from "@mui/material";
+import { Stack, StackProps } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import Tooltip from "./Tooltip";
 
 type OnlineIndicatorProps = {
   online: boolean;

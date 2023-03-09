@@ -14,6 +14,7 @@ import {
   originSetter,
 } from "../../../recoil/route";
 import { useEffect } from "react";
+import LoadingAnimation from "../../LoadingAnimation";
 
 type TripStationOverviewProps = NavigationIntention;
 
@@ -41,17 +42,15 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
     });
   };
 
-  // useEffect(() => {
-  //   // clear the route ids used for pushing to eve client
-  //   // otherwise we have a race condition when navigating to TripStationDetail
-  //   clearRoute();
-  // }, []);
-
   if (hasError) {
     console.log("error while fetching", hasError);
   }
   if (isLoading || isValidating) {
-    return <>Loading...</>;
+    return (
+      <Stack direction="column" alignItems="center" justifyContent="center">
+        <LoadingAnimation />
+      </Stack>
+    );
   }
 
   return (

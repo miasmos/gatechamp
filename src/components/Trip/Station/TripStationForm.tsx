@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Checkbox from "@mui/material/Checkbox";
 import { formatCurrency } from "../../../util/currency";
 import { Station as StationEnum, Tax } from "../../../enum";
 import tripState, {
@@ -24,6 +23,7 @@ import { NavigationIntention } from "../../../types";
 import MainButton from "../../MainButton";
 import { TextField } from "@mui/material";
 import { ChangeEvent, useEffect } from "react";
+import Checkbox from "../../Checkbox";
 
 type TripStationProps = NavigationIntention;
 
