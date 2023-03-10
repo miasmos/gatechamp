@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -17,11 +16,14 @@ import { AppRoute } from "./enum";
 // import ShipsForm from "./components/Ship/ShipsForm";
 // import TripStationForm from "./components/Trip/Station/TripStationForm";
 // import TripStationOverview from "./components/Trip/Station/TripStationOverview";
-import AppLayout from "./layout/RootLayout";
+import RootLayout from "./layout/RootLayout";
 // import TripLayout from "./layout/TripLayout";
 // import StationFlowLayout from "./layout/StationFlowLayout";
 // import TripStationDetail from "./components/Trip/Station/TripStationDetail";
 import RouteForm from "./components/Route/RouteForm";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import ScrolledLayout from "./layout/ScrolledLayout";
+import NoScrollLayout from "./layout/NoScrollLayout";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -44,11 +46,19 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       path={AppRoute.Home}
-      element={<AppLayout />}
+      element={<RootLayout />}
       errorElement={<>Not Found</>}
     >
-      <Route index element={<Navigate to={AppRoute.Route} />} />
-      <Route path={AppRoute.Route} element={<RouteForm />} />
+      <Route path={AppRoute.Home} element={<NoScrollLayout />}>
+        <Route index path={AppRoute.Home} element={<RouteForm />} />
+      </Route>
+      <Route path={AppRoute.Home} element={<ScrolledLayout />}>
+        <Route
+          index
+          path={AppRoute.PrivacyPolicy}
+          element={<PrivacyPolicy />}
+        />
+      </Route>
 
       {/* <Route path={AppRoute.Trip} element={<TripLayout />}>
         <Route index element={<Navigate to={AppRoute.StationFlow} />} />

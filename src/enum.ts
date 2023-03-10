@@ -7,6 +7,7 @@ enum AppRoute {
   Overview = "overview",
   Detail = "detail",
   Route = "route",
+  PrivacyPolicy = "privacy-policy",
 }
 
 enum Station {

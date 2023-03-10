@@ -9,9 +9,13 @@ function AppBar() {
   return (
     <MuiAppBar
       className="app-bar"
-      color="transparent"
       elevation={0}
-      sx={{ height: 90, width: "100vw", left: 0 }}
+      sx={{
+        height: 90,
+        width: "100vw",
+        left: 0,
+        background: (theme) => theme.palette.background.default,
+      }}
     >
       <Stack
         height="100%"
@@ -28,7 +32,7 @@ function AppBar() {
       >
         <Stack justifyContent="center" height="100%">
           <Link href={AppRoute.Home}>
-            <LogoIcon color={theme.palette.primary.main} width={180} mt={1} />
+            <LogoIcon color={theme.palette.primary.main} width={160} mt={1} />
           </Link>
         </Stack>
         <Stack justifyContent="center" height="100%">

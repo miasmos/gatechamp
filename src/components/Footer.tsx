@@ -1,26 +1,26 @@
 import {
   Container,
-  Link,
+  Box,
   Stack,
   styled,
   Typography,
   useTheme,
+  BoxProps,
 } from "@mui/material";
+import { WEBSITE_NAME } from "../constants";
 import { AppRoute } from "../enum";
 import { LogoIcon } from "./icon";
+import Link from "./Link";
 
-const StyledFooter = styled("footer")(() => ({
-  padding: "40px 0",
+const StyledFooter = styled(Box)(() => ({
   width: "100%",
-  position: "fixed",
   minHeight: 80,
-  bottom: 0,
 }));
 
-function Footer() {
+function Footer(props: BoxProps) {
   const theme = useTheme();
   return (
-    <StyledFooter>
+    <StyledFooter component="footer" {...props}>
       <Container>
         <Stack direction="row" justifyContent="space-between">
           <Stack>
@@ -28,10 +28,14 @@ function Footer() {
               <LogoIcon color={theme.palette.primary.main} width={100} mt={1} />
             </Link>
             <Typography variant="caption" mt={-0.4}>
-              ©{new Date().getFullYear()} GateChamp
+              ©{new Date().getFullYear()} {WEBSITE_NAME} Inc.
             </Typography>
           </Stack>
-          <Stack></Stack>
+          <Stack justifyContent="center">
+            <Link href={AppRoute.PrivacyPolicy} variant="body2">
+              Privacy Policy
+            </Link>
+          </Stack>
         </Stack>
       </Container>
     </StyledFooter>

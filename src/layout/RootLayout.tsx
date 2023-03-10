@@ -1,11 +1,8 @@
-import { Container, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { Outlet } from "react-router";
 import { useRecoilState, useRecoilValue } from "recoil";
-import AppBar from "../components/AppBar";
 import ErrorBoundary from "../components/ErrorBoundary";
-import Footer from "../components/Footer";
 import DebugObserver from "../components/RecoilObserver";
 import useFetchCharacter from "../hooks/useFetchCharacter";
 import useInitializeUser from "../hooks/useInitializeUser";
@@ -48,13 +45,7 @@ function RootLayout() {
       <>
         <DebugObserver />
         <ErrorBoundary>
-          <AppBar />
-          <Container
-            sx={{ display: "flex", flex: 1, mt: "90px", minHeight: "70vh" }}
-          >
-            <Outlet />
-          </Container>
-          <Footer />
+          <Outlet />
         </ErrorBoundary>
       </>
     </Box>
