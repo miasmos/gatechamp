@@ -20,10 +20,10 @@ import RootLayout from "./layout/RootLayout";
 // import TripLayout from "./layout/TripLayout";
 // import StationFlowLayout from "./layout/StationFlowLayout";
 // import TripStationDetail from "./components/Trip/Station/TripStationDetail";
-import RouteForm from "./components/Route/RouteForm";
 import ScrolledLayout from "./layout/ScrolledLayout";
 import NoScrollLayout from "./layout/NoScrollLayout";
 
+const RouteForm = lazy(() => import("./components/Route/RouteForm"));
 const PrivacyPolicy = lazy(
   () => import("./components/PrivacyPolicy/PrivacyPolicy")
 );
