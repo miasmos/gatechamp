@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { WebSocketEvent } from "../enum";
+import { WebSocketEvent, WebSocketEventType } from "../enum";
 import {
   addSubscriptionsSetter,
   clearSubscriptionsSetter,
@@ -23,7 +23,7 @@ const serializeEvent = (
   id: number
 ) => `${name}:${type}:${id}`;
 
-function useKillsWebsocket() {
+function useWebsocketKills() {
   const loggedIn = useRecoilValue(isLoggedInSelector);
   const isConnected = useRecoilValue(isConnectedSelector);
   const setKillsState = useSetRecoilState(killsState);
@@ -43,7 +43,7 @@ function useKillsWebsocket() {
   useEffect(() => {
     if (removeSubscription.length > 0) {
       removeSubscription.forEach((eventId) =>
-        sendEvent("unsubscribe", { event: eventId })
+        sendEvent(WebSocketEventType.Unsubscribe, { event: eventId })
       );
       setRemoveSubscriptions(removeSubscription);
     }
@@ -52,7 +52,7 @@ function useKillsWebsocket() {
   useEffect(() => {
     if (addSubscription.length > 0) {
       addSubscription.forEach((eventId) =>
-        sendEvent("subscribe", { event: eventId })
+        sendEvent(WebSocketEventType.Subscribe, { event: eventId })
       );
       setAddSubscriptions(addSubscription);
     }
@@ -85,5 +85,5 @@ function useKillsWebsocket() {
   }, [lastJsonMessage]);
 }
 
-export default useKillsWebsocket;
+export default useWebsocketKills;
 export { deserializeEvent, serializeEvent };

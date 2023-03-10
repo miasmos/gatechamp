@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { WebSocketEvent } from "../enum";
+import { WebSocketEvent, WebSocketEventType } from "../enum";
 import {
   getIsSubscribedSelector,
   isSubscribedSetter,
@@ -19,10 +19,9 @@ const deserializeEvent = (event: string) => {
   return { name: eventName, type: eventType, id: resourceId };
 };
 
-const serializeEvent = (name: WebSocketEvent.Status, id: number) =>
-  `${name}::${id}`;
+const serializeEvent = (id: number) => `${WebSocketEvent.Status}::${id}`;
 
-function useStatusWebsocket() {
+function useWebSocketStatus() {
   const loggedIn = useRecoilValue(isLoggedInSelector);
   const isSubscribed = useRecoilValue(getIsSubscribedSelector);
   const isConnected = useRecoilValue(isConnectedSelector);
@@ -41,15 +40,15 @@ function useStatusWebsocket() {
 
     if (loggedIn) {
       if (!isSubscribed) {
-        const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
-        sendEvent("subscribe", { event: eventId });
+        const eventId = serializeEvent(activeCharacter);
+        sendEvent(WebSocketEventType.Subscribe, { event: eventId });
         setIsSubscribed(true);
       }
     }
     if (!loggedIn) {
       if (isSubscribed) {
-        const eventId = serializeEvent(WebSocketEvent.Status, activeCharacter);
-        sendEvent("unsubscribe", { event: eventId });
+        const eventId = serializeEvent(activeCharacter);
+        sendEvent(WebSocketEventType.Unsubscribe, { event: eventId });
         setIsSubscribed(false);
       }
     }
@@ -71,5 +70,5 @@ function useStatusWebsocket() {
   }, [lastJsonMessage]);
 }
 
-export default useStatusWebsocket;
+export default useWebSocketStatus;
 export { deserializeEvent, serializeEvent };

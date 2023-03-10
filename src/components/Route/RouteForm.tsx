@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -15,6 +15,8 @@ import {
   avoidSmartBombsSetter,
   destinationNameSetter,
   destinationSetter,
+  getPushRouteCooldownProgressSelector,
+  getPushRouteProgressSelector,
   originNameSetter,
   originSetter,
 } from "../../recoil/route";
@@ -24,6 +26,7 @@ import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
 import Tooltip from "../Tooltip";
 import Checkbox from "../Checkbox";
+import ProgressIcon from "../ProgressIcon";
 
 function RouteForm() {
   const theme = useTheme();
@@ -45,12 +48,16 @@ function RouteForm() {
     destinationName,
   } = useRecoilValue(routeState);
   const isLoggedIn = useRecoilValue(isLoggedInSelector);
+  const pushRouteCooldownProgress = useRecoilValue(
+    getPushRouteCooldownProgressSelector
+  );
+  const pushRouteProgress = useRecoilValue(getPushRouteProgressSelector);
   const setDestination = destinationSetter(setRouteState);
   const setOrigin = originSetter(setRouteState);
   const setDestinationName = destinationNameSetter(setRouteState);
   const setOriginName = originNameSetter(setRouteState);
 
-  const { canPushRoute, pushRoute } = usePushRoute();
+  const { onPushRoute } = usePushRoute();
 
   const onOriginChange = (solarSystem: EveSolarSystem) =>
     originSetter(setRouteState)(solarSystem.solarSystemID);
@@ -190,13 +197,13 @@ function RouteForm() {
               <Stack spacing={0.5}>
                 <Typography>&nbsp;</Typography>
                 <Tooltip title="Push to Eve client">
-                  <PublishIcon
-                    sx={{
-                      cursor: canPushRoute ? "pointer" : "default",
-                      opacity: canPushRoute ? 1 : 0.4,
-                      transition: "opacity 0.2s",
-                    }}
-                    onClick={pushRoute}
+                  <ProgressIcon
+                    progress={pushRouteProgress}
+                    cooldownProgress={pushRouteCooldownProgress}
+                    isOnCooldown={pushRouteCooldownProgress > 0}
+                    isInProgress={pushRouteProgress !== 1}
+                    icon={PublishIcon}
+                    onClick={onPushRoute}
                   />
                 </Tooltip>
               </Stack>

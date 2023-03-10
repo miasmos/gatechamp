@@ -8,6 +8,15 @@ type AvoidedSolarSystem = {
   solarSystemID: number;
 };
 
+type PushRouteState = {
+  isPushing: boolean;
+  progress: number;
+  cooldownDate: number | undefined;
+  shouldPushRoute: boolean;
+  route: number[];
+  didPushRoute: boolean;
+};
+
 interface RouteState {
   origin: number | undefined;
   destination: number | undefined;
@@ -20,8 +29,7 @@ interface RouteState {
   avoidSmartBombs: boolean;
   jumps: number;
   isUsingMyLocation: boolean;
-  route: number[];
-  pushedRouteId: undefined | number;
+  pushRoute: PushRouteState;
 }
 
 const routeState = atom<RouteState>({
@@ -38,11 +46,17 @@ const routeState = atom<RouteState>({
     avoidSmartBombs: false,
     jumps: 0,
     isUsingMyLocation: false,
-    route: [],
-    pushedRouteId: undefined,
+    pushRoute: {
+      isPushing: false,
+      progress: 1,
+      cooldownDate: undefined,
+      shouldPushRoute: false,
+      route: [],
+      didPushRoute: false,
+    },
   },
   effects_UNSTABLE: [persistAtom],
 });
 
 export default routeState;
-export type { RouteState, AvoidedSolarSystem };
+export type { RouteState, AvoidedSolarSystem, PushRouteState };

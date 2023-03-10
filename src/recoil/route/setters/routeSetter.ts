@@ -3,9 +3,9 @@ import { RouteState } from "../atom";
 
 const routeSetter =
   (setter: SetterOrUpdater<RouteState>) => (solarSystemIds: number[]) =>
-    setter((state) => ({
+    setter(({ pushRoute, ...state }) => ({
       ...state,
-      route: solarSystemIds,
+      pushRoute: { ...pushRoute, route: solarSystemIds },
     }));
 
 export default routeSetter;

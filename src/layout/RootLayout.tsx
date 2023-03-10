@@ -7,6 +7,7 @@ import DebugObserver from "../components/RecoilObserver";
 import useFetchCharacter from "../hooks/useFetchCharacter";
 import useInitializeUser from "../hooks/useInitializeUser";
 import useWebSocketKills from "../hooks/useWebSocketKills";
+import useWebSocketPushRoute from "../hooks/useWebSocketPushRoute";
 import useWebSocketStatus from "../hooks/useWebSocketStatus";
 import shipsState, { Ship } from "../recoil/ships/atom";
 import userState from "../recoil/user/atom";
@@ -17,6 +18,7 @@ function RootLayout() {
   useInitializeUser();
   useWebSocketKills();
   useWebSocketStatus();
+  useWebSocketPushRoute();
   useFetchCharacter(loggedIn);
 
   useEffect(() => {

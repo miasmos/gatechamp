@@ -52,6 +52,13 @@ enum CargoBayType {
 enum WebSocketEvent {
   Kills = "kills",
   Status = "status",
+  PushRoute = "push-route",
+}
+
+enum WebSocketEventType {
+  Subscribe = "subscribe",
+  Unsubscribe = "unsubscribe",
+  OneTime = "one-time",
 }
 
 export {
@@ -62,4 +69,5 @@ export {
   CargoBay,
   CargoBayType,
   WebSocketEvent,
+  WebSocketEventType,
 };

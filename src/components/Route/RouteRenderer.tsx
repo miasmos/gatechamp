@@ -133,7 +133,7 @@ function RouteRenderer({
         "route-renderer--always-show-origin": alwaysShowDestination,
         "route-renderer--always-show-destination": alwaysShowDestination,
       })}
-      minHeight={164}
+      minHeight={195}
       justifyContent="center"
       alignItems="center"
       direction="column"
