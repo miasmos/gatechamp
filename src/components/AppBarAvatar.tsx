@@ -37,11 +37,13 @@ function AppBarAvatar() {
           <Stack direction="row" spacing={2}>
             <OnlineIndicator online={isCharacterOnline} fontSize="small" />
             {!isSm && (
-              <Typography lineHeight={1.3}>{character.name}</Typography>
+              <Typography lineHeight={1.3} color="primary">
+                {character.name}
+              </Typography>
             )}
           </Stack>
 
-          <Link onClick={logout}>
+          <Link onClick={logout} sx={{ textDecoration: "none" }}>
             <Button variant="outlined" size="small">
               Logout
             </Button>
@@ -49,7 +51,7 @@ function AppBarAvatar() {
         </Stack>
       ) : (
         <Link href={`${EVE_TRADE_PLUS_DOMAIN}/api/auth/login`}>
-          <img src="/login.png" width={200} />
+          <img src="/login.png" width={220} />
         </Link>
       )}
     </Stack>

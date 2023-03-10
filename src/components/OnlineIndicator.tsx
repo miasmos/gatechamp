@@ -17,22 +17,26 @@ function OnlineIndicator({ online, ...props }: OnlineIndicatorProps) {
             alignItems="center"
             justifyContent="center"
           >
-            <CircleOutlinedIcon sx={{ opacity: 0.4 }} fontSize="inherit" />
+            <CircleOutlinedIcon
+              sx={{ opacity: 0.4 }}
+              fontSize="inherit"
+              color="primary"
+            />
           </Stack>
         </Tooltip>
       ) : (
         <Tooltip title="Online">
           <Stack
             sx={{
-              boxShadow: "0 0 1px 1px #fffffffa",
+              boxShadow: "0 0 1px 1px #0000000a",
               width: 5,
               height: 5,
               "@keyframes pulse": {
                 from: {
-                  boxShadow: `0 0 0 0 rgba(255,255,255, 0.3)`,
+                  boxShadow: `0 0 0 0 rgba(0,0,0, 0.3)`,
                 },
                 to: {
-                  boxShadow: `0 0 0 9px rgba(255,255,255, 0)`,
+                  boxShadow: `0 0 0 9px rgba(0,0,0, 0)`,
                 },
               },
               borderRadius: "50%",

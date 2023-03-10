@@ -20,19 +20,22 @@ function useMyLocation() {
   const location = useRecoilValue(getLocationSelector);
   const loggedIn = useRecoilValue(isLoggedInSelector);
   const isOnline = useRecoilValue(isOnlineSelector);
-  const setisUsingMyLocation = isUsingMyLocationSetter(setRouteState);
+  const setIsUsingMyLocation = isUsingMyLocationSetter(setRouteState);
   const setOrigin = originSetter(setRouteState);
   const setOriginName = originNameSetter(setRouteState);
 
   const canUseMyLocation = loggedIn && isOnline && hasLocation;
   const isMyLocationAvailable = canUseMyLocation && isUsingMyLocation;
 
-  const onUseMyLocation = (nextisUsingMyLocation: boolean) => {
-    if (nextisUsingMyLocation) {
+  const onUseMyLocation = (nextIsUsingMyLocation: boolean) => {
+    if (nextIsUsingMyLocation) {
+      if (!canUseMyLocation) {
+        return;
+      }
       setOriginName(location.solarSystemName);
       setOrigin(location.solarSystemID);
     }
-    setisUsingMyLocation(nextisUsingMyLocation);
+    setIsUsingMyLocation(nextIsUsingMyLocation);
   };
 
   useEffect(() => {

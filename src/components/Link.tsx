@@ -3,10 +3,22 @@ import { Link as ReactRouterLink } from "react-router-dom";
 
 function Link(props: LinkProps) {
   if (props.href?.startsWith("#")) {
-    return <MuiLink fontWeight="bold" {...props} />;
+    return (
+      <MuiLink
+        fontWeight="bold"
+        sx={{ textDecoration: "underline" }}
+        {...props}
+      />
+    );
   }
   return (
-    <MuiLink {...props} component={ReactRouterLink} to={props.href ?? "#"} />
+    <MuiLink
+      fontWeight="bold"
+      sx={{ textDecoration: "underline" }}
+      {...props}
+      component={ReactRouterLink}
+      to={props.href ?? "#"}
+    />
   );
 }
 

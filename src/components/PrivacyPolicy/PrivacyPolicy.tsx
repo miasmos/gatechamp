@@ -1,10 +1,6 @@
 import { Box, List, ListItem, Stack, Typography } from "@mui/material";
 import { ComponentProps } from "react";
-import {
-  DATA_REQUESTS_EMAIL,
-  INQUIRIES_EMAIL,
-  WEBSITE_NAME,
-} from "../../constants";
+import { INQUIRIES_EMAIL, WEBSITE_NAME } from "../../constants";
 import Link from "../Link";
 
 function PrivacyPolicy() {
@@ -13,12 +9,7 @@ function PrivacyPolicy() {
     children = `https://${document.location.hostname}`,
     ...props
   }: ComponentProps<typeof Link>) => (
-    <Link
-      href={href}
-      fontWeight="bold"
-      sx={{ textDecoration: "underline" }}
-      {...props}
-    >
+    <Link href={href} {...props}>
       {children}
     </Link>
   );
@@ -69,7 +60,7 @@ function PrivacyPolicy() {
           This summary provides key points from our privacy notice, but you can
           find out more details about any of these topics by clicking the link
           following each key point or by using our table of contents below to
-          find the section you are looking for. You can also click&nbsp;
+          find the section you are looking for. You can also click{" "}
           <SiteLink href="#toc">here</SiteLink> to go directly to our table of
           contents.
         </Typography>
@@ -79,13 +70,13 @@ function PrivacyPolicy() {
           visit, use, or navigate our Services, we may process personal
           information depending on how you interact with {WEBSITE_NAME} Inc. and
           the Services, the choices you make, and the products and features you
-          use. Click&nbsp;<SiteLink href="#infocollect">here</SiteLink> to learn
+          use. Click <SiteLink href="#infocollect">here</SiteLink> to learn
           more.
         </Typography>
         <br />
         <Typography>
-          <strong>Do we receive any information from third parties?</strong>
-          &nbsp; We do not receive any information from third parties.
+          <strong>Do we receive any information from third parties?</strong> We
+          do not receive any information from third parties.
         </Typography>
         <br />
         <Typography>
@@ -94,32 +85,32 @@ function PrivacyPolicy() {
           communicate with you, for security and fraud prevention, and to comply
           with law. We may also process your information for other purposes with
           your consent. We process your information only when we have a valid
-          legal reason to do so. Click&nbsp;
-          <SiteLink href="#infouse">here</SiteLink>&nbsp;to learn more.
+          legal reason to do so. Click <SiteLink href="#infouse">here</SiteLink>{" "}
+          to learn more.
         </Typography>
         <br />
         <Typography>
           <strong>
             In what situations and with which parties do we share personal
             information?
-          </strong>
-          &nbsp; We may share information in specific situations and with
-          specific third parties. Click&nbsp;
-          <SiteLink href="#whoshare">here</SiteLink>&nbsp;to learn more.
+          </strong>{" "}
+          We may share information in specific situations and with specific
+          third parties. Click <SiteLink href="#whoshare">here</SiteLink> to
+          learn more.
         </Typography>
         <br />
         <Typography>
-          <strong>What are your rights? </strong>&nbsp; Depending on where you
-          are located geographically, the applicable privacy law may mean you
-          have certain rights regarding your personal information. Click&nbsp;
-          <SiteLink href="#privacyrights">here</SiteLink>&nbsp;to learn more.
+          <strong>What are your rights? </strong> Depending on where you are
+          located geographically, the applicable privacy law may mean you have
+          certain rights regarding your personal information. Click{" "}
+          <SiteLink href="#privacyrights">here</SiteLink> to learn more.
         </Typography>
         <br />
         <Typography>
           <strong>How do you exercise your rights? </strong>
-          The easiest way to exercise your rights by contacting us at&nbsp;
-          <SiteLink href={`mailto:${DATA_REQUESTS_EMAIL}`}>
-            {DATA_REQUESTS_EMAIL}
+          The easiest way to exercise your rights by contacting us at{" "}
+          <SiteLink href={`mailto:${INQUIRIES_EMAIL}`}>
+            {INQUIRIES_EMAIL}
           </SiteLink>
           . We will consider and act upon any request in accordance with
           applicable data protection laws.
@@ -127,9 +118,8 @@ function PrivacyPolicy() {
         <br />
         <Typography>
           Want to learn more about what {WEBSITE_NAME} Inc. does with any
-          information we collect? Click&nbsp;
-          <SiteLink href="#toc">here</SiteLink>&nbsp;to review the notice in
-          full.
+          information we collect? Click <SiteLink href="#toc">here</SiteLink> to
+          review the notice in full.
         </Typography>
       </Box>
       <br />
@@ -142,7 +132,7 @@ function PrivacyPolicy() {
         </SiteLink>
         <br />
         <SiteLink href="#infouse">
-          2. HOW DO WE PROCESS YOUR INFORMATION??
+          2. HOW DO WE PROCESS YOUR INFORMATION?
         </SiteLink>
         <br />
         <SiteLink href="#legalbases">
@@ -228,11 +218,11 @@ function PrivacyPolicy() {
           register with us using your existing social media account details,
           like your Eve, Facebook, Twitter, or other social media account. If
           you choose to register in this way, we will collect the information
-          described in the section called&nbsp;
+          described in the section called{" "}
           <SiteLink href="#sociallogins">
             "HOW DO WE HANDLE YOUR SOCIAL LOGINS?"
-          </SiteLink>
-          &nbsp; below.
+          </SiteLink>{" "}
+          below.
         </Typography>
         <br />
         <Typography>
@@ -274,7 +264,7 @@ function PrivacyPolicy() {
         <List>
           <ListItem>
             <Typography>
-              <em> Log and Usage Data.</em>&nbsp; Log and usage data is
+              <em> Log and Usage Data.</em> Log and usage data is
               service-related, diagnostic, usage, and performance information
               our servers automatically collect when you access or use our
               Services and which we record in log files. Depending on how you
@@ -311,7 +301,7 @@ function PrivacyPolicy() {
           <ListItem>
             <Typography>
               <strong>
-                To save or protect an individual's vital interest.&nbsp;
+                To save or protect an individual's vital interest.{" "}
               </strong>
               We may process your information when necessary to save or protect
               an individual's vital interest, such as to prevent harm.
@@ -351,8 +341,8 @@ function PrivacyPolicy() {
               <strong>Consent.</strong> We may process your information if you
               have given us permission (i.e., consent) to use your personal
               information for a specific purpose. You can withdraw your consent
-              at any time. Click&nbsp;
-              <SiteLink href="#request">here</SiteLink>&nbsp;to learn more.
+              at any time. Click <SiteLink href="#request">here</SiteLink> to
+              learn more.
             </Typography>
           </ListItem>
           <ListItem>
@@ -384,8 +374,7 @@ function PrivacyPolicy() {
           permission (i.e., express consent) to use your personal information
           for a specific purpose, or in situations where your permission can be
           inferred (i.e., implied consent). You can withdraw your consent at any
-          time. Click&nbsp;<SiteLink href="#request">here</SiteLink>
-          &nbsp;to learn more.
+          time. Click <SiteLink href="#request">here</SiteLink> to learn more.
         </Typography>
         <br />
         <Typography>
@@ -454,12 +443,12 @@ function PrivacyPolicy() {
         <Typography>
           <strong>
             Vendors, Consultants, and Other Third-Party Service Providers.
-          </strong>
-          &nbsp; We may share your data with third-party vendors, service
-          providers, contractors, or agents ("<strong>third parties</strong>")
-          who perform services for us or on our behalf and require access to
-          such information to do that work. We have contracts in place with our
-          third parties, which are designed to help safeguard your personal
+          </strong>{" "}
+          We may share your data with third-party vendors, service providers,
+          contractors, or agents ("<strong>third parties</strong>") who perform
+          services for us or on our behalf and require access to such
+          information to do that work. We have contracts in place with our third
+          parties, which are designed to help safeguard your personal
           information. This means that they cannot do anything with your
           personal information unless we have instructed them to do it. They
           will also not share your personal information with any organization
@@ -470,10 +459,10 @@ function PrivacyPolicy() {
         <br />
         <List>
           <ListItem>
-            <strong>Web and Mobile Analytics:</strong>&nbsp; Google Analytics
+            <strong>Web and Mobile Analytics:</strong>&nbsp;Google Analytics
           </ListItem>
           <ListItem>
-            <strong>Website Performance Monitoring:</strong>&nbsp; Sentry
+            <strong>Website Performance Monitoring:</strong>&nbsp;Sentry
           </ListItem>
         </List>
         <br />
@@ -617,7 +606,7 @@ function PrivacyPolicy() {
         </Typography>
         <br />
         <Typography fontStyle="italic">
-          <strong>In Short:</strong>We do not knowingly collect data from or
+          <strong>In Short:</strong> We do not knowingly collect data from or
           market to children under 18 years of age.
         </Typography>
         <br />
@@ -630,13 +619,12 @@ function PrivacyPolicy() {
           been collected, we will deactivate the account and take reasonable
           measures to promptly delete such data from our records. If you become
           aware of any data we may have collected from children under age 18,
-          please contact us at&nbsp;
+          please contact us at{" "}
           <SiteLink href={`mailto:${INQUIRIES_EMAIL}`}>
             {INQUIRIES_EMAIL}
           </SiteLink>
           .
         </Typography>
-        <br />
       </Box>
       <br />
       <br />
@@ -660,11 +648,11 @@ function PrivacyPolicy() {
           applicable, to data portability. In certain circumstances, you may
           also have the right to object to the processing of your personal
           information. You can make such a request by contacting us by using the
-          contact details provided in the section&nbsp;
+          contact details provided in the section{" "}
           <SiteLink href="#contact">
             "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"
-          </SiteLink>
-          &nbsp; below.
+          </SiteLink>{" "}
+          below.
         </Typography>
         <br />
         <Typography>
@@ -676,7 +664,7 @@ function PrivacyPolicy() {
           If you are located in the EEA or UK and you believe we are unlawfully
           processing your personal information, you also have the right to
           complain to your local data protection supervisory authority. You can
-          find their contact details here:&nbsp;
+          find their contact details here:{" "}
           <SiteLink
             href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm"
             target="_blank"
@@ -687,7 +675,7 @@ function PrivacyPolicy() {
         <br />
         <Typography>
           If you are located in Switzerland, the contact details for the data
-          protection authorities are available here:&nbsp;
+          protection authorities are available here:{" "}
           <SiteLink
             href="https://www.edoeb.admin.ch/edoeb/en/home.html"
             target="_blank"
@@ -703,11 +691,11 @@ function PrivacyPolicy() {
           and/or implied consent depending on the applicable law, you have the
           right to withdraw your consent at any time. You can withdraw your
           consent at any time by contacting us by using the contact details
-          provided in the section&nbsp;
+          provided in the section{" "}
           <SiteLink href="#contact">
             "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"
-          </SiteLink>
-          &nbsp; below.
+          </SiteLink>{" "}
+          below.
         </Typography>
         <br />
         <Typography>
@@ -723,7 +711,7 @@ function PrivacyPolicy() {
           choose to set your browser to remove cookies and to reject cookies. If
           you choose to remove cookies or reject cookies, this could affect
           certain features or services of our Services. To opt out of
-          interest-based advertising by advertisers on our Services visit&nbsp;
+          interest-based advertising by advertisers on our Services visit{" "}
           <SiteLink href="http://www.aboutads.info/choices/" target="_blank">
             http://www.aboutads.info/choices/
           </SiteLink>
@@ -732,7 +720,7 @@ function PrivacyPolicy() {
         <br />
         <Typography>
           If you have questions or comments about your privacy rights, you may
-          email us at&nbsp;
+          email us at{" "}
           <SiteLink href={`mailto:${INQUIRIES_EMAIL}`}>
             {INQUIRIES_EMAIL}
           </SiteLink>
@@ -768,7 +756,7 @@ function PrivacyPolicy() {
         </Typography>
         <br />
         <Typography fontStyle="italic">
-          <strong>In Short:</strong>Yes, if you are a resident of California,
+          <strong>In Short:</strong> Yes, if you are a resident of California,
           you are granted specific rights regarding access to your personal
           information.
         </Typography>
@@ -805,8 +793,8 @@ function PrivacyPolicy() {
         </Typography>
         <br />
         <Typography fontStyle="italic">
-          <strong>In Short:</strong>Yes, we will update this notice as necessary
-          to stay compliant with relevant laws.
+          <strong>In Short:</strong> Yes, we will update this notice as
+          necessary to stay compliant with relevant laws.
         </Typography>
         <br />
         <Typography>
@@ -828,7 +816,7 @@ function PrivacyPolicy() {
         <br />
         <Typography>
           If you have questions or comments about this notice, you may email us
-          at&nbsp;
+          at{" "}
           <SiteLink href={`mailto:${INQUIRIES_EMAIL}`}>
             {INQUIRIES_EMAIL}
           </SiteLink>
@@ -846,8 +834,7 @@ function PrivacyPolicy() {
           Based on the applicable laws of your country, you may have the right
           to request access to the personal information we collect from you,
           change that information, or delete it. To request to review, update,
-          or delete your personal information, please fill out and submit
-          a&nbsp;
+          or delete your personal information, please fill out and submit a{" "}
           <SiteLink href="https://app.termly.io/notify/d4520545-c445-40fa-808c-1205442e2397">
             data subject access request
           </SiteLink>

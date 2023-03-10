@@ -24,6 +24,7 @@ import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
 import Tooltip from "../Tooltip";
 import Checkbox from "../Checkbox";
+import LoadingAnimation from "../LoadingAnimation";
 
 function RouteForm() {
   const theme = useTheme();
@@ -187,7 +188,7 @@ function RouteForm() {
               </Stack>
               <Stack spacing={0.5}>
                 <Typography>&nbsp;</Typography>
-                <Tooltip title="Push to Eve Client">
+                <Tooltip title="Push to Eve client">
                   <PublishIcon
                     sx={{
                       cursor: canPushRoute ? "pointer" : "default",

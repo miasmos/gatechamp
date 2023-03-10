@@ -12,7 +12,7 @@ function NoScrollLayout() {
       >
         <Outlet />
       </Container>
-      <Footer position="fixed" bottom={0} py={6} />
+      <Footer position="fixed" bottom={0} py={5} />
     </>
   );
 }

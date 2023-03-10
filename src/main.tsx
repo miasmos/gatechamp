@@ -29,6 +29,8 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import TermsOfUse from "./components/TermsOfUse/TermsOfUse";
+import Faq from "./components/Faq/Faq";
 
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
 // TODO: stopwatch, timing route from point to point, can use the eve api to fetch user's location periodically
@@ -58,6 +60,8 @@ const router = createBrowserRouter(
           path={AppRoute.PrivacyPolicy}
           element={<PrivacyPolicy />}
         />
+        <Route index path={AppRoute.TermsOfUse} element={<TermsOfUse />} />
+        <Route index path={AppRoute.Faq} element={<Faq />} />
       </Route>
 
       {/* <Route path={AppRoute.Trip} element={<TripLayout />}>

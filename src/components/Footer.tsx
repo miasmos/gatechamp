@@ -7,6 +7,7 @@ import {
   useTheme,
   BoxProps,
 } from "@mui/material";
+import { ComponentProps } from "react";
 import { WEBSITE_NAME } from "../constants";
 import { AppRoute } from "../enum";
 import { LogoIcon } from "./icon";
@@ -16,6 +17,10 @@ const StyledFooter = styled(Box)(() => ({
   width: "100%",
   minHeight: 80,
 }));
+
+const FooterLink = (props: ComponentProps<typeof Link>) => (
+  <Link fontWeight="normal" sx={{ textDecoration: "none" }} {...props} />
+);
 
 function Footer(props: BoxProps) {
   const theme = useTheme();
@@ -31,10 +36,23 @@ function Footer(props: BoxProps) {
               ©{new Date().getFullYear()} {WEBSITE_NAME} Inc.
             </Typography>
           </Stack>
-          <Stack justifyContent="center">
-            <Link href={AppRoute.PrivacyPolicy} variant="body2">
+
+          <Stack alignItems="flex-end" direction="row">
+            <FooterLink href={AppRoute.Faq} variant="body2">
+              FAQ
+            </FooterLink>
+            <Stack alignItems="center" direction="row">
+              <Typography lineHeight="1.25">&nbsp;/&nbsp;</Typography>
+            </Stack>
+            <FooterLink href={AppRoute.PrivacyPolicy} variant="body2">
               Privacy Policy
-            </Link>
+            </FooterLink>
+            <Stack alignItems="center" direction="row">
+              <Typography lineHeight="1.25">&nbsp;/&nbsp;</Typography>
+            </Stack>
+            <FooterLink href={AppRoute.TermsOfUse} variant="body2">
+              Terms of Use
+            </FooterLink>
           </Stack>
         </Stack>
       </Container>
