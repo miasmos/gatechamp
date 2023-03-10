@@ -133,7 +133,7 @@ function RouteRenderer({
         "route-renderer--always-show-origin": alwaysShowDestination,
         "route-renderer--always-show-destination": alwaysShowDestination,
       })}
-      minHeight={157}
+      minHeight={164}
       justifyContent="center"
       alignItems="center"
       direction="column"
@@ -147,15 +147,8 @@ function RouteRenderer({
             width="100%"
             mb={2}
             justifyContent="center"
+            minHeight={24}
           >
-            <Stack direction="column" justifyContent="center">
-              {/* <Typography
-                variant="body2"
-                sx={{ opacity: avoidedSolarSystems.length === 0 ? 0 : 1 }}
-              >
-                Avoid
-              </Typography> */}
-            </Stack>
             <Stack
               alignItems="flex-start"
               direction="row"

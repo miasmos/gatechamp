@@ -10,7 +10,7 @@ import {
 import { ComponentProps } from "react";
 import { WEBSITE_NAME } from "../constants";
 import { AppRoute } from "../enum";
-import { LogoIcon } from "./icon";
+import LogoIcon from "./icon/LogoIcon";
 import Link from "./Link";
 
 const StyledFooter = styled(Box)(() => ({
@@ -28,7 +28,7 @@ function Footer(props: BoxProps) {
     <StyledFooter component="footer" {...props}>
       <Container>
         <Stack direction="row" justifyContent="space-between">
-          <Stack>
+          <Stack alignItems="flex-start">
             <Link href={AppRoute.Home}>
               <LogoIcon color={theme.palette.primary.main} width={100} mt={1} />
             </Link>

@@ -58,9 +58,4 @@ function AppBarAvatar() {
   );
 }
 
-function AppBarAvatarLoading() {
-  return <></>;
-}
-
 export default AppBarAvatar;
-export { AppBarAvatarLoading };

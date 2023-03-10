@@ -51,7 +51,7 @@ function TermsOfUse() {
         <Typography>
           These Legal Terms constitute a legally binding agreement made between
           you, whether personally or on behalf of an entity ("
-          <strong>you</strong>"), and Company Inc., concerning your access to
+          <strong>you</strong>"), and GateChamp Inc., concerning your access to
           and use of the Services. You agree that by accessing the Services, you
           have read, understood, and agreed to be bound by all of these Legal
           Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS, THEN YOU ARE
@@ -149,6 +149,7 @@ function TermsOfUse() {
       <br />
       <Box component="section" id="services">
         <Typography variant="h3">1. OUR SERVICES</Typography>
+
         <br />
         <Typography>
           The information provided when using the Services is not intended for
@@ -180,11 +181,19 @@ function TermsOfUse() {
         </Typography>
         <br />
         <Typography>
+          GateChamp Inc. is in no way affiliated with CCP ehf. or any CCP ehf.
+          subsidiaries. CCP ehf. does not endorse GateChamp Inc. EVE Online® and
+          CCP® and all related logos and other elements are trademarks of CCP
+          ehf.
+        </Typography>
+        <br />
+        <Typography>
           We are the owner or the licensee of all intellectual property rights
           in our Services, including all source code, databases, functionality,
           software, website designs, audio, video, text, photographs, and
           graphics in the Services (collectively, the "Content"), as well as the
-          trademarks, service marks, and logos contained therein (the "Marks").
+          trademarks, service marks, and logos contained therein (the "Marks")
+          with the exception of those owned by CCP ehf.
         </Typography>
         <br />
         <Typography>
@@ -803,7 +812,7 @@ function TermsOfUse() {
         <br />
         <Typography>
           These Legal Terms shall be governed by and defined following the laws
-          of Canada. Company Inc. and yourself irrevocably consent that the
+          of Canada. GateChamp Inc. and yourself irrevocably consent that the
           courts of Canada shall have exclusive jurisdiction to resolve any
           dispute which may arise in connection with these Legal Terms.
         </Typography>

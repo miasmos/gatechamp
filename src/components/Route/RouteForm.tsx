@@ -24,7 +24,6 @@ import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
 import Tooltip from "../Tooltip";
 import Checkbox from "../Checkbox";
-import LoadingAnimation from "../LoadingAnimation";
 
 function RouteForm() {
   const theme = useTheme();
@@ -130,6 +129,7 @@ function RouteForm() {
                         sx={{
                           cursor: canUseMyLocation ? "pointer" : "default",
                           opacity: canUseMyLocation ? 1 : 0.4,
+                          transition: "opacity 0.2s",
                           zIndex: 2,
                         }}
                         onClick={() => onUseMyLocation(!isUsingMyLocation)}
@@ -156,6 +156,7 @@ function RouteForm() {
                     mt: { md: 2.5, sm: 0 },
                     cursor: canSwap ? "pointer" : "default",
                     opacity: canSwap ? 1 : 0.4,
+                    transition: "opacity 0.2s",
                     [theme.breakpoints.down("sm")]: {
                       ml: theme.spacing(5),
                     },
@@ -193,6 +194,7 @@ function RouteForm() {
                     sx={{
                       cursor: canPushRoute ? "pointer" : "default",
                       opacity: canPushRoute ? 1 : 0.4,
+                      transition: "opacity 0.2s",
                     }}
                     onClick={pushRoute}
                   />

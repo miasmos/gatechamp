@@ -1,8 +1,7 @@
-import { Suspense } from "react";
 import { AppBar as MuiAppBar, Link, Stack, useTheme } from "@mui/material";
 import { AppRoute } from "../enum";
-import AppBarAvatar, { AppBarAvatarLoading } from "./AppBarAvatar";
-import { LogoIcon } from "./icon";
+import AppBarAvatar from "./AppBarAvatar";
+import LogoIcon from "./icon/LogoIcon";
 
 function AppBar() {
   const theme = useTheme();
@@ -36,9 +35,7 @@ function AppBar() {
           </Link>
         </Stack>
         <Stack justifyContent="center" height="100%">
-          <Suspense fallback={<AppBarAvatarLoading />}>
-            <AppBarAvatar />
-          </Suspense>
+          <AppBarAvatar />
         </Stack>
       </Stack>
     </MuiAppBar>

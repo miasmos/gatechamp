@@ -2,16 +2,14 @@ import { Box, Stack } from "@mui/material";
 import { CSSTransition } from "react-transition-group";
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { randomIndexFromArray } from "../util/array";
-import {
-  AsteroIcon,
-  BustardIcon,
-  CraneIcon,
-  MiasmosIcon,
-  SunesisIcon,
-  VertIcon,
-  AtronIcon,
-} from "./icon";
 import { palette } from "../theme";
+import AsteroIcon from "./icon/AsteroIcon";
+import AtronIcon from "./icon/AtronIcon";
+import BustardIcon from "./icon/BustardIcon";
+import CraneIcon from "./icon/CraneIcon";
+import MiasmosIcon from "./icon/MiasmosIcon";
+import SunesisIcon from "./icon/SunesisIcon";
+import VertIcon from "./icon/VertIcon";
 
 type LoadingAnimationProps = {
   duration?: number;

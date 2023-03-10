@@ -39,6 +39,35 @@ function Faq() {
         50km of a gate within the last hour.
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />
+      <FaqQuestion question="Why does the route sometimes differ from Eve's autopilot?">
+        GateChamp has it's own proprietary routing system that takes into
+        account distance gate-to-gate and time between jumps. It will sometimes
+        differ from Eve's autopilot route.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
+      <FaqQuestion question="What are those ticks sometimes under the system bar?">
+        These represent active gate camps on the exact route you are currently
+        on. One on the left side means that there's a camp on the entry gate in
+        that system. One on the right side means that there's a camp on the exit
+        gate in that system.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
+      <FaqQuestion question="I clicked 'Avoid Gate Camp' but the route still has systems with kills in it?">
+        The kill indicator represents kills in the entire system, but that
+        doesn't necessarily mean that there's a gate camp in that system. 'Avoid
+        Gate Camp' only avoids systems with active gate camps.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
+      <FaqQuestion question="Why can't I click 'Use My Location'?">
+        In order to use your location, you must be logged in to both the
+        GateChamp website and the Eve client with the same character.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
+      <FaqQuestion question="Why can't I click 'Push to Eve client'?">
+        In order to push to the Eve client, you must be logged in to both the
+        GateChamp website and the Eve client with the same character.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
       <FaqQuestion question="Why do I need to give you access to my location?">
         We use your location to automatically synchronize your route origin as
         you are playing. Your location is only tracked when you are logged in to
@@ -57,16 +86,7 @@ function Faq() {
         will be used for no other purpose.
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />
-      <FaqQuestion question="Why can't I click 'Use My Location'?">
-        In order to use your location, you must be logged in to both the
-        GateChamp website and the Eve client with the same character.
-      </FaqQuestion>
-      <Divider sx={{ my: 6 }} />
-      <FaqQuestion question="Why can't I click 'Push to Eve client'?">
-        In order to push to the Eve client, you must be logged in to both the
-        GateChamp website and the Eve client with the same character.
-      </FaqQuestion>
-      <Divider sx={{ my: 6 }} />
+
       <FaqQuestion question="I want to revoke permissions to my Eve account, how do I do that?">
         <>
           CCP provides their own tools to manage Third Party Applications.
@@ -77,7 +97,7 @@ function Faq() {
           >
             here
           </Link>{" "}
-          and click 'Delete Application'.
+          and click 'Delete Application' within the GateChamp application item.
         </>
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />

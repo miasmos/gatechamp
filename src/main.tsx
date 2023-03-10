@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
@@ -21,16 +21,14 @@ import RootLayout from "./layout/RootLayout";
 // import StationFlowLayout from "./layout/StationFlowLayout";
 // import TripStationDetail from "./components/Trip/Station/TripStationDetail";
 import RouteForm from "./components/Route/RouteForm";
-import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import ScrolledLayout from "./layout/ScrolledLayout";
 import NoScrollLayout from "./layout/NoScrollLayout";
 
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import TermsOfUse from "./components/TermsOfUse/TermsOfUse";
-import Faq from "./components/Faq/Faq";
+const PrivacyPolicy = lazy(
+  () => import("./components/PrivacyPolicy/PrivacyPolicy")
+);
+const TermsOfUse = lazy(() => import("./components/TermsOfUse/TermsOfUse"));
+const Faq = lazy(() => import("./components/Faq/Faq"));
 
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
 // TODO: stopwatch, timing route from point to point, can use the eve api to fetch user's location periodically
@@ -89,11 +87,13 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RecoilRoot>
-        <RouterProvider router={router} />
-      </RecoilRoot>
-    </ThemeProvider>
+    <Suspense fallback={<></>}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RecoilRoot>
+          <RouterProvider router={router} />
+        </RecoilRoot>
+      </ThemeProvider>
+    </Suspense>
   </React.StrictMode>
 );
