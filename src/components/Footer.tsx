@@ -50,6 +50,12 @@ function Footer(props: BoxProps) {
             <Stack alignItems="center" direction="row">
               <Typography lineHeight="1.25">&nbsp;/&nbsp;</Typography>
             </Stack>
+            <FooterLink href={AppRoute.CookiePolicy} variant="body2">
+              Cookie Policy
+            </FooterLink>
+            <Stack alignItems="center" direction="row">
+              <Typography lineHeight="1.25">&nbsp;/&nbsp;</Typography>
+            </Stack>
             <FooterLink href={AppRoute.TermsOfUse} variant="body2">
               Terms of Use
             </FooterLink>

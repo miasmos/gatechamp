@@ -99,14 +99,14 @@ function CookiePolicy() {
         </Typography>
         <br />
         <Typography>
-          Cookies set by the website owner (in this case, Termly) are called
-          "first-party cookies." Cookies set by parties other than the website
-          owner are called "third-party cookies." Third-party cookies enable
-          third-party features or functionality to be provided on or through the
-          website (e.g., advertising, interactive content, and analytics). The
-          parties that set these third-party cookies can recognize your computer
-          both when it visits the website in question and also when it visits
-          certain other websites.
+          Cookies set by the website owner (in this case, {WEBSITE_NAME}) are
+          called "first-party cookies." Cookies set by parties other than the
+          website owner are called "third-party cookies." Third-party cookies
+          enable third-party features or functionality to be provided on or
+          through the website (e.g., advertising, interactive content, and
+          analytics). The parties that set these third-party cookies can
+          recognize your computer both when it visits the website in question
+          and also when it visits certain other websites.
         </Typography>
       </Box>
       <br />
@@ -328,6 +328,8 @@ function CookiePolicy() {
             <SiteLink href="https://support.apple.com/en-ie/guide/safari/sfri11471/mac">
               Safari
             </SiteLink>
+          </ListItem>
+          <ListItem>
             <SiteLink href="https://support.microsoft.com/en-us/windows/microsoft-edge-browsing-data-and-privacy-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd">
               Edge
             </SiteLink>
