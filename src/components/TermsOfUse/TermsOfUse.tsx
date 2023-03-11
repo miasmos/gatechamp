@@ -2,6 +2,7 @@ import { Box, List, ListItem, Stack, Typography } from "@mui/material";
 import { ComponentProps } from "react";
 import { INQUIRIES_EMAIL, WEBSITE_NAME } from "../../constants";
 import { AppRoute } from "../../enum";
+import usePageTitle from "../../hooks/usePageTitle";
 import Link from "../Link";
 
 function TermsOfUse() {
@@ -14,6 +15,7 @@ function TermsOfUse() {
       {children}
     </Link>
   );
+  usePageTitle("Terms Of Use");
 
   return (
     <Stack textAlign="left">
@@ -1076,7 +1078,7 @@ function TermsOfUse() {
         <Typography>
           In order to resolve a complaint regarding the Services or to receive
           further information regarding use of the Services, please contact us
-          at:{" "}
+          at{" "}
           <SiteLink href={`mailto:${INQUIRIES_EMAIL}`}>
             {INQUIRIES_EMAIL}
           </SiteLink>

@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Box, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -27,9 +27,11 @@ import usePushRoute from "../../hooks/usePushRoute";
 import Tooltip from "../Tooltip";
 import Checkbox from "../Checkbox";
 import ProgressIcon from "../ProgressIcon";
+import usePageTitle from "../../hooks/usePageTitle";
 
 function RouteForm() {
   const theme = useTheme();
+  usePageTitle();
   const {
     canUseMyLocation,
     isMyLocationAvailable,
@@ -57,7 +59,7 @@ function RouteForm() {
   const setDestinationName = destinationNameSetter(setRouteState);
   const setOriginName = originNameSetter(setRouteState);
 
-  const { onPushRoute } = usePushRoute();
+  const { onPushRoute, canPushRoute } = usePushRoute();
 
   const onOriginChange = (solarSystem: EveSolarSystem) =>
     originSetter(setRouteState)(solarSystem.solarSystemID);
@@ -197,14 +199,17 @@ function RouteForm() {
               <Stack spacing={0.5}>
                 <Typography>&nbsp;</Typography>
                 <Tooltip title="Push to Eve client">
-                  <ProgressIcon
-                    progress={pushRouteProgress}
-                    cooldownProgress={pushRouteCooldownProgress}
-                    isOnCooldown={pushRouteCooldownProgress > 0}
-                    isInProgress={pushRouteProgress !== 1}
-                    icon={PublishIcon}
-                    onClick={onPushRoute}
-                  />
+                  <Box>
+                    <ProgressIcon
+                      progress={pushRouteProgress}
+                      cooldownProgress={pushRouteCooldownProgress}
+                      isOnCooldown={pushRouteCooldownProgress > 0}
+                      isInProgress={pushRouteProgress !== 1}
+                      icon={PublishIcon}
+                      onClick={onPushRoute}
+                      isUsable={canPushRoute}
+                    />
+                  </Box>
                 </Tooltip>
               </Stack>
             </Stack>

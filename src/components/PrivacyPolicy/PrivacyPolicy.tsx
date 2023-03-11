@@ -1,6 +1,8 @@
 import { Box, List, ListItem, Stack, Typography } from "@mui/material";
 import { ComponentProps } from "react";
 import { INQUIRIES_EMAIL, WEBSITE_NAME } from "../../constants";
+import { AppRoute } from "../../enum";
+import usePageTitle from "../../hooks/usePageTitle";
 import Link from "../Link";
 
 function PrivacyPolicy() {
@@ -13,6 +15,7 @@ function PrivacyPolicy() {
       {children}
     </Link>
   );
+  usePageTitle("Privacy Policy");
 
   return (
     <Stack textAlign="left">
@@ -531,7 +534,11 @@ function PrivacyPolicy() {
           We may use cookies and similar tracking technologies (like web beacons
           and pixels) to access or store information. Specific information about
           how we use such technologies and how you can refuse certain cookies is
-          set out in our Cookie Notice.
+          set out in our{" "}
+          <SiteLink href={`../${AppRoute.CookiePolicy}`}>
+            Cookie Policy
+          </SiteLink>
+          .
         </Typography>
       </Box>
       <br />

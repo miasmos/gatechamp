@@ -25,7 +25,7 @@ function usePushRoute() {
   };
 
   return {
-    canPushRoute,
+    canPushRoute: canPushRouteWithAuth,
     onPushRoute,
     setPushRoute,
     isPushingRoute: isPushing,

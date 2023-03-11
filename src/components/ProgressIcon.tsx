@@ -4,6 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ProgressCircle from "./ProgressCircle";
 
 type ProgressIconProps = {
+  isUsable?: boolean;
   progress: number;
   cooldownProgress: number;
   isOnCooldown: boolean;
@@ -18,6 +19,7 @@ function ProgressIcon({
   onClick,
   progress,
   cooldownProgress,
+  isUsable = true,
   isOnCooldown,
   isInProgress,
   thickness = 5,
@@ -56,15 +58,16 @@ function ProgressIcon({
           transform: "translate(-50%,-50%)",
           left: "50%",
           top: "50%",
-          transition: "opacity 0.1s",
+          transition: "opacity 0.2s",
           pointerEvents: "none",
           opacity: isOnCooldown && !isInProgress ? 1 : 0,
         }}
       />
       <Icon
         sx={{
-          cursor: !isOnCooldown && !isInProgress ? "pointer" : "default",
-          opacity: !isInProgress && !isOnCooldown ? 1 : 0,
+          cursor:
+            isUsable && !isOnCooldown && !isInProgress ? "pointer" : "default",
+          opacity: !isInProgress && !isOnCooldown ? (isUsable ? 1 : 0.4) : 0,
           transition: "opacity 0.2s",
           zIndex: 2,
           position: "relative",

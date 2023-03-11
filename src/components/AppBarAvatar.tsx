@@ -10,6 +10,7 @@ import { EVE_TRADE_PLUS_DOMAIN } from "../constants";
 import useLogout from "../hooks/useLogout";
 import { isOnlineSelector } from "../recoil/status";
 import { characterSelector, isLoggedInSelector } from "../recoil/user";
+import LogInIcon from "./icon/LogInIcon";
 import Link from "./Link";
 import OnlineIndicator from "./OnlineIndicator";
 
@@ -51,7 +52,7 @@ function AppBarAvatar() {
         </Stack>
       ) : (
         <Link href={`${EVE_TRADE_PLUS_DOMAIN}/api/auth/login`}>
-          <img src="/login.png" width={220} />
+          <LogInIcon width={200} />
         </Link>
       )}
     </Stack>

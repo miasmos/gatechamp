@@ -3,6 +3,7 @@ import { Divider, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Link from "../Link";
 import { INQUIRIES_EMAIL } from "../../constants";
+import usePageTitle from "../../hooks/usePageTitle";
 
 type FaqQuestionProps = {
   question: string;
@@ -24,6 +25,8 @@ function FaqQuestion({ question, children }: FaqQuestionProps) {
 }
 
 function Faq() {
+  usePageTitle("FAQ");
+
   return (
     <Stack textAlign="left">
       <Typography variant="h2" textAlign="center" mb={10}>

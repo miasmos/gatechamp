@@ -9,6 +9,7 @@ enum AppRoute {
   Route = "route",
   PrivacyPolicy = "privacy-policy",
   TermsOfUse = "terms",
+  CookiePolicy = "cookie-policy",
   Faq = "faq",
 }
 

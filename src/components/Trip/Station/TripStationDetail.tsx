@@ -26,7 +26,7 @@ type TripStationDetailProps = NavigationIntention;
 
 function TripStationDetail({ to }: TripStationDetailProps) {
   const { onUseMyLocation } = useMyLocation();
-  const { pushRoute } = usePushRoute();
+  const { onPushRoute } = usePushRoute();
   const navigate = useNavigate();
   const routerLocation = useLocation();
   const setRoute = useSetRecoilState(routeState);
@@ -73,7 +73,7 @@ function TripStationDetail({ to }: TripStationDetailProps) {
     setOrigin(origin.system_id);
     setDestination(destination.system_id);
     onUseMyLocation(true);
-    pushRoute();
+    onPushRoute();
   }, []);
 
   return (

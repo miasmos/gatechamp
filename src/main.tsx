@@ -29,6 +29,9 @@ const PrivacyPolicy = lazy(
 );
 const TermsOfUse = lazy(() => import("./components/TermsOfUse/TermsOfUse"));
 const Faq = lazy(() => import("./components/Faq/Faq"));
+const CookiePolicy = lazy(
+  () => import("./components/CookiePolicy/CookiePolicy")
+);
 
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
 // TODO: stopwatch, timing route from point to point, can use the eve api to fetch user's location periodically
@@ -58,8 +61,9 @@ const router = createBrowserRouter(
           path={AppRoute.PrivacyPolicy}
           element={<PrivacyPolicy />}
         />
-        <Route index path={AppRoute.TermsOfUse} element={<TermsOfUse />} />
-        <Route index path={AppRoute.Faq} element={<Faq />} />
+        <Route path={AppRoute.TermsOfUse} element={<TermsOfUse />} />
+        <Route path={AppRoute.Faq} element={<Faq />} />
+        <Route path={AppRoute.CookiePolicy} element={<CookiePolicy />} />
       </Route>
 
       {/* <Route path={AppRoute.Trip} element={<TripLayout />}>
