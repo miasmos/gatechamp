@@ -8,7 +8,15 @@ function ScrolledLayout() {
     <>
       <AppBar />
       <Container
-        sx={{ display: "flex", flex: 1, mt: "120px", minHeight: "70vh" }}
+        sx={{
+          display: "flex",
+          flex: 1,
+          mt: "120px",
+          minHeight: "70vh",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+        fixed
       >
         <Outlet />
       </Container>

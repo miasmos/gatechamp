@@ -7,7 +7,7 @@ import {
   StationItem,
 } from "../../../hooks/useFetchTripStation";
 import { TripState } from "../../../recoil/trip";
-import { getStationDisplayName } from "../../../util/eveTrade";
+import { getStationDisplayName } from "../../../util/eve";
 import { formatCurrency } from "../../../util/currency";
 
 type TripStationOverviewListItemProps = {

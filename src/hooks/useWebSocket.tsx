@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useWebSocketLib, { ReadyState } from "react-use-websocket";
 import { useSetRecoilState } from "recoil";
-import { EVE_TRADE_PLUS_WEBSOCKET_DOMAIN } from "../constants";
+import { APP_WEBSOCKET_DOMAIN } from "../constants";
 import { isConnectedSetter } from "../recoil/user";
 import userState from "../recoil/user/atom";
 
@@ -9,7 +9,7 @@ function useWebSocket() {
   const setUserState = useSetRecoilState(userState);
   const setIsConnected = isConnectedSetter(setUserState);
   const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } =
-    useWebSocketLib(EVE_TRADE_PLUS_WEBSOCKET_DOMAIN, {
+    useWebSocketLib(APP_WEBSOCKET_DOMAIN, {
       share: true,
       shouldReconnect: () => true,
       reconnectInterval: (attempts: number) =>

@@ -21,13 +21,15 @@ import {
   originSetter,
 } from "../../recoil/route";
 import { SyntheticEvent } from "react";
-import { isLoggedInSelector } from "../../recoil/user";
+import { isLoggedInSelector, isSubscribedSelector } from "../../recoil/user";
 import useMyLocation from "../../hooks/useMyLocation";
 import usePushRoute from "../../hooks/usePushRoute";
 import Tooltip from "../Tooltip";
 import Checkbox from "../Checkbox";
 import ProgressIcon from "../ProgressIcon";
 import usePageTitle from "../../hooks/usePageTitle";
+import { subscribeModalSetter } from "../../recoil/modal";
+import modalState, { ModalSubscribeFeature } from "../../recoil/modal/atom";
 
 function RouteForm() {
   const theme = useTheme();
@@ -39,6 +41,8 @@ function RouteForm() {
     isUsingMyLocation,
   } = useMyLocation();
   const setRouteState = useSetRecoilState(routeState);
+  const setModalState = useSetRecoilState(modalState);
+  const setSubscribeModal = subscribeModalSetter(setModalState);
   const {
     avoidGateCamp,
     avoidEntryGateCamp,
@@ -49,6 +53,7 @@ function RouteForm() {
     originName,
     destinationName,
   } = useRecoilValue(routeState);
+  const isSubscribed = useRecoilValue(isSubscribedSelector);
   const isLoggedIn = useRecoilValue(isLoggedInSelector);
   const pushRouteCooldownProgress = useRecoilValue(
     getPushRouteCooldownProgressSelector
@@ -94,6 +99,20 @@ function RouteForm() {
       setOrigin(destination);
     }
   };
+  const onUseMyLocationClicked = () => {
+    if (isSubscribed) {
+      onUseMyLocation(!isUsingMyLocation);
+    } else {
+      setSubscribeModal(true, ModalSubscribeFeature.LocationTracking);
+    }
+  };
+  const onPushRouteClicked = () => {
+    if (isSubscribed) {
+      onPushRoute();
+    } else {
+      setSubscribeModal(true, ModalSubscribeFeature.LocationTracking);
+    }
+  };
 
   const canSwap =
     origin &&
@@ -104,9 +123,10 @@ function RouteForm() {
   const LocationIcon = isMyLocationAvailable
     ? MyLocationIcon
     : LocationSearchingIcon;
+  const isLocationIconEnabled = canUseMyLocation || !isSubscribed;
 
   return (
-    <Stack width="100%" alignSelf="center">
+    <Stack width="100%">
       <Stack direction="column" spacing={3}>
         <Stack direction="column">
           <Stack
@@ -136,12 +156,12 @@ function RouteForm() {
                     <Stack>
                       <LocationIcon
                         sx={{
-                          cursor: canUseMyLocation ? "pointer" : "default",
-                          opacity: canUseMyLocation ? 1 : 0.4,
+                          cursor: isLocationIconEnabled ? "pointer" : "default",
+                          opacity: isLocationIconEnabled ? 1 : 0.4,
                           transition: "opacity 0.2s",
                           zIndex: 2,
                         }}
-                        onClick={() => onUseMyLocation(!isUsingMyLocation)}
+                        onClick={onUseMyLocationClicked}
                       />
                     </Stack>
                   </Tooltip>
@@ -200,15 +220,22 @@ function RouteForm() {
                 <Typography>&nbsp;</Typography>
                 <Tooltip title="Push to Eve client">
                   <Box>
-                    <ProgressIcon
-                      progress={pushRouteProgress}
-                      cooldownProgress={pushRouteCooldownProgress}
-                      isOnCooldown={pushRouteCooldownProgress > 0}
-                      isInProgress={pushRouteProgress !== 1}
-                      icon={PublishIcon}
-                      onClick={onPushRoute}
-                      isUsable={canPushRoute}
-                    />
+                    {isSubscribed ? (
+                      <ProgressIcon
+                        progress={pushRouteProgress}
+                        cooldownProgress={pushRouteCooldownProgress}
+                        isOnCooldown={pushRouteCooldownProgress > 0}
+                        isInProgress={pushRouteProgress !== 1}
+                        icon={PublishIcon}
+                        onClick={onPushRouteClicked}
+                        isUsable={canPushRoute}
+                      />
+                    ) : (
+                      <PublishIcon
+                        sx={{ mt: 1, cursor: "pointer" }}
+                        onClick={onPushRouteClicked}
+                      />
+                    )}
                   </Box>
                 </Tooltip>
               </Stack>

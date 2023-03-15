@@ -13,8 +13,7 @@ import {
   destinationSetter,
   originSetter,
 } from "../../../recoil/route";
-import { useEffect } from "react";
-import LoadingAnimation from "../../LoadingAnimation";
+import Loading from "../../Loading";
 
 type TripStationOverviewProps = NavigationIntention;
 
@@ -46,11 +45,7 @@ function TripStationOverview({ to }: TripStationOverviewProps) {
     console.log("error while fetching", hasError);
   }
   if (isLoading || isValidating) {
-    return (
-      <Stack direction="column" alignItems="center" justifyContent="center">
-        <LoadingAnimation />
-      </Stack>
-    );
+    return <Loading />;
   }
 
   return (

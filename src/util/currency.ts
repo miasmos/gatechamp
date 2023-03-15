@@ -1,7 +1,10 @@
+import { PaymentProvider } from "../enum";
+
 const formatCurrency = (
   value: number,
   format: "short" | "long" = "short",
-  separator = ","
+  separator = ",",
+  decimals = 0
 ): string => {
   const str = Math.floor(value).toString();
   const magnitude = str.length / 3;
@@ -38,4 +41,18 @@ const formatCurrency = (
   }
 };
 
-export { formatCurrency };
+const centsToIsk = (cents: number) => cents * 100000;
+
+const savingsPercent = (baseValue: number, comparedValue: number) =>
+  Math.round((1 - baseValue / comparedValue) * 100);
+
+const getSymbol = (provider: PaymentProvider) => {
+  switch (provider) {
+    case PaymentProvider.Ccp:
+      return "Ƶ";
+    case PaymentProvider.Stripe:
+      return "$";
+  }
+};
+
+export { formatCurrency, centsToIsk, savingsPercent, getSymbol };

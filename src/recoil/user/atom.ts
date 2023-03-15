@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
+import { AppRoute } from "../../enum";
 
 const { persistAtom } = recoilPersist();
 
@@ -9,6 +10,8 @@ interface UserState {
   loginExpiresAt: string | undefined;
   activeCharacter: number;
   character: Record<string, Character>;
+  redirect: AppRoute | undefined;
+  isSubscribed: boolean;
 }
 
 interface Character {
@@ -34,6 +37,8 @@ const userState = atom<UserState>({
     loginExpiresAt: undefined,
     activeCharacter: -1,
     character: {},
+    redirect: undefined,
+    isSubscribed: false,
   },
   effects_UNSTABLE: [persistAtom],
 });

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
-import { getStationDisplayName } from "../../../util/eveTrade";
+import { getStationDisplayName } from "../../../util/eve";
 import { CargoBay } from "../../../enum";
 import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";

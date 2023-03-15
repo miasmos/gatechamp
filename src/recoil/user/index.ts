@@ -7,6 +7,9 @@ import characterSelector from "./selectors/characterSelector";
 import isConnectedSetter from "./setters/isConnectedSetter";
 import activeCharacterSelector from "./selectors/activeCharacterSelector";
 import characterSetter from "./setters/characterSetter";
+import redirectSetter from "./setters/redirectSetter";
+import isSubscribedSetter from "./setters/isSubscribedSetter";
+import isSubscribedSelector from "./selectors/isSubscribedSelector";
 
 export default atom;
 export {
@@ -14,5 +17,13 @@ export {
   isConnectedSelector,
   characterSelector,
   activeCharacterSelector,
+  isSubscribedSelector,
 };
-export { userSetter, loggedInSetter, isConnectedSetter, characterSetter };
+export {
+  userSetter,
+  loggedInSetter,
+  isConnectedSetter,
+  characterSetter,
+  redirectSetter,
+  isSubscribedSetter,
+};

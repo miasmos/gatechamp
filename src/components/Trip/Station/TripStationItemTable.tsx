@@ -16,12 +16,10 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { formatCurrency } from "../../../util/currency";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import {
-  stringifyItemOrder,
-  stringifyItemsOrder,
-} from "../../../util/eveTrade";
+import { stringifyItemOrder, stringifyItemsOrder } from "../../../util/eve";
 import { CargoBayItem } from "../../../hooks/useFetchTripStation";
 import ProgressBar from "../../ProgressBar";
+import { palette } from "../../../theme";
 
 type TripStationItemTableProps = CargoBayItem & {
   title: string;
@@ -58,7 +56,13 @@ function TripStationItemTable({
           <TableContainer sx={{ maxHeight: 300 }}>
             <Table size="small" stickyHeader>
               <TableHead>
-                <TableRow>
+                <TableRow
+                  sx={{
+                    ".MuiTableCell-root": {
+                      background: palette.palette.background.paper,
+                    },
+                  }}
+                >
                   <TableCell />
                   <TableCell>Item</TableCell>
                   <TableCell align="right">Buy</TableCell>

@@ -11,6 +11,14 @@ enum AppRoute {
   TermsOfUse = "terms",
   CookiePolicy = "cookie-policy",
   Faq = "faq",
+  Checkout = "checkout",
+  Stripe = "stripe",
+  Status = "status",
+  Login = "login",
+  ProviderSelector = "provider",
+  Cart = "cart",
+  Pay = "pay",
+  Premium = "premium",
 }
 
 enum Station {
@@ -62,6 +70,11 @@ enum WebSocketEventType {
   OneTime = "one-time",
 }
 
+enum PaymentProvider {
+  Stripe = "stripe",
+  Ccp = "ccp",
+}
+
 export {
   AppRoute,
   Station,
@@ -69,6 +82,7 @@ export {
   Tax,
   CargoBay,
   CargoBayType,
+  PaymentProvider,
   WebSocketEvent,
   WebSocketEventType,
 };

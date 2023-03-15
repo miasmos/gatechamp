@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import { Outlet } from "react-router";
 import AppBar from "../components/AppBar";
 import Footer from "../components/Footer";
@@ -8,7 +8,14 @@ function NoScrollLayout() {
     <>
       <AppBar />
       <Container
-        sx={{ display: "flex", flex: 1, mt: "90px", minHeight: "70vh" }}
+        sx={{
+          display: "flex",
+          flex: 1,
+          mt: "90px",
+          minHeight: "70vh",
+          alignItems: "center",
+        }}
+        fixed
       >
         <Outlet />
       </Container>

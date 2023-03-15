@@ -1,10 +1,20 @@
-import { AppBar as MuiAppBar, Link, Stack, useTheme } from "@mui/material";
+import {
+  AppBar as MuiAppBar,
+  Button,
+  Link,
+  Stack,
+  useTheme,
+} from "@mui/material";
+import { useRecoilValue } from "recoil";
 import { AppRoute } from "../enum";
+import { isSubscribedSelector } from "../recoil/user";
 import AppBarAvatar from "./AppBarAvatar";
 import LogoIcon from "./icon/LogoIcon";
 
 function AppBar() {
   const theme = useTheme();
+  const isSubscribed = useRecoilValue(isSubscribedSelector);
+
   return (
     <MuiAppBar
       className="app-bar"
@@ -35,7 +45,24 @@ function AppBar() {
           </Link>
         </Stack>
         <Stack justifyContent="center" height="100%">
-          <AppBarAvatar />
+          <Stack direction="row" spacing={5}>
+            {!isSubscribed && (
+              <Link
+                href={AppRoute.Premium}
+                sx={{
+                  textDecoration: "none",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Button variant="outlined" size="small">
+                  Get Premium
+                </Button>
+              </Link>
+            )}
+            <AppBarAvatar />
+          </Stack>
         </Stack>
       </Stack>
     </MuiAppBar>

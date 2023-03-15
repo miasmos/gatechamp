@@ -45,9 +45,7 @@ function useInitializeUser() {
         console.log("attempting refresh");
 
         try {
-          await getWithResponse("/api/auth/refresh", {
-            "x-character-id": activeCharacterId,
-          });
+          await getWithResponse("/api/auth/refresh");
           console.log("logged in");
           // logged in
           isLoggedIn = true;

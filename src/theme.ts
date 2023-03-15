@@ -29,6 +29,8 @@ declare module "@mui/material/styles/createPalette" {
   interface PaletteOptions extends PaletteExtended {}
 }
 
+const fontFamily = '"Roboto","Helvetica","Arial",sans-serif';
+const fontFamilyHeading = "BebasNeue, Roboto, Helvetica, Arial, sans-serif";
 const primary = "#222";
 const colors = {
   eve: {
@@ -55,23 +57,24 @@ const colors = {
 
 const palette = createTheme({
   typography: {
+    fontFamily,
     h1: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
     h2: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
     h3: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
     h4: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
     h5: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
     h6: {
-      fontFamily: "BebasNeue, Roboto, Helvetica, Arial, sans-serif",
+      fontFamily: fontFamilyHeading,
     },
   },
   palette: {
@@ -90,8 +93,8 @@ const palette = createTheme({
       disabled: "rgba(22,22,22,0.77)",
     },
     background: {
-      default: "#fff",
-      paper: "transparent",
+      default: "transparent",
+      paper: "#fff",
     },
   },
 });
@@ -191,8 +194,8 @@ const theme = createTheme(
       MuiChip: {
         styleOverrides: {
           root: {
-            borderColor: palette.palette.background.paper,
-            background: palette.palette.background.paper,
+            borderColor: palette.palette.background.default,
+            background: palette.palette.background.default,
             ".MuiChip-deleteIcon": {
               color: palette.palette.primary.main,
             },
@@ -200,7 +203,7 @@ const theme = createTheme(
               color: palette.palette.primary.main,
             },
             "&.MuiChip-clickable:hover": {
-              background: palette.palette.background.paper,
+              background: palette.palette.background.default,
             },
           },
         },
@@ -235,7 +238,7 @@ const theme = createTheme(
           root: {
             borderWidth: "1px",
             "&:hover": {
-              background: palette.palette.background.paper,
+              background: palette.palette.background.default,
             },
           },
         },
@@ -246,4 +249,4 @@ const theme = createTheme(
 );
 
 export default theme;
-export { colors, palette };
+export { colors, palette, fontFamily, fontFamilyHeading };

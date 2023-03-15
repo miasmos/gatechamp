@@ -56,9 +56,10 @@ function Faq() {
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />
       <FaqQuestion question="I clicked 'Avoid Gate Camp' but the route still has systems with kills in it?">
-        The kill indicator represents kills in the entire system, but that
-        doesn't necessarily mean that there's a gate camp in that system. 'Avoid
-        Gate Camp' only avoids systems with active gate camps.
+        The kill indicator represents kills in the entire system. A kill being
+        shown within a system doesn't necessarily mean that there's a gate camp
+        in that system. 'Avoid Gate Camp' only avoids systems with active gate
+        camps on the gates being taken on your current route.
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />
       <FaqQuestion question="Why can't I click 'Use My Location'?">

@@ -1,6 +1,6 @@
 import { Box, Stack, Typography, StackProps } from "@mui/material";
 import { RouteJumpSummary } from "../../hooks/useFetchRoute";
-import { getSecurityColor } from "../../util/eveTrade";
+import { getSecurityColor } from "../../util/eve";
 import RouteRendererTick from "./RouteRendererTick";
 
 type RouteRendererProps = {

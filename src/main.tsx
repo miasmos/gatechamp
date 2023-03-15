@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -13,16 +14,29 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "./theme";
 import { ThemeProvider } from "@emotion/react";
 import { AppRoute } from "./enum";
-// import ShipsForm from "./components/Ship/ShipsForm";
-// import TripStationForm from "./components/Trip/Station/TripStationForm";
-// import TripStationOverview from "./components/Trip/Station/TripStationOverview";
 import RootLayout from "./layout/RootLayout";
-// import TripLayout from "./layout/TripLayout";
-// import StationFlowLayout from "./layout/StationFlowLayout";
-// import TripStationDetail from "./components/Trip/Station/TripStationDetail";
 import ScrolledLayout from "./layout/ScrolledLayout";
 import NoScrollLayout from "./layout/NoScrollLayout";
+import ToastContainer from "./components/ToastContainer";
+import { ENABLE_STATION_TRADING } from "./constants";
+import LoginContainer from "./components/Login/LoginContainer";
+import CheckoutLayout from "./layout/CheckoutLayout";
+import EmptyLayout from "./layout/EmptyLayout";
 
+import "react-toastify/dist/ReactToastify.css";
+
+const ProviderSelector = lazy(
+  () => import("./components/Checkout/ProviderSelector")
+);
+const Cart = lazy(() => import("./components/Checkout/Cart"));
+const CheckoutStart = lazy(() => import("./components/Checkout/CheckoutStart"));
+const CheckoutPay = lazy(() => import("./components/Checkout/CheckoutPay"));
+const CheckoutStatus = lazy(
+  () => import("./components/Checkout/CheckoutStatus")
+);
+const PremiumShowcase = lazy(
+  () => import("./components/Product/PremiumShowcase")
+);
 const RouteForm = lazy(() => import("./components/Route/RouteForm"));
 const PrivacyPolicy = lazy(
   () => import("./components/PrivacyPolicy/PrivacyPolicy")
@@ -31,6 +45,18 @@ const TermsOfUse = lazy(() => import("./components/TermsOfUse/TermsOfUse"));
 const Faq = lazy(() => import("./components/Faq/Faq"));
 const CookiePolicy = lazy(
   () => import("./components/CookiePolicy/CookiePolicy")
+);
+const ShipsForm = lazy(() => import("./components/Ship/ShipsForm"));
+const TripStationForm = lazy(
+  () => import("./components/Trip/Station/TripStationForm")
+);
+const TripStationOverview = lazy(
+  () => import("./components/Trip/Station/TripStationOverview")
+);
+const TripLayout = lazy(() => import("./layout/TripLayout"));
+const StationFlowLayout = lazy(() => import("./layout/StationFlowLayout"));
+const TripStationDetail = lazy(
+  () => import("./components/Trip/Station/TripStationDetail")
 );
 
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
@@ -53,38 +79,65 @@ const router = createBrowserRouter(
       errorElement={<>Not Found</>}
     >
       <Route path={AppRoute.Home} element={<NoScrollLayout />}>
-        <Route index path={AppRoute.Home} element={<RouteForm />} />
+        <Route index element={<RouteForm />} />
+        <Route path={AppRoute.Login} element={<LoginContainer />} />
       </Route>
       <Route path={AppRoute.Home} element={<ScrolledLayout />}>
-        <Route
-          index
-          path={AppRoute.PrivacyPolicy}
-          element={<PrivacyPolicy />}
-        />
+        <Route path={AppRoute.PrivacyPolicy} element={<PrivacyPolicy />} />
         <Route path={AppRoute.TermsOfUse} element={<TermsOfUse />} />
         <Route path={AppRoute.Faq} element={<Faq />} />
         <Route path={AppRoute.CookiePolicy} element={<CookiePolicy />} />
+        <Route path={AppRoute.Premium} element={<PremiumShowcase />} />
+      </Route>
+      <Route path={AppRoute.Home} element={<CheckoutLayout />}>
+        <Route path={AppRoute.Checkout} element={<EmptyLayout />}>
+          <Route index element={<CheckoutStart />} />
+          <Route
+            path={AppRoute.ProviderSelector}
+            element={<ProviderSelector />}
+          />
+          <Route path={AppRoute.Cart} element={<Cart />} />
+          <Route path={AppRoute.Pay} element={<CheckoutPay />} />
+          <Route path={AppRoute.Status} element={<CheckoutStatus />} />
+        </Route>
       </Route>
 
-      {/* <Route path={AppRoute.Trip} element={<TripLayout />}>
-        <Route index element={<Navigate to={AppRoute.StationFlow} />} />
+      {ENABLE_STATION_TRADING && (
+        <Route path={AppRoute.Home} element={<NoScrollLayout />}>
+          <Route path={AppRoute.Trip} element={<TripLayout />}>
+            <Route index element={<Navigate to={AppRoute.StationFlow} />} />
 
-        <Route path={AppRoute.StationFlow} element={<StationFlowLayout />}>
-          <Route index element={<ShipsForm to={AppRoute.ConfigureRoute} />} />
-          <Route
-            path={AppRoute.ConfigureRoute}
-            element={<TripStationForm to={`../${AppRoute.Overview}`} />}
-          />
-          <Route
-            path={AppRoute.Overview}
-            element={<TripStationOverview to={`../${AppRoute.Detail}`} />}
-          />
-          <Route
-            path={AppRoute.Detail}
-            element={<TripStationDetail to={AppRoute.Home} />}
-          />
+            <Route path={AppRoute.StationFlow} element={<StationFlowLayout />}>
+              <Route
+                index
+                element={<ShipsForm to={AppRoute.ConfigureRoute} />}
+              />
+              <Route
+                path={AppRoute.ConfigureRoute}
+                element={<TripStationForm to={`../${AppRoute.Overview}`} />}
+              />
+              <Route
+                path={AppRoute.Overview}
+                element={<TripStationOverview to={`../${AppRoute.Detail}`} />}
+              />
+            </Route>
+          </Route>
         </Route>
-      </Route> */}
+      )}
+      {ENABLE_STATION_TRADING && (
+        <Route path={AppRoute.Home} element={<ScrolledLayout />}>
+          <Route path={AppRoute.Trip} element={<TripLayout />}>
+            <Route path={AppRoute.StationFlow} element={<StationFlowLayout />}>
+              <Route
+                path={AppRoute.Detail}
+                element={
+                  <TripStationDetail to={`../../${AppRoute.StationFlow}`} />
+                }
+              />
+            </Route>
+          </Route>
+        </Route>
+      )}
     </Route>
   )
 );
@@ -96,6 +149,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <CssBaseline />
         <RecoilRoot>
           <RouterProvider router={router} />
+          {ToastContainer}
         </RecoilRoot>
       </ThemeProvider>
     </Suspense>

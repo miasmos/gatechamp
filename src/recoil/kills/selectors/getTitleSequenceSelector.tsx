@@ -3,7 +3,7 @@ import { RouteJumpSummary } from "../../../hooks/useFetchRoute";
 import {
   getDisplaySecurity,
   isCrossingSecurityBoundary,
-} from "../../../util/eveTrade";
+} from "../../../util/eve";
 import killsState from "../atom";
 
 const getTitleSequenceSelector = selectorFamily({
