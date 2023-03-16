@@ -15,12 +15,10 @@ function useInitializeUser() {
   const setUser = userSetter(setUserState);
 
   const attemptLogIn = async (isLoggedIn = false) => {
-    const activeCharacterId = Cookies.get("active_character_id");
     const authToken = Cookies.get("access_token");
-    const expiresAt = Cookies.get("access_token_expires_at");
+    let expiresAt = Cookies.get("access_token_expires_at");
     const refreshTokenExists = Cookies.get("refresh_token_exists");
-
-    const expiryDate = parseISO(expiresAt!);
+    let expiryDate = parseISO(expiresAt!);
     const hasExpiry = (expiryDate as unknown as string) !== "Invalid Date";
     const doesAuthTokenExist =
       Boolean(authToken) && Boolean(expiresAt) && hasExpiry;
@@ -49,6 +47,8 @@ function useInitializeUser() {
           console.log("logged in");
           // logged in
           isLoggedIn = true;
+          expiresAt = Cookies.get("access_token_expires_at");
+          expiryDate = parseISO(expiresAt!);
         } catch {}
       }
     }
@@ -57,14 +57,12 @@ function useInitializeUser() {
       console.log("logged in");
       setUser({
         loggedIn: true,
-        activeCharacter: Number(activeCharacterId),
         loginExpiresAt: expiryDate.toISOString(),
       });
     } else {
       console.log("not logged in");
       setUser({
         loggedIn: false,
-        activeCharacter: -1,
         loginExpiresAt: undefined,
       });
     }

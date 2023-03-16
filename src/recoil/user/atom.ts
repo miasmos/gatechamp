@@ -8,7 +8,7 @@ interface UserState {
   loggedIn: boolean;
   isConnected: boolean;
   loginExpiresAt: string | undefined;
-  activeCharacter: number;
+  activeCharacter: Character;
   character: Record<string, Character>;
   redirect: AppRoute | undefined;
   isSubscribed: boolean;
@@ -27,16 +27,31 @@ interface Character {
   name: string;
   race_id: number;
   security_status: number;
+  character_id: number;
 }
 
+const defaultCharacter = {
+  ancestry_id: 0,
+  birthday: new Date(),
+  bloodline_id: 0,
+  corporation_id: 0,
+  description: "",
+  gender: "",
+  name: "",
+  race_id: 0,
+  security_status: 0,
+  character_id: 0,
+};
 const userState = atom<UserState>({
   key: "UserState",
   default: {
     loggedIn: false,
     isConnected: false,
     loginExpiresAt: undefined,
-    activeCharacter: -1,
-    character: {},
+    activeCharacter: defaultCharacter,
+    character: {
+      "0": defaultCharacter,
+    },
     redirect: undefined,
     isSubscribed: false,
   },

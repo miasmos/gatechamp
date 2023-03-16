@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import useSWRImmutable from "swr/immutable";
 import { get } from "../api";
-import { activeCharacterSelector, characterSetter } from "../recoil/user";
+import { characterSetter } from "../recoil/user";
 import userState, { Character } from "../recoil/user/atom";
 
 function useFetchCharacter(loggedIn: boolean) {
   const setUserState = useSetRecoilState(userState);
-  const activeCharacter = useRecoilValue(activeCharacterSelector);
   const setCharacter = characterSetter(setUserState);
   const {
     data = {
@@ -20,6 +19,7 @@ function useFetchCharacter(loggedIn: boolean) {
       name: "",
       race_id: 0,
       security_status: 0,
+      character_id: 0,
     },
     error,
     isLoading,
@@ -28,7 +28,7 @@ function useFetchCharacter(loggedIn: boolean) {
 
   useEffect(() => {
     if (data && data.name.length > 0) {
-      setCharacter(data, activeCharacter);
+      setCharacter(data);
     }
   }, [data]);
 

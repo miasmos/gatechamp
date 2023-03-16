@@ -40,14 +40,14 @@ function useWebSocketStatus() {
 
     if (loggedIn) {
       if (!isSubscribed) {
-        const eventId = serializeEvent(activeCharacter);
+        const eventId = serializeEvent(activeCharacter.character_id);
         sendEvent(WebSocketEventType.Subscribe, { event: eventId });
         setIsSubscribed(true);
       }
     }
     if (!loggedIn) {
       if (isSubscribed) {
-        const eventId = serializeEvent(activeCharacter);
+        const eventId = serializeEvent(activeCharacter.character_id);
         sendEvent(WebSocketEventType.Unsubscribe, { event: eventId });
         setIsSubscribed(false);
       }

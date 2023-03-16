@@ -5,7 +5,7 @@ function usePageTitle(title?: string) {
   useEffect(() => {
     document.title = WEBSITE_TITLE.replace(
       "%s",
-      title || "Check while you jump"
+      title || "Survival tools for Eve Online"
     );
   }, []);
 }

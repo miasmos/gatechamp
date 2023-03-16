@@ -62,7 +62,7 @@ function useWebSocketPushRoute() {
 
   useEffect(() => {
     if (canPushRoute && shouldPushRoute && isConnected && isSubscribed) {
-      const eventId = serializeEvent(activeCharacter);
+      const eventId = serializeEvent(activeCharacter.character_id);
       const accessToken = Cookies.get("access_token");
       if (!accessToken) {
         return;

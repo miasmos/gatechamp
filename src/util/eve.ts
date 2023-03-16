@@ -35,7 +35,7 @@ const stringifyItemOrder = ({
   quantity: number;
   buyPrice: number;
 }) => {
-  return `${item}\t${quantity}\t${formatCurrency(buyPrice, "long")}`;
+  return `${item}\t${quantity}\t${formatCurrency(buyPrice, 0, "long")}`;
 };
 
 const getSecurityColor = (security: number) => {

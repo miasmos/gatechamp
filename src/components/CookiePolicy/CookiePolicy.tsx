@@ -170,15 +170,6 @@ function CookiePolicy() {
           type="http_cookie"
           expiresIn="180 days"
         />
-        <br />
-        <CookieTable
-          name="active_character_id"
-          purpose="Tracks which Eve Online character the user is currently logged in to."
-          provider={document.location.hostname}
-          service={WEBSITE_NAME}
-          type="http_cookie"
-          expiresIn="180 days"
-        />
       </Box>
       <Divider sx={{ my: 11 }} />
       <Box component="section">
