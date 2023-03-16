@@ -8,7 +8,11 @@ import {
   getPushRouteProgressSelector,
 } from "../recoil/route";
 import routeState from "../recoil/route/atom";
-import { activeCharacterSelector, isConnectedSelector } from "../recoil/user";
+import {
+  activeCharacterSelector,
+  isConnectedSelector,
+  isSubscribedSelector,
+} from "../recoil/user";
 import usePushRoute from "./usePushRoute";
 import useWebSocket from "./useWebSocket";
 
@@ -34,6 +38,7 @@ function useWebSocketPushRoute() {
   );
   const pushRouteProgress = useRecoilValue(getPushRouteProgressSelector);
   const { canPushRoute, setPushRoute } = usePushRoute();
+  const isSubscribed = useRecoilValue(isSubscribedSelector);
   const activeCharacter = useRecoilValue(activeCharacterSelector);
   const isConnected = useRecoilValue(isConnectedSelector);
 
@@ -56,7 +61,7 @@ function useWebSocketPushRoute() {
   );
 
   useEffect(() => {
-    if (canPushRoute && shouldPushRoute && isConnected) {
+    if (canPushRoute && shouldPushRoute && isConnected && isSubscribed) {
       const eventId = serializeEvent(activeCharacter);
       const accessToken = Cookies.get("access_token");
       if (!accessToken) {

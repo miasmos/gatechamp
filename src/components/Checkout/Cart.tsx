@@ -12,7 +12,6 @@ import { AppRoute, PaymentProvider } from "../../enum";
 import { priceSelector, productQuantitySetter } from "../../recoil/checkout";
 import checkoutState from "../../recoil/checkout/atom";
 import { centsToIsk, formatCurrency, getSymbol } from "../../util/currency";
-import MainButton from "../MainButton";
 import OrderSummary from "./OrderSummary";
 
 function Cart() {
@@ -22,7 +21,7 @@ function Cart() {
   const setproductQuantity = productQuantitySetter(setCheckoutState);
   const price = useRecoilValue(priceSelector);
 
-  const onproductQuantityChange = (event: SelectChangeEvent<number>) =>
+  const onProductQuantityChange = (event: SelectChangeEvent<number>) =>
     setproductQuantity(Number(event.target.value));
   const onCheckoutClick = () => navigate(`../${AppRoute.Pay}`);
 
@@ -39,7 +38,7 @@ function Cart() {
       break;
     case PaymentProvider.Ccp:
       basePrice = centsToIsk(price!.unit_amount);
-      itemPrice = formatCurrency(basePrice);
+      itemPrice = formatCurrency(basePrice, 1);
       break;
   }
 
@@ -59,7 +58,7 @@ function Cart() {
             <Stack direction="row">
               <Select
                 value={productQuantity}
-                onChange={onproductQuantityChange}
+                onChange={onProductQuantityChange}
                 size="small"
                 sx={{ width: 60 }}
               >

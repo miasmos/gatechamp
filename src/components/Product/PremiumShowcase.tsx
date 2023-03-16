@@ -60,9 +60,36 @@ function PremiumShowcase() {
             <Stack direction="row" width="100%" justifyContent="center">
               <Stack px={4} justifyContent="center">
                 <Typography variant="h6" align="left">
-                  Route charting
+                  Real-time Updates
                 </Typography>
                 <Typography variant="body2" align="left">
+                  Instant data at your fingertips.
+                </Typography>
+              </Stack>
+              <Video
+                src="/feature-0.webm"
+                width={200}
+                height={100}
+                borderRadius={1}
+                overflow="hidden"
+              />
+            </Stack>
+            <Stack mt={4}>
+              <Typography>Never die to another gank.</Typography>
+              <Typography>
+                Real-time updates populate your route with current gate camps
+                and kills automatically, no input required.
+              </Typography>
+            </Stack>
+          </Stack>
+          <Divider />
+          <Stack>
+            <Stack direction="row-reverse" width="100%" justifyContent="center">
+              <Stack px={4} justifyContent="center">
+                <Typography variant="h6" align="right">
+                  Route charting
+                </Typography>
+                <Typography variant="body2" align="right">
                   Easily send routes to your Eve client.
                 </Typography>
               </Stack>
@@ -85,12 +112,12 @@ function PremiumShowcase() {
           </Stack>
           <Divider />
           <Stack>
-            <Stack direction="row-reverse" width="100%" justifyContent="center">
+            <Stack direction="row" width="100%" justifyContent="center">
               <Stack px={4} justifyContent="center">
-                <Typography variant="h6" align="right">
+                <Typography variant="h6" align="left">
                   Location tracking
                 </Typography>
-                <Typography variant="body2" align="right">
+                <Typography variant="body2" align="left">
                   Follows you as you navigate New Eden.
                 </Typography>
               </Stack>
@@ -111,13 +138,13 @@ function PremiumShowcase() {
             </Stack>
           </Stack>
           <Divider />
-          <Stack>
-            <Stack direction="row" width="100%" justifyContent="center">
+          {/* <Stack>
+            <Stack direction="row-reverse" width="100%" justifyContent="center">
               <Stack px={4} justifyContent="center">
-                <Typography variant="h6" align="left">
+                <Typography variant="h6" align="right">
                   Notifications
                 </Typography>
-                <Typography variant="body2" align="left">
+                <Typography variant="body2" align="right">
                   In-game warnings.
                 </Typography>
               </Stack>
@@ -136,7 +163,7 @@ function PremiumShowcase() {
                 your current route.
               </Typography>
             </Stack>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Stack>
       {data && (
@@ -144,11 +171,11 @@ function PremiumShowcase() {
           <Stack direction="row" spacing={8}>
             <Stack p={5}>
               <Typography variant="h6">1 month</Typography>
+              <Typography>${data.prices[0].unit_amount / 100}</Typography>
+              <Typography variant="body2">or</Typography>
               <Typography>
                 {formatCurrency(centsToIsk(data.prices[0].unit_amount))} isk
               </Typography>
-              <Typography>or</Typography>
-              <Typography>${data.prices[0].unit_amount / 100}</Typography>
               <MainButton
                 sx={{ width: 100, height: 50, mt: 3 }}
                 size="small"
@@ -195,11 +222,12 @@ function PremiumShowcase() {
               <Typography variant="h6">
                 {data.prices[2].months} months
               </Typography>
+              <Typography>${data.prices[2].unit_amount / 100}</Typography>
+              <Typography variant="body2">or</Typography>
+
               <Typography>
                 {formatCurrency(centsToIsk(data.prices[2].unit_amount))} isk
               </Typography>
-              <Typography>or</Typography>
-              <Typography>${data.prices[2].unit_amount / 100}</Typography>
               <MainButton
                 variant="contained"
                 sx={{ width: 100, height: 50, mt: 3 }}
@@ -243,11 +271,12 @@ function PremiumShowcase() {
               <Typography variant="h6">
                 {data.prices[1].months} months
               </Typography>
+
+              <Typography>${data.prices[1].unit_amount / 100}</Typography>
+              <Typography variant="body2">or</Typography>
               <Typography>
                 {formatCurrency(centsToIsk(data.prices[1].unit_amount))} isk
               </Typography>
-              <Typography>or</Typography>
-              <Typography>${data.prices[1].unit_amount / 100}</Typography>
               <MainButton
                 sx={{ width: 100, height: 50, mt: 3 }}
                 size="small"

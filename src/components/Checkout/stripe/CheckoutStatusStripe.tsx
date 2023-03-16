@@ -1,4 +1,3 @@
-import { Stack } from "@mui/material";
 import { useStripe } from "@stripe/react-stripe-js";
 import { PaymentIntent } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";

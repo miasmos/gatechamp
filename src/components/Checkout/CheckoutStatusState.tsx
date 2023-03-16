@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { isSubscribedSetter } from "../../recoil/user";
 import { useSetRecoilState } from "recoil";
 import userState from "../../recoil/user/atom";
+import { useEffect } from "react";
 
 enum CheckoutStatus {
   Waiting,
@@ -31,12 +32,17 @@ function CheckoutStatusState({ status }: CheckoutStatusStateProps) {
 
   const onActionClick = () => {
     if (status === CheckoutStatus.Success) {
-      setIsSubscribed(true);
       navigate(`../..`);
     } else if (status === CheckoutStatus.Failure) {
       navigate("..");
     }
   };
+
+  useEffect(() => {
+    if (status === CheckoutStatus.Success) {
+      setIsSubscribed(true);
+    }
+  }, [status]);
 
   switch (status) {
     case CheckoutStatus.Success:
@@ -47,7 +53,8 @@ function CheckoutStatusState({ status }: CheckoutStatusStateProps) {
       break;
     case CheckoutStatus.Waiting:
       Icon = SyncIcon;
-      message = "Processing";
+      message = "Processing...";
+      message2 = "Do not refresh the page.";
       break;
     case CheckoutStatus.Failure:
       Icon = ErrorOutlineIcon;
@@ -64,10 +71,10 @@ function CheckoutStatusState({ status }: CheckoutStatusStateProps) {
           sx={{
             "@keyframes loading": {
               "0%": {
-                transform: "rotate(0deg)",
+                transform: "rotate(360deg)",
               },
               "100%": {
-                transform: "rotate(360deg)",
+                transform: "rotate(0deg)",
               },
             },
             animation:

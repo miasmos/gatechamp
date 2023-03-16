@@ -1,5 +1,5 @@
 import AutocompleteSolarSystem from "../AutocompleteSolarSystem";
-import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PublishIcon from "@mui/icons-material/Publish";
@@ -110,7 +110,7 @@ function RouteForm() {
     if (isSubscribed) {
       onPushRoute();
     } else {
-      setSubscribeModal(true, ModalSubscribeFeature.LocationTracking);
+      setSubscribeModal(true, ModalSubscribeFeature.RouteCharting);
     }
   };
 

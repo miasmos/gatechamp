@@ -6,6 +6,7 @@ import checkoutState from "../../recoil/checkout/atom";
 import { palette } from "../../theme";
 import { centsToIsk, formatCurrency, getSymbol } from "../../util/currency";
 import MainButton from "../MainButton";
+import ProgressCircle from "../ProgressCircle";
 
 type OrderSummaryProps = {
   action?: string;
@@ -25,7 +26,7 @@ function OrderSummary({ action, onActionClick }: OrderSummaryProps) {
       break;
     case PaymentProvider.Ccp:
       basePrice = centsToIsk(price!.unit_amount);
-      totalPrice = formatCurrency(basePrice * productQuantity);
+      totalPrice = formatCurrency(basePrice * productQuantity, 1);
       break;
   }
 
@@ -39,7 +40,7 @@ function OrderSummary({ action, onActionClick }: OrderSummaryProps) {
         Order summary
       </Typography>
       <Stack direction="row" justifyContent="space-between" mb={4}>
-        <Typography>Items ({productQuantity}):</Typography>
+        <Typography>Items ({productQuantity}):</Typography>&nbsp;
         <Typography>
           {symbol}
           {totalPrice}

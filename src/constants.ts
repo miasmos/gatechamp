@@ -9,6 +9,7 @@ const ENABLE_STATION_TRADING =
   import.meta.env.VITE_ENABLE_STATION_TRADING === "true";
 const STRIPE_CLIENT_KEY = import.meta.env.VITE_STRIPE_CLIENT_KEY;
 const APP_DOMAIN = `${document.location.protocol}//${document.location.host}`;
+const EVE_ADMIN_CHARACTER_NAME = import.meta.env.VITE_EVE_ADMIN_CHARACTER_NAME;
 
 export {
   APP_API_DOMAIN,
@@ -21,4 +22,5 @@ export {
   PRODUCTION,
   STRIPE_CLIENT_KEY,
   APP_DOMAIN,
+  EVE_ADMIN_CHARACTER_NAME,
 };

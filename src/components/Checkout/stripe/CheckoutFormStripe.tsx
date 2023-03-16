@@ -1,3 +1,4 @@
+import { PaymentProvider } from "../../../enum";
 import useFetchCreatePayment from "../../../hooks/useFetchCreatePayment";
 import CheckoutFormStripeElement from "./CheckoutFormStripeElement";
 import StripeContainer from "./StripeContainer";
@@ -13,7 +14,7 @@ function CheckoutFormStripe({
 }: CheckoutFormStripeProps) {
   const {
     data: { clientSecret, subscriptionId },
-  } = useFetchCreatePayment(priceId, quantity);
+  } = useFetchCreatePayment(priceId, quantity, PaymentProvider.Stripe);
 
   return (
     <StripeContainer clientSecret={clientSecret}>

@@ -32,8 +32,15 @@ function Faq() {
       <Typography variant="h2" textAlign="center" mb={10}>
         Frequently Asked Questions
       </Typography>
+
+      <FaqQuestion question="Why do isk payments take so long?">
+        Isk payments are processed using Eve's public api. It takes up to an
+        hour for changes to be reflected. Unfortunately there's nothing we can
+        do to speed it up.
+      </FaqQuestion>
+      <Divider sx={{ my: 6 }} />
       <FaqQuestion question="How up-to-date is the gate camp data?">
-        Our gate camp data is real-time. This means that the second a player is
+        Our gate camp data is instant. This means that the second a player is
         killed near a gate, that kill is reflected on GateChamp.
       </FaqQuestion>
       <Divider sx={{ my: 6 }} />

@@ -2,9 +2,9 @@ import { PaymentProvider } from "../enum";
 
 const formatCurrency = (
   value: number,
+  decimals = 0,
   format: "short" | "long" = "short",
-  separator = ",",
-  decimals = 0
+  separator = ","
 ): string => {
   const str = Math.floor(value).toString();
   const magnitude = str.length / 3;
@@ -25,10 +25,17 @@ const formatCurrency = (
   }
 
   if (format === "short" && suffix.length > 0) {
-    const formatted = str.substring(0, Math.round((magnitude % 1) * 3) || 3);
-    return formatted.length === 1
-      ? `${formatted}.${str[1]}${suffix}`
-      : `${formatted}${suffix}`;
+    const integerLength = Math.round((magnitude % 1) * 3) || 3;
+    const formattedInteger = str.substring(0, integerLength);
+    const formattedDecimals = str.substring(
+      integerLength,
+      integerLength + decimals
+    );
+    if (decimals > 0) {
+      return `${formattedInteger}.${formattedDecimals}${suffix}`;
+    } else {
+      return `${formattedInteger}${suffix}`;
+    }
   } else {
     let formatted = [];
     for (let i = str.length - 1; i >= 0; i--) {

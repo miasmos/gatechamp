@@ -9,6 +9,9 @@ function CheckoutStatus() {
     undefined
   );
   const [secret, setSecret] = useState<string | undefined>(undefined);
+  const [subscriptionId, setSubscriptionId] = useState<string | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -19,6 +22,9 @@ function CheckoutStatus() {
         setSecret(clientSecret || undefined);
         break;
       case PaymentProvider.Ccp:
+        const subscriptionId = params.get("subscriptionId");
+        setSubscriptionId(subscriptionId || undefined);
+        break;
     }
 
     setProvider(provider);
@@ -32,7 +38,7 @@ function CheckoutStatus() {
         </StripeContainer>
       );
     case PaymentProvider.Ccp:
-      return <CheckoutStatusCcp />;
+      return <CheckoutStatusCcp subscriptionId={subscriptionId} />;
     default:
       return null;
   }

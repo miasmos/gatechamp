@@ -1,20 +1,25 @@
 import useSWRImmutable from "swr/immutable";
 import { post } from "../api";
+import { PaymentProvider } from "../enum";
 
-type CreateOrderResponse = {
+type CreatePaymentResponse = {
   subscriptionId: string;
   clientSecret: string;
 };
 
-function useFetchCreatePayment(priceId: string, quantity: number) {
+function useFetchCreatePayment(
+  priceId: string,
+  quantity: number,
+  provider: PaymentProvider
+) {
   const {
     data = { subscriptionId: undefined, clientSecret: undefined },
     error,
     isLoading,
     isValidating,
-  } = useSWRImmutable<CreateOrderResponse>(
+  } = useSWRImmutable<CreatePaymentResponse>(
     `/api/payment/create`,
-    post({ priceId, quantity }),
+    post({ priceId, quantity, provider }),
     { shouldRetryOnError: false }
   );
 

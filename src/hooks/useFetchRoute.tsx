@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import useSWR from "swr";
 import { get } from "../api";
 import { WebSocketEvent } from "../enum";
 import killsState from "../recoil/kills/atom";
 import { RouteState } from "../recoil/route";
+import { isSubscribedSelector } from "../recoil/user";
 import { serializeEvent } from "./useWebSocketKills";
 
 type RouteJumpSummary = {
@@ -61,6 +62,7 @@ function useFetchRoute(
 ) {
   const [{ subscriptions, bySolarSystem, byStargate }, setKillsState] =
     useRecoilState(killsState);
+  const isSubscribed = useRecoilValue(isSubscribedSelector);
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
     originSolarSystemId > 0 &&
@@ -92,7 +94,7 @@ function useFetchRoute(
   );
 
   useEffect(() => {
-    if (data.kills.length > 0) {
+    if (isSubscribed && data.kills.length > 0) {
       const solarSystemEvents: string[] = [];
       const stargateEvents: string[] = [];
       const stargateKillSummaries: Record<string, KillSummary> = {};
@@ -145,7 +147,7 @@ function useFetchRoute(
         },
       }));
     }
-  }, [data.kills]);
+  }, [data.kills, isSubscribed]);
 
   return {
     data,

@@ -15,7 +15,6 @@ function ProgressCircle({
   direction = "clockwise",
   ...props
 }: ProgressCircleProps) {
-  const currentProgress = direction === "clockwise" ? progress : 1 - progress;
   return (
     <Box position="relative" width={size} height={size} {...props}>
       <Box
@@ -24,8 +23,10 @@ function ProgressCircle({
         borderRadius="50%"
         sx={{
           background: `conic-gradient(${palette.palette.primary.main} ${
-            currentProgress * 100
-          }%, rgb(255,255,255) ${currentProgress * 100}%)`,
+            progress * 100
+          }%, rgb(255,255,255) ${progress * 100}%)`,
+          transform:
+            direction === "counter-clockwise" ? "scaleX(1)" : "scaleX(-1)",
         }}
         width={size}
         height={size}
