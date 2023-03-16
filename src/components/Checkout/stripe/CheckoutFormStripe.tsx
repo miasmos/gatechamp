@@ -4,7 +4,7 @@ import CheckoutFormStripeElement from "./CheckoutFormStripeElement";
 import StripeContainer from "./StripeContainer";
 
 type CheckoutFormStripeProps = {
-  priceId: string;
+  priceId: string | undefined;
   quantity?: number;
 };
 

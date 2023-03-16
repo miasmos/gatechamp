@@ -9,18 +9,15 @@ type PaymentStatusResponse = {
   updated_at: Date;
 };
 
-function useFetchPaymentStatus(
-  subscriptionId: string | undefined,
-  uuid?: string
-) {
+function useFetchPaymentStatus(invoiceId: string | undefined, uuid?: string) {
   const {
     data = { provider: undefined, status: "processing", updated_at: undefined },
     error,
     isLoading,
     isValidating,
   } = useSWR<PaymentStatusResponse>(
-    subscriptionId
-      ? `/api/payment/status?id=${subscriptionId}&uuid=${uuid}`
+    invoiceId
+      ? `/api/payment/status?invoiceId=${invoiceId}&uuid=${uuid}`
       : null,
     get
   );

@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import ErrorBoundary from "../components/ErrorBoundary";
 import ModalContainer from "../components/ModalContainer";
 import useFetchCharacter from "../hooks/useFetchCharacter";
@@ -11,11 +11,15 @@ import useNotification from "../hooks/useNotification";
 import useWebSocketKills from "../hooks/useWebSocketKills";
 import useWebSocketPushRoute from "../hooks/useWebSocketPushRoute";
 import useWebSocketStatus from "../hooks/useWebSocketStatus";
+import { pushRouteSetter } from "../recoil/route";
+import routeState from "../recoil/route/atom";
 import { redirectSetter } from "../recoil/user";
 import userState from "../recoil/user/atom";
 
 function RootLayout() {
   const [{ loggedIn, redirect }, setUserState] = useRecoilState(userState);
+  const setRouteState = useSetRecoilState(routeState);
+  const setPushRouteState = pushRouteSetter(setRouteState);
   useFetchCharacter(loggedIn);
   useFetchUser(loggedIn);
   const setRedirect = redirectSetter(setUserState);
@@ -27,6 +31,7 @@ function RootLayout() {
   useNotification();
 
   useEffect(() => {
+    setPushRouteState({ didPushRoute: false });
     if (redirect) {
       setRedirect(undefined);
       navigate(redirect);

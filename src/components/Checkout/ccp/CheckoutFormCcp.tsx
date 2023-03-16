@@ -4,11 +4,10 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { EVE_ADMIN_CHARACTER_NAME } from "../../../constants";
 import { AppRoute, PaymentProvider } from "../../../enum";
 import useFetchCreatePayment from "../../../hooks/useFetchCreatePayment";
-import { fontFamily, palette } from "../../../theme";
+import { fontFamily } from "../../../theme";
 import { centsToIsk, formatCurrency } from "../../../util/currency";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LoopIcon from "@mui/icons-material/Loop";
-import ProgressTimer from "../../ProgressTimer";
 import MainButton from "../../MainButton";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -17,20 +16,22 @@ import { useInterval } from "usehooks-ts";
 type CheckoutFormCcpProps = {
   quantity?: number;
   unitAmount: number;
-  priceId: string;
+  priceId?: string;
+  invoiceId?: string;
 };
 
 function CheckoutFormCcp({
   priceId,
   unitAmount,
   quantity = 1,
+  invoiceId,
 }: CheckoutFormCcpProps) {
   const [isButtonEnabled, setIsButtonEnabled] = useState<boolean>(false);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const buttonDelay = 5000;
   const navigate = useNavigate();
   const {
-    data: { clientSecret, subscriptionId },
+    data: { invoiceId: apiInvoiceId },
   } = useFetchCreatePayment(priceId, quantity, PaymentProvider.Ccp);
   const iskPrice = centsToIsk(unitAmount) * quantity;
   const iskPriceFormatted = formatCurrency(
@@ -40,7 +41,9 @@ function CheckoutFormCcp({
 
   const onSendClick = () =>
     navigate(
-      `../${AppRoute.Status}?provider=${PaymentProvider.Ccp}&subscriptionId=${subscriptionId}`
+      `../${AppRoute.Status}?provider=${PaymentProvider.Ccp}&invoiceId=${
+        invoiceId || apiInvoiceId
+      }`
     );
 
   useInterval(

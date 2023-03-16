@@ -2,19 +2,18 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useInterval } from "usehooks-ts";
-import { AppRoute } from "../../../enum";
 import useFetchPaymentStatus from "../../../hooks/useFetchPaymentStatus";
 import { generateId } from "../../../util/math";
 import ProgressTimer from "../../ProgressTimer";
 import CheckoutStatusState, { CheckoutStatus } from "../CheckoutStatusState";
 
 type CheckoutStatusCcpProps = {
-  subscriptionId: string | undefined;
+  invoiceId: string | undefined;
 };
 
-function CheckoutStatusCcp({ subscriptionId }: CheckoutStatusCcpProps) {
+function CheckoutStatusCcp({ invoiceId }: CheckoutStatusCcpProps) {
   const [uuid, setUuid] = useState<string>("1");
-  const { data, hasError } = useFetchPaymentStatus(subscriptionId, uuid);
+  const { data, hasError } = useFetchPaymentStatus(invoiceId, uuid);
   const { status } = data;
 
   let checkoutStatus: CheckoutStatus;

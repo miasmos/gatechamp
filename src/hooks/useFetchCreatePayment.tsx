@@ -5,20 +5,25 @@ import { PaymentProvider } from "../enum";
 type CreatePaymentResponse = {
   subscriptionId: string;
   clientSecret: string;
+  invoiceId: string;
 };
 
 function useFetchCreatePayment(
-  priceId: string,
+  priceId: string | undefined,
   quantity: number,
   provider: PaymentProvider
 ) {
   const {
-    data = { subscriptionId: undefined, clientSecret: undefined },
+    data = {
+      subscriptionId: undefined,
+      clientSecret: undefined,
+      invoiceId: undefined,
+    },
     error,
     isLoading,
     isValidating,
   } = useSWRImmutable<CreatePaymentResponse>(
-    `/api/payment/create`,
+    priceId ? `/api/payment/create` : null,
     post({ priceId, quantity, provider }),
     { shouldRetryOnError: false }
   );

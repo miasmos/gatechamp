@@ -89,7 +89,7 @@ function CheckoutStatusState({ status }: CheckoutStatusStateProps) {
       </Stack>
       <Stack justifyContent="center" direction="row" mt={8}>
         <MainButton
-          sx={{ visibility: isComplete ? "visible" : "hidden" }}
+          sx={{ visibility: isComplete ? "visible" : "hidden", width: 120 }}
           onClick={onActionClick}
         >
           {actionMessage}

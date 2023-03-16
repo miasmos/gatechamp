@@ -5,7 +5,7 @@ type SubscriptionProductResponse = {
   product_id: string;
   product_name: string;
   prices: {
-    price_id: string;
+    price_id: string | undefined;
     unit_amount: number;
     months: number;
   }[];
