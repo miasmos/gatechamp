@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:staging": "tsc && vite build --mode staging",
     "start": "vite preview",
     "cdn:prod": "node -r dotenv/config ./scripts/cdn.cjs dotenv_config_path=./.env.production"
   },
