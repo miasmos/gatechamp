@@ -7,7 +7,6 @@ import ModalContainer from "../components/ModalContainer";
 import useFetchCharacter from "../hooks/useFetchCharacter";
 import useFetchUser from "../hooks/useFetchUser";
 import useInitializeUser from "../hooks/useInitializeUser";
-import useNotification from "../hooks/useNotification";
 import useWebSocketKills from "../hooks/useWebSocketKills";
 import useWebSocketPushRoute from "../hooks/useWebSocketPushRoute";
 import useWebSocketStatus from "../hooks/useWebSocketStatus";
@@ -28,7 +27,6 @@ function RootLayout() {
   useWebSocketKills();
   useWebSocketStatus();
   useWebSocketPushRoute();
-  useNotification();
 
   useEffect(() => {
     setPushRouteState({ didPushRoute: false });
