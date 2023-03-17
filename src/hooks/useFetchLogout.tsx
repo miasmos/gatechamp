@@ -4,7 +4,7 @@ import { EveSolarSystem } from "../types";
 
 function useFetchLogout(shouldLogout: boolean = false) {
   const { error, isLoading, isValidating } = useSWRImmutable<EveSolarSystem>(
-    shouldLogout ? `/api/auth/logout` : null,
+    shouldLogout ? `/v1/auth/logout` : null,
     get
   );
 

@@ -9,7 +9,7 @@ function useFetchSolarSystem(solarSystemId: number) {
     isLoading,
     isValidating,
   } = useSWRImmutable<EveSolarSystem>(
-    `/api/solar-system?ids=${solarSystemId}`,
+    `/v1/solar-system?ids=${solarSystemId}`,
     get
   );
 

@@ -37,7 +37,7 @@ function useFetchAutocomplete<T>(
     isLoading,
     isValidating,
   } = useSWR<ElasticSearchResult<T>>(
-    areInputsValid ? `/api/autocomplete/${type}?name=${name}` : null,
+    areInputsValid ? `/v1/autocomplete/${type}?name=${name}` : null,
     get
   );
 

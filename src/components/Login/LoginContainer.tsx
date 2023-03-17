@@ -21,7 +21,7 @@ function LoginContainer() {
 
   return (
     <Stack alignItems="center" justifyContent="center" width="100%">
-      <Link href={`${APP_API_DOMAIN}/api/auth/login`}>
+      <Link href={`${APP_API_DOMAIN}/v1/auth/login`}>
         <LogInIcon width={220} />
       </Link>
     </Stack>

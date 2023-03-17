@@ -23,7 +23,7 @@ function useFetchCreatePayment(
     isLoading,
     isValidating,
   } = useSWRImmutable<CreatePaymentResponse>(
-    priceId ? `/api/payment/create` : null,
+    priceId ? `/v1/payment/create` : null,
     post({ priceId, quantity, provider }),
     { shouldRetryOnError: false }
   );

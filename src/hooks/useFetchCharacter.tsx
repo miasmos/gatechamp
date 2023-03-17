@@ -24,7 +24,7 @@ function useFetchCharacter(loggedIn: boolean) {
     error,
     isLoading,
     isValidating,
-  } = useSWRImmutable<Character>(loggedIn ? `/api/user/character` : null, get);
+  } = useSWRImmutable<Character>(loggedIn ? `/v1/user/character` : null, get);
 
   useEffect(() => {
     if (data && data.name.length > 0) {

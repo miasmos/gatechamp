@@ -43,7 +43,7 @@ function useInitializeUser() {
         console.log("attempting refresh");
 
         try {
-          await getWithResponse("/api/auth/refresh");
+          await getWithResponse("/v1/auth/refresh");
           console.log("logged in");
           // logged in
           isLoggedIn = true;

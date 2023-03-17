@@ -83,7 +83,7 @@ function useFetchRoute(
     isValidating,
   } = useSWR<FetchRouteResult>(
     areInputsValid
-      ? `/api/route/get?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
+      ? `/v1/route/get?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
       : null,
     get,
     {

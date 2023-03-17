@@ -16,9 +16,7 @@ function useFetchPaymentStatus(invoiceId: string | undefined, uuid?: string) {
     isLoading,
     isValidating,
   } = useSWR<PaymentStatusResponse>(
-    invoiceId
-      ? `/api/payment/status?invoiceId=${invoiceId}&uuid=${uuid}`
-      : null,
+    invoiceId ? `/v1/payment/status?invoiceId=${invoiceId}&uuid=${uuid}` : null,
     get
   );
 

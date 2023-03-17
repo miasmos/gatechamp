@@ -81,7 +81,7 @@ function AppBarAvatar() {
             </Stack>
           </Stack>
         ) : (
-          <Link href={`${APP_API_DOMAIN}/api/auth/login`}>
+          <Link href={`${APP_API_DOMAIN}/v1/auth/login`}>
             <LogInIcon width={220} />
           </Link>
         )}

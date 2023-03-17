@@ -18,7 +18,7 @@ function useFetchSubscriptionProduct(shouldFetch: boolean = true) {
     isLoading,
     isValidating,
   } = useSWRImmutable<SubscriptionProductResponse>(
-    shouldFetch ? `/api/product/subscription` : null,
+    shouldFetch ? `/v1/product/subscription` : null,
     get
   );
 

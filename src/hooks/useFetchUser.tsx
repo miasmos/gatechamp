@@ -19,10 +19,7 @@ function useFetchUser(loggedIn: boolean) {
     error,
     isLoading,
     isValidating,
-  } = useSWRImmutable<FetchUserResponse>(
-    loggedIn ? `/api/user/get` : null,
-    get
-  );
+  } = useSWRImmutable<FetchUserResponse>(loggedIn ? `/v1/user/get` : null, get);
 
   useEffect(() => {
     if (data && typeof data.isSubscribed === "boolean") {

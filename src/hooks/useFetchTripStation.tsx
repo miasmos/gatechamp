@@ -61,7 +61,7 @@ function useFetchTripStation(id: string, trip: TripState, ships: Ship[]) {
     isLoading,
     isValidating,
   } = useSWR<FetchTripStationResult>(
-    `/api/trip/station?id=${id}`,
+    `/v1/trip/station?id=${id}`,
     post({ trip, ships }, 120000),
     {
       shouldRetryOnError: false,
