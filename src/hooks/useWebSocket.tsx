@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import useWebSocketLib, { ReadyState } from "react-use-websocket";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { APP_WEBSOCKET_DOMAIN } from "../constants";
-import { isConnectedSetter } from "../recoil/user";
+import { isConnectedSetter, isLoggedInSelector } from "../recoil/user";
 import userState from "../recoil/user/atom";
 
 function useWebSocket() {
   const setUserState = useSetRecoilState(userState);
+  const isLoggedIn = useRecoilValue(isLoggedInSelector);
   const setIsConnected = isConnectedSetter(setUserState);
   const { sendJsonMessage, lastMessage, lastJsonMessage, readyState } =
     useWebSocketLib(APP_WEBSOCKET_DOMAIN, {
       share: true,
-      shouldReconnect: () => true,
+      shouldReconnect: () => isLoggedIn,
       reconnectInterval: (attempts: number) =>
         Math.min(attempts * 5 * 1000, 30 * 1000), // 5s
       reconnectAttempts: Number.MAX_SAFE_INTEGER,
