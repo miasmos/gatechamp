@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 import { get } from "../api";
 import { WebSocketEvent } from "../enum";
 import killsState from "../recoil/kills/atom";
@@ -81,7 +81,7 @@ function useFetchRoute(
     error,
     isLoading,
     isValidating,
-  } = useSWR<FetchRouteResult>(
+  } = useSWRImmutable<FetchRouteResult>(
     areInputsValid
       ? `/v1/route/get?origin=${originSolarSystemId}&destination=${destinationSolarSystemId}&avoidSystems=${avoidedSolarSystemsStr}&avoidGateCamp=${avoidGateCamp}&avoidHics=${avoidHics}&avoidSmartBombs=${avoidSmartBombs}&avoidEntryGateCamp=${avoidEntryGateCamp}`
       : null,
