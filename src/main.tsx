@@ -24,6 +24,7 @@ import CheckoutLayout from "./layout/CheckoutLayout";
 import EmptyLayout from "./layout/EmptyLayout";
 
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./components/NotFound";
 
 const ProviderSelector = lazy(
   () => import("./components/Checkout/ProviderSelector")
@@ -81,6 +82,7 @@ const router = createBrowserRouter(
       <Route path={AppRoute.Home} element={<NoScrollLayout />}>
         <Route index element={<RouteForm />} />
         <Route path={AppRoute.Login} element={<LoginContainer />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Home} element={<ScrolledLayout />}>
         <Route path={AppRoute.PrivacyPolicy} element={<PrivacyPolicy />} />
@@ -88,6 +90,7 @@ const router = createBrowserRouter(
         <Route path={AppRoute.Faq} element={<Faq />} />
         <Route path={AppRoute.CookiePolicy} element={<CookiePolicy />} />
         <Route path={AppRoute.Premium} element={<PremiumShowcase />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Home} element={<CheckoutLayout />}>
         <Route path={AppRoute.Checkout} element={<EmptyLayout />}>
@@ -99,6 +102,7 @@ const router = createBrowserRouter(
           <Route path={AppRoute.Cart} element={<Cart />} />
           <Route path={AppRoute.Pay} element={<CheckoutPay />} />
           <Route path={AppRoute.Status} element={<CheckoutStatus />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Route>
 

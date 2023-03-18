@@ -2,7 +2,6 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import ErrorBoundary from "../components/ErrorBoundary";
 import ModalContainer from "../components/ModalContainer";
 import useFetchCharacter from "../hooks/useFetchCharacter";
 import useFetchUser from "../hooks/useFetchUser";
@@ -39,10 +38,8 @@ function RootLayout() {
   return (
     <Box width="100%" height="100%" className="layout__root">
       <>
-        <ErrorBoundary>
-          <Outlet />
-          <ModalContainer />
-        </ErrorBoundary>
+        <Outlet />
+        <ModalContainer />
       </>
     </Box>
   );

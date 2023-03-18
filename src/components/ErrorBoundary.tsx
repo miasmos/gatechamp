@@ -1,3 +1,4 @@
+import { Stack, Typography } from "@mui/material";
 import { Component } from "react";
 
 type ErrorBoundaryState = {
@@ -17,8 +18,12 @@ class ErrorBoundary extends Component<any, ErrorBoundaryState> {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
+      return (
+        <Stack width="100%">
+          <Typography variant="h4">An error has occurred.</Typography>
+          <Typography variant="h5">Sorry about that.</Typography>
+        </Stack>
+      );
     }
 
     return this.props.children;

@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import { Outlet } from "react-router";
 import AppBar from "../components/AppBar";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
 
 function ScrolledLayout() {
@@ -18,7 +19,9 @@ function ScrolledLayout() {
         }}
         fixed
       >
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </Container>
       <Footer mt={40} />
     </>

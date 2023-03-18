@@ -1,6 +1,7 @@
 import { Container } from "@mui/material";
 import { Outlet } from "react-router";
 import AppBarWithoutUser from "../components/AppBarWithoutUser";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Footer from "../components/Footer";
 
 function CheckoutLayout() {
@@ -17,7 +18,9 @@ function CheckoutLayout() {
         }}
         fixed
       >
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </Container>
       <Footer position="fixed" bottom={0} py={5} />
     </>
