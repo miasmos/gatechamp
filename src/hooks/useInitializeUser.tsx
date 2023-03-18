@@ -17,12 +17,13 @@ function useInitializeUser() {
   const attemptLogIn = async (isLoggedIn = false) => {
     let expiresAt = Cookies.get("access_token_expires_at");
     const refreshTokenExists = Cookies.get("refresh_token_exists");
+    console.log(expiresAt, refreshTokenExists);
     let expiryDate = parseISO(expiresAt!);
     const hasExpiry = (expiryDate as unknown as string) !== "Invalid Date";
     const doesAuthTokenExist = Boolean(expiresAt) && hasExpiry;
 
     if (doesAuthTokenExist) {
-      // console.log("auth token exists");
+      console.log("auth token exists");
       const now = zonedTimeToUtc(
         Date.now(),
         Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -35,14 +36,14 @@ function useInitializeUser() {
     }
 
     if (!isLoggedIn) {
-      // console.log("auth token does not exist");
+      console.log("auth token does not exist");
       // not logged in, attempt refresh
       if (refreshTokenExists) {
-        // console.log("attempting refresh");
+        console.log("attempting refresh");
 
         try {
           await getWithResponse("/v1/auth/refresh");
-          // console.log("logged in");
+          console.log("logged in");
           // logged in
           isLoggedIn = true;
           expiresAt = Cookies.get("access_token_expires_at");
@@ -52,13 +53,13 @@ function useInitializeUser() {
     }
 
     if (isLoggedIn) {
-      // console.log("logged in");
+      console.log("logged in");
       setUser({
         loggedIn: true,
         loginExpiresAt: expiryDate.toISOString(),
       });
     } else {
-      // console.log("not logged in");
+      console.log("not logged in");
       setUser({
         loggedIn: false,
         loginExpiresAt: undefined,
