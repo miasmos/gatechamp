@@ -15,13 +15,11 @@ function useInitializeUser() {
   const setUser = userSetter(setUserState);
 
   const attemptLogIn = async (isLoggedIn = false) => {
-    const authToken = Cookies.get("access_token");
     let expiresAt = Cookies.get("access_token_expires_at");
     const refreshTokenExists = Cookies.get("refresh_token_exists");
     let expiryDate = parseISO(expiresAt!);
     const hasExpiry = (expiryDate as unknown as string) !== "Invalid Date";
-    const doesAuthTokenExist =
-      Boolean(authToken) && Boolean(expiresAt) && hasExpiry;
+    const doesAuthTokenExist = Boolean(expiresAt) && hasExpiry;
 
     if (doesAuthTokenExist) {
       // console.log("auth token exists");
