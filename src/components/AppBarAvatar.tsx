@@ -82,7 +82,7 @@ function AppBarAvatar() {
           </Stack>
         ) : (
           <Link href={`${APP_API_DOMAIN}/v1/auth/login`}>
-            <LogInIcon width={220} />
+            <LogInIcon width={isSm ? 80 : 220} />
           </Link>
         )}
       </Stack>

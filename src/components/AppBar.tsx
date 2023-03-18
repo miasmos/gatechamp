@@ -3,6 +3,7 @@ import {
   Button,
   Link,
   Stack,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
@@ -13,6 +14,7 @@ import LogoIcon from "./icon/LogoIcon";
 
 function AppBar() {
   const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
   const isSubscribed = useRecoilValue(isSubscribedSelector);
 
   return (
@@ -23,7 +25,7 @@ function AppBar() {
         height: 90,
         width: "100vw",
         left: 0,
-        background: (theme) => theme.palette.background.default,
+        background: (theme) => theme.palette.background.paper,
       }}
     >
       <Stack
@@ -46,7 +48,7 @@ function AppBar() {
         </Stack>
         <Stack justifyContent="center" height="100%">
           <Stack direction="row" spacing={5}>
-            {!isSubscribed && (
+            {!isSubscribed && !isSm && (
               <Link
                 href={AppRoute.Premium}
                 sx={{

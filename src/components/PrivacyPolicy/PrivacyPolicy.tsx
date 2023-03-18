@@ -37,9 +37,11 @@ function PrivacyPolicy() {
         </Typography>
         <List>
           <ListItem>
-            Visit our website at&nbsp;
-            <SiteLink />, or any website of ours that links to this privacy
-            notice
+            <Typography>Visit our website at</Typography>
+            <SiteLink />
+            <Typography>
+              , or any website of ours that links to this privacy notice
+            </Typography>
           </ListItem>
           <ListItem>
             Engage with us in other related ways, including any sales,

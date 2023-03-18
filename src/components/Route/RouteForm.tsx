@@ -241,42 +241,56 @@ function RouteForm() {
               </Stack>
             </Stack>
           </Stack>
-          <Stack direction="row" justifyContent="center" spacing={5} mt={1}>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body2" sx={{ width: 120 }}>
-                Avoid Gate Camp
-              </Typography>
-              <Checkbox
-                checked={avoidGateCamp}
-                onChange={(event) => onAvoidGateCamp(event.target.checked)}
-              />
+          <Stack
+            direction={{ sm: "column", md: "row" }}
+            justifyContent="center"
+            spacing={{ sm: 0, md: 5 }}
+          >
+            <Stack mt={1} direction="row" spacing={{ sm: 1, md: 5 }}>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Typography variant="body2" sx={{ width: 120 }}>
+                  Avoid Gate Camp
+                </Typography>
+                <Checkbox
+                  checked={avoidGateCamp}
+                  onChange={(event) => onAvoidGateCamp(event.target.checked)}
+                />
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Typography variant="body2" sx={{ width: 120 }}>
+                  Avoid Entry Gate Camp
+                </Typography>
+                <Checkbox
+                  checked={avoidEntryGateCamp}
+                  onChange={(event) =>
+                    onAvoidEntryGateCamp(event.target.checked)
+                  }
+                />
+              </Stack>
             </Stack>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body2" sx={{ width: 120 }}>
-                Avoid Entry Gate Camp
-              </Typography>
-              <Checkbox
-                checked={avoidEntryGateCamp}
-                onChange={(event) => onAvoidEntryGateCamp(event.target.checked)}
-              />
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body2" sx={{ width: 120 }}>
-                Avoid Heavy Interdiction Cruisers
-              </Typography>
-              <Checkbox
-                checked={avoidHics}
-                onChange={(event) => onAvoidHics(event.target.checked)}
-              />
-            </Stack>
-            <Stack direction="row" alignItems="center" spacing={1}>
-              <Typography variant="body2" sx={{ width: 120 }}>
-                Avoid Smart Bombs
-              </Typography>
-              <Checkbox
-                checked={avoidSmartBombs}
-                onChange={(event) => onAvoidSmartBombs(event.target.checked)}
-              />
+            <Stack
+              mt={{ sm: 5, md: 1 }}
+              direction="row"
+              spacing={{ sm: 1, md: 5 }}
+            >
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Typography variant="body2" sx={{ width: 120 }}>
+                  Avoid Heavy Interdiction Cruisers
+                </Typography>
+                <Checkbox
+                  checked={avoidHics}
+                  onChange={(event) => onAvoidHics(event.target.checked)}
+                />
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Typography variant="body2" sx={{ width: 120 }}>
+                  Avoid Smart Bombs
+                </Typography>
+                <Checkbox
+                  checked={avoidSmartBombs}
+                  onChange={(event) => onAvoidSmartBombs(event.target.checked)}
+                />
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
