@@ -3,6 +3,7 @@ import {
   Button,
   Link,
   Stack,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -42,9 +43,26 @@ function AppBar() {
         }}
       >
         <Stack justifyContent="center" height="100%">
-          <Link href={AppRoute.Home}>
-            <LogoIcon color={theme.palette.primary.main} width={160} mt={1} />
-          </Link>
+          <Stack direction="row">
+            <Link href={AppRoute.Home}>
+              <LogoIcon color={theme.palette.primary.main} width={160} mt={1} />
+            </Link>
+            <Stack direction="column" justifyContent="center" ml={0.5}>
+              <Stack>
+                <Typography align="left" fontSize="0.8rem" color="primary">
+                  Realtime Gate Camp
+                </Typography>
+                <Typography
+                  align="left"
+                  fontSize="0.8rem"
+                  color="primary"
+                  mt={-0.4}
+                >
+                  Checker for Eve Online
+                </Typography>
+              </Stack>
+            </Stack>
+          </Stack>
         </Stack>
         <Stack justifyContent="center" height="100%">
           <Stack direction="row" spacing={5}>
