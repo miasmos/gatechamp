@@ -50,7 +50,7 @@ function HaulForm() {
   } = useRecoilValue(routeState);
   const setRouteState = useSetRecoilState(routeState);
   const theme = useTheme();
-  usePageTitle();
+  usePageTitle("Hauler Calculator");
   const setDestinationName = destinationNameSetter(setRouteState);
   const setOriginName = originNameSetter(setRouteState);
 
