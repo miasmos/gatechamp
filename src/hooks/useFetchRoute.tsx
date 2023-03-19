@@ -1,11 +1,17 @@
 import { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import useSWRImmutable from "swr/immutable";
 import { get } from "../api";
 import { WebSocketEvent } from "../enum";
 import killsState from "../recoil/kills/atom";
-import { RouteState } from "../recoil/route";
+import {
+  hasLowSecuritySetter,
+  hasNullSecuritySetter,
+  RouteState,
+} from "../recoil/route";
+import routeState from "../recoil/route/atom";
 import { isSubscribedSelector } from "../recoil/user";
+import { isLowSecurity, isNullSecurity } from "../util/eve";
 import { serializeEvent } from "./useWebSocketKills";
 
 type RouteJumpSummary = {
@@ -62,6 +68,7 @@ function useFetchRoute(
 ) {
   const [{ subscriptions, bySolarSystem, byStargate }, setKillsState] =
     useRecoilState(killsState);
+  const setRouteState = useSetRecoilState(routeState);
   const isSubscribed = useRecoilValue(isSubscribedSelector);
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
@@ -92,6 +99,19 @@ function useFetchRoute(
       revalidateIfStale: false,
     }
   );
+
+  useEffect(() => {
+    if (data.route.length > 0) {
+      const hasLowSecurity = data.route.some((solarSystem) =>
+        isLowSecurity(solarSystem.security)
+      );
+      hasLowSecuritySetter(setRouteState)(hasLowSecurity);
+      const hasNullSecurity = data.route.some((solarSystem) =>
+        isNullSecurity(solarSystem.security)
+      );
+      hasNullSecuritySetter(setRouteState)(hasNullSecurity);
+    }
+  }, [data.route]);
 
   useEffect(() => {
     if (isSubscribed && data.kills.length > 0) {

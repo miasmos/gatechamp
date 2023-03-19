@@ -30,6 +30,7 @@ type RouteRendererProps = {
   showProgress?: boolean;
   alwaysShowOrigin?: boolean;
   alwaysShowDestination?: boolean;
+  canAvoid?: boolean;
 } & Omit<StackProps, "position">;
 
 const StyledRouteRenderer = styled(Stack)(({}) => ({
@@ -38,7 +39,7 @@ const StyledRouteRenderer = styled(Stack)(({}) => ({
       opacity: 1,
     },
   },
-  ".route-renderer__bar:hover": {
+  ".route-renderer__bar:not(.route-renderer__bar--no-avoid):hover": {
     ".route-renderer__bar__avoid-text": {
       display: "block",
     },
@@ -76,6 +77,7 @@ function RouteRenderer({
   showProgress = false,
   alwaysShowDestination = false,
   alwaysShowOrigin = false,
+  canAvoid = true,
   width = "100%",
   ...props
 }: RouteRendererProps) {
@@ -208,6 +210,7 @@ function RouteRenderer({
                     index={index}
                     count={route.route.length}
                     onAvoidSolarSystem={onAvoidSolarSystem}
+                    canAvoid={canAvoid}
                     alwaysShowTopTitle={
                       (index === 0 && alwaysShowOrigin) ||
                       (index === route.route.length - 1 &&

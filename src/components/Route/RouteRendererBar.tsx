@@ -1,4 +1,5 @@
 import { Box, Stack, Typography, StackProps } from "@mui/material";
+import clsx from "clsx";
 import { RouteJumpSummary } from "../../hooks/useFetchRoute";
 import { getSecurityColor } from "../../util/eve";
 import RouteRendererTick from "./RouteRendererTick";
@@ -8,6 +9,7 @@ type RouteRendererProps = {
   index: number;
   count: number;
   showPosition?: boolean;
+  canAvoid?: boolean;
   onAvoid: (solarSystemID: number, name: string) => void;
 } & Omit<StackProps, "position">;
 
@@ -16,10 +18,18 @@ function RouteRendererBar({
   count,
   index,
   onAvoid,
+  canAvoid = true,
   ...props
 }: RouteRendererProps) {
   return (
-    <Stack className="route-renderer__bar" {...props} width="100%">
+    <Stack
+      className={clsx({
+        "route-renderer__bar": true,
+        "route-renderer__bar--no-avoid": !canAvoid,
+      })}
+      {...props}
+      width="100%"
+    >
       <Stack direction="row" zIndex={1} minHeight={15}>
         <Stack
           className="route__solar-system"
@@ -28,7 +38,7 @@ function RouteRendererBar({
           height={15}
           width="100%"
           key={name}
-          onClick={() => onAvoid && onAvoid(solarSystemID, name)}
+          onClick={() => canAvoid && onAvoid && onAvoid(solarSystemID, name)}
         >
           <Stack justifyContent="center" width="100%">
             <Box
@@ -37,18 +47,20 @@ function RouteRendererBar({
               width="calc(100%-2px)"
               ml="1px"
             />
-            <Typography
-              position="absolute"
-              zIndex={5}
-              fontWeight="bold"
-              fontSize="0.7em"
-              left="50%"
-              display="none"
-              sx={{ transform: "translateX(-50%)" }}
-              className="route-renderer__bar__avoid-text"
-            >
-              AVOID
-            </Typography>
+            {canAvoid && (
+              <Typography
+                position="absolute"
+                zIndex={5}
+                fontWeight="bold"
+                fontSize="0.7em"
+                left="50%"
+                display="none"
+                sx={{ transform: "translateX(-50%)" }}
+                className="route-renderer__bar__avoid-text"
+              >
+                AVOID
+              </Typography>
+            )}
           </Stack>
           <RouteRendererTick
             type="entry"

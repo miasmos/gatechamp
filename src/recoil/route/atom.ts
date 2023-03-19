@@ -27,6 +27,8 @@ interface RouteState {
   avoidEntryGateCamp: boolean;
   avoidHics: boolean;
   avoidSmartBombs: boolean;
+  hasLowSecurity: boolean;
+  hasNullSecurity: boolean;
   jumps: number;
   isUsingMyLocation: boolean;
   pushRoute: PushRouteState;
@@ -44,6 +46,8 @@ const routeState = atom<RouteState>({
     avoidEntryGateCamp: false,
     avoidHics: false,
     avoidSmartBombs: false,
+    hasNullSecurity: false,
+    hasLowSecurity: false,
     jumps: 0,
     isUsingMyLocation: false,
     pushRoute: {

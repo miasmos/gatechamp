@@ -19,6 +19,7 @@ enum AppRoute {
   Cart = "cart",
   Pay = "pay",
   Premium = "premium",
+  HaulerCalculator = "hauler-calculator",
 }
 
 enum Station {

@@ -11,6 +11,7 @@ type RouteRendererItemProps = {
   node: RouteJumpSummary;
   alwaysShowTopTitle?: boolean;
   alwaysShowBottomTitle?: boolean;
+  canAvoid?: boolean;
   onAvoidSolarSystem: (solarSystemID: number, name: string) => void;
 };
 
@@ -20,6 +21,7 @@ function RouteRendererItem({
   node,
   alwaysShowTopTitle = false,
   alwaysShowBottomTitle = false,
+  canAvoid = true,
   onAvoidSolarSystem,
 }: RouteRendererItemProps) {
   return (
@@ -68,6 +70,7 @@ function RouteRendererItem({
         onAvoid={onAvoidSolarSystem}
         index={index}
         count={count}
+        canAvoid={canAvoid}
       />
       <RouteRendererBottomInfo
         node={node}

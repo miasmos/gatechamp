@@ -59,6 +59,7 @@ const StationFlowLayout = lazy(() => import("./layout/StationFlowLayout"));
 const TripStationDetail = lazy(
   () => import("./components/Trip/Station/TripStationDetail")
 );
+const HaulForm = lazy(() => import("./components/Haul/HaulForm"));
 
 // TODO: route mapping: time estimation, rank routes not just by profits, but by profit per second
 // TODO: stopwatch, timing route from point to point, can use the eve api to fetch user's location periodically
@@ -82,6 +83,7 @@ const router = createBrowserRouter(
       <Route path={AppRoute.Home} element={<NoScrollLayout />}>
         <Route index element={<RouteForm />} />
         <Route path={AppRoute.Login} element={<LoginContainer />} />
+        <Route path={AppRoute.HaulerCalculator} element={<HaulForm />} />
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path={AppRoute.Home} element={<ScrolledLayout />}>

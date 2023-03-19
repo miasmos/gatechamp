@@ -129,6 +129,125 @@ const isCrossingSecurityBoundary = (
   return { isHigher, isLower, isCrossing };
 };
 
+const calculateHaulerReward = (
+  collateral: number,
+  volume: number,
+  jumps: number,
+  hasRushDelivery: boolean,
+  isLowOrNullSecurity: boolean
+) => {
+  let base = 1e6;
+  let additive = 0;
+  let multiplier = 1;
+  let isValid = true;
+  let reward;
+  let doesFit = true;
+
+  if (volume <= 12e3) {
+    multiplier *= 1;
+  } else if (volume <= 60e3) {
+    multiplier *= 1;
+  }
+  if (volume > 62500 && collateral < 1e9) {
+    collateral = (3e9 + collateral) / 4;
+  } //low freighter collateral pays more
+  if (volume <= 60000 && volume > 12000 && collateral < 1e9) {
+    collateral = (1e9 + collateral) / 2;
+  } //low DST collateral pays more
+  if (volume <= 12000 && collateral < 1e9) {
+    collateral = (100e6 + collateral) / 1.1;
+  } //low BR/t1 collateral pays more
+
+  if (jumps < 1) {
+    jumps = 1;
+  } //same system counts as 1 jump
+  if (jumps < 5) {
+    //low jumps pay more.
+    jumps = (5 + jumps) * 0.5;
+  }
+
+  if (collateral > 3e9 && volume > 60e3) {
+    multiplier *= Math.max(1.0, Math.log(collateral / 15e7) / Math.log(15));
+  }
+
+  if (collateral > 2e9 && volume > 60e3) {
+    doesFit = false;
+  }
+
+  if (volume > 1050e3) {
+    additive += 250e3;
+    if (collateral > 2e9) {
+      additive += 200e3;
+    }
+  } else if (volume > 880e3) {
+    if (collateral > 1.5e9) {
+      additive += 100e3;
+    }
+    if (collateral > 2.5e9) {
+      additive += 100e3;
+    }
+    if (collateral > 3e9) {
+      additive += 200e3;
+    }
+  } else if (volume > 750e3) {
+    if (collateral > 2.5e9) {
+      additive += 100e3;
+    }
+    if (collateral > 3e9) {
+      additive += 200e3;
+    }
+  } else if (volume > 500e3) {
+    if (collateral > 2.0e9) {
+      additive += 100e3;
+    }
+    if (collateral > 3.5e9) {
+      additive += 100e3;
+    }
+  }
+
+  if (hasRushDelivery) {
+    if (collateral > 2e9) {
+      multiplier *=
+        2.0 * Math.max(1.0, Math.log(collateral / 1e8) / Math.log(20));
+    } else {
+      multiplier *= 2.0;
+    }
+    if (isLowOrNullSecurity) {
+      multiplier *= 2;
+    }
+  }
+  if (isLowOrNullSecurity) {
+    multiplier *= 2;
+    //Non JF lowsec pays double.
+  }
+  if (!isLowOrNullSecurity || volume <= 62500) {
+    //highsec or non JF lowsec
+    reward = ((multiplier * base * collateral) / 1e9 + additive) * jumps;
+  } else if (isLowOrNullSecurity && volume > 386e3) {
+    isValid = false;
+  } else {
+    //null, JF
+    base = 60e6;
+    if (volume < 100) {
+      multiplier = 0.25;
+    } else if (volume <= 12e3) {
+      multiplier = 0.5;
+    } else if (volume <= 60e3) {
+      multiplier = 0.75;
+    } else if (volume <= 340e3) {
+      multiplier = 1;
+    } else {
+      multiplier = 4;
+    }
+    if (hasRushDelivery) {
+      multiplier *= 2;
+    }
+    reward = multiplier * base * Math.max(1.0, jumps / 7) + collateral * 0.01;
+  }
+
+  return { isValid, reward, doesFit };
+};
+
 export {
   stringifyItemsOrder,
   stringifyItemOrder,
@@ -139,4 +258,5 @@ export {
   isHighSecurity,
   isNullSecurity,
   isCrossingSecurityBoundary,
+  calculateHaulerReward,
 };

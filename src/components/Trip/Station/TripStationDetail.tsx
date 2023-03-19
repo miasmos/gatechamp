@@ -73,7 +73,6 @@ function TripStationDetail({ to }: TripStationDetailProps) {
     setOrigin(origin.system_id);
     setDestination(destination.system_id);
     onUseMyLocation(true);
-    onPushRoute();
   }, []);
 
   return (
