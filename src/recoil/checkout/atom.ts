@@ -13,7 +13,7 @@ const checkoutState = atom<CheckoutState>({
   key: "CheckoutState",
   default: {
     productQuantity: 1,
-    provider: undefined,
+    provider: PaymentProvider.Ccp,
     product: undefined,
     priceIndex: 0,
   },

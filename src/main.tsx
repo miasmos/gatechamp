@@ -26,9 +26,6 @@ import EmptyLayout from "./layout/EmptyLayout";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "./components/NotFound";
 
-const ProviderSelector = lazy(
-  () => import("./components/Checkout/ProviderSelector")
-);
 const Cart = lazy(() => import("./components/Checkout/Cart"));
 const CheckoutStart = lazy(() => import("./components/Checkout/CheckoutStart"));
 const CheckoutPay = lazy(() => import("./components/Checkout/CheckoutPay"));
@@ -97,10 +94,6 @@ const router = createBrowserRouter(
       <Route path={AppRoute.Home} element={<CheckoutLayout />}>
         <Route path={AppRoute.Checkout} element={<EmptyLayout />}>
           <Route index element={<CheckoutStart />} />
-          <Route
-            path={AppRoute.ProviderSelector}
-            element={<ProviderSelector />}
-          />
           <Route path={AppRoute.Cart} element={<Cart />} />
           <Route path={AppRoute.Pay} element={<CheckoutPay />} />
           <Route path={AppRoute.Status} element={<CheckoutStatus />} />

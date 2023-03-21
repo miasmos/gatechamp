@@ -15,7 +15,6 @@ enum AppRoute {
   Stripe = "stripe",
   Status = "status",
   Login = "login",
-  ProviderSelector = "provider",
   Cart = "cart",
   Pay = "pay",
   Premium = "premium",

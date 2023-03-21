@@ -171,9 +171,7 @@ function PremiumShowcase() {
           <Stack direction="row" spacing={8}>
             <Stack p={5}>
               <Typography variant="h6">1 month</Typography>
-              <Typography>${data.prices[0].unit_amount / 100}</Typography>
-              <Typography variant="body2">or</Typography>
-              <Typography>
+              <Typography mt={4} mb={2}>
                 {formatCurrency(centsToIsk(data.prices[0].unit_amount))} isk
               </Typography>
               <MainButton
@@ -222,10 +220,7 @@ function PremiumShowcase() {
               <Typography variant="h6">
                 {data.prices[2].months} months
               </Typography>
-              <Typography>${data.prices[2].unit_amount / 100}</Typography>
-              <Typography variant="body2">or</Typography>
-
-              <Typography>
+              <Typography mt={4} mb={2}>
                 {formatCurrency(centsToIsk(data.prices[2].unit_amount))} isk
               </Typography>
               <MainButton
@@ -271,10 +266,7 @@ function PremiumShowcase() {
               <Typography variant="h6">
                 {data.prices[1].months} months
               </Typography>
-
-              <Typography>${data.prices[1].unit_amount / 100}</Typography>
-              <Typography variant="body2">or</Typography>
-              <Typography>
+              <Typography mt={4} mb={2}>
                 {formatCurrency(centsToIsk(data.prices[1].unit_amount))} isk
               </Typography>
               <MainButton
