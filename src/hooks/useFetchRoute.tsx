@@ -10,7 +10,6 @@ import {
   RouteState,
 } from "../recoil/route";
 import routeState from "../recoil/route/atom";
-import { isSubscribedSelector } from "../recoil/user";
 import { isLowSecurity, isNullSecurity } from "../util/eve";
 import { serializeEvent } from "./useWebSocketKills";
 
@@ -69,7 +68,6 @@ function useFetchRoute(
   const [{ subscriptions, bySolarSystem, byStargate }, setKillsState] =
     useRecoilState(killsState);
   const setRouteState = useSetRecoilState(routeState);
-  const isSubscribed = useRecoilValue(isSubscribedSelector);
   const areInputsValid =
     typeof originSolarSystemId === "number" &&
     originSolarSystemId > 0 &&
@@ -114,7 +112,7 @@ function useFetchRoute(
   }, [data.route]);
 
   useEffect(() => {
-    if (isSubscribed && data.kills.length > 0) {
+    if (data.kills.length > 0) {
       const solarSystemEvents: string[] = [];
       const stargateEvents: string[] = [];
       const stargateKillSummaries: Record<string, KillSummary> = {};
@@ -167,7 +165,7 @@ function useFetchRoute(
         },
       }));
     }
-  }, [data.kills, isSubscribed]);
+  }, [data.kills]);
 
   return {
     data,
