@@ -20,7 +20,7 @@ import {
   jumpsSetter,
   routeSetter,
 } from "../../recoil/route";
-import { isConnectedSelector, isSubscribedSelector } from "../../recoil/user";
+import { isConnectedSelector } from "../../recoil/user";
 import OnlineIndicator from "../OnlineIndicator";
 import RouteRendererItem from "./RouteRendererItem";
 import { getTitleSequenceSelector } from "../../recoil/kills";
@@ -83,7 +83,6 @@ function RouteRenderer({
 }: RouteRendererProps) {
   const theme = useTheme();
   const isConnected = useRecoilValue(isConnectedSelector);
-  const isSubscribed = useRecoilValue(isSubscribedSelector);
   const setRouteState = useSetRecoilState(routeState);
   const setRouteRoute = routeSetter(setRouteState);
 
@@ -234,7 +233,7 @@ function RouteRenderer({
             >
               <OnlineIndicator
                 ml={0.7}
-                online={isConnected && isSubscribed}
+                online={isConnected}
                 fontSize="small"
                 mt={5.1}
               />
