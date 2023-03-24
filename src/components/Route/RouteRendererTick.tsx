@@ -45,9 +45,9 @@ function RouteRendererTick({
           zIndex={4}
           left={type === "entry" ? 1 : "initial"}
           right={type === "exit" ? 1 : "initial"}
-          width={4}
-          height={6}
-          bottom={-9}
+          width={6}
+          height={7}
+          bottom={-10}
         />
       </Box>
     </Tooltip>
