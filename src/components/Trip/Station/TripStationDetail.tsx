@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Typography from "@mui/material/Typography";
-import { getStationDisplayName } from "../../../util/eve";
+import { getStationDisplayName, objectifyItemsOrder } from "../../../util/eve";
 import { CargoBay } from "../../../enum";
 import TripStationItemTable from "./TripStationItemTable";
 import { formatCurrency } from "../../../util/currency";
@@ -41,14 +41,14 @@ function TripStationDetail({ to }: TripStationDetailProps) {
   const [main, fleetHanger] = cargo;
   const [
     {
-      cargoBay1: { ignore: cargoBay1Ignore },
-      cargoBay2: { ignore: cargoBay2Ignore },
+      cargoBay1: { ignore: cargoBay1Ignore, filtered: cargoBay1Filtered },
+      cargoBay2: { ignore: cargoBay2Ignore, filtered: cargoBay2Filtered },
     },
     setState,
   ] = useState<{
-    cargoBay1: { ignore: number[] };
-    cargoBay2: { ignore: number[] };
-  }>({ cargoBay1: { ignore: [] }, cargoBay2: { ignore: [] } });
+    cargoBay1: { ignore: number[], filtered: any };
+    cargoBay2: { ignore: number[], filtered: any };
+  }>({ cargoBay1: { ignore: [], filtered: [] }, cargoBay2: { ignore: [], filtered: [] } });
 
   const onReset = () => {
     clearTrip();
@@ -58,15 +58,50 @@ function TripStationDetail({ to }: TripStationDetailProps) {
     if (cargoBay === CargoBay.One) {
       setState((state) => ({
         ...state,
-        cargoBay1: { ignore: [...cargoBay1Ignore, itemId] },
+        cargoBay1: { ...state.cargoBay1, ignore: [...cargoBay1Ignore, itemId], },
       }));
     } else {
       setState((state) => ({
         ...state,
-        cargoBay2: { ignore: [...cargoBay2Ignore, itemId] },
+        cargoBay2: { ...state.cargoBay2, ignore: [...cargoBay2Ignore, itemId] },
       }));
     }
   };
+  const onClearFilter = (cargoBay: CargoBay) => () => {
+    if (cargoBay === CargoBay.One) {
+      setState(state => ({ ...state, cargoBay1: { ...state.cargoBay1, filtered: [] } }));
+    } else {
+      setState(state => ({ ...state, cargoBay2: { ...state.cargoBay2, filtered: [] } }));
+    }
+  }
+  const onOrder = (cargoBay: CargoBay) => async () => {
+    const text = await navigator.clipboard.readText();
+    const obj = objectifyItemsOrder(text);
+    let filtered = [];
+
+    for(let i in obj.items) {
+      const item2 = obj.items[i];
+      const item1 = main.items.find((item:any) => item.item === item2.item);
+      if (!item1 || item2.buyPrice >= item1.sellPrice) {
+        continue;
+      }
+      filtered.push({
+        ...item1,
+        sellPrice: item2.buyPrice,
+        netProfit: (item1.sellPrice - item2.buyPrice) * item1.quantity
+      });
+    }
+
+    if (filtered.length === 0) {
+      return;
+    }
+
+    if (cargoBay === CargoBay.One) {
+      setState(state => ({ ...state, cargoBay1: { ...state.cargoBay1, filtered: [] } }));
+    } else {
+      setState(state => ({ ...state, cargoBay2: { ...state.cargoBay2, filtered: [] } }));
+    }
+  }
   const iskPerJump = jumps ? totalProfit / jumps : profitPerJump;
 
   useEffect(() => {
@@ -120,7 +155,11 @@ function TripStationDetail({ to }: TripStationDetailProps) {
           maxVolume={ship?.cargoBay.main.volume || 0}
           maxCost={trip.maxBudget * 1000000}
           onIgnore={ignoreCargoBayItem(CargoBay.One)}
+          onPasteOrder={onOrder(CargoBay.One)}
+          filtered={cargoBay1Filtered.length > 0}
           {...main}
+          items={cargoBay1Filtered.length > 0 ? cargoBay1Filtered : main.items}
+          clearFilter={onClearFilter(CargoBay.One)}
         />
         {fleetHanger.volume > 0 && (
           <TripStationItemTable
@@ -128,7 +167,11 @@ function TripStationDetail({ to }: TripStationDetailProps) {
             maxVolume={ship?.cargoBay.fleetHanger.volume || 0}
             maxCost={trip.maxBudget * 1000000 - main.cost}
             onIgnore={ignoreCargoBayItem(CargoBay.Two)}
+            onPasteOrder={onOrder(CargoBay.Two)}
+            filtered={cargoBay2Filtered.length > 0}
             {...fleetHanger}
+             items={cargoBay2Filtered.length > 0 ? cargoBay2Filtered : fleetHanger.items}
+             clearFilter={onClearFilter(CargoBay.Two)}
           />
         )}
       </Stack>

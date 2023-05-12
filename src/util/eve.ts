@@ -26,6 +26,34 @@ const stringifyItemsOrder = (
   }[]
 ) => items.reduce((prev, item) => `${prev}${stringifyItemOrder(item)}\n`, "");
 
+const objectifyItemsOrder = (str: string): {
+  items: {
+    item: string;
+    quantity: number;
+    buyPrice: number;
+    totalPrice: number;
+  }[], totalPrice: number;
+} => {
+  const items = str.split('\n').reduce<{
+    item: string;
+    quantity: number;
+    buyPrice: number;
+    totalPrice: number;
+  }[]>((prev, current) => {
+    const [item, quantity, buyPrice, totalPrice] = current.split('\t');
+    prev.push({ 
+      item, 
+      quantity: typeof quantity === 'string' ? Number(quantity.replace(/,/g, '')) : 0, 
+      buyPrice: typeof buyPrice === 'string' ? Number(buyPrice.replace(/,/g, '')) : 0, 
+      totalPrice: typeof totalPrice === 'string' ? Number(totalPrice.replace(/,/g, '')) : 0 
+    });
+    return prev;
+  }, []);
+
+  const [{ totalPrice }] = items.splice(items.length - 1, 1)
+  return { items, totalPrice }
+}
+
 const stringifyItemOrder = ({
   item,
   quantity,
@@ -249,6 +277,7 @@ const calculateHaulerReward = (
 };
 
 export {
+  objectifyItemsOrder,
   stringifyItemsOrder,
   stringifyItemOrder,
   getStationDisplayName,

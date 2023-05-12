@@ -25,7 +25,10 @@ type TripStationItemTableProps = CargoBayItem & {
   title: string;
   maxVolume: number;
   maxCost: number;
+  filtered: boolean;
   onIgnore: (itemId: number) => void;
+  onPasteOrder: () => void;
+  clearFilter: () => void;
 };
 
 function TripStationItemTable({
@@ -33,10 +36,13 @@ function TripStationItemTable({
   volume,
   profit,
   title,
+  filtered,
   maxVolume,
   maxCost,
   cost,
   onIgnore,
+  onPasteOrder,
+  clearFilter
 }: TripStationItemTableProps) {
   const stringifiedBuyOrder = useMemo(
     () => stringifyItemsOrder(items),
@@ -152,11 +158,16 @@ function TripStationItemTable({
             {items.length} item{items.length === 1 ? "" : "s"}
           </Typography>
           <ButtonGroup>
-            <CopyToClipboard text={stringifiedBuyOrder}>
+            {!filtered ? (<CopyToClipboard text={stringifiedBuyOrder}>
               <Button size="small" endIcon={<ContentCopyIcon />}>
                 Copy All
               </Button>
-            </CopyToClipboard>
+            </CopyToClipboard>) : (
+              <Stack >
+                <CloseIcon onClick={clearFilter} />
+              </Stack>
+            )}
+            <Button size="small" onClick={onPasteOrder}>Paste Items</Button>
           </ButtonGroup>
         </Stack>
       </>
